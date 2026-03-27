@@ -1,0 +1,482 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #E2792E;
+    --orange-light: #fdf0e6;
+    --orange-mid: #f5b17a;
+    --gray: #CBCBCA;
+    --gray-dark: #555;
+    --gray-light: #f7f7f6;
+    --text: #222;
+    --text-muted: #666;
+    --border: rgba(0,0,0,0.1);
+    --radius: 10px;
+    --font: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  }
+  body { font-family: var(--font); color: var(--text); background: #fff; font-weight: 700; }
+  .page { max-width: 860px; margin: 0 auto; padding: 0 0 60px; }
+
+  /* Header */
+  .site-header { background: var(--orange); padding: 28px 32px 24px; }
+  .site-header .brand { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.75); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .site-header h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .site-header .version { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+  /* Nav */
+  .nav { background: #fff; border-bottom: 1.5px solid var(--orange); position: sticky; top: 0; z-index: 100; padding: 0 32px; display: flex; gap: 0; overflow-x: auto; }
+  .nav a { display: block; padding: 12px 14px; font-size: 13px; color: var(--text-muted); text-decoration: none; white-space: nowrap; border-bottom: 2.5px solid transparent; transition: color 0.15s; cursor: pointer; }
+  .nav a:hover { color: var(--orange); }
+  .nav a.active { color: var(--orange); border-bottom-color: var(--orange); font-weight: 500; }
+
+  /* Sections */
+  .section { padding: 32px; border-bottom: 1px solid var(--border); }
+  .section:last-child { border-bottom: none; }
+  .section-title { font-size: 18px; font-weight: 700; color: var(--orange); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .section-title .icon { width: 28px; height: 28px; background: var(--orange-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+
+  /* Info grid */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .info-card { background: var(--gray-light); border-radius: var(--radius); padding: 16px 18px; }
+  .info-card .label { font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .info-card .value { font-size: 13px; color: var(--text); line-height: 1.7; }
+
+  /* Hours table */
+  .hours-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .hours-table th { text-align: left; padding: 8px 12px; background: var(--orange-light); color: var(--orange); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .hours-table td { padding: 8px 12px; border-bottom: 0.5px solid var(--border); color: var(--text); }
+  .hours-table tr:last-child td { border-bottom: none; }
+
+  /* Steps */
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: var(--gray-light); border-radius: var(--radius); }
+  .step-num { width: 28px; height: 28px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .step-content { flex: 1; }
+  .step-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .step-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+  /* Alert */
+  .alert { background: #fff3e0; border-left: 4px solid var(--orange); border-radius: 0 var(--radius) var(--radius) 0; padding: 12px 16px; font-size: 13px; color: #7a4000; margin-top: 14px; line-height: 1.6; }
+  .alert strong { color: var(--orange); }
+
+  /* Sub sections */
+  .sub-section { margin-bottom: 22px; }
+  .sub-title { font-size: 14px; font-weight: 700; color: var(--gray-dark); margin-bottom: 10px; padding-bottom: 5px; border-bottom: 0.5px solid var(--border); }
+
+  /* Tag */
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; }
+  .tag-ok { background: #e8f5e9; color: #2e7d32; }
+  .tag-ng { background: #fce4ec; color: #c62828; }
+
+  /* Cols */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Rules list */
+  .rules { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .rules li { display: flex; gap: 10px; font-size: 13px; padding: 10px 14px; background: var(--gray-light); border-radius: 8px; align-items: flex-start; line-height: 1.6; }
+  .rules li::before { content: '▸'; color: var(--orange); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Staff */
+  .staff-card { display: flex; align-items: center; gap: 14px; padding: 14px; background: var(--gray-light); border-radius: var(--radius); margin-bottom: 10px; }
+  .staff-avatar { width: 40px; height: 40px; background: var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .staff-name { font-size: 14px; font-weight: 700; }
+  .staff-role { font-size: 12px; color: var(--text-muted); }
+
+  /* Plan */
+  .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 560px) { .plan-grid { grid-template-columns: 1fr; } }
+  .plan-card { border: 1.5px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+  .plan-card.featured { border-color: var(--orange); }
+  .plan-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .plan-detail { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+  .plan-badge { display: inline-block; background: var(--orange-light); color: var(--orange); font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 99px; margin-bottom: 8px; }
+
+  /* Booking steps */
+  .booking-steps { counter-reset: step; display: flex; flex-direction: column; gap: 8px; }
+  .booking-step { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; line-height: 1.7; }
+  .booking-step::before { counter-increment: step; content: counter(step); background: var(--orange-light); color: var(--orange); font-weight: 700; font-size: 11px; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+  /* Hidden sections */
+  .section { display: none; }
+  .section.visible { display: block; }
+</style>
+
+<div class="page">
+  <div class="site-header">
+    <div class="brand">THE PERSON × NAS</div>
+    <h1>NAS溝の口　店舗マニュアル</h1>
+    <div class="version">ver 1.0 ｜ 2026.03.05</div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a class="active" onclick="show('store')" href="#">店舗情報</a>
+    <a onclick="show('access')" href="#">入館方法</a>
+    <a onclick="show('newmember')" href="#">新規体験</a>
+    <a onclick="show('session')" href="#">通常セッション</a>
+    <a onclick="show('plans')" href="#">料金・プラン</a>
+    <a onclick="show('rules')" href="#">施設ルール</a>
+    <a onclick="show('other')" href="#">その他</a>
+  </nav>
+
+  <!-- 店舗情報 -->
+  <div class="section visible" id="sec-store">
+    <div class="section-title"><div class="icon">🏢</div>店舗情報</div>
+
+    <div class="sub-section">
+      <div class="sub-title">アクセス・連絡先</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">住所</div>
+          <div class="value">〒213-0001<br>神奈川県川崎市高津区溝口1丁目12−12</div>
+        </div>
+        <div class="info-card">
+          <div class="label">電話番号</div>
+          <div class="value">044-328-9950<br><span style="font-size:11px;color:var(--text-muted)">※電話受付は11:00から</span></div>
+        </div>
+        <div class="info-card">
+          <div class="label">アクセス</div>
+          <div class="value">溝の口駅・武蔵溝ノ口駅<br>徒歩4分</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">営業時間</div>
+      <table class="hours-table">
+        <tr><th>区分</th><th>時間</th></tr>
+        <tr><td>平日</td><td>10:00〜23:00</td></tr>
+        <tr><td>土曜日</td><td>10:00〜21:00</td></tr>
+        <tr><td>日・祝</td><td>10:00〜20:00</td></tr>
+        <tr><td colspan="2" style="font-size:12px;color:var(--text-muted);padding-top:10px;">■ 休館日：木曜日</td></tr>
+      </table>
+      <div class="alert" style="margin-top:10px;"><strong>セルフ営業時間</strong><br>月火水金 23:00〜翌10:00 ／ 土曜日 21:00〜翌10:00 ／ 日・祝 20:00〜翌10:00</div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">スタッフ情報（4月〜）</div>
+      <div class="staff-card">
+        <div class="staff-avatar">金</div>
+        <div>
+          <div class="staff-name">金沢さん（女性）</div>
+          <div class="staff-role">支配人</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-avatar">東</div>
+        <div>
+          <div class="staff-name">東城さん（男性）</div>
+          <div class="staff-role">THE PERSON担当 ※中途社員 ／ 最初は美馬さん（社員）が担当</div>
+        </div>
+      </div>
+      <div class="alert"><strong>Note：</strong>川瀬様（前支配人）は4月上旬から産休。堀田様は3/31まで在籍し、その後藤沢店へ異動。</div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">店内動画</div>
+      <a href="https://drive.google.com/file/d/1rfDng75bKIhSSfYQZR1vRwXd0eYnIBqv/view?usp=sharing" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;">
+        ▶ 店内動画を見る
+      </a>
+    </div>
+  </div>
+
+  <!-- 入館方法 -->
+  <div class="section" id="sec-access">
+    <div class="section-title"><div class="icon">🚪</div>入館方法</div>
+
+    <div class="sub-section">
+      <div class="two-col">
+        <div>
+          <div class="sub-title"><span class="tag tag-ok">営業時間内（10:00以降）</span></div>
+          <p style="font-size:13px;line-height:1.7;color:var(--text-muted)">正面玄関から入館（お客様と同じ動線）</p>
+        </div>
+        <div>
+          <div class="sub-title"><span class="tag tag-ng">営業時間外（10:00前）</span></div>
+          <p style="font-size:13px;line-height:1.7;color:var(--text-muted)">施設駐輪場裏口から入館</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">営業時間外の入退館方法</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">入</div>
+          <div class="step-content">
+            <div class="step-title">施設駐輪場裏口から入館</div>
+            <div class="step-desc">扉の「A1460」＋「最後の◯の部分」を押すと開きます。うまくいかない場合は動画を参照してください。<br><a href="https://drive.google.com/file/d/1DQBfYK1B5-0X63bjyeOiyJ7LXisBjPjH/view?usp=drive_link" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:var(--orange);color:#fff;text-decoration:none;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;">▶ 入館方法動画①を見る</a><a href="https://drive.google.com/file/d/1U0F5PQdkR3Y2lo2A9w_T8K71l7aExhZZ/view?usp=sharing" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:var(--orange);color:#fff;text-decoration:none;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;">▶ 入館方法動画②を見る</a></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">退</div>
+          <div class="step-content">
+            <div class="step-title">非常口の扉から退館</div>
+            <div class="step-desc">営業時間内はフロントから出てもOK！</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">トレーナー荷物置き場・更衣室</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">男性</div>
+          <div class="value">1階オフィス内更衣室</div>
+        </div>
+        <div class="info-card">
+          <div class="label">女性</div>
+          <div class="value">1階オフィス内更衣室（奥側）</div>
+        </div>
+        <div class="info-card">
+          <div class="label">お客様更衣室</div>
+          <div class="value">3階（エレベーター降りてすぐ左側）<br>男性・女性ともに3階</div>
+        </div>
+      </div>
+      <div class="alert"><strong>貴重品について：</strong>現時点でTHE PERSON専用ロッカーはないため、ラックに置くなどし、個人で持ち歩くか貴重品ボックスを利用してください。</div>
+    </div>
+  </div>
+
+  <!-- 新規体験 -->
+  <div class="section" id="sec-newmember">
+    <div class="section-title"><div class="icon">✨</div>新規体験（初回来店）</div>
+
+    <div class="sub-section">
+      <a href="https://docs.google.com/presentation/d/1JAvjrP0Xn6h50bXHJR3FC_JN-uZmMWa5JGUNAO6pTOY/edit?slide=id.SLIDES_API1726913902_45#slide=id.SLIDES_API1726913902_45" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;">
+        📊 新規体験 資料を見る
+      </a>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">フロー概要</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">1F受付</div>
+            <div class="step-desc">同意書・緊急連絡先記入。フロントスタッフが4F集合場所まで案内します。</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">3Fロッカー</div>
+            <div class="step-desc">着替え</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">4F説明エリア（カウンター前）</div>
+            <div class="step-desc">トレーナーは4F集合場所で待機。<strong>ラミネートを持っている人が体験の方です！</strong></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">4Fセッション</div>
+            <div class="step-desc">体験セッション実施</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">使用NGエリア</div>
+      <div class="info-grid">
+        <div class="info-card" style="border-left:3px solid #c62828;">
+          <div class="label" style="color:#c62828;">❌ 使用不可</div>
+          <div class="value">・1Fフロントカウンター<br>・1Fラウンジスペース<br>・4Fストレッチスペース（基本）</div>
+        </div>
+        <div class="info-card" style="border-left:3px solid #2e7d32;">
+          <div class="label" style="color:#2e7d32;">✅ 使用可能</div>
+          <div class="value">・4Fセッションスペース<br>・5FスタジオB（混雑時のみ）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">入会手続きの流れ</div>
+      <div class="two-col">
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px;">THE PERSON + NAS入会の場合</div>
+          <div class="booking-steps">
+            <div class="booking-step">クラブ入会チェックカードに「名前＋プラン」記載</div>
+            <div class="booking-step">THE PERSON web登録</div>
+            <div class="booking-step">NAS web登録</div>
+            <div class="booking-step">用紙を持ってフロントへ</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px;">THE PERSONのみの場合</div>
+          <div class="booking-steps">
+            <div class="booking-step">NAS会員マイページ作成（入館に必要）</div>
+            <div class="booking-step">体験後、フロントへ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">資料・データ保管場所</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">体験資料</div>
+          <div class="value">1Fフロントカウンター後ろの棚</div>
+        </div>
+        <div class="info-card">
+          <div class="label">体組成データ</div>
+          <div class="value">鍵付き棚（左上の鍵）に保管<br><span style="font-size:11px;color:var(--text-muted)">※3/28時点でファイルなし（プリンター故障中）</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 通常セッション -->
+  <div class="section" id="sec-session">
+    <div class="section-title"><div class="icon">💪</div>通常セッション</div>
+
+    <div class="sub-section">
+      <div class="sub-title">THE PERSONエリア</div>
+      <div class="alert"><strong>場所：</strong>4階ジムエリア右奥・スミスマシンエリア<br><strong>集合場所も同じ。館内土足厳禁！</strong></div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">スペース予約確認</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">予約方法</div>
+          <div class="value">当日朝8時に自動メール送付にてスペース時間確保</div>
+        </div>
+        <div class="info-card">
+          <div class="label">優先スペース</div>
+          <div class="value">THE PERSONエリア内で全セッション利用（基本）</div>
+        </div>
+        <div class="info-card">
+          <div class="label">変更・キャンセル時</div>
+          <div class="value">現地スタッフへコミュニケーションして対応</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">追加スペース予約手順</div>
+      <div class="booking-steps">
+        <div class="booking-step">場所を選ぶ</div>
+        <div class="booking-step">使用時間を決める（最大20分。60分は20分×3回）</div>
+        <div class="booking-step">性別入れる（どちらでもOK）</div>
+        <div class="booking-step">ロッカーNo.「900〜999」の好きな番号で入力（予約毎に変更）</div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">InBody・その他</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">InBody</div>
+          <div class="value">利用可能（アトリオドゥーエと同じ）<br><span style="font-size:11px;color:var(--text-muted)">※3/24時点でプリンター故障中</span></div>
+        </div>
+        <div class="info-card">
+          <div class="label">ダンベル等</div>
+          <div class="value">ダンベルラックから取りに行く。<br>他備品は準備中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 料金・プラン -->
+  <div class="section" id="sec-plans">
+    <div class="section-title"><div class="icon">💴</div>料金・プラン</div>
+
+    <div class="sub-section">
+      <div class="sub-title">初月キャンペーン（NAS初月無料 ＋ THE PERSON 2回分無料）</div>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <div class="plan-badge">ライト</div>
+          <div class="plan-name">月2枚</div>
+          <div class="plan-detail">NAS：初月無料<br>THE PERSON：2回分無料<br>→ 初月 <strong>¥0</strong></div>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge">レギュラー</div>
+          <div class="plan-name">月4枚</div>
+          <div class="plan-detail">NAS：初月無料<br>THE PERSON：2回分無料<br>→ グループチケット2枚分の料金</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-badge">ハード</div>
+          <div class="plan-name">月8枚</div>
+          <div class="plan-detail">NAS：初月無料<br>THE PERSON：2回分無料<br>→ グループチケット6枚分の料金</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">無料パーソナル（2回目）の流れ</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content"><div class="step-title">1F受付</div></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content"><div class="step-title">3Fロッカー（着替え）</div></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content"><div class="step-title">4Fセッション</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 施設ルール -->
+  <div class="section" id="sec-rules">
+    <div class="section-title"><div class="icon">📋</div>施設ルール</div>
+    <ul class="rules">
+      <li>マシン使用後、<strong>茶色タオル</strong>でマシン・マットを拭いてください</li>
+      <li><strong>館内土足厳禁</strong>（ジムエリア全体）</li>
+      <li>1Fフロントカウンター・ラウンジスペースはトレーナー使用不可</li>
+      <li>MTG・作業はオフィス内の空き机または接客室（利用者がいなければ）</li>
+      <li>施設内リアルタイム混雑状況はリンクより確認可能</li>
+    </ul>
+  </div>
+
+  <!-- その他 -->
+  <div class="section" id="sec-other">
+    <div class="section-title"><div class="icon">ℹ️</div>その他・近隣情報</div>
+
+    <div class="sub-section">
+      <div class="sub-title">近隣カフェ情報</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">ドトールコーヒー</div>
+          <div class="value">店舗情報・MAPはスタッフに確認</div>
+        </div>
+        <div class="info-card">
+          <div class="label">サンマルクカフェ</div>
+          <div class="value">店舗情報・MAPはスタッフに確認</div>
+        </div>
+        <div class="info-card">
+          <div class="label">スターバックス</div>
+          <div class="value">店舗情報・MAPはスタッフに確認</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">競合他社情報（参考）</div>
+      <div class="info-card" style="max-width:400px;">
+        <div class="label">セントラルフィットネスクラブ</div>
+        <div class="value">24時間営業<br>店内雰囲気は薄暗い。NASの方が綺麗でテンション上がる。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('visible');
+  event.target.classList.add('active');
+}
+</script>
