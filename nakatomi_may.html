@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中富さん 5月目標｜THE PERSON 碑文谷</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    padding: 40px 0 32px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .month-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(26px, 5vw, 36px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: var(--gray-dark);
+  }
+
+  /* TARGET HERO */
+  .target {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .target-card {
+    background: linear-gradient(135deg, var(--primary) 0%, #D5651A 100%);
+    color: var(--white);
+    padding: 32px 28px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .target-card::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    bottom: -40px;
+    width: 180px;
+    height: 180px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .target-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    opacity: 0.9;
+    margin-bottom: 12px;
+  }
+  .target-main {
+    font-size: clamp(22px, 4.5vw, 30px);
+    font-weight: 900;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+  }
+  .target-main .highlight {
+    background: var(--white);
+    color: var(--primary);
+    padding: 2px 10px;
+    border-radius: 3px;
+    margin: 0 4px;
+    display: inline-block;
+  }
+
+  /* PROGRESS COUNTER */
+  .counter-wrap {
+    background: var(--gray-light);
+    padding: 40px 0;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 24px;
+  }
+  .counter-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    background: var(--white);
+    padding: 24px 16px;
+    border-radius: 6px;
+  }
+  .check-item {
+    aspect-ratio: 1;
+    border: 2px dashed var(--gray);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 900;
+    color: var(--gray);
+    background: var(--white);
+    transition: all 0.25s ease;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+  .check-item:hover {
+    border-color: var(--primary-light);
+    transform: translateY(-2px);
+  }
+  .check-item:active {
+    transform: scale(0.95);
+  }
+  .check-item.checked {
+    background: var(--primary);
+    border: 2px solid var(--primary);
+    color: var(--white);
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(226, 121, 46, 0.3);
+  }
+  .check-item.checked::after {
+    content: '✓';
+    position: absolute;
+    font-size: clamp(24px, 5vw, 32px);
+    color: var(--white);
+  }
+  .check-item.checked .num-label {
+    opacity: 0;
+  }
+  .num-label {
+    transition: opacity 0.2s;
+  }
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  .check-item.popping {
+    animation: pop 0.3s ease;
+  }
+  .progress-bar-wrap {
+    background: var(--gray-light);
+    height: 8px;
+    border-radius: 4px;
+    margin: 16px 0 8px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    background: linear-gradient(90deg, var(--primary) 0%, #D5651A 100%);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+    border-radius: 4px;
+  }
+  .progress-status {
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray-dark);
+    font-weight: 700;
+  }
+  .progress-status .count-num {
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: 900;
+  }
+  .reset-btn {
+    display: block;
+    margin: 16px auto 0;
+    background: transparent;
+    border: 1px solid var(--gray);
+    color: var(--gray-dark);
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .reset-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .celebration {
+    text-align: center;
+    padding: 16px;
+    background: var(--primary-bg);
+    border-radius: 6px;
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    display: none;
+  }
+  .celebration.show {
+    display: block;
+    animation: pop 0.5s ease;
+  }
+  .counter-caption {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--gray-dark);
+  }
+  .counter-caption strong { color: var(--primary); font-weight: 700; }
+
+  /* TWO PILLARS */
+  .pillars {
+    background: var(--white);
+    padding: 48px 0;
+  }
+  .pillar {
+    background: var(--white);
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .pillar-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--primary-bg);
+    border-bottom: 2px solid var(--primary);
+  }
+  .pillar-num {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .pillar-title {
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+  .pillar-body {
+    padding: 24px;
+  }
+  .pillar-body p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .pillar-body p + p { margin-top: 12px; }
+
+  /* SLACK EXAMPLE */
+  .slack-mock {
+    background: var(--gray-light);
+    border-radius: 6px;
+    padding: 18px 16px;
+    margin-top: 16px;
+    border-left: 3px solid var(--primary);
+  }
+  .slack-mock-label {
+    font-size: 11px;
+    color: var(--gray-dark);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .slack-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .slack-avatar {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .slack-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .slack-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .slack-msg {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .slack-emoji {
+    display: inline-block;
+    margin-right: 4px;
+  }
+
+  /* TOPICS LIST */
+  .topics {
+    list-style: none;
+    margin-top: 16px;
+    padding: 0;
+  }
+  .topics li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--gray);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .topics li:last-child { border-bottom: none; }
+  .topic-tag {
+    background: var(--primary);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* FLOW */
+  .flow {
+    background: var(--text);
+    color: var(--white);
+    padding: 48px 0;
+  }
+  .flow .section-label { color: var(--primary-light); }
+  .flow .section-title { color: var(--white); }
+  .flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .flow-step {
+    background: rgba(255,255,255,0.06);
+    padding: 16px 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-left: 3px solid var(--primary);
+  }
+  .flow-step-num {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--primary-light);
+    flex-shrink: 0;
+    width: 32px;
+  }
+  .flow-step-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .flow-step-text strong {
+    color: var(--primary-light);
+  }
+  .flow-arrow {
+    text-align: center;
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: 900;
+    margin: -4px 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    padding: 28px 0;
+    text-align: center;
+    border-top: 1px solid var(--gray);
+  }
+  footer p {
+    font-size: 12px;
+    color: var(--gray-dark);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="month-badge">MAY 2026 / 中富さん</div>
+    <h1>5月の目標</h1>
+    <p class="subtitle">この1ヶ月で達成したい、2つのこと。</p>
+  </div>
+</header>
+
+<!-- TARGET -->
+<section class="target">
+  <div class="container">
+    <div class="target-card">
+      <div class="target-label">★ THIS MONTH'S TARGET</div>
+      <div class="target-main">
+        5月末までに<br>
+        Slackに<span class="highlight">5件</span>アウトプット
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTER -->
+<section class="counter-wrap">
+  <div class="container">
+    <div class="section-label">PROGRESS</div>
+    <h2 class="section-title">進捗カウンター</h2>
+    <div class="counter-grid" id="counterGrid">
+      <div class="check-item" data-num="1"><span class="num-label">1</span></div>
+      <div class="check-item" data-num="2"><span class="num-label">2</span></div>
+      <div class="check-item" data-num="3"><span class="num-label">3</span></div>
+      <div class="check-item" data-num="4"><span class="num-label">4</span></div>
+      <div class="check-item" data-num="5"><span class="num-label">5</span></div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <p class="progress-status"><span class="count-num" id="countNum">0</span> / 5 件</p>
+    <p class="counter-caption">タップして投稿を記録！<strong>5マス埋まったら達成 🎉</strong></p>
+    <div class="celebration" id="celebration">🎉 目標達成！おめでとうございます！ 🎉</div>
+    <button class="reset-btn" id="resetBtn">リセット</button>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars">
+  <div class="container">
+    <div class="section-label">2 PILLARS</div>
+    <h2 class="section-title">5月の2本柱</h2>
+
+    <!-- Pillar 1 -->
+    <div class="pillar">
+      <div class="pillar-head">
+        <div class="pillar-num">1</div>
+        <div class="pillar-title">店舗Slackで気づきをシェアする</div>
+      </div>
+      <div class="pillar-body">
+        <p>チューニングセッションやグループセッションで<strong>中富さんが感じたこと</strong>を、店舗Slackで発信。</p>
+        <p>👉 中富さんの視点をチームに共有することで、<strong>店舗メンバー全員の理解が揃う</strong>。学びを"自分のもの"で終わらせず、店舗の財産にしていく。</p>
+
+        <div class="slack-mock">
+          <div class="slack-mock-label">▼ 投稿イメージ</div>
+          <div class="slack-row">
+            <div class="slack-avatar">中</div>
+            <div class="slack-content">
+              <div class="slack-name">中富 <span style="font-weight:400;color:var(--gray-dark);font-size:11px;">12:34</span></div>
+              <div class="slack-msg">
+                <span class="slack-emoji">🏠</span>今日のグループでおぎちゃんハウス！！<br>
+                〇〇な動きで△△の意識が入りやすくなった気がします💡<br>
+                次回も試してみます！
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:18px; font-size:13px; color:var(--gray-dark);">📌 投稿テーマの例</p>
+        <ul class="topics">
+          <li><span class="topic-tag">気づき</span>セッション中に発見したお客様の反応・変化</li>
+          <li><span class="topic-tag">工夫</span>うまくいったキューイング・声かけ</li>
+          <li><span class="topic-tag">課題</span>難しかった場面・今後試したいこと</li>
+          <li><span class="topic-tag">研修</span>新規研修で学んだことのシェア</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Pillar 2 -->
+    <div class="pillar">
+      <div class="pillar-head">
+        <div class="pillar-num">2</div>
+        <div class="pillar-title">新規研修の学びを既存セッションに活かす</div>
+      </div>
+      <div class="pillar-body">
+        <p>新規体験の本番はまだ先。でも研修で学んだ内容は<strong>毎日の既存セッションで即実践できる</strong>。</p>
+        <p>👉 学んだ理論や声かけを、目の前のお客様で試す → 反応を見る → 次の研修で深める。このサイクルが、新規体験デビュー時の地力をつくる。</p>
+
+        <div class="slack-mock">
+          <div class="slack-mock-label">▼ 活かし方の例</div>
+          <div class="slack-row">
+            <div class="slack-avatar" style="background:var(--gray-dark);">研</div>
+            <div class="slack-content">
+              <div class="slack-name" style="color:var(--gray-dark);">研修で学んだこと</div>
+              <div class="slack-msg" style="color:var(--gray-dark);">→ 既存のお客様で試す<br>→ 反応をSlackにシェア（=Pillar1にも繋がる）</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="flow">
+  <div class="container">
+    <div class="section-label">CYCLE</div>
+    <h2 class="section-title">学び→実践→共有のサイクル</h2>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-step-num">01</div>
+        <div class="flow-step-text"><strong>研修・セッションで学ぶ</strong>／気づく</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="flow-step-num">02</div>
+        <div class="flow-step-text"><strong>既存セッションで試す</strong>／お客様の反応を見る</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="flow-step-num">03</div>
+        <div class="flow-step-text"><strong>Slackで店舗にシェア</strong>／チームの理解を揃える</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">
+        <div class="flow-step-num">04</div>
+        <div class="flow-step-text"><strong>反応をもらって深める</strong>／次の学びへ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>THE PERSON 碑文谷｜中富さん 5月目標 / 作成：儀間</p>
+  </div>
+</footer>
+
+<script>
+(async function() {
+  const STORAGE_KEY = 'nakatomi-may-progress';
+  const items = document.querySelectorAll('.check-item');
+  const progressBar = document.getElementById('progressBar');
+  const countNum = document.getElementById('countNum');
+  const celebration = document.getElementById('celebration');
+  const resetBtn = document.getElementById('resetBtn');
+
+  let checkedSet = new Set();
+
+  // 保存データを読み込む
+  async function loadState() {
+    try {
+      if (window.storage) {
+        const result = await window.storage.get(STORAGE_KEY);
+        if (result && result.value) {
+          const arr = JSON.parse(result.value);
+          checkedSet = new Set(arr);
+        }
+      }
+    } catch (e) {
+      // データがない場合は空のままでOK
+    }
+    render();
+  }
+
+  // 保存
+  async function saveState() {
+    try {
+      if (window.storage) {
+        await window.storage.set(STORAGE_KEY, JSON.stringify([...checkedSet]));
+      }
+    } catch (e) {
+      console.error('保存に失敗:', e);
+    }
+  }
+
+  // 描画
+  function render() {
+    items.forEach(item => {
+      const num = parseInt(item.dataset.num);
+      if (checkedSet.has(num)) {
+        item.classList.add('checked');
+      } else {
+        item.classList.remove('checked');
+      }
+    });
+    const count = checkedSet.size;
+    countNum.textContent = count;
+    progressBar.style.width = (count / 5 * 100) + '%';
+    if (count >= 5) {
+      celebration.classList.add('show');
+    } else {
+      celebration.classList.remove('show');
+    }
+  }
+
+  // タップ処理
+  items.forEach(item => {
+    item.addEventListener('click', async () => {
+      const num = parseInt(item.dataset.num);
+      const wasChecked = checkedSet.has(num);
+
+      if (wasChecked) {
+        checkedSet.delete(num);
+      } else {
+        checkedSet.add(num);
+        item.classList.add('popping');
+        setTimeout(() => item.classList.remove('popping'), 300);
+      }
+
+      render();
+      await saveState();
+    });
+  });
+
+  // リセット
+  resetBtn.addEventListener('click', async () => {
+    if (confirm('進捗をリセットしますか？')) {
+      checkedSet.clear();
+      render();
+      await saveState();
+    }
+  });
+
+  loadState();
+})();
+</script>
+
+</body>
+</html>
