@@ -8,6 +8,7 @@
 - **レッグロワリング** → 足上げ腹筋（動画: https://youtu.be/wmpfcR8YnYY）
 - **チェストオープナー / チェストオープナーストレッチ** → 胸椎サイドツイスト（動画: https://drive.google.com/file/d/1_y84FUn50VhUioyMqNeKm89GzPbBA9lE/view?usp=drivesdk）
 - **ワールドグレイテストストレッチ（胸椎回旋）** → 動画: https://drive.google.com/file/d/1vKvjJPkQrR4-l5XutiJMnRZONxzzf8rV/view?usp=drivesdk
+- **4ptオルタネイト** → バードドック（動画: https://drive.google.com/file/d/13v3foFMLpcaGDttaFORTv1THFAeNI5YW/view?usp=drivesdk）
 
 ## 種目データベース
 
