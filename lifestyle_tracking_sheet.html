@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>週間ライフスタイルシート｜THE PERSON</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+    --green: #4CAF7D;
+    --green-light: #EBF7F1;
+    --blue: #3B82C4;
+    --blue-light: #EBF3FB;
+    --red: #E05252;
+    --red-light: #FDEAEA;
+    --yellow: #F0C040;
+    --yellow-light: #FDF7E3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    padding: 36px 0 28px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+  header h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: var(--gray-dark);
+  }
+
+  /* META INFO */
+  .meta-section {
+    background: var(--white);
+    padding: 32px 0;
+    margin-top: 16px;
+  }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .field-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    letter-spacing: 0.05em;
+  }
+  .field-input {
+    border: none;
+    border-bottom: 2px solid var(--gray);
+    padding: 6px 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    background: transparent;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field-input:focus { border-bottom-color: var(--primary); }
+  .field-input::placeholder { color: var(--gray); font-weight: 400; }
+
+  /* SECTIONS */
+  .section {
+    background: var(--white);
+    padding: 32px 0;
+    margin-top: 12px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .icon-orange { background: var(--primary-bg); }
+  .icon-green  { background: var(--green-light); }
+  .icon-blue   { background: var(--blue-light); }
+  .icon-yellow { background: var(--yellow-light); }
+  .icon-red    { background: var(--red-light); }
+
+  .section-name {
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  /* WEEKLY TABLE */
+  .week-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .week-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  .week-table thead th {
+    padding: 10px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 2px solid var(--gray);
+    background: var(--gray-light);
+    letter-spacing: 0.05em;
+  }
+  .week-table thead th.row-label { text-align: left; font-size: 11px; color: var(--gray-dark); width: 110px; }
+  .week-table thead th.day-mon { background: #EBF3FB; color: var(--blue); }
+  .week-table thead th.day-tue { background: #EBF3FB; color: var(--blue); }
+  .week-table thead th.day-wed { background: #EBF3FB; color: var(--blue); }
+  .week-table thead th.day-thu { background: #EBF3FB; color: var(--blue); }
+  .week-table thead th.day-fri { background: #EBF3FB; color: var(--blue); }
+  .week-table thead th.day-sat { background: #EBF7F1; color: var(--green); }
+  .week-table thead th.day-sun { background: var(--red-light); color: var(--red); }
+
+  .week-table tbody tr { border-bottom: 1px solid #EBEBEB; }
+  .week-table tbody tr:last-child { border-bottom: none; }
+  .week-table tbody td {
+    padding: 8px 6px;
+    vertical-align: top;
+    text-align: center;
+  }
+  .week-table tbody td.row-label {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    padding-left: 0;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .week-table tbody td.row-label span {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--gray);
+    margin-top: 1px;
+  }
+
+  .cell-input {
+    border: none;
+    border-bottom: 1.5px solid var(--gray);
+    padding: 4px 2px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    background: transparent;
+    width: 100%;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .cell-input:focus { border-bottom-color: var(--primary); }
+  .cell-input::placeholder { color: #CBCBCA; font-size: 12px; }
+
+  /* STAR RATING */
+  .star-rate {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+  }
+  .star-rate input[type="radio"] { display: none; }
+  .star-rate label {
+    font-size: 18px;
+    color: var(--gray);
+    cursor: pointer;
+    transition: color 0.15s;
+    line-height: 1;
+  }
+  .star-rate input[type="radio"]:checked ~ label,
+  .star-rate label:hover,
+  .star-rate label:hover ~ label { color: var(--yellow); }
+  .star-rate { flex-direction: row-reverse; }
+  .star-rate label:hover,
+  .star-rate label:hover ~ label { color: var(--yellow); }
+
+  /* SELECT */
+  .cell-select {
+    border: none;
+    border-bottom: 1.5px solid var(--gray);
+    padding: 4px 2px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    background: transparent;
+    width: 100%;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .cell-select:focus { border-bottom-color: var(--primary); }
+
+  /* CHECKBOX GROUP */
+  .check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .check-item input[type="checkbox"] { accent-color: var(--primary); width: 15px; height: 15px; }
+
+  /* LEVEL METER */
+  .level-select {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+  }
+  .level-select input[type="radio"] { display: none; }
+  .level-select label {
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    background: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1.5px solid var(--gray);
+  }
+  .level-select.stress input[type="radio"]:checked + label { background: var(--red); border-color: var(--red); color: var(--white); }
+  .level-select.energy input[type="radio"]:checked + label { background: var(--green); border-color: var(--green); color: var(--white); }
+  .level-select.sleep-q  input[type="radio"]:checked + label { background: var(--blue); border-color: var(--blue); color: var(--white); }
+
+  /* NOTES */
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media(max-width: 560px) { .notes-grid { grid-template-columns: 1fr; } }
+
+  .note-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .note-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-dark);
+  }
+  .note-textarea {
+    border: 1.5px solid var(--gray);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    resize: vertical;
+    min-height: 90px;
+    outline: none;
+    line-height: 1.7;
+    transition: border-color 0.2s;
+  }
+  .note-textarea:focus { border-color: var(--primary); }
+  .note-textarea::placeholder { color: var(--gray); }
+
+  /* GOALS CARD */
+  .goals-card {
+    background: linear-gradient(135deg, var(--primary) 0%, #D5651A 100%);
+    color: var(--white);
+    border-radius: 6px;
+    padding: 24px 24px 20px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .goals-card::after {
+    content: '';
+    position: absolute;
+    right: -30px; bottom: -30px;
+    width: 140px; height: 140px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .goals-card .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+  .goals-card .card-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+    color: var(--white);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    width: 100%;
+    outline: none;
+    padding: 4px 0;
+  }
+  .goals-card .card-input::placeholder { color: rgba(255,255,255,0.4); font-weight: 400; font-size: 15px; }
+  .goals-card .card-input:focus { border-bottom-color: rgba(255,255,255,0.9); }
+
+  /* HABIT TRACKER */
+  .habit-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #EBEBEB;
+  }
+  .habit-row:last-child { border-bottom: none; }
+  .habit-name {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .habit-name input {
+    border: none;
+    border-bottom: 1.5px solid var(--gray);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    width: 100%;
+    background: transparent;
+    outline: none;
+    padding: 2px 0;
+  }
+  .habit-name input:focus { border-bottom-color: var(--primary); }
+  .habit-name input::placeholder { color: var(--gray); }
+  .habit-days {
+    display: flex;
+    gap: 4px;
+  }
+  .habit-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .habit-day span {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gray-dark);
+  }
+  .habit-day input[type="checkbox"] { accent-color: var(--primary); width: 18px; height: 18px; }
+
+  /* PRINT */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .section, .meta-section, header { box-shadow: none; margin-top: 0; page-break-inside: avoid; }
+    .no-print { display: none; }
+    .week-table-wrapper { overflow: visible; }
+    .week-table { min-width: unset; }
+  }
+
+  /* SAVE BUTTON */
+  .action-bar {
+    background: var(--white);
+    padding: 24px 0;
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .btn-primary { background: var(--primary); color: var(--white); }
+  .btn-primary:hover { background: #C96820; }
+  .btn-outline { background: transparent; color: var(--gray-dark); border: 2px solid var(--gray); }
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* DIVIDER */
+  hr.divider { border: none; border-top: 1px solid #EBEBEB; margin: 20px 0; }
+
+  /* TIPS */
+  .tips-box {
+    background: var(--primary-bg);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--gray-dark);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .tips-box strong { color: var(--primary); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="badge">LIFESTYLE TRACKING SHEET</div>
+    <h1>週間ライフスタイルシート</h1>
+    <div class="header-sub">トレーナーが顧客の1週間の生活習慣を把握・記録するためのシートです</div>
+  </div>
+</header>
+
+<!-- META INFO -->
+<div class="meta-section">
+  <div class="container">
+    <div class="section-title">基本情報</div>
+    <div class="meta-grid">
+      <div class="field-group">
+        <div class="field-label">顧客氏名</div>
+        <input class="field-input" type="text" placeholder="例：山田 太郎">
+      </div>
+      <div class="field-group">
+        <div class="field-label">担当トレーナー</div>
+        <input class="field-input" type="text" placeholder="例：田中 コーチ">
+      </div>
+      <div class="field-group">
+        <div class="field-label">記録週（開始日）</div>
+        <input class="field-input" type="date">
+      </div>
+      <div class="field-group">
+        <div class="field-label">セッション回数 / 月</div>
+        <input class="field-input" type="text" placeholder="例：月4回">
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="meta-grid">
+      <div class="field-group">
+        <div class="field-label">職業・勤務形態</div>
+        <input class="field-input" type="text" placeholder="例：会社員・在宅勤務">
+      </div>
+      <div class="field-group">
+        <div class="field-label">年代</div>
+        <input class="field-input" type="text" placeholder="例：30代">
+      </div>
+      <div class="field-group">
+        <div class="field-label">現在の体重 (kg)</div>
+        <input class="field-input" type="text" placeholder="例：68.5">
+      </div>
+      <div class="field-group">
+        <div class="field-label">目標体重 (kg)</div>
+        <input class="field-input" type="text" placeholder="例：63.0">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GOAL -->
+<div class="section">
+  <div class="container">
+    <div class="section-title">今週のフォーカス目標</div>
+    <div class="goals-card">
+      <div class="card-label">WEEKLY GOAL</div>
+      <input class="card-input" type="text" placeholder="例：毎日7時間以上の睡眠を確保する">
+    </div>
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label">トレーナーからのメッセージ</div>
+        <textarea class="note-textarea" placeholder="今週の重点ポイントや励ましのコメントを入力..."></textarea>
+      </div>
+      <div class="note-box">
+        <div class="note-label">顧客の今週の自己評価・コメント</div>
+        <textarea class="note-textarea" placeholder="顧客が記入、またはセッション時に口頭で確認して入力..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY SCHEDULE -->
+<div class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-blue">📅</div>
+      <div class="section-name">週間スケジュール</div>
+    </div>
+
+    <div class="tips-box">
+      <strong>記入のヒント：</strong> 各セルに時刻・内容・レベルを入力してください。空欄でも構いません。実態に近い情報を優先してください。
+    </div>
+
+    <div class="week-table-wrapper">
+      <table class="week-table">
+        <thead>
+          <tr>
+            <th class="row-label">項目</th>
+            <th class="day-mon">月<br><small>Mon</small></th>
+            <th class="day-tue">火<br><small>Tue</small></th>
+            <th class="day-wed">水<br><small>Wed</small></th>
+            <th class="day-thu">木<br><small>Thu</small></th>
+            <th class="day-fri">金<br><small>Fri</small></th>
+            <th class="day-sat">土<br><small>Sat</small></th>
+            <th class="day-sun">日<br><small>Sun</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 起床時間 -->
+          <tr>
+            <td class="row-label">起床時間<span>Wake up</span></td>
+            <td><input class="cell-input" type="text" placeholder="7:00"></td>
+            <td><input class="cell-input" type="text" placeholder="7:00"></td>
+            <td><input class="cell-input" type="text" placeholder="7:00"></td>
+            <td><input class="cell-input" type="text" placeholder="7:00"></td>
+            <td><input class="cell-input" type="text" placeholder="7:00"></td>
+            <td><input class="cell-input" type="text" placeholder="8:00"></td>
+            <td><input class="cell-input" type="text" placeholder="8:00"></td>
+          </tr>
+          <!-- 就寝時間 -->
+          <tr>
+            <td class="row-label">就寝時間<span>Bedtime</span></td>
+            <td><input class="cell-input" type="text" placeholder="23:30"></td>
+            <td><input class="cell-input" type="text" placeholder="23:30"></td>
+            <td><input class="cell-input" type="text" placeholder="23:30"></td>
+            <td><input class="cell-input" type="text" placeholder="23:30"></td>
+            <td><input class="cell-input" type="text" placeholder="24:00"></td>
+            <td><input class="cell-input" type="text" placeholder="24:00"></td>
+            <td><input class="cell-input" type="text" placeholder="23:00"></td>
+          </tr>
+          <!-- 睡眠の質 -->
+          <tr>
+            <td class="row-label">睡眠の質<span>Sleep Quality</span></td>
+            <td>
+              <div class="level-select sleep-q" id="sq-mon">
+                <input type="radio" name="sq-mon" id="sq-mon-3" value="3"><label for="sq-mon-3">3</label>
+                <input type="radio" name="sq-mon" id="sq-mon-2" value="2"><label for="sq-mon-2">2</label>
+                <input type="radio" name="sq-mon" id="sq-mon-1" value="1"><label for="sq-mon-1">1</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select sleep-q">
+                <input type="radio" name="sq-tue" id="sq-tue-3" value="3"><label for="sq-tue-3">3</label>
+                <input type="radio" name="sq-tue" id="sq-tue-2" value="2"><label for="sq-tue-2">2</label>
+                <input type="radio" name="sq-tue" id="sq-tue-1" value="1"><label for="sq-tue-1">1</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select sleep-q">
+                <input type="radio" name="sq-wed" id="sq-wed-3" value="3"><label for="sq-wed-3">3</label>
+                <input type="radio" name="sq-wed" id="sq-wed-2" value="2"><label for="sq-wed-2">2</label>
+                <input type="radio" name="sq-wed" id="sq-wed-1" value="1"><label for="sq-wed-1">1</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select sleep-q">
+                <input type="radio" name="sq-thu" id="sq-thu-3" value="3"><label for="sq-thu-3">3</label>
+                <input type="radio" name="sq-thu" id="sq-thu-2" value="2"><label for="sq-thu-2">2</label>
+                <input type="radio" name="sq-thu" id="sq-thu-1" value="1"><label for="sq-thu-1">1</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select sleep-q">
+                <input type="radio" name="sq-fri" id="sq-fri-3" value="3"><label for="sq-fri-3">3</label>
+                <input type="radio" name="sq-fri" id="sq-fri-2" value="2"><label for="sq-fri-2">2</label>
+                <input type="radio" name="sq-fri" id="sq-fri-1" value="1"><label for="sq-fri-1">1</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select sleep-q">
+                <input type="radio" name="sq-sat" id="sq-sat-3" value="3"><label for="sq-sat-3">3</label>
+                <input type="radio" name="sq-sat" id="sq-sat-2" value="2"><label for="sq-sat-2">2</label>
+                <input type="radio" name="sq-sat" id="sq-sat-1" value="1"><label for="sq-sat-1">1</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select sleep-q">
+                <input type="radio" name="sq-sun" id="sq-sun-3" value="3"><label for="sq-sun-3">3</label>
+                <input type="radio" name="sq-sun" id="sq-sun-2" value="2"><label for="sq-sun-2">2</label>
+                <input type="radio" name="sq-sun" id="sq-sun-1" value="1"><label for="sq-sun-1">1</label>
+              </div>
+            </td>
+          </tr>
+          <!-- 朝食 -->
+          <tr>
+            <td class="row-label">朝食<span>Breakfast</span></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+          </tr>
+          <!-- 昼食 -->
+          <tr>
+            <td class="row-label">昼食<span>Lunch</span></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+          </tr>
+          <!-- 夕食 -->
+          <tr>
+            <td class="row-label">夕食<span>Dinner</span></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+            <td><input class="cell-input" type="text" placeholder="内容"></td>
+          </tr>
+          <!-- 飲水量 -->
+          <tr>
+            <td class="row-label">飲水量<span>Water (L)</span></td>
+            <td><input class="cell-input" type="text" placeholder="1.5L"></td>
+            <td><input class="cell-input" type="text" placeholder="1.5L"></td>
+            <td><input class="cell-input" type="text" placeholder="1.5L"></td>
+            <td><input class="cell-input" type="text" placeholder="1.5L"></td>
+            <td><input class="cell-input" type="text" placeholder="1.5L"></td>
+            <td><input class="cell-input" type="text" placeholder="1.5L"></td>
+            <td><input class="cell-input" type="text" placeholder="1.5L"></td>
+          </tr>
+          <!-- 運動 -->
+          <tr>
+            <td class="row-label">運動内容<span>Exercise</span></td>
+            <td><input class="cell-input" type="text" placeholder="セッション"></td>
+            <td><input class="cell-input" type="text" placeholder="ウォーク"></td>
+            <td><input class="cell-input" type="text" placeholder="休養"></td>
+            <td><input class="cell-input" type="text" placeholder="ジム"></td>
+            <td><input class="cell-input" type="text" placeholder="休養"></td>
+            <td><input class="cell-input" type="text" placeholder="ランニング"></td>
+            <td><input class="cell-input" type="text" placeholder="休養"></td>
+          </tr>
+          <!-- 運動時間 -->
+          <tr>
+            <td class="row-label">運動時間<span>Duration (min)</span></td>
+            <td><input class="cell-input" type="text" placeholder="60"></td>
+            <td><input class="cell-input" type="text" placeholder="30"></td>
+            <td><input class="cell-input" type="text" placeholder="-"></td>
+            <td><input class="cell-input" type="text" placeholder="45"></td>
+            <td><input class="cell-input" type="text" placeholder="-"></td>
+            <td><input class="cell-input" type="text" placeholder="40"></td>
+            <td><input class="cell-input" type="text" placeholder="-"></td>
+          </tr>
+          <!-- ストレス -->
+          <tr>
+            <td class="row-label">ストレス<span>Stress Lv.</span></td>
+            <td>
+              <div class="level-select stress">
+                <input type="radio" name="st-mon" id="st-mon-3" value="3"><label for="st-mon-3">高</label>
+                <input type="radio" name="st-mon" id="st-mon-2" value="2"><label for="st-mon-2">中</label>
+                <input type="radio" name="st-mon" id="st-mon-1" value="1"><label for="st-mon-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select stress">
+                <input type="radio" name="st-tue" id="st-tue-3" value="3"><label for="st-tue-3">高</label>
+                <input type="radio" name="st-tue" id="st-tue-2" value="2"><label for="st-tue-2">中</label>
+                <input type="radio" name="st-tue" id="st-tue-1" value="1"><label for="st-tue-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select stress">
+                <input type="radio" name="st-wed" id="st-wed-3" value="3"><label for="st-wed-3">高</label>
+                <input type="radio" name="st-wed" id="st-wed-2" value="2"><label for="st-wed-2">中</label>
+                <input type="radio" name="st-wed" id="st-wed-1" value="1"><label for="st-wed-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select stress">
+                <input type="radio" name="st-thu" id="st-thu-3" value="3"><label for="st-thu-3">高</label>
+                <input type="radio" name="st-thu" id="st-thu-2" value="2"><label for="st-thu-2">中</label>
+                <input type="radio" name="st-thu" id="st-thu-1" value="1"><label for="st-thu-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select stress">
+                <input type="radio" name="st-fri" id="st-fri-3" value="3"><label for="st-fri-3">高</label>
+                <input type="radio" name="st-fri" id="st-fri-2" value="2"><label for="st-fri-2">中</label>
+                <input type="radio" name="st-fri" id="st-fri-1" value="1"><label for="st-fri-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select stress">
+                <input type="radio" name="st-sat" id="st-sat-3" value="3"><label for="st-sat-3">高</label>
+                <input type="radio" name="st-sat" id="st-sat-2" value="2"><label for="st-sat-2">中</label>
+                <input type="radio" name="st-sat" id="st-sat-1" value="1"><label for="st-sat-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select stress">
+                <input type="radio" name="st-sun" id="st-sun-3" value="3"><label for="st-sun-3">高</label>
+                <input type="radio" name="st-sun" id="st-sun-2" value="2"><label for="st-sun-2">中</label>
+                <input type="radio" name="st-sun" id="st-sun-1" value="1"><label for="st-sun-1">低</label>
+              </div>
+            </td>
+          </tr>
+          <!-- 活力 -->
+          <tr>
+            <td class="row-label">活力・元気<span>Energy Lv.</span></td>
+            <td>
+              <div class="level-select energy">
+                <input type="radio" name="en-mon" id="en-mon-3" value="3"><label for="en-mon-3">高</label>
+                <input type="radio" name="en-mon" id="en-mon-2" value="2"><label for="en-mon-2">中</label>
+                <input type="radio" name="en-mon" id="en-mon-1" value="1"><label for="en-mon-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select energy">
+                <input type="radio" name="en-tue" id="en-tue-3" value="3"><label for="en-tue-3">高</label>
+                <input type="radio" name="en-tue" id="en-tue-2" value="2"><label for="en-tue-2">中</label>
+                <input type="radio" name="en-tue" id="en-tue-1" value="1"><label for="en-tue-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select energy">
+                <input type="radio" name="en-wed" id="en-wed-3" value="3"><label for="en-wed-3">高</label>
+                <input type="radio" name="en-wed" id="en-wed-2" value="2"><label for="en-wed-2">中</label>
+                <input type="radio" name="en-wed" id="en-wed-1" value="1"><label for="en-wed-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select energy">
+                <input type="radio" name="en-thu" id="en-thu-3" value="3"><label for="en-thu-3">高</label>
+                <input type="radio" name="en-thu" id="en-thu-2" value="2"><label for="en-thu-2">中</label>
+                <input type="radio" name="en-thu" id="en-thu-1" value="1"><label for="en-thu-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select energy">
+                <input type="radio" name="en-fri" id="en-fri-3" value="3"><label for="en-fri-3">高</label>
+                <input type="radio" name="en-fri" id="en-fri-2" value="2"><label for="en-fri-2">中</label>
+                <input type="radio" name="en-fri" id="en-fri-1" value="1"><label for="en-fri-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select energy">
+                <input type="radio" name="en-sat" id="en-sat-3" value="3"><label for="en-sat-3">高</label>
+                <input type="radio" name="en-sat" id="en-sat-2" value="2"><label for="en-sat-2">中</label>
+                <input type="radio" name="en-sat" id="en-sat-1" value="1"><label for="en-sat-1">低</label>
+              </div>
+            </td>
+            <td>
+              <div class="level-select energy">
+                <input type="radio" name="en-sun" id="en-sun-3" value="3"><label for="en-sun-3">高</label>
+                <input type="radio" name="en-sun" id="en-sun-2" value="2"><label for="en-sun-2">中</label>
+                <input type="radio" name="en-sun" id="en-sun-1" value="1"><label for="en-sun-1">低</label>
+              </div>
+            </td>
+          </tr>
+          <!-- 備考 -->
+          <tr>
+            <td class="row-label">メモ<span>Notes</span></td>
+            <td><input class="cell-input" type="text" placeholder="..."></td>
+            <td><input class="cell-input" type="text" placeholder="..."></td>
+            <td><input class="cell-input" type="text" placeholder="..."></td>
+            <td><input class="cell-input" type="text" placeholder="..."></td>
+            <td><input class="cell-input" type="text" placeholder="..."></td>
+            <td><input class="cell-input" type="text" placeholder="..."></td>
+            <td><input class="cell-input" type="text" placeholder="..."></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 凡例 -->
+    <div style="display:flex; gap:24px; margin-top:16px; flex-wrap:wrap;">
+      <div style="font-size:11px; color:var(--gray-dark); display:flex; align-items:center; gap:6px;">
+        <span style="width:12px; height:12px; border-radius:2px; background:var(--blue); display:inline-block;"></span>
+        睡眠の質：1=悪い　2=普通　3=良い
+      </div>
+      <div style="font-size:11px; color:var(--gray-dark); display:flex; align-items:center; gap:6px;">
+        <span style="width:12px; height:12px; border-radius:2px; background:var(--red); display:inline-block;"></span>
+        ストレス：低・中・高
+      </div>
+      <div style="font-size:11px; color:var(--gray-dark); display:flex; align-items:center; gap:6px;">
+        <span style="width:12px; height:12px; border-radius:2px; background:var(--green); display:inline-block;"></span>
+        活力：低・中・高
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HABIT TRACKER -->
+<div class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-green">✅</div>
+      <div class="section-name">週間習慣トラッカー</div>
+    </div>
+    <div class="tips-box">
+      <strong>使い方：</strong> トレーナーが顧客と一緒に「今週継続したい習慣」を設定し、実施した日にチェックを入れてください。
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table style="width:100%; min-width:520px; border-collapse:collapse;">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding:8px 0; font-size:12px; font-weight:700; color:var(--gray-dark); border-bottom:2px solid var(--gray); width:200px;">習慣内容</th>
+            <th style="padding:8px 6px; font-size:12px; font-weight:700; color:var(--blue); text-align:center;">月</th>
+            <th style="padding:8px 6px; font-size:12px; font-weight:700; color:var(--blue); text-align:center;">火</th>
+            <th style="padding:8px 6px; font-size:12px; font-weight:700; color:var(--blue); text-align:center;">水</th>
+            <th style="padding:8px 6px; font-size:12px; font-weight:700; color:var(--blue); text-align:center;">木</th>
+            <th style="padding:8px 6px; font-size:12px; font-weight:700; color:var(--blue); text-align:center;">金</th>
+            <th style="padding:8px 6px; font-size:12px; font-weight:700; color:var(--green); text-align:center;">土</th>
+            <th style="padding:8px 6px; font-size:12px; font-weight:700; color:var(--red); text-align:center;">日</th>
+            <th style="padding:8px 6px; font-size:12px; font-weight:700; text-align:center; color:var(--gray-dark);">達成率</th>
+          </tr>
+        </thead>
+        <tbody id="habit-body">
+          <!-- rows generated by JS -->
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-outline no-print" onclick="addHabitRow()" style="margin-top:14px; font-size:13px; padding:8px 16px;">＋ 習慣を追加</button>
+  </div>
+</div>
+
+<!-- FOOD & LIFESTYLE -->
+<div class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-orange">🍽️</div>
+      <div class="section-name">食事・生活習慣チェック</div>
+    </div>
+
+    <div class="notes-grid">
+      <div>
+        <div style="font-size:13px; font-weight:700; margin-bottom:12px;">食事の傾向</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <label class="check-item"><input type="checkbox"> 朝食を毎日食べている</label>
+          <label class="check-item"><input type="checkbox"> 間食が多い（週3回以上）</label>
+          <label class="check-item"><input type="checkbox"> 外食・テイクアウトが多い</label>
+          <label class="check-item"><input type="checkbox"> アルコールを飲む習慣がある</label>
+          <label class="check-item"><input type="checkbox"> 夜遅い時間（21時以降）に食べる</label>
+          <label class="check-item"><input type="checkbox"> 食事の時間が不規則</label>
+          <label class="check-item"><input type="checkbox"> 水分をあまり摂らない</label>
+          <label class="check-item"><input type="checkbox"> 甘いものを摂りやすい</label>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px; font-weight:700; margin-bottom:12px;">生活習慣</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <label class="check-item"><input type="checkbox"> デスクワーク中心（座位が長い）</label>
+          <label class="check-item"><input type="checkbox"> 通勤で歩く機会がある</label>
+          <label class="check-item"><input type="checkbox"> 喫煙習慣がある</label>
+          <label class="check-item"><input type="checkbox"> 入浴（湯船）の習慣がある</label>
+          <label class="check-item"><input type="checkbox"> ストレッチ・セルフケアをしている</label>
+          <label class="check-item"><input type="checkbox"> 日常的に階段を使っている</label>
+          <label class="check-item"><input type="checkbox"> スマホ・PCの使用時間が長い</label>
+          <label class="check-item"><input type="checkbox"> 家族・育児の負担が大きい</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLEEP DETAIL -->
+<div class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🌙</div>
+      <div class="section-name">睡眠詳細</div>
+    </div>
+    <div class="meta-grid">
+      <div class="field-group">
+        <div class="field-label">平均睡眠時間</div>
+        <input class="field-input" type="text" placeholder="例：6時間30分">
+      </div>
+      <div class="field-group">
+        <div class="field-label">入眠のしやすさ</div>
+        <input class="field-input" type="text" placeholder="例：すぐ眠れる / 30分以上かかる">
+      </div>
+      <div class="field-group">
+        <div class="field-label">途中覚醒の有無</div>
+        <input class="field-input" type="text" placeholder="例：ほぼなし / 毎晩1〜2回">
+      </div>
+      <div class="field-group">
+        <div class="field-label">起床時のすっきり感</div>
+        <input class="field-input" type="text" placeholder="例：まあすっきり / だるい">
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="note-box">
+      <div class="note-label">睡眠に関するトレーナーコメント・アドバイス</div>
+      <textarea class="note-textarea" placeholder="例：就寝1時間前のスマホ使用を控えるよう提案。寝室の温度管理も確認する..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISE HABITS -->
+<div class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-green">💪</div>
+      <div class="section-name">運動習慣・セルフトレーニング</div>
+    </div>
+    <div class="meta-grid">
+      <div class="field-group">
+        <div class="field-label">セッション外の運動頻度</div>
+        <input class="field-input" type="text" placeholder="例：週2回程度">
+      </div>
+      <div class="field-group">
+        <div class="field-label">主な自主トレの種類</div>
+        <input class="field-input" type="text" placeholder="例：ウォーキング、自重トレ">
+      </div>
+      <div class="field-group">
+        <div class="field-label">1日の歩数（目安）</div>
+        <input class="field-input" type="text" placeholder="例：6,000〜8,000歩">
+      </div>
+      <div class="field-group">
+        <div class="field-label">運動後の疲労感</div>
+        <input class="field-input" type="text" placeholder="例：翌日まで残る / 当日中に回復">
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="meta-grid">
+      <div class="note-box">
+        <div class="note-label">身体の気になる箇所・痛み・違和感</div>
+        <textarea class="note-textarea" style="min-height:70px;" placeholder="例：右膝が時々痛む、腰が重い感じが続いている..."></textarea>
+      </div>
+      <div class="note-box">
+        <div class="note-label">トレーナー所見・次回への申し送り</div>
+        <textarea class="note-textarea" style="min-height:70px;" placeholder="例：膝の状態を確認しながらスクワットの負荷調整を検討..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MENTAL -->
+<div class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon icon-yellow">🧠</div>
+      <div class="section-name">メンタル・モチベーション</div>
+    </div>
+    <div class="meta-grid">
+      <div class="field-group">
+        <div class="field-label">今週のモチベーション（全体）</div>
+        <div class="star-rate" id="motivation-stars">
+          <input type="radio" name="motivation" id="m5" value="5"><label for="m5">★</label>
+          <input type="radio" name="motivation" id="m4" value="4"><label for="m4">★</label>
+          <input type="radio" name="motivation" id="m3" value="3"><label for="m3">★</label>
+          <input type="radio" name="motivation" id="m2" value="2"><label for="m2">★</label>
+          <input type="radio" name="motivation" id="m1" value="1"><label for="m1">★</label>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-label">継続への意欲</div>
+        <div class="star-rate">
+          <input type="radio" name="willpower" id="w5" value="5"><label for="w5">★</label>
+          <input type="radio" name="willpower" id="w4" value="4"><label for="w4">★</label>
+          <input type="radio" name="willpower" id="w3" value="3"><label for="w3">★</label>
+          <input type="radio" name="willpower" id="w2" value="2"><label for="w2">★</label>
+          <input type="radio" name="willpower" id="w1" value="1"><label for="w1">★</label>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label">今週うまくいったこと</div>
+        <textarea class="note-textarea" placeholder="例：毎朝ストレッチができた、間食を減らせた..."></textarea>
+      </div>
+      <div class="note-box">
+        <div class="note-label">難しかったこと・乗り越えたいこと</div>
+        <textarea class="note-textarea" placeholder="例：残業が続き夜の食事が遅くなった..."></textarea>
+      </div>
+      <div class="note-box">
+        <div class="note-label">来週取り組みたいこと（顧客）</div>
+        <textarea class="note-textarea" placeholder="例：朝5分のストレッチを習慣にしたい..."></textarea>
+      </div>
+      <div class="note-box">
+        <div class="note-label">トレーナーからの来週への提案</div>
+        <textarea class="note-textarea" placeholder="例：水曜日に軽いウォーキングを追加することを提案する..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar no-print">
+  <div class="container" style="display:flex; gap:12px; justify-content:flex-end;">
+    <button class="btn btn-outline" onclick="window.print()">🖨️ 印刷する</button>
+    <button class="btn btn-primary" onclick="saveData()">💾 入力内容を保存</button>
+  </div>
+</div>
+
+<script>
+  /* ---- HABIT TRACKER ---- */
+  const DAYS = ['月','火','水','木','金','土','日'];
+  let habitCount = 0;
+
+  function addHabitRow(name = '') {
+    habitCount++;
+    const id = 'habit-' + habitCount;
+    const tbody = document.getElementById('habit-body');
+    const tr = document.createElement('tr');
+    tr.id = id;
+    tr.style.borderBottom = '1px solid #EBEBEB';
+
+    let html = `<td style="padding:10px 0;">
+      <input type="text" value="${name}" placeholder="習慣を入力（例：30分ウォーキング）"
+        style="border:none;border-bottom:1.5px solid var(--gray);font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--text);width:100%;background:transparent;outline:none;padding:2px 0;"
+        oninput="calcRate('${id}')"
+        onfocus="this.style.borderBottomColor='var(--primary)'"
+        onblur="this.style.borderBottomColor='var(--gray)'">
+    </td>`;
+
+    DAYS.forEach((d, i) => {
+      html += `<td style="text-align:center;padding:10px 4px;">
+        <input type="checkbox" style="accent-color:var(--primary);width:18px;height:18px;" onchange="calcRate('${id}')">
+      </td>`;
+    });
+
+    html += `<td style="text-align:center;padding:10px 4px;">
+      <span id="${id}-rate" style="font-size:13px;font-weight:700;color:var(--primary);">0%</span>
+    </td>`;
+
+    tr.innerHTML = html;
+    tbody.appendChild(tr);
+  }
+
+  function calcRate(rowId) {
+    const row = document.getElementById(rowId);
+    const boxes = row.querySelectorAll('input[type="checkbox"]');
+    const checked = [...boxes].filter(b => b.checked).length;
+    const pct = Math.round(checked / DAYS.length * 100);
+    const rateEl = document.getElementById(rowId + '-rate');
+    if (rateEl) rateEl.textContent = pct + '%';
+  }
+
+  /* Preset habits */
+  ['毎日1.5L以上の水を飲む', '朝食を食べる', '就寝前スマホを控える（30分前）'].forEach(h => addHabitRow(h));
+
+  /* ---- SAVE (localStorage) ---- */
+  function saveData() {
+    const data = {};
+    document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach((el, i) => {
+      data['field_' + i] = el.value;
+    });
+    document.querySelectorAll('input[type="radio"]:checked').forEach(el => {
+      data['radio_' + el.name] = el.value;
+    });
+    document.querySelectorAll('input[type="checkbox"]').forEach((el, i) => {
+      data['check_' + i] = el.checked;
+    });
+    try {
+      localStorage.setItem('lifestyle_sheet', JSON.stringify(data));
+      alert('入力内容をブラウザに保存しました。\n同じブラウザで次回開くと復元されます。');
+    } catch(e) {
+      alert('保存できませんでした。ブラウザの設定を確認してください。');
+    }
+  }
+
+  function loadData() {
+    const raw = localStorage.getItem('lifestyle_sheet');
+    if (!raw) return;
+    try {
+      const data = JSON.parse(raw);
+      document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach((el, i) => {
+        if (data['field_' + i] !== undefined) el.value = data['field_' + i];
+      });
+      Object.keys(data).forEach(key => {
+        if (key.startsWith('radio_')) {
+          const name = key.replace('radio_', '');
+          const radio = document.querySelector(`input[type="radio"][name="${name}"][value="${data[key]}"]`);
+          if (radio) radio.checked = true;
+        }
+      });
+      document.querySelectorAll('input[type="checkbox"]').forEach((el, i) => {
+        if (data['check_' + i] !== undefined) el.checked = data['check_' + i];
+      });
+    } catch(e) { /* ignore */ }
+  }
+
+  window.addEventListener('load', loadData);
+</script>
+</body>
+</html>
