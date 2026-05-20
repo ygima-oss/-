@@ -19,6 +19,10 @@
     --green-light: #E8F7F0;
     --blue: #3A7FC1;
     --blue-light: #EBF3FB;
+    --red: #D94F4F;
+    --red-light: #FDEAEA;
+    --yellow: #D4920A;
+    --yellow-light: #FFF8E6;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -141,6 +145,195 @@
     font-weight: 700;
     padding: 6px 14px;
     border-radius: 4px;
+  }
+
+  /* SCHEDULE ANALYSIS */
+  .analysis-wrap {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .insight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  @media(max-width: 520px) { .insight-grid { grid-template-columns: 1fr; } }
+  .insight-card {
+    border-radius: 6px;
+    padding: 16px;
+    border-left: 4px solid;
+  }
+  .insight-card.warn {
+    background: var(--red-light);
+    border-color: var(--red);
+  }
+  .insight-card.ok {
+    background: var(--green-light);
+    border-color: var(--green);
+  }
+  .insight-card.caution {
+    background: var(--yellow-light);
+    border-color: var(--yellow);
+  }
+  .insight-card.info {
+    background: var(--blue-light);
+    border-color: var(--blue);
+  }
+  .insight-icon { font-size: 20px; margin-bottom: 6px; }
+  .insight-title {
+    font-size: 13px;
+    font-weight: 900;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .insight-body {
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+  }
+
+  /* TIME SUGGESTIONS */
+  .time-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--gray);
+  }
+  .time-row:last-child { border-bottom: none; }
+  .time-badge {
+    background: var(--text);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .time-content { flex: 1; }
+  .time-label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .time-detail {
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+  }
+  .time-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-right: 4px;
+    margin-top: 4px;
+  }
+  .time-tag.step { background: var(--primary-bg); color: var(--primary); }
+  .time-tag.session { background: var(--green-light); color: var(--green); }
+  .time-tag.admin { background: var(--blue-light); color: var(--blue); }
+
+  /* ACTION PLAN */
+  .plan-wrap {
+    background: var(--text);
+    padding: 48px 0;
+    margin-top: 16px;
+  }
+  .plan-wrap .section-label { color: var(--primary-light); }
+  .plan-wrap .section-title { color: var(--white); }
+  .plan-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .plan-month {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+  }
+  .plan-month::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 24px;
+    bottom: -8px;
+    width: 2px;
+    background: var(--primary);
+  }
+  .plan-month:last-child::before { display: none; }
+  .plan-month-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .plan-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary);
+    position: absolute;
+    left: 0;
+    top: 4px;
+    flex-shrink: 0;
+  }
+  .plan-month-label {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--primary-light);
+    letter-spacing: 0.05em;
+  }
+  .plan-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .plan-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--primary);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .plan-item-priority {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-light);
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 28px;
+  }
+  .plan-item-body { flex: 1; }
+  .plan-item-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .plan-item-detail {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+  .plan-item-when {
+    font-size: 11px;
+    background: rgba(226,121,46,0.25);
+    color: var(--primary-light);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
   /* ROADMAP */
@@ -461,6 +654,179 @@
       <div class="lead-card">
         <div class="lead-avatar">牧</div>
         <div class="lead-name">牧 寛子さん</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE ANALYSIS -->
+<section class="analysis-wrap">
+  <div class="container">
+    <div class="section-label">SCHEDULE ANALYSIS / 6月のスケジュールを読む</div>
+    <h2 class="section-title">スケジュールから見えること</h2>
+
+    <div class="insight-grid">
+      <div class="insight-card warn">
+        <div class="insight-icon">⚠️</div>
+        <div class="insight-title">土曜の欠勤が2回（6/13・6/20）</div>
+        <div class="insight-body">土曜は本来リード顧客と接点が多い日。2週連続の欠勤は顧客接触機会のロスにつながる。7月は土曜の出勤を安定させることが優先。</div>
+      </div>
+      <div class="insight-card caution">
+        <div class="insight-icon">📊</div>
+        <div class="insight-title">セッションがほぼ1/3止まり</div>
+        <div class="insight-body">G60件達成のためには2/3・3/3への移行が必要。現状の予約枠の組み方を見直して、同一時間帯に2〜3名を入れる設計に変えていく。</div>
+      </div>
+      <div class="insight-card ok">
+        <div class="insight-icon">✅</div>
+        <div class="insight-title">14:00〜18:00の入り時間が研修に使いやすい</div>
+        <div class="insight-body">出勤後〜夜のセッション開始までの時間帯が活用できる。MTGや研修ブロックがすでに入っており、ここをさらに有効活用できる。</div>
+      </div>
+      <div class="insight-card info">
+        <div class="insight-icon">💡</div>
+        <div class="insight-title">MTGが点在しているのでまとめると効率的</div>
+        <div class="insight-body">現在MTGが週複数日に分散している。同じ曜日にMTG→研修→振り返りを連続させることで、集中して進めやすくなる。</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 8px;">IDEAL TIME USAGE / 時間の使い方の提案</div>
+    <div style="background: var(--gray-light); border-radius: 6px; padding: 16px; margin-top: 12px;">
+      <div class="time-row">
+        <div class="time-badge">14:00〜15:30</div>
+        <div class="time-content">
+          <div class="time-label">出勤後すぐ：MTGや研修をまとめて入れる</div>
+          <div class="time-detail">出勤してすぐのタイミング。ステップ①-1の1on1、ステップ①-2のマニュアル読み合わせはここに設定すると動きやすい。MTG後に続けて研修できるのが理想。</div>
+          <span class="time-tag step">ステップ①-1</span>
+          <span class="time-tag step">ステップ①-2</span>
+        </div>
+      </div>
+      <div class="time-row">
+        <div class="time-badge">15:30〜17:30</div>
+        <div class="time-content">
+          <div class="time-label">MTG後の隙間 → N1Cycle作成・リード顧客管理</div>
+          <div class="time-detail">MTGやLINE/CS対応の後に続けて使える時間。例：MTG（14:00〜14:30）→ N1Cycle作成（14:30〜15:30）。場所移動ゼロで研修まで完結できる。</div>
+          <span class="time-tag step">ステップ②</span>
+          <span class="time-tag admin">管理業務</span>
+        </div>
+      </div>
+      <div class="time-row">
+        <div class="time-badge">18:00〜20:00</div>
+        <div class="time-content">
+          <div class="time-label">セッションを2/3・3/3に段階的に移行</div>
+          <div class="time-detail">現在の1/3枠を活かしながら、週2〜3コマを2/3・3/3に変えていく。G60件達成の最短ルート。</div>
+          <span class="time-tag session">セッション数UP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION PLAN -->
+<section class="plan-wrap">
+  <div class="container">
+    <div class="section-label">ACTION PLAN</div>
+    <h2 class="section-title">6月後半〜7月 具体的にやること</h2>
+
+    <div class="plan-timeline">
+      <!-- 6月後半 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">6月後半（〜6/30）</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">ステップ①-1 の1on1 MTGを設定・完了させる</div>
+              <div class="plan-item-detail">Will Want Must再確認・等級表での目標設定・7月以降の研修スケジュール大枠を1回60分で完結させる。既存のMTG枠に追加する形が◯。</div>
+            </div>
+            <div class="plan-item-when">今週中に予約</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">ステップ①-2 の3名マニュアル読み合わせを実施</div>
+              <div class="plan-item-detail">平日10:00〜12:00の空き枠を使って60分で実施。MGと一緒に現状の差分・OPE課題を会話する。</div>
+            </div>
+            <div class="plan-item-when">6/23〜6/27</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P3</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">セッション評価シートを自分で記入して提出</div>
+              <div class="plan-item-detail">既存のセッション後に評価シートを書く習慣をつける。振り返りはMGと一緒に30分。</div>
+            </div>
+            <div class="plan-item-when">随時</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7月前半 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">7月前半（7/1〜7/15）</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">土曜の出勤を安定させる（欠勤ゼロへ）</div>
+              <div class="plan-item-detail">6月に2回あった土曜欠勤をリセット。土曜はリード顧客接触のゴールデンタイム。予約も多く取れるよう調整する。</div>
+            </div>
+            <div class="plan-item-when">7月全土曜</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">ステップ② リード顧客のN1Cycle作成を開始</div>
+              <div class="plan-item-detail">6名のリード顧客について、MGと一緒にN1Cycleを作成する。来店状況・チケット消化・目標を整理するところから。まず1名から着手。</div>
+            </div>
+            <div class="plan-item-when">MTG後に連続設定</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P3</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">セッション枠を週2コマ、2/3に移行</div>
+              <div class="plan-item-detail">現在の1/3枠の中から2コマを選び、2名体制に変える。G60件達成に向けての第一歩。</div>
+            </div>
+            <div class="plan-item-when">予約調整時に</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7月後半 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">7月後半〜8月（ステップ③へ）</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">ステップ③ 新規研修スタート（動画→見学→ロープレ→試験）</div>
+              <div class="plan-item-detail">4〜6週間かかる研修。出勤後〜セッション開始前（14:00〜17:00）の枠を毎週固定で確保し、週1回ペースで進める。</div>
+            </div>
+            <div class="plan-item-when">14〜17時枠で</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">1on1研修（ラポール・目標設定・進捗管理）受講開始</div>
+              <div class="plan-item-detail">知る/わかるフェーズ。30分×3項目×3工程（計270分）。MTGの流れの中で分割して実施。</div>
+            </div>
+            <div class="plan-item-when">MTGに連続</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P3</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">セッション評価受講（品質管理部・里森・五味）</div>
+              <div class="plan-item-detail">責任者が品質管理担当者と日程調整して実施。60分＋FB30分（計90分）。</div>
+            </div>
+            <div class="plan-item-when">日程要調整</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
