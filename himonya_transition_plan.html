@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>碑文谷店舗 移行計画 2026年6〜8月</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      line-height: 1.7;
+    }
+
+    /* ヘッダー */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: white;
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 1.9rem; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 8px; }
+    .hero .sub { font-size: 0.95rem; opacity: 0.75; margin-bottom: 24px; }
+    .hero .kpi-row {
+      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .hero .kpi-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 14px 24px;
+      min-width: 130px;
+    }
+    .hero .kpi-card .num { font-size: 2rem; font-weight: 800; }
+    .hero .kpi-card .label { font-size: 0.75rem; opacity: 0.75; margin-top: 2px; }
+    .hero .alert-badge {
+      display: inline-block;
+      background: #e74c3c;
+      color: white;
+      border-radius: 20px;
+      padding: 4px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+
+    /* コンテンツ */
+    .container { max-width: 900px; margin: 0 auto; padding: 32px 16px 60px; }
+
+    /* フェーズタイトル */
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 40px 0 20px;
+    }
+    .phase-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .badge-jun { background: #e8f4fd; color: #1a6bb5; border: 1.5px solid #1a6bb5; }
+    .badge-jul { background: #eafaf1; color: #1a8a4a; border: 1.5px solid #1a8a4a; }
+    .badge-aug { background: #fef9e7; color: #b7770d; border: 1.5px solid #b7770d; }
+    .phase-header h2 { font-size: 1.35rem; font-weight: 800; }
+
+    /* カード */
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title .icon { font-size: 1.15rem; }
+
+    /* 特集バナー：写真OK */
+    .photo-banner {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      border-radius: 14px;
+      padding: 22px 28px;
+      color: white;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 18px rgba(238,90,36,0.3);
+    }
+    .photo-banner .banner-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .photo-banner ul {
+      list-style: none;
+      padding: 0;
+    }
+    .photo-banner ul li {
+      padding: 5px 0;
+      font-size: 0.93rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .photo-banner ul li::before { content: "📷"; flex-shrink: 0; }
+    .photo-banner .usage-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .photo-banner .tag {
+      background: rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* 口コミ目標カード */
+    .review-goal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .goal-box {
+      border-radius: 10px;
+      padding: 16px 18px;
+      text-align: center;
+    }
+    .goal-box.current { background: #f8f9fa; border: 2px solid #dee2e6; }
+    .goal-box.target { background: #fff3cd; border: 2px solid #ffc107; }
+    .goal-box .num { font-size: 2.4rem; font-weight: 900; line-height: 1; }
+    .goal-box .num.current-num { color: #6c757d; }
+    .goal-box .num.target-num { color: #e67e22; }
+    .goal-box .lbl { font-size: 0.78rem; color: #888; margin-top: 4px; }
+
+    /* タイミング表 */
+    .timing-grid { display: flex; flex-direction: column; gap: 10px; }
+    .timing-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr 2fr;
+      gap: 10px;
+      align-items: start;
+    }
+    .timing-row .t-label {
+      background: #eaf2ff;
+      color: #1a6bb5;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .timing-row .t-situation,
+    .timing-row .t-action {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
+    .timing-header {
+      display: grid;
+      grid-template-columns: 1fr 2fr 2fr;
+      gap: 10px;
+    }
+    .timing-header span {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #999;
+      padding: 0 4px;
+    }
+
+    /* ミッションカード */
+    .mission-card {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 12px;
+      padding: 18px 22px;
+      color: white;
+      margin-top: 14px;
+    }
+    .mission-card .m-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      opacity: 0.85;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .mission-card ul { list-style: none; padding: 0; }
+    .mission-card ul li {
+      padding: 5px 0;
+      font-size: 0.88rem;
+      display: flex;
+      gap: 8px;
+    }
+    .mission-card ul li::before { content: "→"; opacity: 0.7; }
+
+    /* 週次チェック */
+    .checklist { list-style: none; padding: 0; }
+    .checklist li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: "";
+      width: 18px; height: 18px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    /* プラン比率 */
+    .plan-bars { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+    .plan-row { display: flex; align-items: center; gap: 12px; }
+    .plan-name { width: 80px; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
+    .bar-wrap { flex: 1; background: #f0f0f0; border-radius: 20px; height: 10px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 20px; }
+    .bar-light { background: #74b9ff; }
+    .bar-regular { background: #00b894; }
+    .bar-hard { background: #e17055; }
+    .plan-pct { font-size: 0.82rem; color: #666; width: 120px; flex-shrink: 0; }
+
+    /* アクションテーブル */
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th {
+      background: #f8f9fa;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+      color: #555;
+      border-bottom: 2px solid #e9ecef;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    .priority-high {
+      background: #fff5f5;
+      color: #c0392b;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+    .priority-mid {
+      background: #fff9e6;
+      color: #e67e22;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    /* カレンダー */
+    .calendar { display: flex; flex-direction: column; gap: 0; }
+    .cal-month {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .cal-month-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px 10px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: white;
+    }
+    .cal-month-label .mo { font-size: 1.4rem; }
+    .lbl-jun { background: #1a6bb5; }
+    .lbl-jul { background: #1a8a4a; }
+    .lbl-aug { background: #b7770d; }
+    .cal-weeks { background: white; padding: 14px 18px; }
+    .cal-week {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.85rem;
+    }
+    .cal-week:last-child { border-bottom: none; }
+    .cal-week .wk-label {
+      font-weight: 700;
+      color: #999;
+      font-size: 0.78rem;
+      min-width: 42px;
+      padding-top: 2px;
+    }
+    .cal-week .wk-items { display: flex; flex-wrap: wrap; gap: 6px; }
+    .wk-tag {
+      background: #f0f4ff;
+      color: #3a5fc8;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.8rem;
+    }
+    .wk-tag.red { background: #fff0f0; color: #c0392b; }
+    .wk-tag.green { background: #f0fff4; color: #1a8a4a; }
+    .wk-tag.orange { background: #fff8ee; color: #b7770d; }
+    .wk-tag.purple { background: #f5f0ff; color: #7b4fc8; }
+
+    /* 期待値テーブル */
+    .expectation-grid { display: flex; flex-direction: column; gap: 10px; }
+    .exp-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .exp-month {
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: white;
+    }
+    .exp-jun { background: #1a6bb5; }
+    .exp-jul { background: #1a8a4a; }
+    .exp-aug { background: #b7770d; }
+    .exp-text {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* ゴールバナー */
+    .goal-banner {
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      border-radius: 14px;
+      padding: 24px 28px;
+      color: white;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .goal-banner .g-label { font-size: 0.78rem; opacity: 0.7; letter-spacing: 0.1em; }
+    .goal-banner .g-text {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.4rem; }
+      .hero .kpi-row { gap: 12px; }
+      .timing-row { grid-template-columns: 1fr; }
+      .timing-header { display: none; }
+      .review-goal { grid-template-columns: 1fr 1fr; }
+      .cal-month { grid-template-columns: 80px 1fr; }
+      .exp-row { grid-template-columns: 70px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<div class="hero">
+  <div class="sub">東急AD碑文谷 ／ フィットネスクラブ移行計画</div>
+  <h1>碑文谷店舗 6〜8月 アクションプラン</h1>
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="num">193</div>
+      <div class="label">5月末 会員数</div>
+    </div>
+    <div class="kpi-card">
+      <div class="num">24</div>
+      <div class="label">現在の口コミ件数</div>
+    </div>
+    <div class="kpi-card">
+      <div class="num">304</div>
+      <div class="label">6月 会員目標</div>
+    </div>
+    <div class="kpi-card">
+      <div class="num">34+</div>
+      <div class="label">6月末 口コミ目標</div>
+    </div>
+  </div>
+  <div class="alert-badge">移行による会員減少 ▲20名 を想定済み</div>
+</div>
+
+<div class="container">
+
+  <!-- ========== 6月 ========== -->
+  <div class="phase-header">
+    <span class="phase-badge badge-jun">June 2026</span>
+    <h2>6月：移行安定化 ＋ 口コミ月間</h2>
+  </div>
+
+  <!-- 写真OKバナー -->
+  <div class="photo-banner">
+    <div class="banner-title">
+      📸 碑文谷店はジム内・写真撮影OK！しっかり活用していこう
+    </div>
+    <ul>
+      <li>姿勢チェック・フォーム確認の写真撮影OK</li>
+      <li>グループ写真・メンバーとの記念撮影OK</li>
+      <li>Before／Afterの変化記録 → 口コミ・UGコンテンツに活用</li>
+      <li>体験セッション中の様子を撮影 → SNS投稿の素材に（会員許可必須）</li>
+    </ul>
+    <div class="usage-tags">
+      <span class="tag">口コミ投稿に添付</span>
+      <span class="tag">SNS・Instagram</span>
+      <span class="tag">UGコンテンツ</span>
+      <span class="tag">進捗記録</span>
+      <span class="tag">体験→入会のストーリー</span>
+    </div>
+  </div>
+
+  <!-- 口コミ目標 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">⭐</span>6月の特別テーマ：口コミ増加月間</div>
+    <div class="review-goal">
+      <div class="goal-box current">
+        <div class="num current-num">24</div>
+        <div class="lbl">現在の件数</div>
+      </div>
+      <div class="goal-box target">
+        <div class="num target-num">34+</div>
+        <div class="lbl">6月末の目標件数（+10件）</div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem;color:#555;margin-bottom:14px;"><strong>メンバー一人あたり：2件獲得を必達ライン</strong></p>
+
+    <div class="card-title" style="margin-top:16px;"><span class="icon">🕐</span>依頼タイミングの設計</div>
+    <div class="timing-header">
+      <span>タイミング</span><span>状況</span><span>依頼方法</span>
+    </div>
+    <div class="timing-grid" style="margin-top:6px;">
+      <div class="timing-row">
+        <div class="t-label">成果が出た瞬間</div>
+        <div class="t-situation">体重・体型の変化を会員が実感したとき</div>
+        <div class="t-action">「ぜひ感想をGoogleに書いてください」と直接依頼。<strong>写真を一緒に撮って投稿を促す</strong></div>
+      </div>
+      <div class="timing-row">
+        <div class="t-label">目標達成時</div>
+        <div class="t-situation">1ヶ月・3ヶ月のマイルストーン達成</div>
+        <div class="t-action">セッション内でお祝い＋投稿依頼。<strong>Before写真があれば一緒に投稿を</strong></div>
+      </div>
+      <div class="timing-row">
+        <div class="t-label">満足度が高いとき</div>
+        <div class="t-situation">「楽しかった」「また来ます」などの発言後</div>
+        <div class="t-action">その場でスマホから書けるよう誘導。QRコードを活用</div>
+      </div>
+    </div>
+
+    <div class="mission-card">
+      <div class="m-title">石井くん・中富さんへの特別ミッション</div>
+      <ul>
+        <li>体験セッション担当後、担当した体験者に口コミ依頼を必ず行う</li>
+        <li>体験中に姿勢・フォームの写真を撮影し、投稿素材として提供する</li>
+        <li>体験→入会につながったケースは特に丁寧にフォロー</li>
+        <li>初担当の緊張感が会員にポジティブな印象を与える — それを活かす</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 口コミ週次管理 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📊</span>週次チェック項目</div>
+    <ul class="checklist">
+      <li>今週の口コミ獲得数（全体・個人別）を確認</li>
+      <li>残り目標件数を全員で共有</li>
+      <li>依頼できていない担当会員をリストアップ</li>
+      <li>好事例の共有（どんな言い方で依頼したか）</li>
+      <li>写真撮影を活用できた事例を紹介</li>
+    </ul>
+  </div>
+
+  <!-- UG・特典 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🎁</span>UG・特典との連動</div>
+    <table>
+      <thead>
+        <tr><th>施策</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>口コミ投稿特典</strong></td>
+          <td>投稿確認後、次回セッションでサプライズフォロー（感謝の言葉＋小さなギフト）</td>
+        </tr>
+        <tr>
+          <td><strong>写真×UGコンテンツ</strong></td>
+          <td>会員の許可を得て、口コミ・SNSに写真を活用。体験者の投稿は入会促進の最強素材</td>
+        </tr>
+        <tr>
+          <td><strong>体験者の口コミ</strong></td>
+          <td>体験直後の依頼を習慣化 → 問い合わせ増加 → 7月以降の新規獲得に直結</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 離脱防止 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🛡️</span>最優先：離脱防止（▲20名の最小化）</div>
+    <table>
+      <thead>
+        <tr><th>優先度</th><th>施策</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="priority-high">最優先</span></td>
+          <td>全会員フォローアップ面談</td>
+          <td>変更内容の説明、不安解消、プラン継続確認</td>
+        </tr>
+        <tr>
+          <td><span class="priority-high">最優先</span></td>
+          <td>移行特典の設定</td>
+          <td>継続会員向けクーポン活用、紹介キャンペーン強化</td>
+        </tr>
+        <tr>
+          <td><span class="priority-mid">重要</span></td>
+          <td>レギュラー比率引き上げ</td>
+          <td>現状51〜52% → 55%目標。ライト会員へのアップセル提案</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:14px;">
+      <div class="plan-bars">
+        <div class="plan-row">
+          <div class="plan-name">ライト</div>
+          <div class="bar-wrap"><div class="bar-fill bar-light" style="width:41%"></div></div>
+          <div class="plan-pct">実績41% → 目標40%</div>
+        </div>
+        <div class="plan-row">
+          <div class="plan-name">レギュラー</div>
+          <div class="bar-wrap"><div class="bar-fill bar-regular" style="width:51%"></div></div>
+          <div class="plan-pct">実績51% → <strong>目標55%</strong></div>
+        </div>
+        <div class="plan-row">
+          <div class="plan-name">ハード</div>
+          <div class="bar-wrap"><div class="bar-fill bar-hard" style="width:8%"></div></div>
+          <div class="plan-pct">実績8% → 目標5%以下</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 7月 ========== -->
+  <div class="phase-header">
+    <span class="phase-badge badge-jul">July 2026</span>
+    <h2>7月：回復・獲得フェーズ</h2>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🚀</span>新規獲得施策</div>
+    <table>
+      <thead>
+        <tr><th>施策</th><th>目標水準</th><th>アクション</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>体験セッション転換率</td>
+          <td><strong>50%以上</strong></td>
+          <td>週次体験枠の確保、口コミを見て来た体験者を優先フォロー</td>
+        </tr>
+        <tr>
+          <td>特典パーソナル提案</td>
+          <td>担当会員の<strong>30%以上</strong></td>
+          <td>提案タイミングの標準化、スクリプト整備</td>
+        </tr>
+        <tr>
+          <td>追加購入提案</td>
+          <td>担当会員の<strong>20%以上</strong></td>
+          <td>セッション内での自然な提案フローを練習</td>
+        </tr>
+        <tr>
+          <td>まとめ購入促進</td>
+          <td>月次で提案実施</td>
+          <td>3ヶ月プランとセットで提示</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📈</span>メンバー育成：設計力の向上</div>
+    <p style="font-size:0.88rem;color:#555;margin-bottom:14px;">現状課題：セッションには慣れてきたが、<strong>中長期設計ができていない</strong></p>
+    <table>
+      <thead>
+        <tr><th>求めるレベル</th><th>アクション</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>担当会員全員の<strong>3ヶ月計画</strong>を作成</td>
+          <td>ロールプレイング練習（週1回）</td>
+        </tr>
+        <tr>
+          <td>売上を<strong>自己予測して発表</strong>できる</td>
+          <td>個別KPI管理シートの導入</td>
+        </tr>
+        <tr>
+          <td>口コミ・写真を<strong>設計の武器</strong>として使える</td>
+          <td>成功事例の共有（月1回ミーティング）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== 8月 ========== -->
+  <div class="phase-header">
+    <span class="phase-badge badge-aug">August 2026</span>
+    <h2>8月：定着・成長フェーズ</h2>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🎯</span>8月の数値目標</div>
+    <table>
+      <thead>
+        <tr><th>指標</th><th>目標</th><th>アクション</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>会員数</td>
+          <td><strong>306名</strong></td>
+          <td>新規獲得継続＋離脱防止の両輪</td>
+        </tr>
+        <tr>
+          <td>入会月額プラン費用</td>
+          <td>前月比維持〜増</td>
+          <td>レギュラー比率55%達成を維持</td>
+        </tr>
+        <tr>
+          <td>単発購入合計</td>
+          <td>¥100,000以上/月</td>
+          <td>特典・追加購入の設計強化</td>
+        </tr>
+        <tr>
+          <td>口コミ件数</td>
+          <td>継続増加</td>
+          <td>月間依頼を習慣化、写真活用を定着させる</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== カレンダー ========== -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📅</span>3ヶ月アクションカレンダー</div>
+    <div class="calendar">
+      <div class="cal-month">
+        <div class="cal-month-label lbl-jun">
+          <span>6月</span>
+          <span class="mo">Jun</span>
+          <span style="font-size:0.68rem;opacity:0.8;margin-top:4px;">口コミ月間</span>
+        </div>
+        <div class="cal-weeks">
+          <div class="cal-week">
+            <div class="wk-label">第1週</div>
+            <div class="wk-items">
+              <span class="wk-tag">全会員フォローアップ面談</span>
+              <span class="wk-tag red">口コミ依頼スクリプト共有・練習</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第2週</div>
+            <div class="wk-items">
+              <span class="wk-tag">新プラン運用開始</span>
+              <span class="wk-tag purple">石井・中富 体験セッション開始</span>
+              <span class="wk-tag red">写真×口コミ依頼 実践開始</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第3週</div>
+            <div class="wk-items">
+              <span class="wk-tag red">口コミ進捗確認（目標+5件）</span>
+              <span class="wk-tag">離脱状況の集計と対策</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第4週</div>
+            <div class="wk-items">
+              <span class="wk-tag red">口コミ月間集計（+10件達成確認）</span>
+              <span class="wk-tag green">7月施策の設計・準備</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-month">
+        <div class="cal-month-label lbl-jul">
+          <span>7月</span>
+          <span class="mo">Jul</span>
+          <span style="font-size:0.68rem;opacity:0.8;margin-top:4px;">回復・獲得</span>
+        </div>
+        <div class="cal-weeks">
+          <div class="cal-week">
+            <div class="wk-label">第1週</div>
+            <div class="wk-items">
+              <span class="wk-tag green">新規体験キャンペーン開始</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第2週</div>
+            <div class="wk-items">
+              <span class="wk-tag green">特典パーソナル提案強化</span>
+              <span class="wk-tag green">ロールプレイ実施</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第3週</div>
+            <div class="wk-items">
+              <span class="wk-tag">中間KPI確認と施策調整</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第4週</div>
+            <div class="wk-items">
+              <span class="wk-tag green">追加購入設計の強化</span>
+              <span class="wk-tag">8月施策の準備</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-month">
+        <div class="cal-month-label lbl-aug">
+          <span>8月</span>
+          <span class="mo">Aug</span>
+          <span style="font-size:0.68rem;opacity:0.8;margin-top:4px;">定着・成長</span>
+        </div>
+        <div class="cal-weeks">
+          <div class="cal-week">
+            <div class="wk-label">第1週</div>
+            <div class="wk-items">
+              <span class="wk-tag orange">数値目標進捗確認</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第2週</div>
+            <div class="wk-items">
+              <span class="wk-tag orange">レギュラー比率55%達成確認</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第3週</div>
+            <div class="wk-items">
+              <span class="wk-tag">秋以降の計画着手</span>
+            </div>
+          </div>
+          <div class="cal-week">
+            <div class="wk-label">第4週</div>
+            <div class="wk-items">
+              <span class="wk-tag orange">3ヶ月振り返りと次期計画策定</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- メンバーへの期待値 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">👥</span>メンバーへの期待値設定</div>
+    <div class="expectation-grid">
+      <div class="exp-row">
+        <div class="exp-month exp-jun">6月</div>
+        <div class="exp-text">口コミ<strong>2件獲得を必達</strong>。石井・中富は体験担当後に依頼を実践。写真撮影を積極活用し、投稿のハードルを下げる</div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-month exp-jul">7月</div>
+        <div class="exp-text">担当会員の<strong>3ヶ月計画を全員分作成</strong>。特典パーソナル・追加購入の提案を毎セッション意識する</div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-month exp-aug">8月</div>
+        <div class="exp-text">担当会員の売上・継続率を<strong>自分でマネジメントできる状態</strong>。数字への当事者意識を持つ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ゴールバナー -->
+  <div class="goal-banner">
+    <div class="g-label">3ヶ月後に目指す姿</div>
+    <div class="g-text">メンバー全員が「担当会員の担当コンサルタント」として<br>自立して動ける店舗をつくる</div>
+  </div>
+
+</div>
+</body>
+</html>
