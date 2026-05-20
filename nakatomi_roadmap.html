@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中富さん リーダートレーナーへの道｜THE PERSON 碑文谷</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+    --green: #3DAA6E;
+    --green-light: #E8F7F0;
+    --blue: #3A7FC1;
+    --blue-light: #EBF3FB;
+    --red: #D94F4F;
+    --red-light: #FDEAEA;
+    --yellow: #D4920A;
+    --yellow-light: #FFF8E6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    padding: 40px 0 32px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(24px, 5vw, 34px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: var(--gray-dark);
+  }
+
+  /* SECTION */
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 24px;
+  }
+
+  /* MISSION CARDS */
+  .mission-wrap {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media(max-width: 520px) { .mission-grid { grid-template-columns: 1fr; } }
+  .mission-card {
+    background: var(--primary-bg);
+    border: 1px solid var(--primary-light);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .mission-card-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .mission-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .mission-card-items {
+    list-style: none;
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 1.8;
+  }
+  .mission-card-items li::before {
+    content: '・';
+    color: var(--primary);
+  }
+
+  /* CONDITION BANNER */
+  .condition-wrap {
+    background: var(--text);
+    padding: 20px 0;
+    margin-top: 16px;
+  }
+  .condition-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .condition-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-light);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+  .condition-item {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 4px;
+  }
+
+  /* SCHEDULE ANALYSIS */
+  .analysis-wrap {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .insight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  @media(max-width: 520px) { .insight-grid { grid-template-columns: 1fr; } }
+  .insight-card {
+    border-radius: 6px;
+    padding: 16px;
+    border-left: 4px solid;
+  }
+  .insight-card.warn {
+    background: var(--red-light);
+    border-color: var(--red);
+  }
+  .insight-card.ok {
+    background: var(--green-light);
+    border-color: var(--green);
+  }
+  .insight-card.caution {
+    background: var(--yellow-light);
+    border-color: var(--yellow);
+  }
+  .insight-card.info {
+    background: var(--blue-light);
+    border-color: var(--blue);
+  }
+  .insight-icon { font-size: 20px; margin-bottom: 6px; }
+  .insight-title {
+    font-size: 13px;
+    font-weight: 900;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .insight-body {
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+  }
+
+  /* TIME SUGGESTIONS */
+  .time-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--gray);
+  }
+  .time-row:last-child { border-bottom: none; }
+  .time-badge {
+    background: var(--text);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .time-content { flex: 1; }
+  .time-label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .time-detail {
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+  }
+  .time-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-right: 4px;
+    margin-top: 4px;
+  }
+  .time-tag.step { background: var(--primary-bg); color: var(--primary); }
+  .time-tag.session { background: var(--green-light); color: var(--green); }
+  .time-tag.admin { background: var(--blue-light); color: var(--blue); }
+
+  /* ACTION PLAN */
+  .plan-wrap {
+    background: var(--text);
+    padding: 48px 0;
+    margin-top: 16px;
+  }
+  .plan-wrap .section-label { color: var(--primary-light); }
+  .plan-wrap .section-title { color: var(--white); }
+  .plan-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .plan-month {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+  }
+  .plan-month::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 24px;
+    bottom: -8px;
+    width: 2px;
+    background: var(--primary);
+  }
+  .plan-month:last-child::before { display: none; }
+  .plan-month-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .plan-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary);
+    position: absolute;
+    left: 0;
+    top: 4px;
+    flex-shrink: 0;
+  }
+  .plan-month-label {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--primary-light);
+    letter-spacing: 0.05em;
+  }
+  .plan-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .plan-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--primary);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .plan-item-priority {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-light);
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 28px;
+  }
+  .plan-item-body { flex: 1; }
+  .plan-item-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .plan-item-detail {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+  .plan-item-when {
+    font-size: 11px;
+    background: rgba(226,121,46,0.25);
+    color: var(--primary-light);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ROADMAP */
+  .roadmap-wrap {
+    background: var(--gray-light);
+    padding: 40px 0;
+  }
+  .step-block {
+    background: var(--white);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--gray);
+    transition: box-shadow 0.2s;
+  }
+  .step-block.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(226,121,46,0.15);
+  }
+  .step-block.done { border-color: var(--green); }
+  .step-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .step-head:hover { background: var(--gray-light); }
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    flex-shrink: 0;
+    background: var(--gray);
+    color: var(--white);
+  }
+  .step-block.active .step-num { background: var(--primary); }
+  .step-block.done .step-num { background: var(--green); }
+  .step-head-text { flex: 1; min-width: 0; }
+  .step-title {
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+  .step-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .tag-todo { background: var(--gray-light); color: var(--gray-dark); }
+  .tag-active { background: var(--primary-bg); color: var(--primary); }
+  .tag-done { background: var(--green-light); color: var(--green); }
+  .tag-gate { background: #FFF3CD; color: #856404; }
+  .step-arrow {
+    font-size: 18px;
+    color: var(--gray);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .step-block.open .step-arrow { transform: rotate(180deg); }
+  .step-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--gray-light);
+  }
+  .step-block.open .step-body { display: block; }
+
+  /* CHECK ITEMS */
+  .check-list { list-style: none; margin-top: 16px; }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--gray);
+    font-size: 14px;
+    line-height: 1.6;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .check-list li:last-child { border-bottom: none; }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--gray);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.2s;
+  }
+  .check-list li.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+    font-size: 14px;
+  }
+  .check-list li.checked .check-box::after { content: '✓'; }
+  .check-list li.checked .check-text { text-decoration: line-through; color: var(--gray-dark); }
+  .check-note {
+    font-size: 12px;
+    color: var(--gray-dark);
+    margin-top: 4px;
+    display: block;
+  }
+  .gate-note {
+    background: #FFF3CD;
+    border: 1px solid #F0C040;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #856404;
+    margin-top: 14px;
+  }
+  .gate-note::before { content: '⚠ '; }
+
+  /* STEP CONNECTOR */
+  .step-connector {
+    text-align: center;
+    color: var(--gray);
+    font-size: 20px;
+    margin: -4px 0;
+    padding: 0;
+  }
+
+  /* PROGRESS BAR AT TOP */
+  .progress-wrap {
+    background: var(--white);
+    padding: 24px 0;
+    border-bottom: 1px solid var(--gray);
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label { font-size: 13px; font-weight: 700; }
+  .progress-count { font-size: 13px; color: var(--gray-dark); }
+  .progress-count span { color: var(--primary); font-weight: 900; font-size: 18px; }
+  .prog-bar-wrap {
+    background: var(--gray-light);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .prog-bar {
+    background: linear-gradient(90deg, var(--primary), #D5651A);
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+  }
+
+  /* LEAD CUSTOMER */
+  .leads-wrap {
+    background: var(--white);
+    padding: 40px 0;
+  }
+  .lead-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  @media(max-width: 420px) { .lead-grid { grid-template-columns: repeat(2, 1fr); } }
+  .lead-card {
+    background: var(--primary-bg);
+    border: 1px solid var(--primary-light);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+  .lead-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    margin: 0 auto 8px;
+  }
+  .lead-name { font-size: 12px; font-weight: 700; line-height: 1.4; }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    padding: 28px 0;
+    text-align: center;
+    border-top: 1px solid var(--gray);
+    margin-top: 16px;
+  }
+  footer p { font-size: 12px; color: var(--gray-dark); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">中富さん｜キャリアロードマップ</div>
+    <h1>リーダートレーナーへの道</h1>
+    <p class="subtitle">THE PERSON 碑文谷｜現在地と次のステップを確認しよう</p>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="container">
+    <div class="progress-info">
+      <span class="progress-label">全体進捗</span>
+      <span class="progress-count"><span id="doneCount">0</span> / <span id="totalCount">0</span> 項目完了</span>
+    </div>
+    <div class="prog-bar-wrap">
+      <div class="prog-bar" id="progBar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section class="mission-wrap">
+  <div class="container">
+    <div class="section-label">LEADER TRAINER MISSION</div>
+    <h2 class="section-title">リーダートレーナーの4つのミッション</h2>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-card-num">MISSION 01</div>
+        <div class="mission-card-title">リード顧客を習慣化に導く</div>
+        <ul class="mission-card-items">
+          <li>予約管理</li>
+          <li>チケット消化管理</li>
+          <li>スキップ管理</li>
+        </ul>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-num">MISSION 02</div>
+        <div class="mission-card-title">前向きな提案＋達成プロセスの管理</div>
+        <ul class="mission-card-items">
+          <li>特典P（チューニングセッション）</li>
+          <li>アップグレード</li>
+          <li>NA達成管理／目標の管理</li>
+        </ul>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-num">MISSION 03</div>
+        <div class="mission-card-title">チームとして動く</div>
+        <ul class="mission-card-items">
+          <li>Must業務を当たり前に実行</li>
+          <li>報連相でトラブル防止</li>
+          <li>チームへの好影響</li>
+        </ul>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-num">MISSION 04</div>
+        <div class="mission-card-title">リーダーシップを発揮する</div>
+        <ul class="mission-card-items">
+          <li>チームを引っ張る</li>
+          <li>信頼される存在になる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONDITIONS -->
+<div class="condition-wrap">
+  <div class="container">
+    <div class="condition-inner">
+      <span class="condition-label">昇格条件</span>
+      <span class="condition-item">4名セッション可能（G60件実施が条件）</span>
+      <span class="condition-item">プランニングセッション実施できること</span>
+    </div>
+  </div>
+</div>
+
+<!-- LEAD CUSTOMERS -->
+<section class="leads-wrap">
+  <div class="container">
+    <div class="section-label">CURRENT LEADS</div>
+    <h2 class="section-title">中富さんのリード顧客 6名</h2>
+    <div class="lead-grid">
+      <div class="lead-card">
+        <div class="lead-avatar">永</div>
+        <div class="lead-name">永井 恵美子さん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">ブ</div>
+        <div class="lead-name">ブエさん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">村</div>
+        <div class="lead-name">村井 裕美子さん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">早</div>
+        <div class="lead-name">早野 健太さん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">三</div>
+        <div class="lead-name">三浦 美佐子さん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">牧</div>
+        <div class="lead-name">牧 寛子さん</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE ANALYSIS -->
+<section class="analysis-wrap">
+  <div class="container">
+    <div class="section-label">SCHEDULE ANALYSIS / 6月のスケジュールを読む</div>
+    <h2 class="section-title">スケジュールから見えること</h2>
+
+    <div class="insight-grid">
+      <div class="insight-card warn">
+        <div class="insight-icon">⚠️</div>
+        <div class="insight-title">土曜の欠勤が2回（6/13・6/20）</div>
+        <div class="insight-body">土曜は本来リード顧客と接点が多い日。2週連続の欠勤は顧客接触機会のロスにつながる。7月は土曜の出勤を安定させることが優先。</div>
+      </div>
+      <div class="insight-card caution">
+        <div class="insight-icon">📊</div>
+        <div class="insight-title">セッションがほぼ1/3止まり</div>
+        <div class="insight-body">G60件達成のためには2/3・3/3への移行が必要。現状の予約枠の組み方を見直して、同一時間帯に2〜3名を入れる設計に変えていく。</div>
+      </div>
+      <div class="insight-card ok">
+        <div class="insight-icon">✅</div>
+        <div class="insight-title">14:00〜18:00の入り時間が研修に使いやすい</div>
+        <div class="insight-body">出勤後〜夜のセッション開始までの時間帯が活用できる。MTGや研修ブロックがすでに入っており、ここをさらに有効活用できる。</div>
+      </div>
+      <div class="insight-card info">
+        <div class="insight-icon">💡</div>
+        <div class="insight-title">MTGが点在しているのでまとめると効率的</div>
+        <div class="insight-body">現在MTGが週複数日に分散している。同じ曜日にMTG→研修→振り返りを連続させることで、集中して進めやすくなる。</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 8px;">IDEAL TIME USAGE / 時間の使い方の提案</div>
+    <div style="background: var(--gray-light); border-radius: 6px; padding: 16px; margin-top: 12px;">
+      <div class="time-row">
+        <div class="time-badge">14:00〜15:30</div>
+        <div class="time-content">
+          <div class="time-label">出勤後すぐ：MTGや研修をまとめて入れる</div>
+          <div class="time-detail">出勤してすぐのタイミング。ステップ①-1の1on1、ステップ①-2のマニュアル読み合わせはここに設定すると動きやすい。MTG後に続けて研修できるのが理想。</div>
+          <span class="time-tag step">ステップ①-1</span>
+          <span class="time-tag step">ステップ①-2</span>
+        </div>
+      </div>
+      <div class="time-row">
+        <div class="time-badge">15:30〜17:30</div>
+        <div class="time-content">
+          <div class="time-label">MTG後の隙間 → N1Cycle作成・リード顧客管理</div>
+          <div class="time-detail">MTGやLINE/CS対応の後に続けて使える時間。例：MTG（14:00〜14:30）→ N1Cycle作成（14:30〜15:30）。場所移動ゼロで研修まで完結できる。</div>
+          <span class="time-tag step">ステップ②</span>
+          <span class="time-tag admin">管理業務</span>
+        </div>
+      </div>
+      <div class="time-row">
+        <div class="time-badge">18:00〜20:00</div>
+        <div class="time-content">
+          <div class="time-label">セッションを2/3・3/3に段階的に移行</div>
+          <div class="time-detail">現在の1/3枠を活かしながら、週2〜3コマを2/3・3/3に変えていく。G60件達成の最短ルート。</div>
+          <span class="time-tag session">セッション数UP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION PLAN -->
+<section class="plan-wrap">
+  <div class="container">
+    <div class="section-label">ACTION PLAN</div>
+    <h2 class="section-title">6月後半〜7月 具体的にやること</h2>
+
+    <div class="plan-timeline">
+      <!-- 6月後半 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">6月後半（〜6/30）</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">ステップ①-1 の1on1 MTGを設定・完了させる</div>
+              <div class="plan-item-detail">Will Want Must再確認・等級表での目標設定・7月以降の研修スケジュール大枠を1回60分で完結させる。既存のMTG枠に追加する形が◯。</div>
+            </div>
+            <div class="plan-item-when">今週中に予約</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">ステップ①-2 の3名マニュアル読み合わせを実施</div>
+              <div class="plan-item-detail">平日10:00〜12:00の空き枠を使って60分で実施。MGと一緒に現状の差分・OPE課題を会話する。</div>
+            </div>
+            <div class="plan-item-when">6/23〜6/27</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P3</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">セッション評価シートを自分で記入して提出</div>
+              <div class="plan-item-detail">既存のセッション後に評価シートを書く習慣をつける。振り返りはMGと一緒に30分。</div>
+            </div>
+            <div class="plan-item-when">随時</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7月前半 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">7月前半（7/1〜7/15）</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">土曜の出勤を安定させる（欠勤ゼロへ）</div>
+              <div class="plan-item-detail">6月に2回あった土曜欠勤をリセット。土曜はリード顧客接触のゴールデンタイム。予約も多く取れるよう調整する。</div>
+            </div>
+            <div class="plan-item-when">7月全土曜</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">ステップ② リード顧客のN1Cycle作成を開始</div>
+              <div class="plan-item-detail">6名のリード顧客について、MGと一緒にN1Cycleを作成する。来店状況・チケット消化・目標を整理するところから。まず1名から着手。</div>
+            </div>
+            <div class="plan-item-when">MTG後に連続設定</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P3</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">セッション枠を週2コマ、2/3に移行</div>
+              <div class="plan-item-detail">現在の1/3枠の中から2コマを選び、2名体制に変える。G60件達成に向けての第一歩。</div>
+            </div>
+            <div class="plan-item-when">予約調整時に</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7月後半 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">7月後半〜8月（ステップ③へ）</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">ステップ③ 新規研修スタート（動画→見学→ロープレ→試験）</div>
+              <div class="plan-item-detail">4〜6週間かかる研修。出勤後〜セッション開始前（14:00〜17:00）の枠を毎週固定で確保し、週1回ペースで進める。</div>
+            </div>
+            <div class="plan-item-when">14〜17時枠で</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">1on1研修（ラポール・目標設定・進捗管理）受講開始</div>
+              <div class="plan-item-detail">知る/わかるフェーズ。30分×3項目×3工程（計270分）。MTGの流れの中で分割して実施。</div>
+            </div>
+            <div class="plan-item-when">MTGに連続</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P3</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">セッション評価受講（品質管理部・里森・五味）</div>
+              <div class="plan-item-detail">責任者が品質管理担当者と日程調整して実施。60分＋FB30分（計90分）。</div>
+            </div>
+            <div class="plan-item-when">日程要調整</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-wrap">
+  <div class="container">
+    <div class="section-label">WORKFLOW</div>
+    <h2 class="section-title">リーダートレーナー ワークフロー</h2>
+
+    <!-- STEP 1-1 -->
+    <div class="step-block" id="step1a" data-step="1a">
+      <div class="step-head" onclick="toggleStep('step1a')">
+        <div class="step-num">①-1</div>
+        <div class="step-head-text">
+          <div class="step-title">基盤づくり（1on1 MTG 60分）</div>
+          <span class="step-tag tag-todo" id="tag-step1a">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="1a">
+          <li data-id="1a-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              業務における注意事項の読み合わせ（責任者と実施）
+              <span class="check-note">how long: 下記に含む</span>
+            </div>
+          </li>
+          <li data-id="1a-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              Will Want Must の再実施（改めて一緒に埋める）
+              <span class="check-note">30分街ブラ＋30分で埋める｜how long: 60分</span>
+            </div>
+          </li>
+          <li data-id="1a-3" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              目標設定（等級表で評価3.0以上を確認）
+              <span class="check-note">自己評価15分 → MG FB5分 → ミッション共有10分</span>
+            </div>
+          </li>
+          <li data-id="1a-4" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              研修スケジュールの設定（ステップ②以降を1〜2ヶ月単位で大枠設定）
+              <span class="check-note">MG事前準備45〜60分 → MTG 30分共有</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 1-2 -->
+    <div class="step-block" id="step1b" data-step="1b">
+      <div class="step-head" onclick="toggleStep('step1b')">
+        <div class="step-num">①-2</div>
+        <div class="step-head-text">
+          <div class="step-title">ステップ②への解放条件クリア</div>
+          <span class="step-tag tag-todo" id="tag-step1b">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <div class="gate-note">これが完了するまでステップ②に進めない</div>
+        <ul class="check-list" data-step="1b">
+          <li data-id="1b-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              3名セッションマニュアルの読み合わせ（マネージャーと）
+              <span class="check-note">現状との差分・OPE課題を会話する｜how long: 60分</span>
+            </div>
+          </li>
+          <li data-id="1b-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              セッション評価シートで自己評価 → マネージャーと振り返り
+              <span class="check-note">TR自分で記入 → MGと一緒に振り返り｜how long: 60分</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 2 -->
+    <div class="step-block" id="step2" data-step="2">
+      <div class="step-head" onclick="toggleStep('step2')">
+        <div class="step-num">②</div>
+        <div class="step-head-text">
+          <div class="step-title">リード顧客マネジメント</div>
+          <span class="step-tag tag-todo" id="tag-step2">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="2">
+          <li data-id="2-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              リード顧客の来店管理・チケット管理
+              <span class="check-note">⓪動画視聴（BQデータ活用） → ①N1Cycleを一緒に作る/AIのFBを受ける → ②自分で作りFBもらう｜動画30分</span>
+            </div>
+          </li>
+          <li data-id="2-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              リード顧客の目標と体の変化の管理（N1テクニカルカンファレンス）
+              <span class="check-note">①一緒に作る → ②自分で作りFBもらう｜how long: 60分×3〜5回</span>
+            </div>
+          </li>
+          <li data-id="2-3" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              リード顧客の特典・アップグレード管理
+            </div>
+          </li>
+          <li data-id="2-4" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              リード顧客の紹介（N1Cycle）
+              <span class="check-note">⓪N1Cycle動画研修（30分） → ①一緒に60分 → ②TR60分＋MGTR30分</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 3 -->
+    <div class="step-block" id="step3" data-step="3">
+      <div class="step-head" onclick="toggleStep('step3')">
+        <div class="step-num">③</div>
+        <div class="step-head-text">
+          <div class="step-title">教育・新規スキル習得</div>
+          <span class="step-tag tag-todo" id="tag-step3">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="3">
+          <li data-id="3-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              1on1研修：ラポール（動画→同席→MGから説明）
+              <span class="check-note">知る/わかるフェーズ｜30分×3工程</span>
+            </div>
+          </li>
+          <li data-id="3-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              1on1研修：目標設定（動画→同席→MGから説明）
+              <span class="check-note">30分×3工程</span>
+            </div>
+          </li>
+          <li data-id="3-3" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              1on1研修：進捗管理（動画→同席→MGから説明）
+              <span class="check-note">30分×3工程</span>
+            </div>
+          </li>
+          <li data-id="3-4" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              退会阻止研修（動画→ケーススタディ→ロープレ）
+              <span class="check-note">30分×3（計90分）</span>
+            </div>
+          </li>
+          <li data-id="3-5" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              新規研修（動画→見学→ロープレ→試験→実施）
+              <span class="check-note">how long: 4〜6週間</span>
+            </div>
+          </li>
+          <li data-id="3-6" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              N1準備をメンバーへ実施（研修→ロープレ→実践）
+              <span class="check-note">1回セッティングTR30〜45分＋MG30〜45分、3〜5回実施</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 4 -->
+    <div class="step-block" id="step4" data-step="4">
+      <div class="step-head" onclick="toggleStep('step4')">
+        <div class="step-num">④</div>
+        <div class="step-head-text">
+          <div class="step-title">チームビルディング</div>
+          <span class="step-tag tag-todo" id="tag-step4">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="4">
+          <li data-id="4-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              新人スタッフ歓迎会の設定（ランチなど）
+              <span class="check-note">how long: 30分</span>
+            </div>
+          </li>
+          <li data-id="4-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              Meet Upへの参加呼びかけ
+              <span class="check-note">how long: 30分</span>
+            </div>
+          </li>
+          <li data-id="4-3" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              Meet Upでの他店舗交流・メンバー繋ぎ込み
+              <span class="check-note">how long: 30分</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 5 -->
+    <div class="step-block" id="step5" data-step="5">
+      <div class="step-head" onclick="toggleStep('step5')">
+        <div class="step-num">⑤</div>
+        <div class="step-head-text">
+          <div class="step-title">セッション評価（品質管理部）</div>
+          <span class="step-tag tag-todo" id="tag-step5">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="5">
+          <li data-id="5-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              セッション評価受講（責任者が品質管理担当者と日程設定し実施）
+              <span class="check-note">里森・五味が参加｜how long: 60分＋FB30分（計90分）</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector" style="color:var(--primary); font-size:24px; font-weight:900; padding:8px 0;">↓</div>
+
+    <!-- GOAL -->
+    <div style="background: linear-gradient(135deg, var(--primary) 0%, #D5651A 100%); border-radius: 8px; padding: 28px; text-align:center; color:var(--white);">
+      <div style="font-size:13px; font-weight:700; letter-spacing:0.15em; opacity:0.9; margin-bottom:10px;">GOAL</div>
+      <div style="font-size:clamp(22px,5vw,30px); font-weight:900; line-height:1.4;">リーダートレーナー 🎉</div>
+      <div style="font-size:13px; opacity:0.85; margin-top:10px;">顧客の継続のために邁進できることはもちろん、<br>チームの中で信頼される人になる</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>THE PERSON 碑文谷｜中富さん リーダートレーナーロードマップ / 作成：儀間</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'nakatomi-roadmap-checks';
+  let checkedSet = new Set();
+
+  const STEPS = ['1a','1b','2','3','4','5'];
+  const STEP_IDS = {
+    '1a': ['1a-1','1a-2','1a-3','1a-4'],
+    '1b': ['1b-1','1b-2'],
+    '2':  ['2-1','2-2','2-3','2-4'],
+    '3':  ['3-1','3-2','3-3','3-4','3-5','3-6'],
+    '4':  ['4-1','4-2','4-3'],
+    '5':  ['5-1'],
+  };
+  const ALL_IDS = Object.values(STEP_IDS).flat();
+
+  // Load
+  async function loadState() {
+    try {
+      if (window.storage) {
+        const r = await window.storage.get(STORAGE_KEY);
+        if (r && r.value) checkedSet = new Set(JSON.parse(r.value));
+      }
+    } catch(e) {}
+    render();
+  }
+
+  async function saveState() {
+    try {
+      if (window.storage) {
+        await window.storage.set(STORAGE_KEY, JSON.stringify([...checkedSet]));
+      }
+    } catch(e) {}
+  }
+
+  function render() {
+    // Render check items
+    document.querySelectorAll('.check-list li').forEach(li => {
+      const id = li.dataset.id;
+      if (checkedSet.has(id)) {
+        li.classList.add('checked');
+      } else {
+        li.classList.remove('checked');
+      }
+    });
+
+    // Render step tags & classes
+    STEPS.forEach(step => {
+      const ids = STEP_IDS[step];
+      const done = ids.filter(id => checkedSet.has(id)).length;
+      const total = ids.length;
+      const block = document.getElementById('step' + step);
+      const tag = document.getElementById('tag-step' + step);
+      const num = block.querySelector('.step-num');
+
+      block.classList.remove('active','done');
+      if (done === total) {
+        block.classList.add('done');
+        tag.className = 'step-tag tag-done';
+        tag.textContent = '完了 ✓';
+      } else if (done > 0) {
+        block.classList.add('active');
+        tag.className = 'step-tag tag-active';
+        tag.textContent = `進行中 ${done}/${total}`;
+      } else {
+        tag.className = 'step-tag tag-todo';
+        tag.textContent = '未着手';
+      }
+    });
+
+    // Progress bar
+    const doneCount = ALL_IDS.filter(id => checkedSet.has(id)).length;
+    const total = ALL_IDS.length;
+    document.getElementById('doneCount').textContent = doneCount;
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('progBar').style.width = (doneCount / total * 100) + '%';
+  }
+
+  window.toggleCheck = async function(li) {
+    const id = li.dataset.id;
+    if (checkedSet.has(id)) {
+      checkedSet.delete(id);
+    } else {
+      checkedSet.add(id);
+    }
+    render();
+    await saveState();
+  };
+
+  window.toggleStep = function(id) {
+    const block = document.getElementById(id);
+    block.classList.toggle('open');
+  };
+
+  loadState();
+})();
+</script>
+
+</body>
+</html>
