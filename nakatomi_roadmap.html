@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中富さん リーダートレーナーへの道｜THE PERSON 碑文谷</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+    --green: #3DAA6E;
+    --green-light: #E8F7F0;
+    --blue: #3A7FC1;
+    --blue-light: #EBF3FB;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    padding: 40px 0 32px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(24px, 5vw, 34px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: var(--gray-dark);
+  }
+
+  /* SECTION */
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 24px;
+  }
+
+  /* MISSION CARDS */
+  .mission-wrap {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media(max-width: 520px) { .mission-grid { grid-template-columns: 1fr; } }
+  .mission-card {
+    background: var(--primary-bg);
+    border: 1px solid var(--primary-light);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .mission-card-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .mission-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .mission-card-items {
+    list-style: none;
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 1.8;
+  }
+  .mission-card-items li::before {
+    content: '・';
+    color: var(--primary);
+  }
+
+  /* CONDITION BANNER */
+  .condition-wrap {
+    background: var(--text);
+    padding: 20px 0;
+    margin-top: 16px;
+  }
+  .condition-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .condition-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-light);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+  .condition-item {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 4px;
+  }
+
+  /* ROADMAP */
+  .roadmap-wrap {
+    background: var(--gray-light);
+    padding: 40px 0;
+  }
+  .step-block {
+    background: var(--white);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--gray);
+    transition: box-shadow 0.2s;
+  }
+  .step-block.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(226,121,46,0.15);
+  }
+  .step-block.done { border-color: var(--green); }
+  .step-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .step-head:hover { background: var(--gray-light); }
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    flex-shrink: 0;
+    background: var(--gray);
+    color: var(--white);
+  }
+  .step-block.active .step-num { background: var(--primary); }
+  .step-block.done .step-num { background: var(--green); }
+  .step-head-text { flex: 1; min-width: 0; }
+  .step-title {
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+  .step-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .tag-todo { background: var(--gray-light); color: var(--gray-dark); }
+  .tag-active { background: var(--primary-bg); color: var(--primary); }
+  .tag-done { background: var(--green-light); color: var(--green); }
+  .tag-gate { background: #FFF3CD; color: #856404; }
+  .step-arrow {
+    font-size: 18px;
+    color: var(--gray);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .step-block.open .step-arrow { transform: rotate(180deg); }
+  .step-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--gray-light);
+  }
+  .step-block.open .step-body { display: block; }
+
+  /* CHECK ITEMS */
+  .check-list { list-style: none; margin-top: 16px; }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--gray);
+    font-size: 14px;
+    line-height: 1.6;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .check-list li:last-child { border-bottom: none; }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--gray);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.2s;
+  }
+  .check-list li.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+    font-size: 14px;
+  }
+  .check-list li.checked .check-box::after { content: '✓'; }
+  .check-list li.checked .check-text { text-decoration: line-through; color: var(--gray-dark); }
+  .check-note {
+    font-size: 12px;
+    color: var(--gray-dark);
+    margin-top: 4px;
+    display: block;
+  }
+  .gate-note {
+    background: #FFF3CD;
+    border: 1px solid #F0C040;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #856404;
+    margin-top: 14px;
+  }
+  .gate-note::before { content: '⚠ '; }
+
+  /* STEP CONNECTOR */
+  .step-connector {
+    text-align: center;
+    color: var(--gray);
+    font-size: 20px;
+    margin: -4px 0;
+    padding: 0;
+  }
+
+  /* PROGRESS BAR AT TOP */
+  .progress-wrap {
+    background: var(--white);
+    padding: 24px 0;
+    border-bottom: 1px solid var(--gray);
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label { font-size: 13px; font-weight: 700; }
+  .progress-count { font-size: 13px; color: var(--gray-dark); }
+  .progress-count span { color: var(--primary); font-weight: 900; font-size: 18px; }
+  .prog-bar-wrap {
+    background: var(--gray-light);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .prog-bar {
+    background: linear-gradient(90deg, var(--primary), #D5651A);
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+  }
+
+  /* LEAD CUSTOMER */
+  .leads-wrap {
+    background: var(--white);
+    padding: 40px 0;
+  }
+  .lead-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  @media(max-width: 420px) { .lead-grid { grid-template-columns: repeat(2, 1fr); } }
+  .lead-card {
+    background: var(--primary-bg);
+    border: 1px solid var(--primary-light);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+  .lead-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    margin: 0 auto 8px;
+  }
+  .lead-name { font-size: 12px; font-weight: 700; line-height: 1.4; }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    padding: 28px 0;
+    text-align: center;
+    border-top: 1px solid var(--gray);
+    margin-top: 16px;
+  }
+  footer p { font-size: 12px; color: var(--gray-dark); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">中富さん｜キャリアロードマップ</div>
+    <h1>リーダートレーナーへの道</h1>
+    <p class="subtitle">THE PERSON 碑文谷｜現在地と次のステップを確認しよう</p>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="container">
+    <div class="progress-info">
+      <span class="progress-label">全体進捗</span>
+      <span class="progress-count"><span id="doneCount">0</span> / <span id="totalCount">0</span> 項目完了</span>
+    </div>
+    <div class="prog-bar-wrap">
+      <div class="prog-bar" id="progBar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section class="mission-wrap">
+  <div class="container">
+    <div class="section-label">LEADER TRAINER MISSION</div>
+    <h2 class="section-title">リーダートレーナーの4つのミッション</h2>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-card-num">MISSION 01</div>
+        <div class="mission-card-title">リード顧客を習慣化に導く</div>
+        <ul class="mission-card-items">
+          <li>予約管理</li>
+          <li>チケット消化管理</li>
+          <li>スキップ管理</li>
+        </ul>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-num">MISSION 02</div>
+        <div class="mission-card-title">前向きな提案＋達成プロセスの管理</div>
+        <ul class="mission-card-items">
+          <li>特典P（チューニングセッション）</li>
+          <li>アップグレード</li>
+          <li>NA達成管理／目標の管理</li>
+        </ul>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-num">MISSION 03</div>
+        <div class="mission-card-title">チームとして動く</div>
+        <ul class="mission-card-items">
+          <li>Must業務を当たり前に実行</li>
+          <li>報連相でトラブル防止</li>
+          <li>チームへの好影響</li>
+        </ul>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-num">MISSION 04</div>
+        <div class="mission-card-title">リーダーシップを発揮する</div>
+        <ul class="mission-card-items">
+          <li>チームを引っ張る</li>
+          <li>信頼される存在になる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONDITIONS -->
+<div class="condition-wrap">
+  <div class="container">
+    <div class="condition-inner">
+      <span class="condition-label">昇格条件</span>
+      <span class="condition-item">4名セッション可能（G60件実施が条件）</span>
+      <span class="condition-item">プランニングセッション実施できること</span>
+    </div>
+  </div>
+</div>
+
+<!-- LEAD CUSTOMERS -->
+<section class="leads-wrap">
+  <div class="container">
+    <div class="section-label">CURRENT LEADS</div>
+    <h2 class="section-title">中富さんのリード顧客 6名</h2>
+    <div class="lead-grid">
+      <div class="lead-card">
+        <div class="lead-avatar">永</div>
+        <div class="lead-name">永井 恵美子さん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">ブ</div>
+        <div class="lead-name">ブエさん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">村</div>
+        <div class="lead-name">村井 裕美子さん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">早</div>
+        <div class="lead-name">早野 健太さん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">三</div>
+        <div class="lead-name">三浦 美佐子さん</div>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar">牧</div>
+        <div class="lead-name">牧 寛子さん</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-wrap">
+  <div class="container">
+    <div class="section-label">WORKFLOW</div>
+    <h2 class="section-title">リーダートレーナー ワークフロー</h2>
+
+    <!-- STEP 1-1 -->
+    <div class="step-block" id="step1a" data-step="1a">
+      <div class="step-head" onclick="toggleStep('step1a')">
+        <div class="step-num">①-1</div>
+        <div class="step-head-text">
+          <div class="step-title">基盤づくり（1on1 MTG 60分）</div>
+          <span class="step-tag tag-todo" id="tag-step1a">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="1a">
+          <li data-id="1a-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              業務における注意事項の読み合わせ（責任者と実施）
+              <span class="check-note">how long: 下記に含む</span>
+            </div>
+          </li>
+          <li data-id="1a-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              Will Want Must の再実施（改めて一緒に埋める）
+              <span class="check-note">30分街ブラ＋30分で埋める｜how long: 60分</span>
+            </div>
+          </li>
+          <li data-id="1a-3" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              目標設定（等級表で評価3.0以上を確認）
+              <span class="check-note">自己評価15分 → MG FB5分 → ミッション共有10分</span>
+            </div>
+          </li>
+          <li data-id="1a-4" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              研修スケジュールの設定（ステップ②以降を1〜2ヶ月単位で大枠設定）
+              <span class="check-note">MG事前準備45〜60分 → MTG 30分共有</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 1-2 -->
+    <div class="step-block" id="step1b" data-step="1b">
+      <div class="step-head" onclick="toggleStep('step1b')">
+        <div class="step-num">①-2</div>
+        <div class="step-head-text">
+          <div class="step-title">ステップ②への解放条件クリア</div>
+          <span class="step-tag tag-todo" id="tag-step1b">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <div class="gate-note">これが完了するまでステップ②に進めない</div>
+        <ul class="check-list" data-step="1b">
+          <li data-id="1b-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              3名セッションマニュアルの読み合わせ（マネージャーと）
+              <span class="check-note">現状との差分・OPE課題を会話する｜how long: 60分</span>
+            </div>
+          </li>
+          <li data-id="1b-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              セッション評価シートで自己評価 → マネージャーと振り返り
+              <span class="check-note">TR自分で記入 → MGと一緒に振り返り｜how long: 60分</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 2 -->
+    <div class="step-block" id="step2" data-step="2">
+      <div class="step-head" onclick="toggleStep('step2')">
+        <div class="step-num">②</div>
+        <div class="step-head-text">
+          <div class="step-title">リード顧客マネジメント</div>
+          <span class="step-tag tag-todo" id="tag-step2">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="2">
+          <li data-id="2-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              リード顧客の来店管理・チケット管理
+              <span class="check-note">⓪動画視聴（BQデータ活用） → ①N1Cycleを一緒に作る/AIのFBを受ける → ②自分で作りFBもらう｜動画30分</span>
+            </div>
+          </li>
+          <li data-id="2-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              リード顧客の目標と体の変化の管理（N1テクニカルカンファレンス）
+              <span class="check-note">①一緒に作る → ②自分で作りFBもらう｜how long: 60分×3〜5回</span>
+            </div>
+          </li>
+          <li data-id="2-3" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              リード顧客の特典・アップグレード管理
+            </div>
+          </li>
+          <li data-id="2-4" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              リード顧客の紹介（N1Cycle）
+              <span class="check-note">⓪N1Cycle動画研修（30分） → ①一緒に60分 → ②TR60分＋MGTR30分</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 3 -->
+    <div class="step-block" id="step3" data-step="3">
+      <div class="step-head" onclick="toggleStep('step3')">
+        <div class="step-num">③</div>
+        <div class="step-head-text">
+          <div class="step-title">教育・新規スキル習得</div>
+          <span class="step-tag tag-todo" id="tag-step3">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="3">
+          <li data-id="3-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              1on1研修：ラポール（動画→同席→MGから説明）
+              <span class="check-note">知る/わかるフェーズ｜30分×3工程</span>
+            </div>
+          </li>
+          <li data-id="3-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              1on1研修：目標設定（動画→同席→MGから説明）
+              <span class="check-note">30分×3工程</span>
+            </div>
+          </li>
+          <li data-id="3-3" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              1on1研修：進捗管理（動画→同席→MGから説明）
+              <span class="check-note">30分×3工程</span>
+            </div>
+          </li>
+          <li data-id="3-4" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              退会阻止研修（動画→ケーススタディ→ロープレ）
+              <span class="check-note">30分×3（計90分）</span>
+            </div>
+          </li>
+          <li data-id="3-5" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              新規研修（動画→見学→ロープレ→試験→実施）
+              <span class="check-note">how long: 4〜6週間</span>
+            </div>
+          </li>
+          <li data-id="3-6" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              N1準備をメンバーへ実施（研修→ロープレ→実践）
+              <span class="check-note">1回セッティングTR30〜45分＋MG30〜45分、3〜5回実施</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 4 -->
+    <div class="step-block" id="step4" data-step="4">
+      <div class="step-head" onclick="toggleStep('step4')">
+        <div class="step-num">④</div>
+        <div class="step-head-text">
+          <div class="step-title">チームビルディング</div>
+          <span class="step-tag tag-todo" id="tag-step4">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="4">
+          <li data-id="4-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              新人スタッフ歓迎会の設定（ランチなど）
+              <span class="check-note">how long: 30分</span>
+            </div>
+          </li>
+          <li data-id="4-2" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              Meet Upへの参加呼びかけ
+              <span class="check-note">how long: 30分</span>
+            </div>
+          </li>
+          <li data-id="4-3" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              Meet Upでの他店舗交流・メンバー繋ぎ込み
+              <span class="check-note">how long: 30分</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector">↓</div>
+
+    <!-- STEP 5 -->
+    <div class="step-block" id="step5" data-step="5">
+      <div class="step-head" onclick="toggleStep('step5')">
+        <div class="step-num">⑤</div>
+        <div class="step-head-text">
+          <div class="step-title">セッション評価（品質管理部）</div>
+          <span class="step-tag tag-todo" id="tag-step5">未着手</span>
+        </div>
+        <div class="step-arrow">▼</div>
+      </div>
+      <div class="step-body">
+        <ul class="check-list" data-step="5">
+          <li data-id="5-1" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-text">
+              セッション評価受講（責任者が品質管理担当者と日程設定し実施）
+              <span class="check-note">里森・五味が参加｜how long: 60分＋FB30分（計90分）</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-connector" style="color:var(--primary); font-size:24px; font-weight:900; padding:8px 0;">↓</div>
+
+    <!-- GOAL -->
+    <div style="background: linear-gradient(135deg, var(--primary) 0%, #D5651A 100%); border-radius: 8px; padding: 28px; text-align:center; color:var(--white);">
+      <div style="font-size:13px; font-weight:700; letter-spacing:0.15em; opacity:0.9; margin-bottom:10px;">GOAL</div>
+      <div style="font-size:clamp(22px,5vw,30px); font-weight:900; line-height:1.4;">リーダートレーナー 🎉</div>
+      <div style="font-size:13px; opacity:0.85; margin-top:10px;">顧客の継続のために邁進できることはもちろん、<br>チームの中で信頼される人になる</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>THE PERSON 碑文谷｜中富さん リーダートレーナーロードマップ / 作成：儀間</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'nakatomi-roadmap-checks';
+  let checkedSet = new Set();
+
+  const STEPS = ['1a','1b','2','3','4','5'];
+  const STEP_IDS = {
+    '1a': ['1a-1','1a-2','1a-3','1a-4'],
+    '1b': ['1b-1','1b-2'],
+    '2':  ['2-1','2-2','2-3','2-4'],
+    '3':  ['3-1','3-2','3-3','3-4','3-5','3-6'],
+    '4':  ['4-1','4-2','4-3'],
+    '5':  ['5-1'],
+  };
+  const ALL_IDS = Object.values(STEP_IDS).flat();
+
+  // Load
+  async function loadState() {
+    try {
+      if (window.storage) {
+        const r = await window.storage.get(STORAGE_KEY);
+        if (r && r.value) checkedSet = new Set(JSON.parse(r.value));
+      }
+    } catch(e) {}
+    render();
+  }
+
+  async function saveState() {
+    try {
+      if (window.storage) {
+        await window.storage.set(STORAGE_KEY, JSON.stringify([...checkedSet]));
+      }
+    } catch(e) {}
+  }
+
+  function render() {
+    // Render check items
+    document.querySelectorAll('.check-list li').forEach(li => {
+      const id = li.dataset.id;
+      if (checkedSet.has(id)) {
+        li.classList.add('checked');
+      } else {
+        li.classList.remove('checked');
+      }
+    });
+
+    // Render step tags & classes
+    STEPS.forEach(step => {
+      const ids = STEP_IDS[step];
+      const done = ids.filter(id => checkedSet.has(id)).length;
+      const total = ids.length;
+      const block = document.getElementById('step' + step);
+      const tag = document.getElementById('tag-step' + step);
+      const num = block.querySelector('.step-num');
+
+      block.classList.remove('active','done');
+      if (done === total) {
+        block.classList.add('done');
+        tag.className = 'step-tag tag-done';
+        tag.textContent = '完了 ✓';
+      } else if (done > 0) {
+        block.classList.add('active');
+        tag.className = 'step-tag tag-active';
+        tag.textContent = `進行中 ${done}/${total}`;
+      } else {
+        tag.className = 'step-tag tag-todo';
+        tag.textContent = '未着手';
+      }
+    });
+
+    // Progress bar
+    const doneCount = ALL_IDS.filter(id => checkedSet.has(id)).length;
+    const total = ALL_IDS.length;
+    document.getElementById('doneCount').textContent = doneCount;
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('progBar').style.width = (doneCount / total * 100) + '%';
+  }
+
+  window.toggleCheck = async function(li) {
+    const id = li.dataset.id;
+    if (checkedSet.has(id)) {
+      checkedSet.delete(id);
+    } else {
+      checkedSet.add(id);
+    }
+    render();
+    await saveState();
+  };
+
+  window.toggleStep = function(id) {
+    const block = document.getElementById(id);
+    block.classList.toggle('open');
+  };
+
+  loadState();
+})();
+</script>
+
+</body>
+</html>
