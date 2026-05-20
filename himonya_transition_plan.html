@@ -45,6 +45,55 @@
       font-weight: 700;
       margin-top: 20px;
     }
+    .hero .au-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      color: white;
+      border-radius: 20px;
+      padding: 6px 22px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-top: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    /* AU率バナー */
+    .au-banner {
+      background: linear-gradient(135deg, #f39c12, #e67e22);
+      border-radius: 14px;
+      padding: 20px 28px;
+      color: white;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 18px rgba(243,156,18,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .au-banner .au-left .au-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .au-banner .au-left .au-desc {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    .au-banner .au-right {
+      display: flex;
+      gap: 16px;
+    }
+    .au-banner .au-month {
+      text-align: center;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 10px 16px;
+      min-width: 64px;
+    }
+    .au-banner .au-month .mo { font-size: 0.72rem; opacity: 0.85; }
+    .au-banner .au-month .pct { font-size: 1.5rem; font-weight: 900; line-height: 1.1; }
+    .au-banner .au-month .pct.target { color: #fff176; }
 
     /* コンテンツ */
     .container { max-width: 900px; margin: 0 auto; padding: 32px 16px 60px; }
@@ -232,6 +281,51 @@
       flex-shrink: 0;
     }
 
+    /* 特典数値グリッド */
+    .tokuten-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .tokuten-col {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid #e9ecef;
+    }
+    .tokuten-col .col-head {
+      background: #f8f9fa;
+      padding: 8px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #555;
+      text-align: center;
+      border-bottom: 1.5px solid #e9ecef;
+    }
+    .tokuten-col .col-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 12px;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 0.82rem;
+    }
+    .tokuten-col .col-row:last-child { border-bottom: none; }
+    .tokuten-col .col-row .mo-label { color: #888; }
+    .tokuten-col .col-row .val { font-weight: 700; }
+    .tokuten-col .col-row .val.zero { color: #ccc; }
+    .tokuten-col .col-row .val.good { color: #1a8a4a; }
+    .tokuten-col .target-row {
+      background: #fff9e6;
+      border-top: 2px solid #ffc107;
+      padding: 9px 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+    }
+    .tokuten-col .target-row .t-label { font-weight: 700; color: #e67e22; }
+    .tokuten-col .target-row .t-val { font-weight: 800; color: #e67e22; }
+
     /* プラン比率 */
     .plan-bars { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
     .plan-row { display: flex; align-items: center; gap: 12px; }
@@ -411,6 +505,8 @@
     </div>
   </div>
   <div class="alert-badge">移行による会員減少 ▲20名 を想定済み</div>
+  <br>
+  <div class="au-badge">6〜8月 共通チャレンジ：AU率（継続率）90% 維持</div>
 </div>
 
 <div class="container">
@@ -419,6 +515,31 @@
   <div class="phase-header">
     <span class="phase-badge badge-jun">June 2026</span>
     <h2>6月：移行安定化 ＋ 口コミ月間</h2>
+  </div>
+
+  <!-- AU率バナー -->
+  <div class="au-banner">
+    <div class="au-left">
+      <div class="au-title">AU率（継続率）90%チャレンジ</div>
+      <div class="au-desc">毎月の退会を最小化し、3ヶ月を通じて90%以上の継続率を維持する</div>
+    </div>
+    <div class="au-right">
+      <div class="au-month">
+        <div class="mo">6月</div>
+        <div class="pct target">90%</div>
+        <div class="mo">目標</div>
+      </div>
+      <div class="au-month">
+        <div class="mo">7月</div>
+        <div class="pct target">90%</div>
+        <div class="mo">目標</div>
+      </div>
+      <div class="au-month">
+        <div class="mo">8月</div>
+        <div class="pct target">90%</div>
+        <div class="mo">目標</div>
+      </div>
+    </div>
   </div>
 
   <!-- 写真OKバナー -->
@@ -430,14 +551,15 @@
       <li>姿勢チェック・フォーム確認の写真撮影OK</li>
       <li>グループ写真・メンバーとの記念撮影OK</li>
       <li>Before／Afterの変化記録 → 口コミ・UGコンテンツに活用</li>
-      <li>体験セッション中の様子を撮影 → SNS投稿の素材に（会員許可必須）</li>
+      <li><strong>体験者も写真付きで口コミを投稿できる</strong> — 体験中に撮影した写真をそのまま活用（許可取り必須）</li>
+      <li>体験セッション後にその場でQRコード＋写真で投稿 → 入会前に口コミが蓄積される</li>
     </ul>
     <div class="usage-tags">
-      <span class="tag">口コミ投稿に添付</span>
+      <span class="tag">体験者の口コミ（写真付き）</span>
       <span class="tag">SNS・Instagram</span>
       <span class="tag">UGコンテンツ</span>
-      <span class="tag">進捗記録</span>
-      <span class="tag">体験→入会のストーリー</span>
+      <span class="tag">Before/After記録</span>
+      <span class="tag">体験→入会ストーリー</span>
     </div>
   </div>
 
@@ -577,6 +699,67 @@
     <h2>7月：回復・獲得フェーズ</h2>
   </div>
 
+  <!-- 特典パーソナル・2枚P 現状数値 -->
+  <div class="card">
+    <div class="card-title"><span class="icon">💳</span>7月の重点：特典パーソナル・2枚P 継続取得顧客を増やす</div>
+    <p style="font-size:0.85rem;color:#555;margin-bottom:16px;">6月に口コミを蓄積し体験を増やした流れを受け、<strong>7月は追加収益を継続して生み出せる顧客の母数を拡大</strong>する。まず現状を正確に把握し、目標を設定する。</p>
+
+    <div class="tokuten-grid">
+      <!-- 特典パーソナル -->
+      <div class="tokuten-col">
+        <div class="col-head">特典パーソナル（¥4,000）</div>
+        <div class="col-row"><span class="mo-label">3月</span><span class="val good">19名</span></div>
+        <div class="col-row"><span class="mo-label">4月</span><span class="val good">15名</span></div>
+        <div class="col-row"><span class="mo-label">5月</span><span class="val zero">0名</span></div>
+        <div class="target-row"><span class="t-label">7月目標</span><span class="t-val">要確認・設定</span></div>
+      </div>
+      <!-- 単発チケット（2枚P相当） -->
+      <div class="tokuten-col">
+        <div class="col-head">単発チケット / 2枚P</div>
+        <div class="col-row"><span class="mo-label">3月</span><span class="val good">7名</span></div>
+        <div class="col-row"><span class="mo-label">4月</span><span class="val good">6名</span></div>
+        <div class="col-row"><span class="mo-label">5月</span><span class="val zero">0名</span></div>
+        <div class="target-row"><span class="t-label">7月目標</span><span class="t-val">要確認・設定</span></div>
+      </div>
+      <!-- まとめ購入 -->
+      <div class="tokuten-col">
+        <div class="col-head">まとめ購入</div>
+        <div class="col-row"><span class="mo-label">3月</span><span class="val good">¥31,100</span></div>
+        <div class="col-row"><span class="mo-label">4月</span><span class="val good">¥90,550</span></div>
+        <div class="col-row"><span class="mo-label">5月</span><span class="val zero">¥0</span></div>
+        <div class="target-row"><span class="t-label">7月目標</span><span class="t-val">要確認・設定</span></div>
+      </div>
+    </div>
+
+    <div style="background:#fff3cd;border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:0.85rem;">
+      <strong>5月が0の理由を確認する</strong> — 移行タイミングの混乱か、提案できていないのか。6月末に現状数値を再集計し、7月目標を確定させる。
+    </div>
+
+    <div class="card-title" style="margin-top:4px;"><span class="icon">🎯</span>継続取得を生む設計</div>
+    <table>
+      <thead>
+        <tr><th>施策</th><th>目標水準</th><th>アクション</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>特典パーソナル</strong>の継続提案</td>
+          <td>担当会員の<strong>30%以上</strong></td>
+          <td>毎月のセッション設計に組み込む。「今月も取れますよ」の一言を習慣化</td>
+        </tr>
+        <tr>
+          <td><strong>2枚P（単発2枚）</strong>の継続利用</td>
+          <td>担当会員の<strong>20%以上</strong></td>
+          <td>残枚数を毎回確認し、切れそうなタイミングで自然に提案</td>
+        </tr>
+        <tr>
+          <td>まとめ購入の提案</td>
+          <td>月次で全担当に1回</td>
+          <td>3〜6ヶ月の目標設定と合わせて提示</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="card">
     <div class="card-title"><span class="icon">🚀</span>新規獲得施策</div>
     <table>
@@ -587,22 +770,7 @@
         <tr>
           <td>体験セッション転換率</td>
           <td><strong>50%以上</strong></td>
-          <td>週次体験枠の確保、口コミを見て来た体験者を優先フォロー</td>
-        </tr>
-        <tr>
-          <td>特典パーソナル提案</td>
-          <td>担当会員の<strong>30%以上</strong></td>
-          <td>提案タイミングの標準化、スクリプト整備</td>
-        </tr>
-        <tr>
-          <td>追加購入提案</td>
-          <td>担当会員の<strong>20%以上</strong></td>
-          <td>セッション内での自然な提案フローを練習</td>
-        </tr>
-        <tr>
-          <td>まとめ購入促進</td>
-          <td>月次で提案実施</td>
-          <td>3ヶ月プランとセットで提示</td>
+          <td>週次体験枠の確保、6月口コミ経由の体験者を優先フォロー</td>
         </tr>
       </tbody>
     </table>
@@ -723,25 +891,27 @@
             <div class="wk-label">第1週</div>
             <div class="wk-items">
               <span class="wk-tag green">新規体験キャンペーン開始</span>
+              <span class="wk-tag orange">特典パーソナル・2枚P 現状数値確認</span>
             </div>
           </div>
           <div class="cal-week">
             <div class="wk-label">第2週</div>
             <div class="wk-items">
-              <span class="wk-tag green">特典パーソナル提案強化</span>
+              <span class="wk-tag green">特典パーソナル・2枚P 提案スタート</span>
               <span class="wk-tag green">ロールプレイ実施</span>
             </div>
           </div>
           <div class="cal-week">
             <div class="wk-label">第3週</div>
             <div class="wk-items">
-              <span class="wk-tag">中間KPI確認と施策調整</span>
+              <span class="wk-tag orange">特典・追加購入 中間進捗確認</span>
+              <span class="wk-tag">AU率確認</span>
             </div>
           </div>
           <div class="cal-week">
             <div class="wk-label">第4週</div>
             <div class="wk-items">
-              <span class="wk-tag green">追加購入設計の強化</span>
+              <span class="wk-tag green">特典・2枚P 取得顧客数を集計</span>
               <span class="wk-tag">8月施策の準備</span>
             </div>
           </div>
@@ -790,15 +960,15 @@
     <div class="expectation-grid">
       <div class="exp-row">
         <div class="exp-month exp-jun">6月</div>
-        <div class="exp-text">口コミ<strong>2件獲得を必達</strong>。石井・中富は体験担当後に依頼を実践。写真撮影を積極活用し、投稿のハードルを下げる</div>
+        <div class="exp-text"><strong>口コミ特化月間</strong> — 一人2件獲得を必達。体験者に写真付き口コミを依頼する。石井・中富は体験担当後に必ず実践。AU率90%をキープしながら離脱防止に注力する</div>
       </div>
       <div class="exp-row">
         <div class="exp-month exp-jul">7月</div>
-        <div class="exp-text">担当会員の<strong>3ヶ月計画を全員分作成</strong>。特典パーソナル・追加購入の提案を毎セッション意識する</div>
+        <div class="exp-text"><strong>特典パーソナル・2枚P 継続取得の設計</strong> — 担当会員の30%に特典パーソナル、20%に単発チケットを継続提案できる状態へ。3ヶ月計画を全担当分作成。AU率90%継続</div>
       </div>
       <div class="exp-row">
         <div class="exp-month exp-aug">8月</div>
-        <div class="exp-text">担当会員の売上・継続率を<strong>自分でマネジメントできる状態</strong>。数字への当事者意識を持つ</div>
+        <div class="exp-text">担当会員の売上・継続率を<strong>自分でマネジメントできる状態</strong>。数字を自己予測し月末に発表できる。AU率90%を当たり前の水準として定着させる</div>
       </div>
     </div>
   </div>
