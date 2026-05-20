@@ -98,6 +98,170 @@
     /* コンテンツ */
     .container { max-width: 900px; margin: 0 auto; padding: 32px 16px 60px; }
 
+    /* ===== 会員数増加タイムライン ===== */
+    .timeline-section { margin-bottom: 16px; }
+
+    /* 入会ファネル */
+    .funnel {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .funnel-step {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      position: relative;
+    }
+    .funnel-step .step-box {
+      background: white;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 14px 10px;
+      margin: 0 4px;
+      transition: border-color 0.2s;
+    }
+    .funnel-step.active .step-box { border-color: #1a6bb5; background: #eaf2ff; }
+    .funnel-step .step-num {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #aaa;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .funnel-step.active .step-num { color: #1a6bb5; }
+    .funnel-step .step-icon { font-size: 1.4rem; line-height: 1; margin-bottom: 4px; }
+    .funnel-step .step-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .funnel-step .step-sub {
+      font-size: 0.72rem;
+      color: #888;
+      margin-top: 3px;
+    }
+    .funnel-arrow {
+      font-size: 1.3rem;
+      color: #ccc;
+      flex-shrink: 0;
+      padding: 0 2px;
+      align-self: center;
+    }
+    .funnel-step.active .funnel-arrow { color: #1a6bb5; }
+
+    /* 月別タイムライン */
+    .month-timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .mt-col {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid;
+    }
+    .mt-col.jun { border-color: #1a6bb5; }
+    .mt-col.jul { border-color: #1a8a4a; }
+    .mt-col.aug { border-color: #b7770d; }
+    .mt-col .mt-head {
+      padding: 10px 14px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: white;
+    }
+    .mt-col.jun .mt-head { background: #1a6bb5; }
+    .mt-col.jul .mt-head { background: #1a8a4a; }
+    .mt-col.aug .mt-head { background: #b7770d; }
+    .mt-col .mt-body { background: white; padding: 12px 14px; }
+    .mt-col .mt-item {
+      font-size: 0.82rem;
+      padding: 4px 0;
+      border-bottom: 1px solid #f5f5f5;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+    .mt-col .mt-item:last-child { border-bottom: none; }
+    .mt-col .mt-item::before { content: "→"; color: #aaa; flex-shrink: 0; }
+    .mt-col .mt-kpi {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      margin-top: 8px;
+      color: #555;
+    }
+    .mt-col .mt-kpi strong { color: #1a1a2e; }
+
+    /* 退会防止：6ヶ月未満サポート */
+    .churn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .churn-zone {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid;
+    }
+    .churn-zone.danger { border-color: #e74c3c; }
+    .churn-zone.caution { border-color: #e67e22; }
+    .churn-zone .cz-head {
+      padding: 10px 14px;
+      font-weight: 800;
+      font-size: 0.83rem;
+      color: white;
+    }
+    .churn-zone.danger .cz-head { background: #e74c3c; }
+    .churn-zone.caution .cz-head { background: #e67e22; }
+    .churn-zone .cz-body { background: white; padding: 12px 14px; }
+    .churn-zone .cz-item {
+      font-size: 0.82rem;
+      padding: 5px 0;
+      border-bottom: 1px solid #f5f5f5;
+      display: flex;
+      gap: 6px;
+    }
+    .churn-zone .cz-item:last-child { border-bottom: none; }
+    .churn-zone .cz-item::before { content: "✓"; color: #aaa; flex-shrink: 0; }
+
+    .support-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .sf-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+    .sf-period {
+      background: #fff0f0;
+      color: #c0392b;
+      border-radius: 8px;
+      padding: 7px 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .sf-period.mid { background: #fff8ee; color: #b7770d; }
+    .sf-period.ok { background: #eafaf1; color: #1a8a4a; }
+    .sf-content {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.83rem;
+      line-height: 1.6;
+    }
+
     /* フェーズタイトル */
     .phase-header {
       display: flex;
@@ -515,6 +679,147 @@
   <div class="phase-header">
     <span class="phase-badge badge-jun">June 2026</span>
     <h2>6月：移行安定化 ＋ 口コミ月間</h2>
+  </div>
+
+  <!-- ===== 会員数増加タイムライン ===== -->
+  <div class="phase-header" style="margin-top:8px;">
+    <h2 style="font-size:1.2rem;">会員数増加の構造とタイムライン</h2>
+  </div>
+
+  <!-- 入会ファネル -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📈</span>入会経路：広告なし ＝ 口コミ・MEOが唯一の入口</div>
+    <p style="font-size:0.84rem;color:#c0392b;font-weight:700;margin-bottom:14px;background:#fff5f5;padding:10px 14px;border-radius:8px;">
+      広告出稿なし → 自然流入（Google MEO・紹介）のみが入会経路。口コミ件数が増えるほどMEO順位が上がり、体験問い合わせが増える。
+    </p>
+    <div class="funnel">
+      <div class="funnel-step active">
+        <div class="step-box">
+          <div class="step-num">STEP 1</div>
+          <div class="step-icon">⭐</div>
+          <div class="step-label">口コミ増加</div>
+          <div class="step-sub">現状24件 → 34件+</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">▶</div>
+      <div class="funnel-step">
+        <div class="step-box">
+          <div class="step-num">STEP 2</div>
+          <div class="step-icon">🗺️</div>
+          <div class="step-label">MEO順位向上</div>
+          <div class="step-sub">Google検索・マップ上位</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">▶</div>
+      <div class="funnel-step">
+        <div class="step-box">
+          <div class="step-num">STEP 3</div>
+          <div class="step-icon">🤝</div>
+          <div class="step-label">体験問い合わせ増</div>
+          <div class="step-sub">紹介 ＋ MEO経由</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">▶</div>
+      <div class="funnel-step">
+        <div class="step-box">
+          <div class="step-num">STEP 4</div>
+          <div class="step-icon">✅</div>
+          <div class="step-label">体験→入会</div>
+          <div class="step-sub">転換率50%目標</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">▶</div>
+      <div class="funnel-step">
+        <div class="step-box">
+          <div class="step-num">STEP 5</div>
+          <div class="step-icon">👥</div>
+          <div class="step-label">会員数増加</div>
+          <div class="step-sub">AU率90%で維持</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month-timeline">
+      <div class="mt-col jun">
+        <div class="mt-head">6月 ― 口コミ基盤をつくる</div>
+        <div class="mt-body">
+          <div class="mt-item">口コミ+10件（24→34件）を達成</div>
+          <div class="mt-item">体験者が写真付きで口コミ投稿</div>
+          <div class="mt-item">既存会員の紹介を促進</div>
+          <div class="mt-item">MEOプロフィール整備（写真更新）</div>
+          <div class="mt-kpi">目標：<strong>口コミ34件以上</strong></div>
+        </div>
+      </div>
+      <div class="mt-col jul">
+        <div class="mt-head">7月 ― MEO経由の流入を増やす</div>
+        <div class="mt-body">
+          <div class="mt-item">6月の口コミ蓄積でMEO効果が出始める</div>
+          <div class="mt-item">体験枠を週次で確保・管理</div>
+          <div class="mt-item">体験→入会クロージング強化</div>
+          <div class="mt-item">石井・中富が体験を安定担当</div>
+          <div class="mt-kpi">目標：<strong>体験転換率50%以上</strong></div>
+        </div>
+      </div>
+      <div class="mt-col aug">
+        <div class="mt-head">8月 ― 入会・継続の両輪を回す</div>
+        <div class="mt-body">
+          <div class="mt-item">新規入会の安定獲得が定着</div>
+          <div class="mt-item">口コミ依頼を毎月の習慣として維持</div>
+          <div class="mt-item">6ヶ月未満サポートで退会抑制</div>
+          <div class="mt-item">紹介キャンペーンの継続</div>
+          <div class="mt-kpi">目標：<strong>会員306名・AU率90%</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 退会防止：6ヶ月未満サポート -->
+  <div class="card">
+    <div class="card-title"><span class="icon">🛡️</span>退会防止：6ヶ月未満の会員を手厚くサポートする</div>
+    <p style="font-size:0.84rem;color:#555;margin-bottom:14px;">
+      退会の大多数は入会後<strong>6ヶ月以内</strong>に発生する。この層に集中的に接触頻度を上げることが最も効果的な離脱防止策。
+    </p>
+
+    <div class="churn-grid">
+      <div class="churn-zone danger">
+        <div class="cz-head">最危険ゾーン：入会〜3ヶ月未満</div>
+        <div class="cz-body">
+          <div class="cz-item">毎セッション後に次回の予約を確認</div>
+          <div class="cz-item">1ヶ月で目標の変化を可視化（写真・数値）</div>
+          <div class="cz-item">3回セッションごとに小さなマイルストーンを祝う</div>
+          <div class="cz-item">担当者が週1回でも声かけ（LINE・対面）</div>
+        </div>
+      </div>
+      <div class="churn-zone caution">
+        <div class="cz-head">警戒ゾーン：3〜6ヶ月未満</div>
+        <div class="cz-body">
+          <div class="cz-item">中間振り返り面談（3ヶ月目に実施）</div>
+          <div class="cz-item">次の3ヶ月目標を一緒に設計し直す</div>
+          <div class="cz-item">特典パーソナル・2枚Pを提案しコミット感を高める</div>
+          <div class="cz-item">口コミ依頼のベストタイミング</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-title" style="margin-top:18px;"><span class="icon">📋</span>入会後のサポートフロー（標準化）</div>
+    <div class="support-flow">
+      <div class="sf-row">
+        <div class="sf-period">入会直後<br>〜1ヶ月</div>
+        <div class="sf-content"><strong>ゴール設定＋習慣化</strong> — 初回に3ヶ月・6ヶ月目標を明確化。毎セッションで「次回はいつ来ますか？」を必ず確認。体組成・写真で初期値を記録</div>
+      </div>
+      <div class="sf-row">
+        <div class="sf-period mid">1〜3ヶ月</div>
+        <div class="sf-content"><strong>成果の可視化＋関係強化</strong> — 1ヶ月後に写真・数値を見返し「変化」を一緒に確認。小さな成果でも積極的にフィードバック。口コミ依頼もこのタイミング</div>
+      </div>
+      <div class="sf-row">
+        <div class="sf-period mid">3〜6ヶ月</div>
+        <div class="sf-content"><strong>中間振り返り＋次期目標設計</strong> — 3ヶ月面談で振り返り。「次の6ヶ月でどうなりたいか」を設計。特典パーソナルや追加購入でコミットを深める</div>
+      </div>
+      <div class="sf-row">
+        <div class="sf-period ok">6ヶ月〜</div>
+        <div class="sf-content"><strong>定着会員へ</strong> — ここまで継続した会員は退会リスクが大幅に低下。紹介促進・口コミ依頼のメイン層として活躍してもらう</div>
+      </div>
+    </div>
   </div>
 
   <!-- AU率バナー -->
