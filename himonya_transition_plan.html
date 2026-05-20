@@ -536,8 +536,114 @@
       white-space: nowrap;
     }
 
-    /* カレンダー */
-    .calendar { display: flex; flex-direction: column; gap: 0; }
+    /* ===== 移行会員ジャーニー ===== */
+    .journey-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .journey-badge {
+      background: #6c3483;
+      color: white;
+      border-radius: 20px;
+      padding: 3px 14px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+    .journey-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 32px;
+      margin: 4px 0 16px;
+    }
+    .journey-steps::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 20px;
+      bottom: 20px;
+      width: 2px;
+      background: linear-gradient(to bottom, #8e44ad, #2980b9, #27ae60);
+    }
+    .journey-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .journey-step:last-child { margin-bottom: 0; }
+    .js-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+      margin-left: -32px;
+      z-index: 1;
+    }
+    .js-dot.now { background: #8e44ad; }
+    .js-dot.step1 { background: #2980b9; }
+    .js-dot.step2 { background: #1a8a4a; }
+    .js-dot.goal { background: #27ae60; }
+    .js-body {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 16px;
+      flex: 1;
+      border: 2px solid #f0f0f0;
+    }
+    .js-body.now { border-color: #8e44ad; background: #faf5ff; }
+    .js-body.step1 { border-color: #2980b9; }
+    .js-body.step2 { border-color: #1a8a4a; }
+    .js-body.goal { border-color: #27ae60; background: #f0fff4; }
+    .js-title {
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .js-timing {
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #f0f0f0;
+      color: #666;
+      border-radius: 10px;
+      padding: 2px 8px;
+    }
+    .js-body.step1 .js-timing { background: #eaf2ff; color: #2980b9; }
+    .js-body.step2 .js-timing { background: #eafaf1; color: #1a8a4a; }
+    .js-body.goal .js-timing { background: #d5f5e3; color: #1a8a4a; }
+    .js-desc {
+      font-size: 0.83rem;
+      color: #555;
+      line-height: 1.65;
+    }
+    .js-desc ul { list-style: none; padding: 0; margin-top: 4px; }
+    .js-desc ul li { padding: 3px 0; display: flex; gap: 6px; }
+    .js-desc ul li::before { content: "→"; color: #aaa; flex-shrink: 0; }
+    .js-alt {
+      margin-top: 8px;
+      background: #fff9e6;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      color: #b7770d;
+      font-weight: 600;
+    }
+    .js-alt::before { content: "💡 "; }
     .cal-month {
       display: grid;
       grid-template-columns: 110px 1fr;
@@ -818,6 +924,116 @@
       <div class="sf-row">
         <div class="sf-period ok">6ヶ月〜</div>
         <div class="sf-content"><strong>定着会員へ</strong> — ここまで継続した会員は退会リスクが大幅に低下。紹介促進・口コミ依頼のメイン層として活躍してもらう</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 移行会員ジャーニー -->
+  <div class="card">
+    <div class="journey-header">
+      <span class="journey-badge">移行会員 専用設計</span>
+      <span style="font-size:1rem;font-weight:800;">アトリオドゥーエ → ルネサンス移行 ／ THE PERSON継続会員のロードマップ</span>
+    </div>
+    <p style="font-size:0.84rem;color:#555;margin-bottom:18px;background:#f8f0ff;border-radius:8px;padding:10px 14px;">
+      フィットネスクラブが変わるタイミングで<strong>THE PERSONのみ継続</strong>を選んだ会員は、最も離脱リスクが高い一方、関係を深めれば<strong>ルネサンスへの入会＋長期継続</strong>につながる最重要ターゲット。
+    </p>
+
+    <div class="journey-steps">
+
+      <div class="journey-step">
+        <div class="js-dot now">今</div>
+        <div class="js-body now">
+          <div class="js-title">
+            THE PERSON のみ継続中（ライトプラン）
+            <span class="js-timing">移行直後 6月〜</span>
+          </div>
+          <div class="js-desc">
+            アトリオドゥーエからの移行で、フィットネスクラブには入会していない状態。まずこの関係を途切らせないことが最優先。
+            <ul>
+              <li>移行の不安・不満を丁寧にヒアリング</li>
+              <li>「THE PERSONだけで十分な変化は出せる」と伝え安心させる</li>
+              <li>セッション品質で信頼を積み上げる期間と位置づける</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-dot step1">①</div>
+        <div class="js-body step1">
+          <div class="js-title">
+            ライト → レギュラーへアップグレード
+            <span class="js-timing">6〜7月 ／ 成果が見え始めたタイミングで</span>
+          </div>
+          <div class="js-desc">
+            セッションの成果が出てきた・運動の楽しさを感じ始めたところで自然に提案する。
+            <ul>
+              <li>「今のペースだとこのくらいの変化。レギュラーなら◯◯まで行けます」</li>
+              <li>金額差より<strong>得られる変化の差</strong>を具体的に伝える</li>
+              <li>特典パーソナル・2枚Pも合わせて提案し、運動密度を高める</li>
+            </ul>
+          </div>
+          <div class="js-alt">1ヶ月の成果写真・数値が揃ったタイミングが最高の提案機会</div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-dot step2">②</div>
+        <div class="js-body step2">
+          <div class="js-title">
+            運動頻度を上げてルネサンスへの入会を検討
+            <span class="js-timing">数ヶ月後 ／ 会員の意欲に応じて</span>
+          </div>
+          <div class="js-desc">
+            THE PERSONで習慣化・成果が出てきたら、「もっと動きたい」という気持ちを引き出す。
+            <ul>
+              <li>「週◯回動けるようになったら、さらに結果が早くなります」と頻度の価値を伝える</li>
+              <li>ルネサンスの施設・プールなど具体的なメリットを紹介</li>
+              <li>THE PERSON ＋ ルネサンス の組み合わせを提案（相乗効果）</li>
+            </ul>
+          </div>
+          <div class="js-alt">入会を急がせない。「気になったらいつでも一緒に見に行きましょう」の姿勢で</div>
+        </div>
+      </div>
+
+      <div class="journey-step">
+        <div class="js-dot goal">◎</div>
+        <div class="js-body goal">
+          <div class="js-title">
+            最低目標：運動習慣の継続（離脱させない）
+            <span class="js-timing">どのフェーズでも最優先</span>
+          </div>
+          <div class="js-desc">
+            ルネサンスに入会できなくても構わない。<strong>「THE PERSONでの運動が続いている」状態を守ることが最重要。</strong>
+            <ul>
+              <li>離脱さえしなければ、ルネサンス入会のタイミングはいつでも来る</li>
+              <li>運動習慣が定着した会員は口コミ・紹介の主力になる</li>
+              <li>「焦らせない」「押しつけない」姿勢が長期継続につながる</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;">
+      <div style="background:#f8f9fa;border-radius:10px;padding:14px 16px;">
+        <div style="font-size:0.78rem;font-weight:800;color:#8e44ad;margin-bottom:8px;">この層へのNG行動</div>
+        <div style="font-size:0.82rem;color:#555;line-height:1.7;">
+          ✗ 移行直後にルネサンス入会を急かす<br>
+          ✗ プランアップを金額で押す<br>
+          ✗ セッション以外の接触を怠る<br>
+          ✗ 成果が出ていないのに提案する
+        </div>
+      </div>
+      <div style="background:#f0fff4;border-radius:10px;padding:14px 16px;">
+        <div style="font-size:0.78rem;font-weight:800;color:#1a8a4a;margin-bottom:8px;">この層への理想の姿勢</div>
+        <div style="font-size:0.82rem;color:#555;line-height:1.7;">
+          ✓ まず信頼・成果をつくる<br>
+          ✓ 提案は「会員のための提案」として設計<br>
+          ✓ ルネサンス入会は結果であって目的ではない<br>
+          ✓ 習慣継続が全ての前提
+        </div>
       </div>
     </div>
   </div>
