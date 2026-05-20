@@ -32,13 +32,16 @@
     background: var(--gray-light);
     -webkit-font-smoothing: antialiased;
   }
-  .container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 16px; }
 
   /* HEADER */
   header {
     background: var(--white);
-    padding: 40px 0 32px;
+    padding: 32px 0 24px;
     border-bottom: 4px solid var(--primary);
+  }
+  @media(max-width:480px) {
+    header { padding: 24px 0 20px; }
   }
   .badge {
     display: inline-block;
@@ -68,9 +71,9 @@
     margin-bottom: 8px;
   }
   .section-title {
-    font-size: 20px;
+    font-size: clamp(17px, 4vw, 20px);
     font-weight: 900;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   /* ========================
@@ -78,19 +81,19 @@
   ======================== */
   .current-wrap {
     background: var(--white);
-    padding: 40px 0;
+    padding: 32px 0;
     margin-top: 16px;
   }
+  @media(max-width:480px) { .current-wrap { padding: 24px 0; } }
   .current-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
-  @media(max-width: 520px) { .current-grid { grid-template-columns: 1fr; } }
   .current-card {
     background: var(--gray-light);
     border-radius: 6px;
-    padding: 18px 16px;
+    padding: 14px 10px;
     text-align: center;
   }
   .current-card-num {
@@ -126,8 +129,9 @@
   ======================== */
   .analysis-wrap {
     background: var(--gray-light);
-    padding: 40px 0;
+    padding: 32px 0;
   }
+  @media(max-width:480px) { .analysis-wrap { padding: 24px 0; } }
   .insight-list {
     display: flex;
     flex-direction: column;
@@ -136,9 +140,9 @@
   .insight-item {
     background: var(--white);
     border-radius: 6px;
-    padding: 18px 20px;
+    padding: 16px 16px;
     display: flex;
-    gap: 16px;
+    gap: 14px;
     align-items: flex-start;
     border-left: 4px solid;
   }
@@ -292,8 +296,9 @@
   ======================== */
   .plan-wrap {
     background: var(--text);
-    padding: 48px 0;
+    padding: 40px 0;
   }
+  @media(max-width:480px) { .plan-wrap { padding: 28px 0; } }
   .plan-wrap .section-label { color: var(--primary-light); }
   .plan-wrap .section-title { color: var(--white); }
   .phase-block {
@@ -319,7 +324,7 @@
     flex-shrink: 0;
   }
   .phase-period {
-    font-size: 16px;
+    font-size: clamp(14px, 3.5vw, 16px);
     font-weight: 900;
     color: var(--primary-light);
   }
@@ -331,10 +336,11 @@
   .plan-item {
     background: rgba(255,255,255,0.07);
     border-radius: 6px;
-    padding: 16px 18px;
+    padding: 16px 16px;
     border-left: 3px solid var(--primary);
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
     align-items: flex-start;
   }
   .plan-pri {
@@ -343,20 +349,20 @@
     color: var(--primary-light);
     flex-shrink: 0;
     width: 24px;
-    padding-top: 1px;
+    padding-top: 2px;
   }
   .plan-main { flex: 1; min-width: 0; }
   .plan-title {
     font-size: 14px;
     font-weight: 700;
     color: var(--white);
-    line-height: 1.4;
+    line-height: 1.5;
     margin-bottom: 4px;
   }
   .plan-detail {
     font-size: 12px;
     color: rgba(255,255,255,0.6);
-    line-height: 1.7;
+    line-height: 1.8;
   }
   .plan-when {
     font-size: 11px;
@@ -368,7 +374,9 @@
     white-space: nowrap;
     flex-shrink: 0;
     align-self: flex-start;
-    margin-top: 2px;
+  }
+  @media(max-width:480px) {
+    .plan-when { margin-left: 34px; }
   }
   .phase-divider {
     text-align: center;
@@ -382,8 +390,9 @@
   ======================== */
   .timeguide-wrap {
     background: var(--white);
-    padding: 40px 0;
+    padding: 32px 0;
   }
+  @media(max-width:480px) { .timeguide-wrap { padding: 24px 0; } }
   .timeguide-list {
     display: flex;
     flex-direction: column;
@@ -392,7 +401,7 @@
   .timeguide-row {
     display: flex;
     gap: 16px;
-    align-items: stretch;
+    align-items: flex-start;
     padding: 16px 0;
     border-bottom: 1px dashed var(--gray);
   }
@@ -410,8 +419,13 @@
     border-radius: 6px;
     line-height: 1.3;
     text-align: center;
-    min-width: 88px;
+    min-width: 80px;
     flex-shrink: 0;
+  }
+  @media(max-width:480px) {
+    .timeguide-row { flex-direction: column; gap: 10px; }
+    .tg-time { min-width: unset; width: fit-content; flex-direction: row; gap: 6px; padding: 6px 12px; font-size: 13px; }
+    .tg-arrow { display: none; }
   }
   .tg-arrow {
     font-size: 10px;
@@ -440,6 +454,23 @@
   .tg-tag.step { background: var(--primary-bg); color: var(--primary); }
   .tg-tag.session { background: var(--green-light); color: var(--green); }
   .tg-tag.admin { background: var(--blue-light); color: var(--blue); }
+
+  /* TABLE SCROLL WRAPPER */
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -4px;
+    padding: 0 4px;
+  }
+  .scroll-hint {
+    display: none;
+    font-size: 11px;
+    color: var(--gray-dark);
+    text-align: right;
+    margin-bottom: 6px;
+  }
+  @media(max-width:600px) { .scroll-hint { display: block; } }
+  .week-table { min-width: 480px; }
 
   /* FOOTER */
   footer {
@@ -579,7 +610,8 @@
     <!-- WEEKLY MODEL -->
     <div style="margin-top: 32px;">
       <div class="section-label">IDEAL WEEK MODEL / 理想の1週間イメージ</div>
-      <div style="overflow-x: auto; margin-top: 12px;">
+      <div class="table-scroll" style="margin-top: 12px;">
+        <p class="scroll-hint">← 横にスクロールできます →</p>
         <table class="week-table">
           <thead>
             <tr>
