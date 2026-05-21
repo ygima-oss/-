@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>顧客継続率分析｜蒲田店</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+    --green: #3DAA6E;
+    --green-light: #E8F7F0;
+    --blue: #3A7FC1;
+    --blue-light: #EBF3FB;
+    --red: #D94F4F;
+    --red-light: #FDEAEA;
+    --yellow: #D4920A;
+    --yellow-light: #FFF8E6;
+    --purple: #7B5EA7;
+    --purple-light: #F0EBF8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    padding: 40px 0 32px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .subtitle { font-size: 14px; color: var(--gray-dark); }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .meta-tag {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 3px;
+    background: var(--gray-light);
+    color: var(--gray-dark);
+    border: 1px solid var(--gray);
+  }
+
+  /* SECTION */
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 24px;
+  }
+
+  /* FINDING BLOCK */
+  .finding-wrap {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+
+  /* BIG STAT */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  @media(max-width: 520px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+  .stat-card {
+    background: var(--primary-bg);
+    border: 1px solid var(--primary-light);
+    border-radius: 8px;
+    padding: 18px 14px;
+    text-align: center;
+  }
+  .stat-card.blue {
+    background: var(--blue-light);
+    border-color: #90BBE0;
+  }
+  .stat-card.green {
+    background: var(--green-light);
+    border-color: #90D4B0;
+  }
+  .stat-num {
+    font-size: clamp(28px, 6vw, 38px);
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-card.blue .stat-num { color: var(--blue); }
+  .stat-card.green .stat-num { color: var(--green); }
+  .stat-unit {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    margin-bottom: 2px;
+  }
+  .stat-desc {
+    font-size: 11px;
+    color: var(--gray-dark);
+    line-height: 1.5;
+    margin-top: 6px;
+  }
+
+  /* INSIGHT CARDS */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  @media(max-width: 520px) { .insight-grid { grid-template-columns: 1fr; } }
+  .insight-card {
+    border-radius: 6px;
+    padding: 16px;
+    border-left: 4px solid;
+  }
+  .insight-card.warn { background: var(--red-light); border-color: var(--red); }
+  .insight-card.ok { background: var(--green-light); border-color: var(--green); }
+  .insight-card.caution { background: var(--yellow-light); border-color: var(--yellow); }
+  .insight-card.info { background: var(--blue-light); border-color: var(--blue); }
+  .insight-card.purple { background: var(--purple-light); border-color: var(--purple); }
+  .insight-icon { font-size: 20px; margin-bottom: 6px; }
+  .insight-title {
+    font-size: 13px;
+    font-weight: 900;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .insight-body {
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+  }
+
+  /* DATA CALLOUT */
+  .callout {
+    background: var(--text);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+  .callout-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-light);
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+  }
+  .callout-main {
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .callout-main em {
+    color: var(--primary-light);
+    font-style: normal;
+  }
+  .callout-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+
+  /* TIMELINE / TURNING POINT */
+  .timeline-wrap {
+    background: var(--gray-light);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gray);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -22px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--gray);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--gray);
+  }
+  .tl-item.highlight .tl-dot {
+    background: var(--primary);
+    box-shadow: 0 0 0 3px rgba(226,121,46,0.3);
+  }
+  .tl-item.done .tl-dot { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+  .tl-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 14px 16px;
+    border: 1px solid var(--gray);
+  }
+  .tl-item.highlight .tl-card {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(226,121,46,0.12);
+  }
+  .tl-period {
+    font-size: 13px;
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+  .tl-item.highlight .tl-period { color: var(--primary); }
+  .tl-desc {
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+  }
+  .tl-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 6px;
+    margin-right: 4px;
+  }
+  .tl-tag.warn { background: var(--red-light); color: var(--red); }
+  .tl-tag.key  { background: var(--primary-bg); color: var(--primary); }
+  .tl-tag.stable { background: var(--green-light); color: var(--green); }
+
+  /* SOC FRAMEWORK */
+  .soc-wrap {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .soc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media(max-width: 560px) { .soc-grid { grid-template-columns: 1fr; } }
+  .soc-card {
+    border-radius: 8px;
+    padding: 18px 14px;
+    text-align: center;
+    border: 2px solid transparent;
+  }
+  .soc-card.s1 { background: var(--blue-light); border-color: var(--blue); }
+  .soc-card.s2 { background: var(--green-light); border-color: var(--green); }
+  .soc-card.s3 { background: var(--primary-bg); border-color: var(--primary); }
+  .soc-icon { font-size: 26px; margin-bottom: 8px; }
+  .soc-name {
+    font-size: 13px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .soc-card.s1 .soc-name { color: var(--blue); }
+  .soc-card.s2 .soc-name { color: var(--green); }
+  .soc-card.s3 .soc-name { color: var(--primary); }
+  .soc-ruby {
+    font-size: 11px;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+  }
+  .soc-desc {
+    font-size: 11px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    text-align: left;
+  }
+  .soc-example {
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 4px;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  /* ACTION PLAN */
+  .plan-wrap {
+    background: var(--text);
+    padding: 48px 0;
+    margin-top: 16px;
+  }
+  .plan-wrap .section-label { color: var(--primary-light); }
+  .plan-wrap .section-title { color: var(--white); }
+  .plan-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .plan-month {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+  }
+  .plan-month::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 24px;
+    bottom: -8px;
+    width: 2px;
+    background: var(--primary);
+  }
+  .plan-month:last-child::before { display: none; }
+  .plan-month-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .plan-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary);
+    position: absolute;
+    left: 0;
+    top: 4px;
+    flex-shrink: 0;
+  }
+  .plan-month-label {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--primary-light);
+    letter-spacing: 0.05em;
+  }
+  .plan-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .plan-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--primary);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .plan-item-priority {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-light);
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 28px;
+  }
+  .plan-item-body { flex: 1; }
+  .plan-item-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .plan-item-detail {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+  .plan-item-when {
+    font-size: 11px;
+    background: rgba(226,121,46,0.25);
+    color: var(--primary-light);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* FOLLOWUP STRATEGY */
+  .strategy-wrap {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media(max-width: 520px) { .strategy-grid { grid-template-columns: 1fr; } }
+  .strategy-card {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--gray);
+  }
+  .strategy-head {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .strategy-head.s-orange { background: var(--primary-bg); color: var(--primary); border-bottom: 1px solid var(--primary-light); }
+  .strategy-head.s-red { background: var(--red-light); color: var(--red); border-bottom: 1px solid #F5BBBB; }
+  .strategy-head.s-green { background: var(--green-light); color: var(--green); border-bottom: 1px solid #A0D9BE; }
+  .strategy-head.s-blue { background: var(--blue-light); color: var(--blue); border-bottom: 1px solid #9FBFDD; }
+  .strategy-body {
+    padding: 12px 14px;
+    background: var(--white);
+  }
+  .strategy-body ul {
+    list-style: none;
+    font-size: 12px;
+    color: var(--gray-dark);
+    line-height: 2;
+  }
+  .strategy-body ul li::before { content: '→ '; color: var(--primary); font-weight: 700; }
+
+  /* STORE GROWTH */
+  .growth-wrap {
+    background: var(--gray-light);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .funnel {
+    max-width: 400px;
+    margin: 0 auto 24px;
+  }
+  .funnel-row {
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    position: relative;
+  }
+  .funnel-row.f1 { background: var(--primary); }
+  .funnel-row.f2 { background: #C96A25; margin: 0 16px; }
+  .funnel-row.f3 { background: #A85520; margin: 0 32px; }
+  .funnel-row.f4 { background: var(--green); margin: 0 48px; }
+  .funnel-sub {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .kpi-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 16px;
+    border: 1px solid var(--gray);
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+  .kpi-val {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .kpi-note { font-size: 11px; color: var(--gray-dark); }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    padding: 28px 0;
+    text-align: center;
+    border-top: 1px solid var(--gray);
+    margin-top: 16px;
+  }
+  footer p { font-size: 12px; color: var(--gray-dark); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">蒲田店｜顧客継続率分析</div>
+    <h1>顧客の長期継続を<br>生み出す要因とは何か</h1>
+    <p class="subtitle">儀間禎平・柴田夏乃 議論まとめ｜店舗成長とトレーナー育成への示唆</p>
+    <div class="meta-row">
+      <span class="meta-tag">議論日：2026年5月</span>
+      <span class="meta-tag">蒲田店</span>
+      <span class="meta-tag">100名→200名フェーズ</span>
+    </div>
+  </div>
+</header>
+
+<!-- KEY FINDING -->
+<section class="finding-wrap">
+  <div class="container">
+    <div class="section-label">KEY FINDING / 主要発見</div>
+    <h2 class="section-title">データが示した事実</h2>
+
+    <div class="callout">
+      <div class="callout-label">INSIGHT 01</div>
+      <div class="callout-main">目標未更新 ≠ 退会リスク<br><em>91日以上</em>更新がない顧客の<em>77%</em>が1年超継続</div>
+      <div class="callout-sub">20名中26名（※議論値）が1年以上継続。「目標更新をしていない＝退会予備軍」という仮説は崩れた。長期継続者ほど目標更新の必要性を感じにくい可能性がある。</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">91<span style="font-size:18px">日+</span></div>
+        <div class="stat-unit">目標未更新期間</div>
+        <div class="stat-desc">対象顧客の定義</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-num">77<span style="font-size:18px">%</span></div>
+        <div class="stat-unit">1年超継続率</div>
+        <div class="stat-desc">対象20名中の割合</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">6〜12<span style="font-size:14px">ヶ月</span></div>
+        <div class="stat-unit">最重要転換期</div>
+        <div class="stat-desc">継続の分岐点となる期間</div>
+      </div>
+    </div>
+
+    <div class="insight-grid">
+      <div class="insight-card ok">
+        <div class="insight-icon">✅</div>
+        <div class="insight-title">長期継続者の共通パターン</div>
+        <div class="insight-body">運動を「習慣」として組み込んでいる。目標達成の有無より、来店・運動のルーティン化が継続の本質となっている。</div>
+      </div>
+      <div class="insight-card info">
+        <div class="insight-icon">🤝</div>
+        <div class="insight-title">トレーナーとの信頼関係</div>
+        <div class="insight-body">長期継続者はトレーナーへの信頼が確立している。「このトレーナーに通う」という関係性が離脱を防ぐ最大の要因のひとつ。</div>
+      </div>
+      <div class="insight-card warn">
+        <div class="insight-icon">⚠️</div>
+        <div class="insight-title">6ヶ月未満は最も離脱しやすい</div>
+        <div class="insight-body">習慣化と信頼関係の形成が完了していない時期。この期間に離脱する顧客が最も多く、特別なフォローが必要な重点ゾーン。</div>
+      </div>
+      <div class="insight-card caution">
+        <div class="insight-icon">📊</div>
+        <div class="insight-title">目標更新は継続の「代理指標」</div>
+        <div class="insight-body">目標更新はモチベーション維持の手段に過ぎず、それ自体が継続率を上げるわけではない。更新を促すより、習慣化を支援することが先決。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TURNING POINT TIMELINE -->
+<section class="timeline-wrap">
+  <div class="container">
+    <div class="section-label">RETENTION TIMELINE / 継続フェーズの変化</div>
+    <h2 class="section-title">入会からの時間軸で見る離脱リスク</h2>
+
+    <div class="timeline">
+      <div class="tl-item warn">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">入会〜3ヶ月</div>
+          <div class="tl-desc">最も不安定な時期。来店習慣が未定着でトレーナーとの関係も構築中。成果実感がないと離脱リスクが高い。効果を「見える化」することが重要。</div>
+          <span class="tl-tag warn">高離脱リスク</span>
+          <span class="tl-tag key">成果の可視化が急務</span>
+        </div>
+      </div>
+
+      <div class="tl-item highlight">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">3〜6ヶ月 ← ここが第1の分岐点</div>
+          <div class="tl-desc">習慣化が定着するかどうかの境界線。このフェーズを超えられるかが継続率を大きく左右する。トレーナーの関わり方が決定的な影響を持つ。</div>
+          <span class="tl-tag key">最重要介入ポイント</span>
+        </div>
+      </div>
+
+      <div class="tl-item highlight">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">6ヶ月〜1年 ← 儀間さんが指摘した転換期</div>
+          <div class="tl-desc">習慣化が完成しつつあり、トレーナーとの信頼関係が確立される時期。この時期を越えた顧客は長期継続に移行しやすい。最重要な転換点。</div>
+          <span class="tl-tag key">習慣化の完成</span>
+          <span class="tl-tag key">信頼関係の確立</span>
+        </div>
+      </div>
+
+      <div class="tl-item done">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-period">1年以上（長期継続フェーズ）</div>
+          <div class="tl-desc">目標更新の頻度は下がる傾向にあるが、それは「継続の安定」を示すシグナルである可能性が高い。コミュニティへの帰属感が継続を支える。</div>
+          <span class="tl-tag stable">安定継続</span>
+          <span class="tl-tag stable">目標更新より習慣が主役</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOC FRAMEWORK -->
+<section class="soc-wrap">
+  <div class="container">
+    <div class="section-label">CONTINUITY FRAMEWORK / 継続を支える3要素</div>
+    <h2 class="section-title">儀間さんが提示した「継続の3感覚」</h2>
+
+    <div class="soc-grid">
+      <div class="soc-card s1">
+        <div class="soc-icon">🔍</div>
+        <div class="soc-name">把握可能感</div>
+        <div class="soc-ruby">自分の状況がわかる</div>
+        <div class="soc-desc">顧客が自分の体の変化・運動の進捗を理解できているか。トレーナーが「現在地」を言語化して伝えることで育まれる。</div>
+        <div class="soc-example">✦ トレーナーの実践<br>「先月と比べてここが変わりましたよ」と定期的に数値・見た目の変化を伝える</div>
+      </div>
+      <div class="soc-card s2">
+        <div class="soc-icon">💪</div>
+        <div class="soc-name">処理可能感</div>
+        <div class="soc-ruby">自分にできると思える</div>
+        <div class="soc-desc">運動が「辛すぎず、続けられる」と思えるか。難易度・量の設計がこの感覚を左右する。「やればできる」体験の積み重ね。</div>
+        <div class="soc-example">✦ トレーナーの実践<br>セッション後に「今日もできましたね」と達成感を言語化して届ける</div>
+      </div>
+      <div class="soc-card s3">
+        <div class="soc-icon">✨</div>
+        <div class="soc-name">意味可能感</div>
+        <div class="soc-ruby">やることに意味がある</div>
+        <div class="soc-desc">「なぜ運動しているか」の目的が明確か。顧客自身の言葉で運動目的を語れるよう支援することがトレーナーの核心的役割。</div>
+        <div class="soc-example">✦ トレーナーの実践<br>「○○さんが運動する理由は△△ですよね」と目的を繰り返し確認・言語化する</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">TRAINER REQUIREMENT</div>
+      <div class="callout-main" style="font-size:16px;">トレーナーは顧客の<em>運動目的を理解し、明確に説明できる</em>こと</div>
+      <div class="callout-sub">「なぜあなたが運動しているか、私はわかっています」という信頼が、長期継続の土台を作る。目標シートの記入より、この理解の深さが問われている。</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOLLOW-UP STRATEGY -->
+<section class="strategy-wrap">
+  <div class="container">
+    <div class="section-label">FOLLOW-UP STRATEGY / フォローアップ戦略</div>
+    <h2 class="section-title">継続期間別の対応アプローチ</h2>
+
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="strategy-head s-red">🚨 入会〜3ヶ月（超高優先）</div>
+        <div class="strategy-body">
+          <ul>
+            <li>月1回の成果確認（数値・写真）</li>
+            <li>来店頻度の週2回定着を目標設定</li>
+            <li>担当トレーナーとの1on1面談実施</li>
+            <li>トレーナーから積極的に声かけ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-head s-orange">⚡ 3〜6ヶ月（重点介入）</div>
+        <div class="strategy-body">
+          <ul>
+            <li>3ヶ月目に運動目的を再確認・更新</li>
+            <li>チューニングセッションの積極活用</li>
+            <li>「半年継続記念」など節目を演出</li>
+            <li>コミュニティ（他会員）への橋渡し</li>
+          </ul>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-head s-blue">📌 6ヶ月〜1年（習慣確立期）</div>
+        <div class="strategy-body">
+          <ul>
+            <li>目標更新より来店ルーティンの強化</li>
+            <li>体の変化の半年比較レポート</li>
+            <li>新たなチャレンジ目標の提案</li>
+            <li>アップグレード・プラン見直しの提案</li>
+          </ul>
+        </div>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-head s-green">✅ 1年超（長期継続者）</div>
+        <div class="strategy-body">
+          <ul>
+            <li>継続記念のアクション（1年・2年）</li>
+            <li>ロールモデルとして新規会員に紹介</li>
+            <li>目標更新の強制はしない</li>
+            <li>特典・ポイント活用で維持動機を提供</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORE GROWTH -->
+<section class="growth-wrap">
+  <div class="container">
+    <div class="section-label">STORE GROWTH / 蒲田店の成長フェーズ</div>
+    <h2 class="section-title">100名→200名への課題整理</h2>
+
+    <div class="funnel">
+      <div class="funnel-row f1">新規体験・入会<div class="funnel-sub">月次新規獲得数の最大化</div></div>
+      <div class="funnel-row f2">〜3ヶ月 定着期<div class="funnel-sub">離脱を最小化する介入</div></div>
+      <div class="funnel-row f3">3〜12ヶ月 習慣化期<div class="funnel-sub">継続の3感覚を育てる</div></div>
+      <div class="funnel-row f4">1年超 長期継続<div class="funnel-sub">コミュニティ化・紹介促進</div></div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">現在の規模</div>
+        <div class="kpi-val">〜100名</div>
+        <div class="kpi-note">新規獲得と既存維持の両輪が必要なフェーズ</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">目標規模</div>
+        <div class="kpi-val">200名</div>
+        <div class="kpi-note">継続率を上げることが最短ルート</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">新入トレーナー育成</div>
+        <div class="kpi-val">急務</div>
+        <div class="kpi-note">継続率はトレーナーの質に直結する</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">注力施策</div>
+        <div class="kpi-val">6ヶ月壁</div>
+        <div class="kpi-note">6ヶ月未満離脱を減らすことが最大のレバレッジ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION PLAN -->
+<section class="plan-wrap">
+  <div class="container">
+    <div class="section-label">ACTION PLAN</div>
+    <h2 class="section-title">今後の実施項目</h2>
+
+    <div class="plan-timeline">
+      <!-- 即時 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">即時着手（〜今月末）</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">継続期間 × 目標更新の関係を店舗別に分析</div>
+              <div class="plan-item-detail">蒲田店だけでなく他店舗のデータも収集し、店舗特性・トレーナー特性との相関を確認する。担当：儀間さん。</div>
+            </div>
+            <div class="plan-item-when">今月中</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">6ヶ月未満離脱顧客の退会理由を遡り調査</div>
+              <div class="plan-item-detail">過去3〜6ヶ月の退会者にヒアリングまたはデータ確認。離脱理由の類型化と、介入できたポイントを特定する。</div>
+            </div>
+            <div class="plan-item-when">今月中</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1〜2ヶ月 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">1〜2ヶ月以内</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">トレーナー研修プログラムの設計・開発</div>
+              <div class="plan-item-detail">「継続の3感覚（把握・処理・意味）」を育てるコミュニケーション方法を学ぶ研修。新入トレーナーへの適切な教育プログラムとして体系化する。</div>
+            </div>
+            <div class="plan-item-when">設計：1ヶ月以内</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">顧客の「運動目的ヒアリングシート」の作成</div>
+              <div class="plan-item-detail">入会時・3ヶ月・6ヶ月の各タイミングで顧客の運動目的を確認・言語化するためのフォーマット。トレーナーが顧客の目的を常に把握できる状態を作る。</div>
+            </div>
+            <div class="plan-item-when">1ヶ月以内</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3ヶ月以内 -->
+      <div class="plan-month">
+        <div class="plan-dot"></div>
+        <div class="plan-month-head">
+          <div class="plan-month-label">3ヶ月以内</div>
+        </div>
+        <div class="plan-items">
+          <div class="plan-item">
+            <div class="plan-item-priority">P1</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">6ヶ月未満顧客へのフォローアップ施策の実施</div>
+              <div class="plan-item-detail">入会〜6ヶ月の顧客に対する特別接触プログラムを設計・運用開始。月1回の成果確認・担当トレーナーからの声かけを標準化する。</div>
+            </div>
+            <div class="plan-item-when">施策実施：2〜3ヶ月</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P2</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">研修プログラムの初回実施と振り返り</div>
+              <div class="plan-item-detail">作成したトレーナー研修を実際に実施し、参加トレーナーのフィードバックをもとに改善。柴田夏乃さんとの定期的な振り返りMTGを設定する。</div>
+            </div>
+            <div class="plan-item-when">研修開始：2ヶ月後</div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-item-priority">P3</div>
+            <div class="plan-item-body">
+              <div class="plan-item-title">継続率の定期モニタリング体制の構築</div>
+              <div class="plan-item-detail">月次で継続率・離脱率・フェーズ別人数を可視化するダッシュボードまたはレポートを整備。数値の変化をチーム全体で共有する。</div>
+            </div>
+            <div class="plan-item-when">仕組み構築：3ヶ月</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>THE PERSON 蒲田店｜顧客継続率分析レポート / 儀間禎平・柴田夏乃 議論まとめ</p>
+  </div>
+</footer>
+
+</body>
+</html>
