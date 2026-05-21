@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>継続の3感覚｜トレーナー × 顧客チェックリスト</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+    --green: #3DAA6E;
+    --green-light: #E8F7F0;
+    --blue: #3A7FC1;
+    --blue-light: #EBF3FB;
+    --red: #D94F4F;
+    --red-light: #FDEAEA;
+    --yellow: #D4920A;
+    --yellow-light: #FFF8E6;
+    --q3: #3A7FC1;
+    --q3-light: #EBF3FB;
+    --q3-border: #90BBE0;
+    --q4: #3DAA6E;
+    --q4-light: #E8F7F0;
+    --q4-border: #90D4B0;
+    --q5: #E2792E;
+    --q5-light: #FDF4EC;
+    --q5-border: #F5B883;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    padding: 40px 0 32px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(20px, 5vw, 30px);
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .subtitle { font-size: 14px; color: var(--gray-dark); }
+
+  /* HYPOTHESIS CALLOUT */
+  .hypothesis {
+    background: var(--text);
+    padding: 32px 0;
+    margin-top: 0;
+  }
+  .hyp-inner {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 22px 24px;
+    border-left: 4px solid var(--primary);
+  }
+  .hyp-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-light);
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+  }
+  .hyp-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .hyp-text em {
+    color: var(--primary-light);
+    font-style: normal;
+    background: rgba(226,121,46,0.2);
+    padding: 0 4px;
+    border-radius: 2px;
+  }
+  .hyp-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    background: var(--white);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--gray);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .progress-label { font-size: 13px; font-weight: 700; }
+  .progress-count { font-size: 13px; color: var(--gray-dark); }
+  .progress-count span { color: var(--primary); font-weight: 900; font-size: 16px; }
+  .prog-bar-wrap {
+    background: var(--gray-light);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .prog-bar {
+    background: linear-gradient(90deg, var(--primary), #D5651A);
+    height: 100%;
+    width: 0%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  /* SECTION WRAPPER */
+  .q-section {
+    background: var(--white);
+    padding: 40px 0;
+    margin-top: 16px;
+  }
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .q-num {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 900;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .q-num.q3 { background: var(--q3); }
+  .q-num.q4 { background: var(--q4); }
+  .q-num.q5 { background: var(--q5); }
+  .q-title-block { flex: 1; }
+  .q-name {
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .q-name.q3 { color: var(--q3); }
+  .q-name.q4 { color: var(--q4); }
+  .q-name.q5 { color: var(--q5); }
+  .q-def {
+    font-size: 13px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  .q-def.q3 { background: var(--q3-light); border-left: 3px solid var(--q3); }
+  .q-def.q4 { background: var(--q4-light); border-left: 3px solid var(--q4); }
+  .q-def.q5 { background: var(--q5-light); border-left: 3px solid var(--q5); }
+
+  /* SCORE BADGE per section */
+  .q-score {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .q-score.q3 { background: var(--q3-light); color: var(--q3); }
+  .q-score.q4 { background: var(--q4-light); color: var(--q4); }
+  .q-score.q5 { background: var(--q5-light); color: var(--q5); }
+
+  /* PERSPECTIVE BLOCK */
+  .perspective {
+    margin-bottom: 20px;
+  }
+  .perspective-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 3px;
+  }
+  .perspective-label.trainer {
+    background: #2B2B2A;
+    color: var(--primary-light);
+  }
+  .perspective-label.customer {
+    background: var(--gray-light);
+    color: var(--gray-dark);
+    border: 1px solid var(--gray);
+  }
+  .perspective-icon { font-size: 14px; }
+
+  /* CHECK LIST */
+  .check-list { list-style: none; }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 12px;
+    border-radius: 5px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+    border: 1px solid transparent;
+  }
+  .check-list li:hover { background: var(--gray-light); }
+  .check-list li.checked { background: #F6FBF8; border-color: #C0E4D1; }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--gray);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.15s;
+    background: var(--white);
+  }
+  .check-list li.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+  }
+  .check-list li.checked .check-box::after { content: '✓'; font-size: 13px; font-weight: 900; }
+  .check-content { flex: 1; }
+  .check-main {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .check-list li.checked .check-main {
+    color: var(--gray-dark);
+    text-decoration: line-through;
+  }
+  .check-note {
+    font-size: 11px;
+    color: var(--gray-dark);
+    margin-top: 3px;
+    line-height: 1.6;
+    display: block;
+  }
+  .check-example {
+    font-size: 11px;
+    color: var(--gray-dark);
+    margin-top: 5px;
+    padding: 6px 10px;
+    background: var(--gray-light);
+    border-radius: 3px;
+    line-height: 1.6;
+    font-style: italic;
+    display: block;
+  }
+  .check-example::before { content: '例：'; font-style: normal; font-weight: 700; }
+
+  /* CONVERSATION CHECK */
+  .conv-check-wrap {
+    background: var(--gray-light);
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 16px;
+    border: 1px dashed var(--gray);
+  }
+  .conv-check-label {
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+  .conv-q {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 12px;
+    background: var(--white);
+    border-radius: 4px;
+    margin-bottom: 6px;
+    border-left: 3px solid var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    transition: background 0.15s;
+  }
+  .conv-q:last-child { margin-bottom: 0; }
+  .conv-q:hover { background: var(--primary-bg); }
+  .conv-q.checked { background: var(--green-light); border-color: var(--green); }
+  .conv-q.checked .conv-q-text { color: var(--gray-dark); text-decoration: line-through; }
+  .conv-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    background: var(--white);
+  }
+  .conv-q.checked .conv-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+  }
+  .conv-q.checked .conv-box::after { content: '✓'; font-size: 11px; font-weight: 900; }
+  .conv-q-text { font-size: 13px; font-weight: 700; flex: 1; line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    padding: 28px 0;
+    text-align: center;
+    border-top: 1px solid var(--gray);
+    margin-top: 16px;
+  }
+  footer p { font-size: 12px; color: var(--gray-dark); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--gray-light);
+    margin: 20px 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">継続の3感覚｜チェックリスト</div>
+    <h1>トレーナーと顧客が<br>ともに言語化できるか</h1>
+    <p class="subtitle">Q3 把握可能感 / Q4 処理可能感 / Q5 有意味感｜細分化チェックリスト</p>
+  </div>
+</header>
+
+<!-- HYPOTHESIS -->
+<div class="hypothesis">
+  <div class="container">
+    <div class="hyp-inner">
+      <div class="hyp-label">HYPOTHESIS / 仮説</div>
+      <div class="hyp-text">
+        <em>目標更新が91日を過ぎても継続している顧客</em>は、<br>
+        Q3・Q4・Q5の3つを<em>自分の言葉で話せる人</em>である。
+      </div>
+      <div class="hyp-sub">
+        目標シートの記入状況は継続率の代理指標に過ぎない。重要なのは「自分のからだのことを理解しているか」「頼れる手段があるか」「なぜ続けているかを語れるか」の3点。トレーナーがこれをお客さんと一緒に言語化できているかどうかが、長期継続を生む。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="container">
+    <div class="progress-info">
+      <span class="progress-label">確認済み項目</span>
+      <span class="progress-count"><span id="doneCount">0</span> / <span id="totalCount">0</span></span>
+    </div>
+    <div class="prog-bar-wrap">
+      <div class="prog-bar" id="progBar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 把握可能感 -->
+<section class="q-section" id="sec-q3">
+  <div class="container">
+    <div class="q-header">
+      <div class="q-num q3">Q3</div>
+      <div class="q-title-block">
+        <div class="q-name q3">把握可能感</div>
+        <div class="q-def q3">いま自分のからだの状態と、トレーニングで取り組んでいることの理由が、自分の言葉で説明できる。</div>
+      </div>
+      <div class="q-score q3" id="score-q3">0/0</div>
+    </div>
+
+    <!-- TRAINER -->
+    <div class="perspective">
+      <div class="perspective-label trainer">
+        <span class="perspective-icon">👨‍💼</span> トレーナーが確認・実践できているか
+      </div>
+      <ul class="check-list" id="cl-q3-trainer">
+        <li data-id="q3t1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">この顧客の「いまの身体の状態」を、自分の言葉で30秒で説明できる</div>
+            <span class="check-note">姿勢・筋力バランス・過去からの変化など。スペックの暗記ではなく、物語として語れるか。</span>
+          </div>
+        </li>
+        <li data-id="q3t2" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">各エクササイズを「なぜこの顧客に行っているか」を顧客に伝えている</div>
+            <span class="check-note">「みんなやってるから」ではなく、「○○さんの▲▲を改善するためにこれをやっています」と毎回説明できているか。</span>
+            <span class="check-example">「このスクワットは○○さんの股関節の可動域を広げて、階段が楽になるためにやっています」</span>
+          </div>
+        </li>
+        <li data-id="q3t3" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">顧客が自分の変化を「どう感じているか」を定期的に聞いている</div>
+            <span class="check-note">測定数値だけでなく、顧客の主観的な感覚（疲れにくくなった・肩こりが減った等）をセッションで拾っているか。</span>
+          </div>
+        </li>
+        <li data-id="q3t4" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">顧客が「自分の身体について誰かに話せる状態」になっているか確認している</div>
+            <span class="check-note">「家族や友人に自分のトレーニングを説明できますか？」と聞いてみる。言語化できていれば把握可能感が育っている。</span>
+          </div>
+        </li>
+        <li data-id="q3t5" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">先月と今月の変化を、具体的な言葉で顧客にフィードバックしている</div>
+            <span class="check-note">「先月と比べて体幹が安定してきたので、今月からこの種目に進みます」のように変化の連続性を伝えているか。</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CUSTOMER -->
+    <div class="perspective">
+      <div class="perspective-label customer">
+        <span class="perspective-icon">🙋</span> 顧客が自分の言葉で言えるか（トレーナーが確認する視点）
+      </div>
+      <ul class="check-list" id="cl-q3-customer">
+        <li data-id="q3c1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「いまの自分の身体の状態は？」と聞かれたとき、自分の言葉で答えられる</div>
+            <span class="check-example">「最近は体幹が少し使えるようになってきた感じがする」「まだ右肩の動きが硬い」</span>
+          </div>
+        </li>
+        <li data-id="q3c2" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「なぜいまこのトレーニングをしているのか」を他人に説明できる</div>
+            <span class="check-example">「体幹が弱いから、まず土台を作るためにこれをやっているって言われてます」</span>
+          </div>
+        </li>
+        <li data-id="q3c3" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">半年前・1年前と比べて、自分の身体がどう変わったかを語れる</div>
+            <span class="check-note">数値でなくてよい。生活の中での変化として実感できているか。</span>
+            <span class="check-example">「前は駅の階段がしんどかったけど、最近は全然気にならなくなった」</span>
+          </div>
+        </li>
+        <li data-id="q3c4" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">セッション中に「なぜこれをやっているのか」と思ったとき、トレーナーに聞ける関係がある</div>
+            <span class="check-note">疑問を持てる・質問できる関係性があること自体が把握可能感の証拠。</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CONVERSATION TEST -->
+    <div class="conv-check-wrap">
+      <div class="conv-check-label">CONVERSATION CHECK｜この会話ができているか</div>
+      <div class="conv-q" data-id="q3conv1" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">「○○さん、いまの自分の身体、誰かに説明できますか？」と聞いたことがある</div>
+      </div>
+      <div class="conv-q" data-id="q3conv2" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">顧客が「なるほど、だからこれをやってるんですね」と言った場面がある</div>
+      </div>
+      <div class="conv-q" data-id="q3conv3" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">顧客が自分から「最近こういう変化があって」と話してくれたことがある</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Q4 処理可能感 -->
+<section class="q-section" id="sec-q4">
+  <div class="container">
+    <div class="q-header">
+      <div class="q-num q4">Q4</div>
+      <div class="q-title-block">
+        <div class="q-name q4">処理可能感</div>
+        <div class="q-def q4">からだのことで困ったとき、頼れる人や手段がある。</div>
+      </div>
+      <div class="q-score q4" id="score-q4">0/0</div>
+    </div>
+
+    <!-- TRAINER -->
+    <div class="perspective">
+      <div class="perspective-label trainer">
+        <span class="perspective-icon">👨‍💼</span> トレーナーが確認・実践できているか
+      </div>
+      <ul class="check-list" id="cl-q4-trainer">
+        <li data-id="q4t1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「セッション外でからだに困ったことがあったら相談してください」と伝えている</div>
+            <span class="check-note">顧客がトレーナーを「頼れる存在」として認識しているか。連絡方法を知っているか。</span>
+          </div>
+        </li>
+        <li data-id="q4t2" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「筋肉痛のときはどうすればいいか」「休む基準」を顧客に教えている</div>
+            <span class="check-note">セルフケアの知識を渡すこと自体が処理可能感を育てる。「困ったとき自分で対処できる」感覚。</span>
+            <span class="check-example">「筋肉痛がひどいときはウォーキングだけにして、ストレッチをしてください」</span>
+          </div>
+        </li>
+        <li data-id="q4t3" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">顧客の生活環境（仕事・家族・睡眠）を把握し、無理なく続けられる負荷設計をしている</div>
+            <span class="check-note">「先週忙しかったから今日は少し軽めにしましょう」と柔軟に対応できているか。</span>
+          </div>
+        </li>
+        <li data-id="q4t4" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">顧客が「スキップしたいとき」に言い出せる関係を作っている</div>
+            <span class="check-note">スキップを責めない文化をトレーナー自身が作っているか。「来られなかった理由」を聞ける関係性。</span>
+          </div>
+        </li>
+        <li data-id="q4t5" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「困ったことや不安なことはありませんか？」をセッション内で定期的に聞いている</div>
+            <span class="check-note">月1回でも十分。「何かあれば言える」という安心感を顧客に持たせているか。</span>
+          </div>
+        </li>
+        <li data-id="q4t6" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">痛みや体調不良があったとき、医療機関への橋渡しも含めて対応できる準備がある</div>
+            <span class="check-note">「これは整形外科に行ったほうがいいです」と言える判断力と信頼関係があるか。</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CUSTOMER -->
+    <div class="perspective">
+      <div class="perspective-label customer">
+        <span class="perspective-icon">🙋</span> 顧客が自分の言葉で言えるか（トレーナーが確認する視点）
+      </div>
+      <ul class="check-list" id="cl-q4-customer">
+        <li data-id="q4c1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「からだのことで困ったとき、誰に聞けばいいか」が分かっている</div>
+            <span class="check-example">「まずトレーナーさんに連絡する」「LINEで聞いていいって言われてる」</span>
+          </div>
+        </li>
+        <li data-id="q4c2" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">体調が悪い日・仕事が忙しい週でも、自分なりの対処法を知っている</div>
+            <span class="check-example">「調子悪い日はストレッチだけにする」「週1しか来られないときもあるけどそれでいいって言ってもらった」</span>
+          </div>
+        </li>
+        <li data-id="q4c3" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「スキップしたい」「今日きつい」を正直に言える</div>
+            <span class="check-note">言えない状態は処理可能感が低いサイン。言えているかどうかを定期確認。</span>
+          </div>
+        </li>
+        <li data-id="q4c4" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">運動以外にも（食事・睡眠・ストレス）自分のからだを整える手段を1つ以上知っている</div>
+            <span class="check-example">「トレーナーに教えてもらったストレッチを家でやってる」「最近睡眠を意識するようになった」</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CONVERSATION TEST -->
+    <div class="conv-check-wrap">
+      <div class="conv-check-label">CONVERSATION CHECK｜この会話ができているか</div>
+      <div class="conv-q" data-id="q4conv1" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">「セッション外で何か困ったことはありましたか？」と聞いたことがある</div>
+      </div>
+      <div class="conv-q" data-id="q4conv2" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">顧客から「これってどうすればいいですか？」と自発的に質問が来たことがある</div>
+      </div>
+      <div class="conv-q" data-id="q4conv3" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">「無理なときは無理って言っていいですよ」と伝えたことがある</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Q5 有意味感 -->
+<section class="q-section" id="sec-q5">
+  <div class="container">
+    <div class="q-header">
+      <div class="q-num q5">Q5</div>
+      <div class="q-title-block">
+        <div class="q-name q5">有意味感</div>
+        <div class="q-def q5">いま続けている運動・習慣は、自分の人生にとって意味があると感じる。</div>
+      </div>
+      <div class="q-score q5" id="score-q5">0/0</div>
+    </div>
+
+    <!-- TRAINER -->
+    <div class="perspective">
+      <div class="perspective-label trainer">
+        <span class="perspective-icon">👨‍💼</span> トレーナーが確認・実践できているか
+      </div>
+      <ul class="check-list" id="cl-q5-trainer">
+        <li data-id="q5t1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">この顧客が「なぜ運動を続けているか」を、顧客自身の言葉で言えるよう支援している</div>
+            <span class="check-note">「体重を落としたい」の奥にある動機（孫と走り回りたい・仕事のパフォーマンスを上げたい等）を引き出せているか。</span>
+          </div>
+        </li>
+        <li data-id="q5t2" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">顧客の「運動目的」を暗記しており、セッション中に自然に触れることができる</div>
+            <span class="check-example">「○○さん、先日おっしゃってた旅行がもうすぐですね。体力どうですか？」</span>
+          </div>
+        </li>
+        <li data-id="q5t3" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「続けることが○○さんの人生にどう繋がっているか」を一緒に話したことがある</div>
+            <span class="check-note">表面的な目標（数値）を超えた「人生にとっての意味」を会話できているか。</span>
+            <span class="check-example">「これを続けることで、5年後の○○さんはどんな状態でいたいですか？」</span>
+          </div>
+        </li>
+        <li data-id="q5t4" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">顧客が落ち込んだときや停滞したとき、「意味」を再確認する会話ができる</div>
+            <span class="check-note">成果が出にくい時期こそ有意味感が問われる。「なぜ始めたか」に戻れるか。</span>
+          </div>
+        </li>
+        <li data-id="q5t5" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「目標更新」より「目的の再確認」を優先している</div>
+            <span class="check-note">シートを埋めることが目的化していないか。顧客の内側にある「意味」を引き出すことが先。</span>
+          </div>
+        </li>
+        <li data-id="q5t6" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">顧客が「運動を通じて生活が変わった」エピソードを持っており、それを知っている</div>
+            <span class="check-note">こうしたエピソードは有意味感が育っているサイン。トレーナーがそれを引き出し・覚えているか。</span>
+            <span class="check-example">「最近子供と公園でサッカーできるようになったって言ってた」</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CUSTOMER -->
+    <div class="perspective">
+      <div class="perspective-label customer">
+        <span class="perspective-icon">🙋</span> 顧客が自分の言葉で言えるか（トレーナーが確認する視点）
+      </div>
+      <ul class="check-list" id="cl-q5-customer">
+        <li data-id="q5c1" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「なぜ運動を続けているか」を、自分の言葉で話せる</div>
+            <span class="check-example">「体重よりも、疲れにくい体になりたいから」「70歳になっても自分で歩きたいから」</span>
+          </div>
+        </li>
+        <li data-id="q5c2" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">運動を続けることで「日常生活が変わった」と感じるエピソードを持っている</div>
+            <span class="check-note">数値変化でなく、日常の変化として意味を感じているか。</span>
+            <span class="check-example">「最近姿勢がいいって言われた」「長時間のデスクワークが楽になった」</span>
+          </div>
+        </li>
+        <li data-id="q5c3" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">成果が出にくい時期でも「続ける理由」を自分なりに持っている</div>
+            <span class="check-note">停滞期に有意味感があれば離脱しにくい。</span>
+            <span class="check-example">「数字は変わってないけど、気持ちがリセットされるから来てる」</span>
+          </div>
+        </li>
+        <li data-id="q5c4" onclick="toggle(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-main">「運動していない自分」よりも「運動している自分」の方が好きだと感じている</div>
+            <span class="check-note">アイデンティティとして運動が組み込まれているか。</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CONVERSATION TEST -->
+    <div class="conv-check-wrap">
+      <div class="conv-check-label">CONVERSATION CHECK｜この会話ができているか</div>
+      <div class="conv-q" data-id="q5conv1" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">「○○さんはなぜ運動を続けているんですか？」と直接聞いたことがある</div>
+      </div>
+      <div class="conv-q" data-id="q5conv2" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">顧客が「これを続けてて本当によかった」と言ったことがある</div>
+      </div>
+      <div class="conv-q" data-id="q5conv3" onclick="toggleConv(this)">
+        <div class="conv-box"></div>
+        <div class="conv-q-text">顧客の運動目的を「体重」以外の言葉で説明できる</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>THE PERSON｜継続の3感覚チェックリスト / 儀間禎平 作成</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'retention-checklist-v1';
+  let checkedSet = new Set();
+
+  // すべてのチェック可能なIDを収集
+  function getAllIds() {
+    const ids = [];
+    document.querySelectorAll('[data-id]').forEach(el => ids.push(el.dataset.id));
+    return ids;
+  }
+
+  // セクションごとのIDマップ
+  const SECTION_IDS = {
+    q3: [],
+    q4: [],
+    q5: [],
+  };
+
+  function buildSectionIds() {
+    ['q3','q4','q5'].forEach(q => {
+      document.querySelectorAll(`#sec-${q} [data-id]`).forEach(el => {
+        SECTION_IDS[q].push(el.dataset.id);
+      });
+    });
+  }
+
+  async function loadState() {
+    try {
+      if (window.storage) {
+        const r = await window.storage.get(STORAGE_KEY);
+        if (r && r.value) checkedSet = new Set(JSON.parse(r.value));
+      }
+    } catch(e) {}
+    buildSectionIds();
+    render();
+  }
+
+  async function saveState() {
+    try {
+      if (window.storage) {
+        await window.storage.set(STORAGE_KEY, JSON.stringify([...checkedSet]));
+      }
+    } catch(e) {}
+  }
+
+  function render() {
+    // チェックリスト items
+    document.querySelectorAll('.check-list [data-id]').forEach(li => {
+      li.classList.toggle('checked', checkedSet.has(li.dataset.id));
+    });
+    // conv items
+    document.querySelectorAll('.conv-q[data-id]').forEach(el => {
+      el.classList.toggle('checked', checkedSet.has(el.dataset.id));
+    });
+
+    // セクションスコア
+    ['q3','q4','q5'].forEach(q => {
+      const ids = SECTION_IDS[q];
+      const done = ids.filter(id => checkedSet.has(id)).length;
+      document.getElementById('score-' + q).textContent = done + '/' + ids.length;
+    });
+
+    // 全体プログレス
+    const allIds = getAllIds();
+    const total = allIds.length;
+    const done = allIds.filter(id => checkedSet.has(id)).length;
+    document.getElementById('doneCount').textContent = done;
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('progBar').style.width = total ? (done / total * 100) + '%' : '0%';
+  }
+
+  window.toggle = async function(li) {
+    const id = li.dataset.id;
+    if (checkedSet.has(id)) checkedSet.delete(id);
+    else checkedSet.add(id);
+    render();
+    await saveState();
+  };
+
+  window.toggleConv = async function(el) {
+    const id = el.dataset.id;
+    if (checkedSet.has(id)) checkedSet.delete(id);
+    else checkedSet.add(id);
+    render();
+    await saveState();
+  };
+
+  loadState();
+})();
+</script>
+
+</body>
+</html>
