@@ -34,15 +34,12 @@
   }
   .container { max-width: 760px; margin: 0 auto; padding: 0 16px; }
 
-  /* HEADER */
   header {
     background: var(--white);
     padding: 32px 0 24px;
     border-bottom: 4px solid var(--primary);
   }
-  @media(max-width:480px) {
-    header { padding: 24px 0 20px; }
-  }
+  @media(max-width:480px) { header { padding: 24px 0 20px; } }
   .badge {
     display: inline-block;
     background: var(--primary);
@@ -54,15 +51,9 @@
     border-radius: 2px;
     margin-bottom: 16px;
   }
-  h1 {
-    font-size: clamp(24px, 5vw, 34px);
-    font-weight: 900;
-    line-height: 1.3;
-    margin-bottom: 10px;
-  }
+  h1 { font-size: clamp(24px, 5vw, 34px); font-weight: 900; line-height: 1.3; margin-bottom: 10px; }
   .subtitle { font-size: 14px; color: var(--gray-dark); }
 
-  /* SECTION */
   .section-label {
     font-size: 12px;
     font-weight: 700;
@@ -76,43 +67,14 @@
     margin-bottom: 20px;
   }
 
-  /* ========================
-     CURRENT STATE
-  ======================== */
-  .current-wrap {
-    background: var(--white);
-    padding: 32px 0;
-    margin-top: 16px;
-  }
+  /* CURRENT STATE */
+  .current-wrap { background: var(--white); padding: 32px 0; margin-top: 16px; }
   @media(max-width:480px) { .current-wrap { padding: 24px 0; } }
-  .current-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  .current-card {
-    background: var(--gray-light);
-    border-radius: 6px;
-    padding: 14px 10px;
-    text-align: center;
-  }
-  .current-card-num {
-    font-size: clamp(28px, 6vw, 38px);
-    font-weight: 900;
-    color: var(--primary);
-    line-height: 1.1;
-  }
-  .current-card-unit {
-    font-size: 13px;
-    color: var(--gray-dark);
-    margin-top: 2px;
-  }
-  .current-card-label {
-    font-size: 12px;
-    font-weight: 700;
-    margin-top: 6px;
-    line-height: 1.4;
-  }
+  .current-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .current-card { background: var(--gray-light); border-radius: 6px; padding: 14px 10px; text-align: center; }
+  .current-card-num { font-size: clamp(28px, 6vw, 38px); font-weight: 900; color: var(--primary); line-height: 1.1; }
+  .current-card-unit { font-size: 13px; color: var(--gray-dark); margin-top: 2px; }
+  .current-card-label { font-size: 12px; font-weight: 700; margin-top: 6px; line-height: 1.4; }
   .current-note {
     background: var(--primary-bg);
     border: 1px solid var(--primary-light);
@@ -124,23 +86,14 @@
   }
   .current-note strong { color: var(--primary); }
 
-  /* ========================
-     SCHEDULE ANALYSIS
-  ======================== */
-  .analysis-wrap {
-    background: var(--gray-light);
-    padding: 32px 0;
-  }
+  /* SCHEDULE ANALYSIS */
+  .analysis-wrap { background: var(--gray-light); padding: 32px 0; }
   @media(max-width:480px) { .analysis-wrap { padding: 24px 0; } }
-  .insight-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .insight-list { display: flex; flex-direction: column; gap: 12px; }
   .insight-item {
     background: var(--white);
     border-radius: 6px;
-    padding: 16px 16px;
+    padding: 16px;
     display: flex;
     gap: 14px;
     align-items: flex-start;
@@ -150,254 +103,19 @@
   .insight-item.caution { border-color: var(--yellow); }
   .insight-item.ok    { border-color: var(--green); }
   .insight-item.info  { border-color: var(--blue); }
-  .insight-icon {
-    font-size: 22px;
-    flex-shrink: 0;
-    line-height: 1;
-    margin-top: 2px;
-  }
+  .insight-icon { font-size: 22px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
   .insight-body { flex: 1; }
-  .insight-title {
-    font-size: 14px;
-    font-weight: 900;
-    margin-bottom: 4px;
-    line-height: 1.4;
-  }
-  .insight-detail {
-    font-size: 13px;
-    color: var(--gray-dark);
-    line-height: 1.7;
-  }
+  .insight-title { font-size: 14px; font-weight: 900; margin-bottom: 4px; line-height: 1.4; }
+  .insight-detail { font-size: 13px; color: var(--gray-dark); line-height: 1.7; }
   .insight-item.warn .insight-title  { color: var(--red); }
   .insight-item.caution .insight-title { color: var(--yellow); }
   .insight-item.ok .insight-title    { color: var(--green); }
   .insight-item.info .insight-title  { color: var(--blue); }
 
-  /* WEEKLY PATTERN */
-  .week-wrap {
-    background: var(--white);
-    padding: 40px 0;
-  }
-  .week-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    margin-bottom: 20px;
-  }
-  @media(max-width: 480px) {
-    .week-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-  .day-col { display: flex; flex-direction: column; gap: 4px; }
-  .day-header {
-    text-align: center;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 6px 4px;
-    border-radius: 4px;
-    background: var(--gray-light);
-  }
-  .day-header.off { color: var(--gray); }
-  .day-header.work { color: var(--text); }
-  .day-header.sat { color: var(--blue); }
-  .day-header.sun { color: var(--red); }
-  .day-block {
-    background: var(--gray-light);
-    border-radius: 4px;
-    padding: 6px 4px;
-    font-size: 10px;
-    text-align: center;
-    line-height: 1.4;
-    min-height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .day-block.empty { background: var(--white); border: 1px dashed var(--gray); color: var(--gray); }
-  .day-block.session { background: #FDF4EC; color: var(--primary); font-weight: 700; border: 1px solid var(--primary-light); }
-  .day-block.training { background: var(--blue-light); color: var(--blue); font-weight: 700; }
-  .day-block.mtg { background: #F0E8FF; color: #7B4FBF; font-weight: 700; }
-  .day-block.admin { background: var(--green-light); color: var(--green); font-weight: 700; }
-  .day-block.absent { background: #F5F5F4; color: var(--gray); font-style: italic; }
-  .day-block.suggest { background: var(--primary-bg); color: var(--primary); font-weight: 700; border: 1px dashed var(--primary); }
-  .time-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--gray-dark);
-    padding: 4px 0;
-    text-align: right;
-    padding-right: 4px;
-  }
-  .week-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-  }
-  .week-table th {
-    background: var(--gray-light);
-    padding: 8px 6px;
-    font-weight: 700;
-    font-size: 12px;
-    border: 1px solid var(--gray);
-    text-align: center;
-  }
-  .week-table th.sat { color: var(--blue); }
-  .week-table th.sun { color: var(--red); }
-  .week-table th.off { color: var(--gray); font-weight: 400; }
-  .week-table td {
-    padding: 7px 6px;
-    border: 1px solid var(--gray);
-    text-align: center;
-    vertical-align: top;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-  .week-table td.time {
-    font-weight: 700;
-    color: var(--gray-dark);
-    background: var(--gray-light);
-    white-space: nowrap;
-    font-size: 11px;
-  }
-  .cell-session { color: var(--primary); font-weight: 700; }
-  .cell-training { color: var(--blue); font-weight: 700; }
-  .cell-mtg { color: #7B4FBF; font-weight: 700; }
-  .cell-admin { color: var(--green); font-weight: 700; }
-  .cell-suggest {
-    color: var(--primary);
-    font-weight: 700;
-    background: var(--primary-bg);
-    border-radius: 3px;
-    padding: 2px 4px;
-    display: inline-block;
-    border: 1px dashed var(--primary-light);
-  }
-  .cell-empty { color: var(--gray); font-size: 10px; }
-  .legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 16px;
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-  }
-  .legend-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-
-  /* ========================
-     ACTION PLAN
-  ======================== */
-  .plan-wrap {
-    background: var(--text);
-    padding: 40px 0;
-  }
-  @media(max-width:480px) { .plan-wrap { padding: 28px 0; } }
-  .plan-wrap .section-label { color: var(--primary-light); }
-  .plan-wrap .section-title { color: var(--white); }
-  .phase-block {
-    margin-bottom: 32px;
-  }
-  .phase-head {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  .phase-num {
-    background: var(--primary);
-    color: var(--white);
-    font-size: 12px;
-    font-weight: 900;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .phase-period {
-    font-size: clamp(14px, 3.5vw, 16px);
-    font-weight: 900;
-    color: var(--primary-light);
-  }
-  .phase-items {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .plan-item {
-    background: rgba(255,255,255,0.07);
-    border-radius: 6px;
-    padding: 16px 16px;
-    border-left: 3px solid var(--primary);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .plan-pri {
-    font-size: 11px;
-    font-weight: 900;
-    color: var(--primary-light);
-    flex-shrink: 0;
-    width: 24px;
-    padding-top: 2px;
-  }
-  .plan-main { flex: 1; min-width: 0; }
-  .plan-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.5;
-    margin-bottom: 4px;
-  }
-  .plan-detail {
-    font-size: 12px;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.8;
-  }
-  .plan-when {
-    font-size: 11px;
-    font-weight: 700;
-    background: rgba(226,121,46,0.2);
-    color: var(--primary-light);
-    padding: 3px 10px;
-    border-radius: 12px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    align-self: flex-start;
-  }
-  @media(max-width:480px) {
-    .plan-when { margin-left: 34px; }
-  }
-  .phase-divider {
-    text-align: center;
-    color: var(--primary);
-    font-size: 18px;
-    margin: 4px 0 28px;
-  }
-
-  /* ========================
-     TIME USAGE GUIDE
-  ======================== */
-  .timeguide-wrap {
-    background: var(--white);
-    padding: 32px 0;
-  }
+  /* TIME USAGE GUIDE */
+  .timeguide-wrap { background: var(--white); padding: 32px 0; }
   @media(max-width:480px) { .timeguide-wrap { padding: 24px 0; } }
-  .timeguide-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
+  .timeguide-list { display: flex; flex-direction: column; }
   .timeguide-row {
     display: flex;
     gap: 16px;
@@ -422,57 +140,202 @@
     min-width: 80px;
     flex-shrink: 0;
   }
+  .tg-arrow { font-size: 10px; opacity: 0.7; margin: 2px 0; }
+  .tg-body { flex: 1; }
+  .tg-label { font-size: 14px; font-weight: 700; margin-bottom: 4px; line-height: 1.4; }
+  .tg-detail { font-size: 13px; color: var(--gray-dark); line-height: 1.7; }
+  .tg-tags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .tg-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 2px; }
+  .tg-tag.step { background: var(--primary-bg); color: var(--primary); }
+  .tg-tag.session { background: var(--green-light); color: var(--green); }
+  .tg-tag.admin { background: var(--blue-light); color: var(--blue); }
   @media(max-width:480px) {
     .timeguide-row { flex-direction: column; gap: 10px; }
     .tg-time { min-width: unset; width: fit-content; flex-direction: row; gap: 6px; padding: 6px 12px; font-size: 13px; }
     .tg-arrow { display: none; }
   }
-  .tg-arrow {
-    font-size: 10px;
-    opacity: 0.7;
-    margin: 2px 0;
-  }
-  .tg-body { flex: 1; }
-  .tg-label {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    line-height: 1.4;
-  }
-  .tg-detail {
-    font-size: 13px;
-    color: var(--gray-dark);
-    line-height: 1.7;
-  }
-  .tg-tags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 5px; }
-  .tg-tag {
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 2px;
-  }
-  .tg-tag.step { background: var(--primary-bg); color: var(--primary); }
-  .tg-tag.session { background: var(--green-light); color: var(--green); }
-  .tg-tag.admin { background: var(--blue-light); color: var(--blue); }
 
-  /* TABLE SCROLL WRAPPER */
-  .table-scroll {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 0 -4px;
-    padding: 0 4px;
+  /* TABLE */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .scroll-hint { display: none; font-size: 11px; color: var(--gray-dark); text-align: right; margin-bottom: 6px; }
+  @media(max-width:600px) { .scroll-hint { display: block; } }
+  .week-table { min-width: 480px; width: 100%; border-collapse: collapse; font-size: 12px; }
+  .week-table th { background: var(--gray-light); padding: 8px 6px; font-weight: 700; font-size: 12px; border: 1px solid var(--gray); text-align: center; }
+  .week-table th.sat { color: var(--blue); }
+  .week-table th.sun { color: var(--red); }
+  .week-table th.off { color: var(--gray); font-weight: 400; }
+  .week-table td { padding: 7px 6px; border: 1px solid var(--gray); text-align: center; vertical-align: top; font-size: 11px; line-height: 1.5; }
+  .week-table td.time { font-weight: 700; color: var(--gray-dark); background: var(--gray-light); white-space: nowrap; }
+  .cell-session { color: var(--primary); font-weight: 700; }
+  .cell-training { color: var(--blue); font-weight: 700; }
+  .cell-mtg { color: #7B4FBF; font-weight: 700; }
+  .cell-admin { color: var(--green); font-weight: 700; }
+  .cell-suggest { color: var(--primary); font-weight: 700; background: var(--primary-bg); border-radius: 3px; padding: 2px 4px; display: inline-block; border: 1px dashed var(--primary-light); }
+  .cell-empty { color: var(--gray); font-size: 10px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ========================
+     BOOKING PROMOTION TIMELINE
+  ======================== */
+  .booking-wrap {
+    background: var(--white);
+    padding: 32px 0;
+    margin-top: 16px;
   }
-  .scroll-hint {
-    display: none;
+  .booking-timeline {
+    display: flex;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .booking-phase {
+    flex: 1;
+    padding: 18px 16px;
+    position: relative;
+  }
+  .booking-phase.june-promo {
+    background: var(--primary);
+    color: var(--white);
+  }
+  .booking-phase.july-promo {
+    background: var(--blue);
+    color: var(--white);
+  }
+  .booking-phase-period {
     font-size: 11px;
-    color: var(--gray-dark);
-    text-align: right;
+    font-weight: 700;
+    opacity: 0.85;
+    letter-spacing: 0.08em;
     margin-bottom: 6px;
   }
-  @media(max-width:600px) { .scroll-hint { display: block; } }
-  .week-table { min-width: 480px; }
+  .booking-phase-title {
+    font-size: clamp(15px, 3.5vw, 18px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .booking-phase-detail {
+    font-size: 12px;
+    opacity: 0.85;
+    line-height: 1.6;
+  }
+  .booking-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    color: var(--gray-dark);
+    font-size: 16px;
+    font-weight: 900;
+    width: 28px;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .booking-today-marker {
+    background: var(--primary-bg);
+    border: 1.5px solid var(--primary-light);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .booking-today-dot {
+    width: 10px; height: 10px;
+    background: var(--primary);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  .booking-today-text { font-size: 13px; font-weight: 700; color: var(--primary); }
+  .booking-nau-list {
+    margin-top: 14px;
+    background: var(--gray-light);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .booking-nau-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+  }
+  .nau-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .nau-chip {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .nau-chip.priority { background: var(--red-light); color: #A03030; border: 1px solid #F0B0B0; }
+  .nau-chip.followup { background: var(--yellow-light); color: #8A5E00; border: 1px solid #F0D080; }
+  .nau-chip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .nau-chip.priority .nau-chip-dot { background: var(--red); }
+  .nau-chip.followup .nau-chip-dot { background: var(--yellow); }
 
-  /* FOOTER */
+  /* ACTION PLAN */
+  .plan-wrap { background: var(--text); padding: 40px 0; margin-top: 16px; }
+  @media(max-width:480px) { .plan-wrap { padding: 28px 0; } }
+  .plan-wrap .section-label { color: var(--primary-light); }
+  .plan-wrap .section-title { color: var(--white); }
+  .phase-block { margin-bottom: 32px; }
+  .phase-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .phase-num {
+    background: var(--primary);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 900;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .phase-period { font-size: clamp(14px, 3.5vw, 16px); font-weight: 900; color: var(--primary-light); }
+  .phase-items { display: flex; flex-direction: column; gap: 8px; }
+  .plan-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 6px;
+    padding: 16px;
+    border-left: 3px solid var(--primary);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .plan-item.booking-item { border-left-color: var(--green); }
+  .plan-pri { font-size: 11px; font-weight: 900; color: var(--primary-light); flex-shrink: 0; width: 24px; padding-top: 2px; }
+  .plan-item.booking-item .plan-pri { color: #7FCFAA; }
+  .plan-main { flex: 1; min-width: 0; }
+  .plan-title { font-size: 14px; font-weight: 700; color: var(--white); line-height: 1.5; margin-bottom: 4px; }
+  .plan-detail { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.8; }
+  .plan-when {
+    font-size: 11px; font-weight: 700;
+    background: rgba(226,121,46,0.2);
+    color: var(--primary-light);
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+  .plan-item.booking-item .plan-when {
+    background: rgba(61,170,110,0.2);
+    color: #7FCFAA;
+  }
+  @media(max-width:480px) { .plan-when { margin-left: 34px; } }
+  .phase-divider { text-align: center; color: var(--primary); font-size: 18px; margin: 4px 0 28px; }
+
   footer {
     background: var(--white);
     padding: 28px 0;
@@ -484,7 +347,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="container">
     <div class="badge">2026年6月 現在地｜中富さん</div>
@@ -519,6 +381,44 @@
       <strong>次のステージ：リーダートレーナー</strong>へ向けて進行中。<br>
       条件は <strong>G60件実施</strong> と <strong>プランニングセッション実施できること</strong>。<br>
       今は「セッション数を増やす」「研修ステップを確実に進める」この2軸を同時に動かしていく時期。
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING PROMOTION TIMELINE -->
+<section class="booking-wrap">
+  <div class="container">
+    <div class="section-label">BOOKING PROMOTION / 予約促しスケジュール</div>
+    <h2 class="section-title">6月の予約促し切り替えライン</h2>
+
+    <div class="booking-timeline">
+      <div class="booking-phase june-promo">
+        <div class="booking-phase-period">現在 〜 6/14</div>
+        <div class="booking-phase-title">6月の予約を促す</div>
+        <div class="booking-phase-detail">NAU顧客に6月中の<br>予約を入れてもらう</div>
+      </div>
+      <div class="booking-arrow">→</div>
+      <div class="booking-phase july-promo">
+        <div class="booking-phase-period">6/15 〜 6/末日</div>
+        <div class="booking-phase-title">7月の予約を促す</div>
+        <div class="booking-phase-detail">全リード顧客に<br>7月予約を入れてもらう</div>
+      </div>
+    </div>
+
+    <div class="booking-today-marker">
+      <div class="booking-today-dot"></div>
+      <div class="booking-today-text">今は6/14以前 → 今すぐNAU顧客に声がけ！</div>
+    </div>
+
+    <div class="booking-nau-list">
+      <div class="booking-nau-title">6月予約促しの対象（NAU 5名）</div>
+      <div class="nau-chips">
+        <span class="nau-chip priority"><span class="nau-chip-dot"></span>石橋 誓朗</span>
+        <span class="nau-chip priority"><span class="nau-chip-dot"></span>佐藤 みなみ</span>
+        <span class="nau-chip priority"><span class="nau-chip-dot"></span>吉田 明依</span>
+        <span class="nau-chip followup"><span class="nau-chip-dot"></span>牧野 元音 <small style="font-size:10px; margin-left:2px;">05/31</small></span>
+        <span class="nau-chip followup"><span class="nau-chip-dot"></span>紙谷 紗希 <small style="font-size:10px; margin-left:2px;">05/31</small></span>
+      </div>
     </div>
   </div>
 </section>
@@ -568,9 +468,7 @@
     <h2 class="section-title">1日の時間の設計（勤務日）</h2>
     <div class="timeguide-list">
       <div class="timeguide-row">
-        <div class="tg-time">
-          14:00<div class="tg-arrow">↓</div>15:30
-        </div>
+        <div class="tg-time">14:00<div class="tg-arrow">↓</div>15:30</div>
         <div class="tg-body">
           <div class="tg-label">出勤後すぐ：MTG＋研修をまとめて入れる</div>
           <div class="tg-detail">MTGの直後にそのまま研修を続ける設計にする。ステップ①-1の1on1、ステップ①-2のマニュアル読み合わせはここに設定するのが◯。「MTG（30分）→ 研修（60分）」で完結。</div>
@@ -581,9 +479,7 @@
         </div>
       </div>
       <div class="timeguide-row">
-        <div class="tg-time">
-          15:30<div class="tg-arrow">↓</div>17:30
-        </div>
+        <div class="tg-time">15:30<div class="tg-arrow">↓</div>17:30</div>
         <div class="tg-body">
           <div class="tg-label">MTG後の隙間：リード顧客管理・N1Cycle作成</div>
           <div class="tg-detail">MTGやLINE/CS対応が終わった後の時間。6名のリード顧客について、N1Cycleの作成や来店状況の確認をここで進める。1名ずつ60分で取り組む。</div>
@@ -594,9 +490,7 @@
         </div>
       </div>
       <div class="timeguide-row">
-        <div class="tg-time">
-          18:00<div class="tg-arrow">↓</div>20:00
-        </div>
+        <div class="tg-time">18:00<div class="tg-arrow">↓</div>20:00</div>
         <div class="tg-body">
           <div class="tg-label">セッション枠：段階的に2/3・3/3へ移行</div>
           <div class="tg-detail">現在の1/3枠を活かしながら、週2〜3コマを2/3・3/3に変えていく。まず「この枠は2名以上」と決めたコマを設計して、予約調整と合わせて進める。G60件達成への最短ルート。</div>
@@ -606,8 +500,6 @@
         </div>
       </div>
     </div>
-
-    <!-- WEEKLY MODEL -->
     <div style="margin-top: 32px;">
       <div class="section-label">IDEAL WEEK MODEL / 理想の1週間イメージ</div>
       <div class="table-scroll" style="margin-top: 12px;">
@@ -616,33 +508,29 @@
           <thead>
             <tr>
               <th style="width:72px;">時間帯</th>
-              <th>月</th>
-              <th>火</th>
-              <th class="off">水<br><span style="font-size:10px; font-weight:400;">休み</span></th>
+              <th>月</th><th>火</th>
+              <th class="off">水<br><span style="font-size:10px;font-weight:400;">休み</span></th>
               <th>木</th>
-              <th class="off">金<br><span style="font-size:10px; font-weight:400;">休み</span></th>
-              <th class="sat">土</th>
-              <th class="sun">日</th>
+              <th class="off">金<br><span style="font-size:10px;font-weight:400;">休み</span></th>
+              <th class="sat">土</th><th class="sun">日</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="time">〜14:00</td>
+              <td><span class="cell-empty">出勤前</span></td><td><span class="cell-empty">出勤前</span></td>
+              <td style="background:var(--gray-light);color:var(--gray);">—</td>
               <td><span class="cell-empty">出勤前</span></td>
-              <td><span class="cell-empty">出勤前</span></td>
-              <td style="background:var(--gray-light); color:var(--gray);">—</td>
-              <td><span class="cell-empty">出勤前</span></td>
-              <td style="background:var(--gray-light); color:var(--gray);">—</td>
-              <td><span class="cell-empty">出勤前</span></td>
-              <td><span class="cell-empty">出勤前</span></td>
+              <td style="background:var(--gray-light);color:var(--gray);">—</td>
+              <td><span class="cell-empty">出勤前</span></td><td><span class="cell-empty">出勤前</span></td>
             </tr>
             <tr>
               <td class="time">14:00〜<br>15:30</td>
               <td><span class="cell-suggest">研修<br>（ステップ①）</span></td>
               <td><span class="cell-mtg">MTG<br>→研修</span></td>
-              <td style="background:var(--gray-light); color:var(--gray);">—</td>
+              <td style="background:var(--gray-light);color:var(--gray);">—</td>
               <td><span class="cell-mtg">MTG</span></td>
-              <td style="background:var(--gray-light); color:var(--gray);">—</td>
+              <td style="background:var(--gray-light);color:var(--gray);">—</td>
               <td><span class="cell-training">研修・<br>振り返り</span></td>
               <td><span class="cell-empty">フリー</span></td>
             </tr>
@@ -650,9 +538,9 @@
               <td class="time">15:30〜<br>18:00</td>
               <td><span class="cell-admin">N1Cycle<br>作成</span></td>
               <td><span class="cell-admin">LINE/CS<br>対応</span></td>
-              <td style="background:var(--gray-light); color:var(--gray);">—</td>
+              <td style="background:var(--gray-light);color:var(--gray);">—</td>
               <td><span class="cell-suggest">N1Cycle<br>・振り返り</span></td>
-              <td style="background:var(--gray-light); color:var(--gray);">—</td>
+              <td style="background:var(--gray-light);color:var(--gray);">—</td>
               <td><span class="cell-session">セッション<br>（2/3〜3/3）</span></td>
               <td><span class="cell-session">セッション<br>（2/3〜3/3）</span></td>
             </tr>
@@ -660,9 +548,9 @@
               <td class="time">18:00〜<br>20:00</td>
               <td><span class="cell-session">セッション<br>（2/3へ）</span></td>
               <td><span class="cell-session">セッション<br>（1/3〜2/3）</span></td>
-              <td style="background:var(--gray-light); color:var(--gray);">—</td>
+              <td style="background:var(--gray-light);color:var(--gray);">—</td>
               <td><span class="cell-session">セッション<br>（2/3〜3/3）</span></td>
-              <td style="background:var(--gray-light); color:var(--gray);">—</td>
+              <td style="background:var(--gray-light);color:var(--gray);">—</td>
               <td><span class="cell-session">セッション<br>（2/3〜3/3）</span></td>
               <td><span class="cell-session">セッション<br>（2/3〜3/3）</span></td>
             </tr>
@@ -670,26 +558,11 @@
         </table>
       </div>
       <div class="legend">
-        <div class="legend-item">
-          <div class="legend-dot" style="background:var(--primary-bg); border:1px dashed var(--primary-light);"></div>
-          <span>提案（新たに入れたい）</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background:var(--primary-bg); border:1px solid var(--primary-light);"></div>
-          <span>セッション</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background:#F0E8FF;"></div>
-          <span>MTG</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background:var(--blue-light);"></div>
-          <span>研修</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-dot" style="background:var(--green-light);"></div>
-          <span>管理業務</span>
-        </div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--primary-bg);border:1px dashed var(--primary-light);"></div><span>提案</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--primary-bg);border:1px solid var(--primary-light);"></div><span>セッション</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#F0E8FF;"></div><span>MTG</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue-light);"></div><span>研修</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green-light);"></div><span>管理業務</span></div>
       </div>
     </div>
   </div>
@@ -708,6 +581,22 @@
         <div class="phase-period">6月後半（〜6/30）今すぐ動く</div>
       </div>
       <div class="phase-items">
+        <div class="plan-item booking-item">
+          <div class="plan-pri">★</div>
+          <div class="plan-main">
+            <div class="plan-title">〜6/14：NAU 5名に6月の予約を入れてもらう</div>
+            <div class="plan-detail">石橋・佐藤・吉田（優先）と牧野・紙谷に声がけ。6/14までに6月予約が入らなければ、6/15以降は7月予約の促しに切り替える。</div>
+          </div>
+          <div class="plan-when">〜6/14</div>
+        </div>
+        <div class="plan-item booking-item">
+          <div class="plan-pri">★</div>
+          <div class="plan-main">
+            <div class="plan-title">6/15〜末日：全リード顧客に7月の予約を促す</div>
+            <div class="plan-detail">AU 16名も含めた全21名に7月予約を確認・入れてもらう。セッション終わりや連絡のタイミングで自然に声がけする。</div>
+          </div>
+          <div class="plan-when">6/15〜</div>
+        </div>
         <div class="plan-item">
           <div class="plan-pri">P1</div>
           <div class="plan-main">
