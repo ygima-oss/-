@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中富さん リード顧客まとめ｜THE PERSON 碑文谷</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+    --green: #3DAA6E;
+    --green-light: #E8F7F0;
+    --red: #D94F4F;
+    --red-light: #FDEAEA;
+    --yellow: #D4920A;
+    --yellow-light: #FFF8E6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+  header {
+    background: var(--white);
+    padding: 28px 0 24px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: clamp(22px, 5vw, 30px); font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: var(--gray-dark); }
+
+  .sec-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+  .sec-title {
+    font-size: clamp(16px, 4vw, 19px);
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  .may-wrap {
+    background: var(--text);
+    padding: 32px 0;
+    margin-top: 16px;
+  }
+  .may-wrap .sec-label { color: var(--primary-light); }
+  .may-wrap .sec-title { color: var(--white); }
+
+  .perfect-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, #D5651A 100%);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .perfect-banner::after {
+    content: '';
+    position: absolute;
+    right: -30px; bottom: -30px;
+    width: 140px; height: 140px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .perfect-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .perfect-num {
+    font-size: clamp(52px, 14vw, 72px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .perfect-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 700;
+    margin-top: 6px;
+  }
+  .perfect-detail {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 4px;
+  }
+
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .plan-card {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .plan-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .plan-fraction {
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .plan-fraction span {
+    font-size: clamp(13px, 3vw, 16px);
+    color: rgba(255,255,255,0.6);
+  }
+  .plan-bar-wrap {
+    background: rgba(255,255,255,0.1);
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .plan-bar {
+    background: var(--primary-light);
+    height: 100%;
+    border-radius: 2px;
+  }
+  .plan-pct {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+
+  .june-wrap {
+    background: var(--white);
+    padding: 32px 0;
+    margin-top: 16px;
+  }
+
+  .overview-card {
+    background: var(--gray-light);
+    border-radius: 10px;
+    padding: 20px 18px;
+    margin-bottom: 24px;
+  }
+  .overview-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .overview-total { font-size: 13px; font-weight: 700; }
+  .overview-total em {
+    font-size: clamp(28px, 7vw, 36px);
+    font-weight: 900;
+    color: var(--primary);
+    font-style: normal;
+    line-height: 1;
+    margin-right: 4px;
+  }
+  .overview-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .chip.au { background: var(--green-light); color: var(--green); }
+  .chip.nau { background: var(--red-light); color: var(--red); }
+  .overview-bar-wrap {
+    background: var(--red-light);
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .overview-bar-au {
+    background: var(--green);
+    height: 100%;
+    border-radius: 6px 0 0 6px;
+    width: 0%;
+    transition: width 1s ease;
+  }
+  .overview-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .legend-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  .group-block { margin-bottom: 20px; }
+  .group-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .group-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 900;
+    flex-shrink: 0;
+    color: var(--white);
+  }
+  .group-icon.au { background: var(--green); }
+  .group-icon.nau-warn { background: var(--red); }
+  .group-icon.nau-ok { background: var(--yellow); }
+  .group-title { font-size: 14px; font-weight: 900; line-height: 1.3; }
+  .group-count { font-size: 11px; color: var(--gray-dark); margin-top: 1px; }
+
+  .name-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+  .name-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    line-height: 1.2;
+  }
+  .name-tag.au { background: var(--green-light); color: #1E7A4A; border: 1px solid #B8E8CE; }
+  .name-tag.nau-plan { background: var(--yellow-light); color: #8A5E00; border: 1px solid #F0D080; }
+  .name-tag.nau-warn { background: var(--red-light); color: #A03030; border: 1px solid #F0B0B0; }
+  .name-tag .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .name-tag.au .dot { background: var(--green); }
+  .name-tag.nau-plan .dot { background: var(--yellow); }
+  .name-tag.nau-warn .dot { background: var(--red); }
+  .date-badge {
+    font-size: 10px;
+    font-weight: 700;
+    background: var(--yellow);
+    color: var(--white);
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 2px;
+  }
+
+  .priority-box {
+    background: var(--red-light);
+    border: 1.5px solid #F0B0B0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 6px;
+  }
+  .priority-box-title {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .priority-box-title::before { content: '⚡ '; }
+
+  .sec-divider { height: 1px; background: var(--gray); margin: 24px 0; opacity: 0.4; }
+
+  footer {
+    background: var(--white);
+    padding: 24px 0;
+    text-align: center;
+    border-top: 1px solid var(--gray);
+    margin-top: 16px;
+  }
+  footer p { font-size: 12px; color: var(--gray-dark); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">中富さん｜リード顧客まとめ</div>
+    <h1>リード顧客 状況レポート</h1>
+    <p class="subtitle">THE PERSON 碑文谷｜2026年6月時点</p>
+  </div>
+</header>
+
+<section class="may-wrap">
+  <div class="container">
+    <div class="sec-label">MAY RESULT / 5月の結果</div>
+    <div class="sec-title" style="color:var(--white);">5月 全員予約あり・完全達成！</div>
+    <div class="perfect-banner">
+      <div class="perfect-label">5月 AU RATE</div>
+      <div class="perfect-num">100%</div>
+      <div class="perfect-sub">リード顧客21名 全員 予約あり</div>
+      <div class="perfect-detail">NAU 0名｜AU 21名</div>
+    </div>
+    <div class="plan-grid">
+      <div class="plan-card">
+        <div class="plan-name">ライト</div>
+        <div class="plan-fraction">6<span>/6名</span></div>
+        <div class="plan-bar-wrap"><div class="plan-bar" style="width:100%;"></div></div>
+        <div class="plan-pct">100%</div>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">レギュラー</div>
+        <div class="plan-fraction">13<span>/13名</span></div>
+        <div class="plan-bar-wrap"><div class="plan-bar" style="width:100%;"></div></div>
+        <div class="plan-pct">100%</div>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">ハード</div>
+        <div class="plan-fraction">2<span>/2名</span></div>
+        <div class="plan-bar-wrap"><div class="plan-bar" style="width:100%;"></div></div>
+        <div class="plan-pct">100%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="june-wrap">
+  <div class="container">
+    <div class="sec-label">JUNE STATUS / 6月の状況</div>
+    <div class="sec-title">6月 リード顧客 21名の状況</div>
+
+    <div class="overview-card">
+      <div class="overview-top">
+        <div class="overview-total">リード顧客合計 <em>21</em>名</div>
+        <div class="overview-chips">
+          <span class="chip au">AU 16名</span>
+          <span class="chip nau">NAU 5名</span>
+        </div>
+      </div>
+      <div class="overview-bar-wrap">
+        <div class="overview-bar-au" id="auBar"></div>
+      </div>
+      <div class="overview-legend">
+        <span><span class="legend-dot" style="background:var(--green);"></span>予約あり（AU）76.2%</span>
+        <span><span class="legend-dot" style="background:var(--red);"></span>予約なし（NAU）23.8%</span>
+      </div>
+    </div>
+
+    <div class="group-block">
+      <div class="group-head">
+        <div class="group-icon au">16</div>
+        <div>
+          <div class="group-title">6月 予約あり（AU）</div>
+          <div class="group-count">現状維持・継続フォロー</div>
+        </div>
+      </div>
+      <div class="name-wrap">
+        <span class="name-tag au"><span class="dot"></span>吉田 萌香</span>
+        <span class="name-tag au"><span class="dot"></span>関 絵梨菜</span>
+        <span class="name-tag au"><span class="dot"></span>石黒 眞史</span>
+        <span class="name-tag au"><span class="dot"></span>兼松 雄治</span>
+        <span class="name-tag au"><span class="dot"></span>土谷 智子</span>
+        <span class="name-tag au"><span class="dot"></span>ブエ 圭南</span>
+        <span class="name-tag au"><span class="dot"></span>早野 健太</span>
+        <span class="name-tag au"><span class="dot"></span>草間 茂雄</span>
+        <span class="name-tag au"><span class="dot"></span>岩井 奈緒美</span>
+        <span class="name-tag au"><span class="dot"></span>平松 良太</span>
+        <span class="name-tag au"><span class="dot"></span>出口 友子</span>
+        <span class="name-tag au"><span class="dot"></span>荒牧 俊一</span>
+        <span class="name-tag au"><span class="dot"></span>吉田 誉子</span>
+        <span class="name-tag au"><span class="dot"></span>小林 円</span>
+        <span class="name-tag au"><span class="dot"></span>小林 徹也</span>
+        <span class="name-tag au"><span class="dot"></span>鈴木 賢志</span>
+      </div>
+    </div>
+
+    <div class="sec-divider"></div>
+
+    <div class="group-block">
+      <div class="group-head">
+        <div class="group-icon nau-ok">2</div>
+        <div>
+          <div class="group-title">6月 予約なし（NAU）― 5/31 予約あり</div>
+          <div class="group-count">6月中に予約入れるよう声がけを</div>
+        </div>
+      </div>
+      <div class="name-wrap">
+        <span class="name-tag nau-plan"><span class="dot"></span>牧野 元音<span class="date-badge">05/31</span></span>
+        <span class="name-tag nau-plan"><span class="dot"></span>紙谷 紗希<span class="date-badge">05/31</span></span>
+      </div>
+    </div>
+
+    <div class="group-block">
+      <div class="group-head">
+        <div class="group-icon nau-warn">3</div>
+        <div>
+          <div class="group-title">6月 予約なし（NAU）― 優先アプローチ</div>
+          <div class="group-count">5月も予約なし。早めの連絡が必要</div>
+        </div>
+      </div>
+      <div class="priority-box">
+        <div class="priority-box-title">優先度 高：今すぐアプローチ</div>
+        <div class="name-wrap">
+          <span class="name-tag nau-warn"><span class="dot"></span>石橋 誓朗</span>
+          <span class="name-tag nau-warn"><span class="dot"></span>佐藤 みなみ</span>
+          <span class="name-tag nau-warn"><span class="dot"></span>吉田 明依</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>THE PERSON 碑文谷｜中富さん リード顧客まとめ / 作成：儀間</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const bar = document.getElementById('auBar');
+      if (bar) bar.style.width = '76.2%';
+    }, 300);
+  });
+</script>
+
+</body>
+</html>
