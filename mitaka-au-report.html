@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三鷹店 月初AU率 改善｜現状まとめ</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2933; --sub:#6b7785;
+    --line:#e4e8ee; --accent:#2563eb; --accent-bg:#eff4ff;
+    --green:#16a34a; --green-bg:#e9f7ef;
+    --yellow:#d97706; --yellow-bg:#fdf3e3;
+    --red:#dc2626; --red-bg:#fdeced;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:32px 20px 80px;}
+  header.page{
+    background:linear-gradient(135deg,#1e3a8a,#2563eb); color:#fff;
+    border-radius:16px; padding:30px 32px; margin-bottom:28px;
+    box-shadow:0 6px 24px rgba(37,99,235,.25);
+  }
+  header.page h1{margin:0 0 6px; font-size:26px; letter-spacing:.02em;}
+  header.page p{margin:0; opacity:.9; font-size:14px;}
+  .meta{margin-top:14px; font-size:12px; opacity:.8;}
+
+  section{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:24px 26px; margin-bottom:22px; box-shadow:0 1px 3px rgba(0,0,0,.03);
+  }
+  h2{
+    font-size:19px; margin:0 0 16px; padding-left:12px;
+    border-left:5px solid var(--accent); line-height:1.3;
+  }
+  h3{font-size:15px; margin:22px 0 10px; color:var(--ink);}
+  p.lead{color:var(--sub); margin-top:0;}
+
+  /* KPI cards */
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .kpi{
+    border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center;
+    background:#fcfdff;
+  }
+  .kpi .label{font-size:13px; color:var(--sub);}
+  .kpi .big{font-size:30px; font-weight:700; margin:6px 0 2px;}
+  .kpi .sub{font-size:12px; color:var(--sub);}
+  .kpi.good .big{color:var(--green);}
+  .kpi.warn .big{color:var(--red);}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; font-size:14px; margin-top:6px;}
+  th,td{padding:10px 12px; text-align:left; border-bottom:1px solid var(--line);}
+  th{background:#f3f6fb; font-weight:600; color:#3b4654; font-size:13px;}
+  td.num,th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  tr.total td{font-weight:700; background:#f8fafc;}
+  .bar{height:8px; border-radius:5px; background:var(--accent); display:inline-block; vertical-align:middle;}
+  .barwrap{background:#eef1f5; border-radius:5px; width:120px; display:inline-block; vertical-align:middle; overflow:hidden;}
+
+  /* badges */
+  .badge{display:inline-block; font-size:12px; font-weight:600; padding:2px 10px; border-radius:999px;}
+  .b-green{background:var(--green-bg); color:var(--green);}
+  .b-yellow{background:var(--yellow-bg); color:var(--yellow);}
+  .b-red{background:var(--red-bg); color:var(--red);}
+  .b-blue{background:var(--accent-bg); color:var(--accent);}
+
+  /* member chips */
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .chip{
+    background:#f3f6fb; border:1px solid var(--line); border-radius:8px;
+    padding:5px 10px; font-size:13px;
+  }
+  .chip .m{color:var(--sub); font-size:11px; margin-left:4px;}
+
+  .seg{border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:14px;}
+  .seg .head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;}
+  .seg .head .t{font-weight:700; font-size:15px;}
+  .seg .note{font-size:13px; color:var(--sub); margin:4px 0 0;}
+
+  /* matrix */
+  .matrix{width:100%; border-collapse:collapse; margin-top:8px; font-size:13px; table-layout:fixed;}
+  .matrix th,.matrix td{border:1px solid var(--line); padding:12px; vertical-align:top;}
+  .matrix th{background:#f3f6fb; text-align:center;}
+  .cell-g{background:var(--green-bg);}
+  .cell-y{background:var(--yellow-bg);}
+  .cell-r{background:var(--red-bg);}
+  .matrix .state{font-weight:700; display:block; margin-bottom:2px;}
+
+  /* action list */
+  ol.actions{counter-reset:step; list-style:none; padding:0; margin:0;}
+  ol.actions li{
+    position:relative; padding:14px 16px 14px 56px; margin-bottom:12px;
+    border:1px solid var(--line); border-radius:12px; background:#fcfdff;
+  }
+  ol.actions li::before{
+    counter-increment:step; content:counter(step);
+    position:absolute; left:14px; top:14px; width:30px; height:30px;
+    background:var(--accent); color:#fff; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+  }
+  ol.actions .at{font-weight:700; display:block; margin-bottom:2px;}
+  ol.actions .ad{font-size:13px; color:var(--sub);}
+
+  .flow{
+    background:var(--accent-bg); border:1px dashed #b9ccf5; border-radius:12px;
+    padding:16px 18px; font-size:14px; color:#1e3a8a; line-height:2;
+  }
+  .flow b{color:var(--accent);}
+  .callout{
+    border-left:4px solid var(--yellow); background:var(--yellow-bg);
+    padding:10px 14px; border-radius:0 8px 8px 0; font-size:13px; margin-top:12px;
+  }
+  footer{text-align:center; color:var(--sub); font-size:12px; margin-top:30px;}
+  @media(max-width:680px){
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .matrix{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page">
+    <h1>三鷹店｜月初AU率 改善 — 現状まとめ</h1>
+    <p>月初に予約が入っている状態をどう作るか。NAU 26名の構造と打ち手の整理。</p>
+    <div class="meta">作成日：2026-06-01 ／ 対象：サブスク会員 約110名</div>
+  </header>
+
+  <!-- 全体サマリー -->
+  <section>
+    <h2>1. 全体サマリー</h2>
+    <div class="kpis">
+      <div class="kpi good">
+        <div class="label">AU（稼働）</div>
+        <div class="big">85</div>
+        <div class="sub">77.27%</div>
+      </div>
+      <div class="kpi warn">
+        <div class="label">NAU（非稼働）</div>
+        <div class="big">26</div>
+        <div class="sub">23.64%</div>
+      </div>
+      <div class="kpi">
+        <div class="label">会員総数</div>
+        <div class="big">110</div>
+        <div class="sub">ライト/レギュラー/ハード</div>
+      </div>
+      <div class="kpi">
+        <div class="label">改善ターゲット</div>
+        <div class="big">26</div>
+        <div class="sub">NAU全員が伸びしろ</div>
+      </div>
+    </div>
+    <div class="flow" style="margin-top:18px;">
+      <b>月末セッションでクロージング（次月予約を取り切る）</b><br>
+      → 月初に予約が入っている → <b>月初AUが上がる</b> → 月末AUも上がる
+      → 継続率が上がる<br>
+      <span style="font-size:13px; opacity:.85;">※ 2〜3月の好調期（顧客106名）はこの循環が回っていた。</span>
+    </div>
+  </section>
+
+  <!-- プラン別 -->
+  <section>
+    <h2>2. プラン別の内訳</h2>
+    <p class="lead">伸びしろの本体は <b>ライト14名＋レギュラー12名＝26名</b>。特に<b>ライト層がボトルネック</b>（NAU率はレギュラーの約2倍）。ハードは満点で対応不要。</p>
+    <table>
+      <thead>
+        <tr>
+          <th>プラン</th>
+          <th class="num">総数</th>
+          <th class="num">AU</th>
+          <th class="num">NAU</th>
+          <th class="num">NAU率</th>
+          <th>稼働状況</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ライト <span class="badge b-red">要対策</span></td>
+          <td class="num">38</td>
+          <td class="num">25</td>
+          <td class="num">14</td>
+          <td class="num">36.84%</td>
+          <td><span class="barwrap"><span class="bar" style="width:65%;"></span></span></td>
+        </tr>
+        <tr>
+          <td>レギュラー</td>
+          <td class="num">63</td>
+          <td class="num">51</td>
+          <td class="num">12</td>
+          <td class="num">19.05%</td>
+          <td><span class="barwrap"><span class="bar" style="width:81%;"></span></span></td>
+        </tr>
+        <tr>
+          <td>ハード <span class="badge b-green">満点</span></td>
+          <td class="num">9</td>
+          <td class="num">9</td>
+          <td class="num">0</td>
+          <td class="num">0.00%</td>
+          <td><span class="barwrap"><span class="bar" style="width:100%; background:var(--green);"></span></span></td>
+        </tr>
+        <tr class="total">
+          <td>合計</td>
+          <td class="num">110</td>
+          <td class="num">85</td>
+          <td class="num">26</td>
+          <td class="num">23.64%</td>
+          <td><span class="barwrap"><span class="bar" style="width:77%;"></span></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- NAU/AUの特徴 -->
+  <section>
+    <h2>3. AU / NAU の特徴</h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div class="seg" style="margin:0;">
+        <div class="head"><span class="badge b-green">AU の特徴</span></div>
+        <ul style="margin:8px 0 0; padding-left:18px;">
+          <li>15日から予約が取れることを知っている</li>
+          <li>月初にまとめて複数枠を押さえている</li>
+          <li>運動が習慣化できている</li>
+        </ul>
+      </div>
+      <div class="seg" style="margin:0;">
+        <div class="head"><span class="badge b-red">NAU の特徴</span></div>
+        <ul style="margin:8px 0 0; padding-left:18px;">
+          <li>予定が流動的で、先の予定がわからない</li>
+          <li>15日に予約が開くことを知らない場合がある</li>
+          <li>3週目だけ予約＝<b>黄色信号</b>（翌月NAU化の予兆）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <b>現場の予約取得しやすさ：</b>15〜18日は取りやすい／25〜27日は取りづらく、運動が習慣化できていない人ほど後ろにずれる。
+    </div>
+  </section>
+
+  <!-- NAU 26名 セグメント -->
+  <section>
+    <h2>4. NAU 26名 ＝ 利用期間で2分割</h2>
+    <p class="lead">「連絡すれば取る人」と「関係性構築が要る人」は打ち手が根本的に異なる。利用月数で切り分ける。</p>
+
+    <!-- ベテラン -->
+    <div class="seg">
+      <div class="head">
+        <span class="badge b-blue">① ベテランNAU</span>
+        <span class="t">利用 10〜17ヶ月 ／ 8名</span>
+        <span class="badge b-green">即AU化・最優先</span>
+      </div>
+      <p class="note">習慣が切れたのではなく「今月たまたま入れ忘れ」。取り方も15日ルールも熟知。<b>1本連絡すればほぼ100%戻る。</b>放置＝離脱要因になるため、今週中に触る。</p>
+      <div class="chips">
+        <span class="chip">中島のりゆき<span class="m">17ヶ月</span></span>
+        <span class="chip">秋沢京子<span class="m">11ヶ月</span></span>
+        <span class="chip">森田悠佑<span class="m">11ヶ月</span></span>
+        <span class="chip">田村貴義<span class="m">11ヶ月</span></span>
+        <span class="chip">加藤愛唯<span class="m">11ヶ月</span></span>
+        <span class="chip">石丸諒<span class="m">10ヶ月</span></span>
+        <span class="chip">松原勝哉<span class="m">10ヶ月</span></span>
+        <span class="chip">溝口晃<span class="m">10ヶ月</span></span>
+      </div>
+    </div>
+
+    <!-- 定着途上 -->
+    <div class="seg">
+      <div class="head">
+        <span class="badge b-yellow">②-A 定着途上NAU</span>
+        <span class="t">利用 4〜7ヶ月 ／ 11名</span>
+        <span class="badge b-yellow">関係性構築</span>
+      </div>
+      <p class="note">習慣が固まりきっていない。下記マトリクスで🟢🟡🔴に色分けし、🔴を月末クロージングの優先対象に。</p>
+      <div class="chips">
+        <span class="chip">山口潤<span class="m">7ヶ月</span></span>
+        <span class="chip">関口博之<span class="m">6ヶ月</span></span>
+        <span class="chip">今野渉平<span class="m">6ヶ月</span></span>
+        <span class="chip">佐藤優姫<span class="m">6ヶ月</span></span>
+        <span class="chip">河井一<span class="m">5ヶ月</span></span>
+        <span class="chip">瀬島綾日<span class="m">5ヶ月</span></span>
+        <span class="chip">石井湧介<span class="m">5ヶ月</span></span>
+        <span class="chip">園田哲郎<span class="m">4ヶ月</span></span>
+        <span class="chip">真坂啓介<span class="m">4ヶ月</span></span>
+        <span class="chip">奥田真一朗<span class="m">4ヶ月</span></span>
+        <span class="chip">相笠隼人<span class="m">4ヶ月</span></span>
+      </div>
+    </div>
+
+    <!-- オンボーディング -->
+    <div class="seg">
+      <div class="head">
+        <span class="badge b-red">②-B オンボーディングNAU</span>
+        <span class="t">利用 1〜3ヶ月 ／ 6名</span>
+        <span class="badge b-red">離脱リスク最大</span>
+      </div>
+      <p class="note">最初の数ヶ月で習慣が決まる最重要期。トレーナーが付いて、月末セッションでその場で<b>まとめ予約＝月の「型」</b>を作る。</p>
+      <div class="chips">
+        <span class="chip">工藤暖士<span class="m">3ヶ月</span></span>
+        <span class="chip">相笠清夏<span class="m">2ヶ月</span></span>
+        <span class="chip">大塚理恵<span class="m">2ヶ月</span></span>
+        <span class="chip">喜田美奈<span class="m">1ヶ月</span></span>
+        <span class="chip">大本玲子<span class="m">1ヶ月</span></span>
+        <span class="chip">飯盛秀一<span class="m">1ヶ月</span></span>
+      </div>
+      <div class="callout">
+        <b>相笠隼人(4ヶ月)・相笠清夏(2ヶ月)</b>はご家族/ペアの可能性。<b>2人セットで予約取得</b>させると相互に習慣化しやすい。
+      </div>
+    </div>
+  </section>
+
+  <!-- 診断マトリクス -->
+  <section>
+    <h2>5. ②層の診断マトリクス（黄色信号の物差し）</h2>
+    <p class="lead">「まとめて予約しているか」×「月初から予約しているか」の2軸で17名を色分けし、手のかけ方を決める。</p>
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th style="width:18%;"></th>
+          <th>月初に予約（1〜2週）</th>
+          <th>3週目以降 or なし</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>まとめ予約<br>（月に複数枠）</th>
+          <td class="cell-g"><span class="state">🟢 定着済み</span>触らなくてOK</td>
+          <td class="cell-y"><span class="state">🟡 timingのみ前倒し</span>月初に動かす声かけ</td>
+        </tr>
+        <tr>
+          <th>都度予約<br>（1枠ずつ）</th>
+          <td class="cell-y"><span class="state">🟡 まとめ化を促す</span>月の型を作らせる</td>
+          <td class="cell-r"><span class="state">🔴 最優先介入</span>離脱予備軍・翌月NAU化</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <b>ポイント：</b>AU（=ベテラン）は「月初にまとめて」押さえている。新規の「都度1枚ずつ」は月の"型"が無い証拠。<b>都度 → まとめ</b>への転換が定着の核心。オンボーディング6名はほぼ🔴に入る想定。
+    </div>
+  </section>
+
+  <!-- アクション -->
+  <section>
+    <h2>6. 動かし方の優先順位</h2>
+    <ol class="actions">
+      <li>
+        <span class="at">今週：ベテラン8名へ連絡</span>
+        <span class="ad">「来月もいつもの曜日で押さえますね」。即AU化・ほぼ確実。月初AU率を最速で押し上げる。</span>
+      </li>
+      <li>
+        <span class="at">月末セッション：オンボーディング6名をその場でまとめ予約</span>
+        <span class="ad">トレーナーが付いて月の「型」作り。相笠ペアはセットで。</span>
+      </li>
+      <li>
+        <span class="at">定着途上11名を🟢🟡🔴で色分け</span>
+        <span class="ad">🔴（都度×3週目以降）を月末クロージングの優先リストに。</span>
+      </li>
+      <li>
+        <span class="at">仕組み化：15日リマインド ＆ 2トレーナー体制</span>
+        <span class="ad">NAU全員に「今日から来月予約できます」を配信。月末の予約集中時間帯はグループ＋案内枠を回すため2名体制に。</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 構造的課題 -->
+  <section>
+    <h2>7. 押さえておく構造的課題</h2>
+    <ul style="margin:0; padding-left:18px;">
+      <li><b>クロージング問題：</b>「予約取ってください」で終わるかどうかで結果が分かれる。その場で枠を確定させる。</li>
+      <li><b>枠コントロール：</b>マンツーで予約を取るとグループ枠が取れない。1トレーナーだとグループ＋案内2枠の制御が回らない → 2名体制が前提。</li>
+      <li><b>先行指標：</b>「月初に予約が入っているか」を週次でトラッキング。3週目だけ予約の人は黄色信号として別管理。</li>
+    </ul>
+  </section>
+
+  <footer>
+    三鷹店 月初AU率 改善 ／ 現状まとめ ・ 2026-06-01
+  </footer>
+
+</div>
+</body>
+</html>
