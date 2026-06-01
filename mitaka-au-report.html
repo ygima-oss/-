@@ -133,6 +133,34 @@
     .solve .sols .row{flex-direction:column; gap:4px;}
     .solve .sols .name{flex:none;}
   }
+  /* stacked bar */
+  .stack{display:flex; height:38px; border-radius:9px; overflow:hidden; font-size:13px; font-weight:700; color:#fff; margin:12px 0 4px;}
+  .stack .s{display:flex; align-items:center; justify-content:center; white-space:nowrap;}
+  .stack .s-green{background:var(--green);}
+  .stack .s-red{background:#e0726f;}
+  .stack-legend{display:flex; gap:18px; font-size:12px; color:var(--sub); margin-bottom:4px;}
+  .stack-legend .dot{display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:5px; vertical-align:middle;}
+
+  /* tree */
+  .tree{margin:8px 0;}
+  .tree .node{
+    display:flex; align-items:center; gap:10px; background:#fcfdff;
+    border:1px solid var(--line); border-radius:10px; padding:10px 14px; font-size:14px;
+  }
+  .tree .node .lv{font-size:11px; font-weight:700; color:#fff; background:var(--accent); border-radius:6px; padding:2px 8px;}
+  .tree .node.root{border-color:var(--green); background:var(--green-bg);}
+  .tree .node.root .lv{background:var(--green);}
+  .tree .arrow{text-align:center; color:var(--sub); font-size:18px; line-height:1; margin:3px 0;}
+
+  /* phase */
+  .phase{border-left:5px solid var(--accent); border-radius:0 12px 12px 0; background:#fcfdff; border:1px solid var(--line); border-left-width:5px; padding:14px 18px; margin-bottom:12px;}
+  .phase .ph-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;}
+  .phase .ph-no{font-size:12px; font-weight:700; color:#fff; background:var(--accent); border-radius:999px; padding:3px 11px;}
+  .phase.p0{border-left-color:var(--yellow);} .phase.p0 .ph-no{background:var(--yellow);}
+  .phase.p2{border-left-color:var(--sub);} .phase.p2 .ph-no{background:var(--sub);}
+  .phase .ph-t{font-weight:700; font-size:15px;}
+  .phase .ph-d{font-size:13px; color:var(--sub); margin:2px 0 0;}
+
   footer{text-align:center; color:var(--sub); font-size:12px; margin-top:30px;}
   @media(max-width:680px){
     .kpis{grid-template-columns:repeat(2,1fr);}
@@ -495,6 +523,69 @@
           <div class="desc"><b>①月末時点の次月予約取得率／②月初（1〜2週）予約保有率</b>を毎月定点で追い、施策の効きを確認。</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 根本原因 -->
+  <section>
+    <h2>8. 根本原因と根治ロードマップ</h2>
+    <p class="lead">これまでの施策（リマインド・確定話法）は<b>対症療法</b>。本当の根っこは「<b>入会3ヶ月で、毎月2回の1対1（2枚P・特典）を取得できているか</b>」。ここが回っていなかったことが数字で露呈した。</p>
+
+    <div class="callout" style="border-left-color:var(--red); background:var(--red-bg); color:var(--red); font-weight:600;">
+      入会から3ヶ月目までは、毎月「2枚P・特典」を取得＝<b>少なくとも月2回は1対1の状態</b>を作ることが必要。これが関係性と習慣のアンカーになる。
+    </div>
+
+    <h3>① 現状のAU85名は見かけより脆い ─ 過半が「関係性なし」</h3>
+    <p class="lead">AU85名のうち<b>50名は特典・2枚P（＝1対1）を一度も取得したことがない</b>。今は稼働しているが、関係性で繋がっていない＝<b>隠れ黄色信号</b>。本当の対象母集団は「NAU 26名＋関係性の薄いAU 50名」。</p>
+    <div class="stack-legend">
+      <span><span class="dot" style="background:var(--green);"></span>関係性あり（1対1取得済み）35名</span>
+      <span><span class="dot" style="background:#e0726f;"></span>関係性なし（1対1未取得）50名 ＝隠れ黄色信号</span>
+    </div>
+    <div class="stack">
+      <div class="s s-green" style="width:41.2%;">35名</div>
+      <div class="s s-red" style="width:58.8%;">50名（未取得）</div>
+    </div>
+    <p class="lead" style="font-size:12px; margin-top:2px;">※ AU85名の内訳。NAU26名を足すと、関係性アンカーが無い会員は計76名にのぼる。</p>
+
+    <h3>② 真の先行指標ツリー ─ 2枚P/特典が最上流</h3>
+    <p class="lead">前回の先行指標「月初予約の有無」のさらに上流が、この1対1取得。順に効いていく。</p>
+    <div class="tree">
+      <div class="node root"><span class="lv">根治</span>入会3ヶ月で毎月2回の1対1（2枚P・特典）を取得</div>
+      <div class="arrow">↓</div>
+      <div class="node"><span class="lv">中間</span>関係性・運動習慣ができる</div>
+      <div class="arrow">↓</div>
+      <div class="node"><span class="lv">先行</span>月初に予約が入る（前回の先行指標）</div>
+      <div class="arrow">↓</div>
+      <div class="node"><span class="lv">結果</span>AUになる → 翌月も継続する</div>
+    </div>
+
+    <h3>③ 「難しい」の正体＝枠コントロール問題と同一</h3>
+    <p class="lead">2枚P/特典が配り切れていない理由は、セクション7の<b>枠コントロール（マンツー vs グループ／1トレーナーでは案内2枠が回らない）</b>とまったく同じ制約。根本原因と構造的課題は根が一つで、<b>2トレーナー体制・枠の事前分離がこの根治策の前提</b>になる。</p>
+
+    <h3>④ 一気にやらず段階導入する ─ ロードマップ</h3>
+    <div class="phase p0">
+      <div class="ph-head"><span class="ph-no">Phase 0</span><span class="ph-t">前提：枠の分離と2トレーナー時間帯の確保</span><span class="badge b-yellow">律速</span></div>
+      <p class="ph-d">グループ枠と案内（マンツー）枠を時間帯で分離。これが無いとPhase 1すら回らない。</p>
+    </div>
+    <div class="phase">
+      <div class="ph-head"><span class="ph-no">Phase 1</span><span class="ph-t">新規（入会1〜3ヶ月）に限定して必達ルール化</span><span class="badge b-red">最優先・ROI最大</span></div>
+      <p class="ph-d">対象はオンボーディング層（NAU6名＋同期間のAU）＝Nが小さく効果が最大。「3ヶ月で毎月2回の1対1」を例外なしの標準オンボーディングにし、取得状況をスコアカード管理。</p>
+    </div>
+    <div class="phase p2">
+      <div class="ph-head"><span class="ph-no">Phase 2</span><span class="ph-t">既存AUの未取得50名をトリアージ</span><span class="badge b-blue">離脱リスク順</span></div>
+      <p class="ph-d">今は稼働中のため緊急度は下げ、利用期間×直近の予約パターンで離脱リスク順に並べ、上位から1対1を差し込む。一気にやらない。</p>
+    </div>
+
+    <h3>⑤ 対症 × 根治の2層で回す</h3>
+    <table>
+      <thead><tr><th>層</th><th>施策</th><th>効果</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge b-yellow">対症</span></td><td>15日配信・確定話法・まとめ予約</td><td>今月のAU率を即上げる（安く速い）</td></tr>
+        <tr><td><span class="badge b-green">根治</span></td><td>入会3ヶ月で毎月2回の1対1</td><td>上げたAUを剥がれなくする（定着）</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      順序が逆だと、上げても漏れる＝今の「AU85名中50名が未取得」問題そのもの。対症で数字を上げ、根治で定着させる。
     </div>
   </section>
 
