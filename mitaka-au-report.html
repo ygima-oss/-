@@ -113,6 +113,26 @@
     border-left:4px solid var(--yellow); background:var(--yellow-bg);
     padding:10px 14px; border-radius:0 8px 8px 0; font-size:13px; margin-top:12px;
   }
+  /* solution cards */
+  .solve{border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-bottom:14px;}
+  .solve .prob{
+    background:var(--red-bg); padding:11px 16px; font-weight:700; color:var(--red);
+    font-size:14px; display:flex; align-items:center; gap:8px;
+  }
+  .solve .prob::before{content:"課題"; font-size:11px; background:var(--red); color:#fff; padding:2px 8px; border-radius:999px; font-weight:600;}
+  .solve .sols{padding:6px 16px 12px; background:#fcfdff;}
+  .solve .sols .row{display:flex; gap:10px; padding:9px 0; border-bottom:1px dashed var(--line);}
+  .solve .sols .row:last-child{border-bottom:none;}
+  .solve .sols .name{
+    flex:0 0 132px; font-weight:700; color:var(--green); font-size:13px;
+    background:var(--green-bg); border-radius:7px; padding:3px 9px; height:fit-content; text-align:center;
+  }
+  .solve .sols .desc{font-size:13px; line-height:1.6;}
+  .solve .sols .desc b{color:var(--ink);}
+  @media(max-width:680px){
+    .solve .sols .row{flex-direction:column; gap:4px;}
+    .solve .sols .name{flex:none;}
+  }
   footer{text-align:center; color:var(--sub); font-size:12px; margin-top:30px;}
   @media(max-width:680px){
     .kpis{grid-template-columns:repeat(2,1fr);}
@@ -237,6 +257,62 @@
     </div>
     <div class="callout">
       <b>現場の予約取得しやすさ：</b>15〜18日は取りやすい／25〜27日は取りづらく、運動が習慣化できていない人ほど後ろにずれる。
+    </div>
+
+    <h3>NAU特徴への課題解決策</h3>
+
+    <div class="solve">
+      <div class="prob">予定が流動的で、先の予定がわからない</div>
+      <div class="sols">
+        <div class="row">
+          <div class="name">先押さえ・後変更</div>
+          <div class="desc"><b>ゼロから決めさせない。</b>「いつもの曜日・時間」をまず仮押さえし、来れなければ変更してもらう運用に。<b>"予定が決まったら予約"→"予約してから調整"</b>へ逆転させる（空枠ゼロより遥かにマシ）。</div>
+        </div>
+        <div class="row">
+          <div class="name">固定枠の提案</div>
+          <div class="desc">曜日・時間を固定したレギュラー枠を案内。<b>変更／キャンセルの柔軟性をセットで伝え</b>、先に押さえる心理的ハードルを下げる。</div>
+        </div>
+        <div class="row">
+          <div class="name">月初一括・型づくり</div>
+          <div class="desc">月初に当月分をまとめて押さえる「型」を作り、流動的でも月のリズムが崩れないようにする（都度予約の解消）。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="solve">
+      <div class="prob">15日に予約が開くことを知らない場合がある</div>
+      <div class="sols">
+        <div class="row">
+          <div class="name">15日一斉配信</div>
+          <div class="desc">毎月15日に「<b>本日から◯月分の予約受付開始</b>」をLINE／アプリ通知で全NAUへ自動配信。知識格差をゼロにする（AUとの差はここが大きい）。</div>
+        </div>
+        <div class="row">
+          <div class="name">入会時に明示</div>
+          <div class="desc">新規入会のオンボーディングで「15日ルール」を必ず説明・資料化し、初月から仕組みを刷り込む。</div>
+        </div>
+        <div class="row">
+          <div class="name">現場リマインド</div>
+          <div class="desc">15日前後のセッション終了時に、トレーナーが口頭で必ず一言添える＋店内掲示。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="solve">
+      <div class="prob">3週目だけ予約＝黄色信号（翌月NAU化の予兆）</div>
+      <div class="sols">
+        <div class="row">
+          <div class="name">自動フラグ化</div>
+          <div class="desc">月初（1〜2週）に予約が無い人を週次で抽出し<b>黄色信号リスト</b>に。前月「3週目だけ」だった人は翌月の重点フォロー対象に固定。</div>
+        </div>
+        <div class="row">
+          <div class="name">まとめ予約化</div>
+          <div class="desc">セッション中に<b>次の2〜3回分を確定</b>させ、都度予約→まとめ予約へ転換。1枚ずつの反応予約から脱却させる。</div>
+        </div>
+        <div class="row">
+          <div class="name">早期接触</div>
+          <div class="desc">3週目に入って予約が無い人へ、その週のうちに連絡。黄色信号のまま月末を迎えさせない。</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -365,12 +441,61 @@
 
   <!-- 構造的課題 -->
   <section>
-    <h2>7. 押さえておく構造的課題</h2>
-    <ul style="margin:0; padding-left:18px;">
-      <li><b>クロージング問題：</b>「予約取ってください」で終わるかどうかで結果が分かれる。その場で枠を確定させる。</li>
-      <li><b>枠コントロール：</b>マンツーで予約を取るとグループ枠が取れない。1トレーナーだとグループ＋案内2枠の制御が回らない → 2名体制が前提。</li>
-      <li><b>先行指標：</b>「月初に予約が入っているか」を週次でトラッキング。3週目だけ予約の人は黄色信号として別管理。</li>
-    </ul>
+    <h2>7. 構造的課題と解決策</h2>
+
+    <div class="solve">
+      <div class="prob">クロージング問題 ─ 「予約取ってください」で終わるかどうかで結果が分かれる</div>
+      <div class="sols">
+        <div class="row">
+          <div class="name">確定話法</div>
+          <div class="desc">「次回いつにしますか?」→<b>「来月もこの曜日で押さえますね」</b>とデフォルトYESの聞き方に。その場で予約画面を開いて一緒に枠を確定させる。</div>
+        </div>
+        <div class="row">
+          <div class="name">締めフロー標準化</div>
+          <div class="desc"><b>セッション終了＝次月枠確定</b>をルール化。トークスクリプト／チェックリストを配布し、誰がやっても取り切れる状態に。</div>
+        </div>
+        <div class="row">
+          <div class="name">KPI化</div>
+          <div class="desc">トレーナー指標に<b>「次月予約取得率」</b>を追加。取り切りを定量で評価し、属人化を防ぐ。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="solve">
+      <div class="prob">枠コントロール ─ マンツーで取るとグループ枠が潰れる／1人だと案内2枠＋グループが回らない</div>
+      <div class="sols">
+        <div class="row">
+          <div class="name">2トレーナー体制</div>
+          <div class="desc">月末の予約集中時間帯だけでも2名配置。グループ進行と案内（マンツー）を分担し、枠の取り合いを解消。</div>
+        </div>
+        <div class="row">
+          <div class="name">枠の事前配分</div>
+          <div class="desc">グループ枠と案内（マンツー）枠を<b>時間帯で分離し上限を設定</b>。マンツーがグループ枠を食い潰さない設計に。</div>
+        </div>
+        <div class="row">
+          <div class="name">システム上の枠管理</div>
+          <div class="desc">予約システムで枠種別を分けて可視化・上限管理。当日の現場判断に依存させない。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="solve">
+      <div class="prob">先行指標 ─ 「月初に予約が入っているか」を週次で追えていない</div>
+      <div class="sols">
+        <div class="row">
+          <div class="name">週次ダッシュボード</div>
+          <div class="desc">NAU別に<b>「月初予約あり/なし」</b>を可視化し、なしの人を月末クロージングの優先対象に。</div>
+        </div>
+        <div class="row">
+          <div class="name">黄色信号リスト</div>
+          <div class="desc">3週目だけ予約の人を別管理し、翌月の重点フォローへ引き継ぐ。NAU化する前に手を打つ。</div>
+        </div>
+        <div class="row">
+          <div class="name">2大KPIの定点観測</div>
+          <div class="desc"><b>①月末時点の次月予約取得率／②月初（1〜2週）予約保有率</b>を毎月定点で追い、施策の効きを確認。</div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer>
