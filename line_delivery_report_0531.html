@@ -313,6 +313,85 @@
     margin-top: 1px;
   }
 
+  /* ANALYSIS */
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 580px) {
+    .analysis-grid { grid-template-columns: 1fr; }
+  }
+  .analysis-card {
+    border-radius: 8px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+  }
+  .analysis-card.positive {
+    background: #F0FAF5;
+    border-color: #A8DFC4;
+  }
+  .analysis-card.caution {
+    background: #FFF8F0;
+    border-color: #F5C98A;
+  }
+  .analysis-card.neutral {
+    background: var(--gray-light);
+    border-color: var(--border);
+  }
+  .analysis-card.action {
+    background: #EEF3FD;
+    border-color: #9BB5E8;
+  }
+  .analysis-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+  .positive .analysis-tag { background: #2E9E6B; color: #fff; }
+  .caution  .analysis-tag { background: #E2792E; color: #fff; }
+  .neutral  .analysis-tag { background: #5A5A58; color: #fff; }
+  .action   .analysis-tag { background: #3A65C4; color: #fff; }
+  .analysis-heading {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .analysis-body {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #3A3A38;
+  }
+  .analysis-body strong { color: var(--text); }
+  .analysis-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+  }
+  .analysis-summary {
+    background: linear-gradient(135deg, var(--primary) 0%, #C8611A 100%);
+    color: #fff;
+    border-radius: 8px;
+    padding: 22px 24px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .analysis-summary-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+    margin-bottom: 10px;
+  }
+
   /* FOOTER */
   footer {
     text-align: center;
@@ -587,6 +666,73 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ANALYSIS -->
+<div class="section">
+  <div class="container">
+    <p class="section-title">考察</p>
+
+    <div class="analysis-grid">
+
+      <div class="analysis-card positive">
+        <div class="analysis-tag">✓ 強み</div>
+        <div class="analysis-heading">全ブランド開封率84〜88%の高水準</div>
+        <div class="analysis-body">
+          メール配信の平均開封率が20〜30%前後であることを踏まえると、<strong>LINEというチャネルの特性</strong>が大きく寄与している。既存会員に限定した配信であることも高水準を後押し。今後のアクション訴求においても、まずLINEを優先チャネルとする根拠となる。
+        </div>
+      </div>
+
+      <div class="analysis-card positive">
+        <div class="analysis-tag">✓ 強み</div>
+        <div class="analysis-heading">開封者の約24%がリンクをクリック</div>
+        <div class="analysis-body">
+          開封数2,162に対してクリックユーザー515+（ルネサンス除く）は、開封者の<strong>約24%がプロフィール更新という具体的なアクション</strong>に進んだことを示す。「1分で完了」という文言や手順の明示がCV率を底上げしたと考えられる。
+        </div>
+      </div>
+
+      <div class="analysis-card positive">
+        <div class="analysis-tag">✓ 強み</div>
+        <div class="analysis-heading">ティップネス：量・率ともにトップクラス</div>
+        <div class="analysis-body">
+          クリックユーザー<strong>205名・21.9%</strong>は全ブランド最多。配信数843と規模が大きいにもかかわらず高い転換率を維持しており、会員の質と関与度の高さがうかがえる。プロフィール更新完了数も最大と推測され、今回の配信で最も成果を上げたブランド。
+        </div>
+      </div>
+
+      <div class="analysis-card positive">
+        <div class="analysis-tag">✓ 強み</div>
+        <div class="analysis-heading">メガロス：最高開封率87.7%</div>
+        <div class="analysis-body">
+          開封率はブランド内最高値。配信数527と中規模ながら、クリック率20.6%・クリックユーザー122名と<strong>ティップネスに次ぐ高水準</strong>。会員一人ひとりへのリーチ精度が高く、コンパクトな母数でも効率的な結果を出している。
+        </div>
+      </div>
+
+      <div class="analysis-card caution">
+        <div class="analysis-tag">△ 改善余地</div>
+        <div class="analysis-heading">ラボ：クリック率14.1%はやや低め</div>
+        <div class="analysis-body">
+          他ブランドのクリック率が17〜22%であるのに対し、ラボは<strong>14.1%（25名）</strong>と差がある。配信数165・開封140と母数が小さいため、絶対数では限界があるが、率の低さはメッセージの訴求力やターゲット特性の違いを示唆する。コンテンツや送信タイミングの見直しを検討する余地あり。
+        </div>
+      </div>
+
+      <div class="analysis-card caution">
+        <div class="analysis-tag">△ 改善余地</div>
+        <div class="analysis-heading">ルネサンス：クリックデータ未計測</div>
+        <div class="analysis-body">
+          開封率86.6%と健全だが、<strong>クリック数・クリックユーザーが未計測</strong>のため、実際の行動につながったかどうかが評価できない。計測環境の整備が優先課題。今回の合計値もルネサンス分が加算されれば、さらに上乗せされる可能性が高い。
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="analysis-divider">
+
+    <div class="analysis-summary">
+      <div class="analysis-summary-title">総合まとめ</div>
+      今回の配信は<strong>全体として非常に良好な結果</strong>。高い開封率はLINEチャネルの強みを活かせている証左であり、「1分で完了」などUX配慮のある文面がクリック転換にも貢献した。次のアクションとしては、①ルネサンスの計測環境整備、②ラボへの訴求内容・タイミング最適化、③クリックしたユーザーに対するフォローアップ（実際に更新完了したかの確認）の3点が優先度が高い。
+    </div>
+
   </div>
 </div>
 
