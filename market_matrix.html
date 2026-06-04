@@ -307,6 +307,82 @@
     padding: 14px 16px; font-size: 11px; color: var(--gray-dark); line-height: 1.7; margin-bottom: 16px;
   }
   .footer-text { font-size: 12px; color: var(--gray-dark); text-align: center; }
+
+  /* ============ MOBILE（スマホ最適化） ============ */
+  @media(max-width: 760px) {
+    .container { padding: 0 14px; }
+    header { padding: 28px 0 24px; }
+    .section-wrap { padding: 28px 0; }
+    h1 { font-size: 25px; }
+    .subtitle { font-size: 13px; }
+    .section-title { font-size: 19px; }
+
+    /* 表 → ターゲットごとの縦積みカードに変形 */
+    .matrix-scroll { overflow: visible; padding-bottom: 0; }
+    table.matrix { display: block; width: 100%; min-width: 0; border-spacing: 0; }
+    table.matrix thead { display: none; }
+    table.matrix tbody { display: block; }
+    table.matrix tr {
+      display: block;
+      margin-bottom: 16px;
+      border: 1px solid var(--gray);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+    }
+    table.matrix td { display: block; width: auto !important; border-radius: 0; }
+
+    .row-head {
+      border: none;
+      border-radius: 0;
+      border-bottom: 2px solid var(--primary);
+      background: var(--primary-bg);
+      padding: 12px 14px;
+    }
+    .row-head .rh-name { font-size: 15px; }
+
+    .cell {
+      border-radius: 0;
+      border-left: 5px solid;
+      border-bottom: 1px solid var(--gray-light);
+      padding: 12px 14px 12px 14px;
+    }
+    tr td.cell:last-child { border-bottom: none; }
+    .cell.hypo { border-left: 5px dashed var(--gray); }
+
+    /* 各マスにカテゴリー名ラベルを表示（縦積みで列見出しが消えるため） */
+    td.cell::before {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gray-dark);
+      letter-spacing: 0.04em;
+      margin-bottom: 5px;
+      padding-bottom: 4px;
+      border-bottom: 1px dotted var(--gray);
+    }
+    td.cell:nth-of-type(2)::before { content: "① コンディショニング（不調改善）"; }
+    td.cell:nth-of-type(3)::before { content: "② ファンクショナル（能力向上）"; }
+    td.cell:nth-of-type(4)::before { content: "③ コミュニティ＆エンタメ"; }
+    td.cell:nth-of-type(5)::before { content: "④ ビジネスソリューション"; }
+
+    .cell .svc { font-size: 13px; }
+    .cell .prio { top: 12px; right: 12px; }
+    .metrics .m { font-size: 11px; }
+    .metrics .m.rev { font-size: 12px; }
+
+    /* 優先順位リスト */
+    .prio-row { padding: 12px; }
+    .pr-pos { width: 22px; }
+    .pr-svc { font-size: 13px; }
+    .prio-block-head { flex-wrap: wrap; }
+    .prio-block-head .pb-total { margin-left: 0; width: 100%; }
+
+    /* 定量サマリー */
+    .quant-card { padding: 18px; }
+    .quant-card .qc-num { font-size: 30px; }
+    .kpi-card { padding: 18px; }
+  }
 </style>
 </head>
 <body>
