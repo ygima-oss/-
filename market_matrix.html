@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>市場可視化マトリックス｜ターゲット × カテゴリー 定量網羅マップ</title>
+<title>市場可視化マトリックス｜ターゲット（属性ペルソナ）× カテゴリー 定量網羅マップ</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -389,9 +389,9 @@
 
 <header>
   <div class="container">
-    <span class="badge">GROWTH STRATEGY · QUANT MAP</span>
-    <h1>市場可視化マトリックス（定量版）</h1>
-    <p class="subtitle">「ターゲット × カテゴリー」を掛け合わせた網羅マップ。すでに着手している領域に加え、空白マスを<strong>「将来仮説サービス」</strong>として薄く配置し、各マスに<strong>想定単価・客数・売上規模</strong>を載せました。どこを・どの順番で埋めれば売上が伸びるかが、一枚で俯瞰できます。</p>
+    <span class="badge">GROWTH STRATEGY · PERSONA MAP</span>
+    <h1>市場可視化マトリックス（属性ペルソナ版）</h1>
+    <p class="subtitle">「ターゲット × カテゴリー（提供価値）」の網羅マップ。<strong>現役世代を OL・サラリーマン・主婦ママ・経営者の4ペルソナに細分化</strong>し、各マスに想定単価・客数・売上規模を載せました。誰に・何を・どの順番で届けるかが、一枚で俯瞰できます。</p>
   </div>
 </header>
 
@@ -451,46 +451,58 @@
             <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">スポーツ少年団 指導者研修</div><div class="note">B2B・関係構築</div>
               <div class="metrics"><span class="m"><b>単価</b>¥5万/団</span><span class="m"><b>客数</b>4団/月</span><span class="m rev"><b>月商</b><span>¥20万</span></span></div></td>
           </tr>
-          <!-- 現役：不調予備軍 -->
+          <!-- 現役：OL・働く女性 -->
           <tr>
-            <td class="row-head"><span class="seg">現役</span><div class="rh-name">不調予備軍</div><div class="rh-sub">会社員・市民</div></td>
-            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">からだの保健室</div><div class="note">肩こり・腰痛改善</div>
+            <td class="row-head"><span class="seg">現役</span><div class="rh-name">OL・働く女性</div><div class="rh-sub">20〜30代／美容・ボディメイク・肩こり</div></td>
+            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">からだの保健室</div><div class="note">肩こり・むくみ・姿勢ケア</div>
               <div class="metrics"><span class="m"><b>単価</b>¥6,000/回</span><span class="m"><b>客数</b>120名/月</span><span class="m rev"><b>月商</b><span>¥72万</span></span></div></td>
-            <td class="cell hypo"><span class="prio a">A</span><span class="tag">【仮説】</span><div class="svc">不調改善パーソナル</div><div class="note">保健室からの単価UP（縦深掘り）</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥18,000/月</span><span class="m"><b>客数</b>50名</span><span class="m rev"><b>月商</b><span>¥90万</span></span></div></td>
-            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">ウォーキング健康サークル</div><div class="note">低単価・接点づくり</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥5,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥30万</span></span></div></td>
+            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">フィットネスクラブ</div><div class="note">マシン・ボディメイク</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥9,000/月</span><span class="m"><b>客数</b>300名</span><span class="m rev"><b>月商</b><span>¥270万</span></span></div></td>
+            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">グループパーソナル</div><div class="note">目的別ボディメイク短期集中</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥15,000/月</span><span class="m"><b>客数</b>80名</span><span class="m rev"><b>月商</b><span>¥120万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">美容・健康 福利厚生プラン</div><div class="note">女性活躍企業向けB2B</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥10万/社·月</span><span class="m"><b>客数</b>5社</span><span class="m rev"><b>月商</b><span>¥50万</span></span></div></td>
+          </tr>
+          <!-- 現役：サラリーマン -->
+          <tr>
+            <td class="row-head"><span class="seg">現役</span><div class="rh-name">サラリーマン</div><div class="rh-sub">男性会社員／腰痛・運動不足・健診対策</div></td>
+            <td class="cell hypo"><span class="prio a">A</span><span class="tag">【仮説】</span><div class="svc">腰痛・肩こり改善（デスクワーク疲労）</div><div class="note">保健室ノウハウを横展開</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥6,000/回</span><span class="m"><b>客数</b>100名/月</span><span class="m rev"><b>月商</b><span>¥60万</span></span></div></td>
+            <td class="cell hypo"><span class="prio a">A</span><span class="tag">【仮説】</span><div class="svc">運動不足解消・健診対策トレ</div><div class="note">会社員の大ボリューム層</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥9,000/月</span><span class="m"><b>客数</b>80名</span><span class="m rev"><b>月商</b><span>¥72万</span></span></div></td>
+            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">部活型セミパーソナル</div><div class="note">仲間と楽しく継続</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥12,000/月</span><span class="m"><b>客数</b>70名</span><span class="m rev"><b>月商</b><span>¥84万</span></span></div></td>
             <td class="cell exist"><span class="tag">【既存】</span><div class="svc">健康経営サポート</div><div class="note">生産性向上・離職防止</div>
               <div class="metrics"><span class="m"><b>単価</b>¥15万/社·月</span><span class="m"><b>客数</b>5社</span><span class="m rev"><b>月商</b><span>¥75万</span></span></div></td>
           </tr>
-          <!-- 現役：ボディメイク層 -->
+          <!-- 現役：主婦・ママ層 -->
           <tr>
-            <td class="row-head"><span class="seg">現役</span><div class="rh-name">ボディメイク層</div><div class="rh-sub">市民・会員</div></td>
-            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">リカバリー・コンディショニング</div><div class="note">疲労回復・ストレッチ（会員追加）</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥10,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥60万</span></span></div></td>
-            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">フィットネスクラブ</div><div class="note">マシントレーニング等</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥9,000/月</span><span class="m"><b>客数</b>300名</span><span class="m rev"><b>月商</b><span>¥270万</span></span></div></td>
-            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">グループパーソナル</div><div class="note">目的別の短期集中型</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥15,000/月</span><span class="m"><b>客数</b>80名</span><span class="m rev"><b>月商</b><span>¥120万</span></span></div></td>
-            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">法人会員プラン（福利厚生）</div><div class="note">B2Bで会員一括獲得</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥12万/社·月</span><span class="m"><b>客数</b>6社</span><span class="m rev"><b>月商</b><span>¥72万</span></span></div></td>
-          </tr>
-          <!-- 現役：コミュニティ重視層 -->
-          <tr>
-            <td class="row-head"><span class="seg">現役</span><div class="rh-name">コミュニティ重視層</div><div class="rh-sub">市民・会員</div></td>
-            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">みんなで整えるグループケア</div><div class="note">肩こり・腰痛を仲間と</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥7,000/月</span><span class="m"><b>客数</b>50名</span><span class="m rev"><b>月商</b><span>¥35万</span></span></div></td>
-            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">初心者向けグループトレーニング</div><div class="note">運動デビューの受け皿</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥9,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥54万</span></span></div></td>
-            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">部活型セミパーソナル</div><div class="note">仲間と楽しむ運動</div>
-              <div class="metrics"><span class="m"><b>単価</b>¥12,000/月</span><span class="m"><b>客数</b>70名</span><span class="m rev"><b>月商</b><span>¥84万</span></span></div></td>
+            <td class="row-head"><span class="seg">現役</span><div class="rh-name">主婦・ママ層</div><div class="rh-sub">子育て世代／産後ケア・スキマ時間・親子</div></td>
+            <td class="cell hypo"><span class="prio a">A</span><span class="tag">【仮説】</span><div class="svc">産後・骨盤ケアコンディショニング</div><div class="note">差別化しやすい強ニーズ</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥8,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥48万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">スキマ時間ボディメイク（託児付き）</div><div class="note">子育て世代の通えない壁を解消</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥10,000/月</span><span class="m"><b>客数</b>50名</span><span class="m rev"><b>月商</b><span>¥50万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">ママ友フィットネスサークル</div><div class="note">口コミ拡散力が高い</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥7,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥42万</span></span></div></td>
             <td class="cell new"><span class="tag">【新規】</span><div class="svc">ファミリー健康デイ</div><div class="note">企業向けの親子イベント</div>
               <div class="metrics"><span class="m"><b>単価</b>¥20万/回</span><span class="m"><b>客数</b>3社/月</span><span class="m rev"><b>月商</b><span>¥60万</span></span></div></td>
+          </tr>
+          <!-- 現役：経営者・自営/フリーランス -->
+          <tr>
+            <td class="row-head"><span class="seg">現役</span><div class="rh-name">経営者・自営／フリーランス</div><div class="rh-sub">自己投資意欲・高単価／時間自由</div></td>
+            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">疲労回復・コンディショニング</div><div class="note">多忙対応・短時間集中</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥12,000/月</span><span class="m"><b>客数</b>30名</span><span class="m rev"><b>月商</b><span>¥36万</span></span></div></td>
+            <td class="cell hypo"><span class="prio a">A</span><span class="tag">【仮説】</span><div class="svc">高単価マンツーマンパーソナル</div><div class="note">自己投資・最重要顧客</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥30,000/月</span><span class="m"><b>客数</b>30名</span><span class="m rev"><b>月商</b><span>¥90万</span></span></div></td>
+            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">経営者コミュニティ・交流型ジム</div><div class="note">人脈づくり×健康</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥20,000/月</span><span class="m"><b>客数</b>25名</span><span class="m rev"><b>月商</b><span>¥50万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">役員・幹部 健康サポート（法人）</div><div class="note">B2B高単価・経営リスク対策</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥15万/社·月</span><span class="m"><b>客数</b>5社</span><span class="m rev"><b>月商</b><span>¥75万</span></span></div></td>
           </tr>
           <!-- シニア：アクティブ層 -->
           <tr>
             <td class="row-head"><span class="seg">シニア</span><div class="rh-name">アクティブ層</div><div class="rh-sub">60代〜70代前半</div></td>
-            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">シニア不調改善（膝・腰ケア）</div><div class="note">アクティブ層の土台づくり</div>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">シニア不調改善（膝・腰ケア）</div><div class="note">アクティブ層の入口</div>
               <div class="metrics"><span class="m"><b>単価</b>¥8,000/月</span><span class="m"><b>客数</b>70名</span><span class="m rev"><b>月商</b><span>¥56万</span></span></div></td>
             <td class="cell new"><span class="tag">【新規】</span><div class="svc">大人の趣味特化塾</div><div class="note">ゴルフや旅行のための体幹</div>
               <div class="metrics"><span class="m"><b>単価</b>¥11,000/月</span><span class="m"><b>客数</b>50名</span><span class="m rev"><b>月商</b><span>¥55万</span></span></div></td>
@@ -522,7 +534,7 @@
   <div class="container">
     <p class="section-label">QUANTITATIVE MAP</p>
     <h2 class="section-title">定量サマリー｜現状とポテンシャル</h2>
-    <p class="section-desc">マップ全体を月商換算で合計。空白マスを埋めきると、売上規模は約 <b>1.8倍</b> のポテンシャルがあります。</p>
+    <p class="section-desc">マップ全体（32マス）を月商換算で合計。空白20マスを埋めきると、売上規模は約 <b>2倍</b> のポテンシャルがあります。</p>
 
     <div class="quant-grid">
       <div class="quant-card">
@@ -531,14 +543,14 @@
         <div class="qc-sub">既存・強化・新規の月商合計</div>
       </div>
       <div class="quant-card">
-        <div class="qc-label">仮説ポテンシャル（空白 16マス）</div>
-        <div class="qc-num">¥797<span class="qc-unit">万/月</span></div>
+        <div class="qc-label">仮説ポテンシャル（空白 20マス）</div>
+        <div class="qc-num">¥1,029<span class="qc-unit">万/月</span></div>
         <div class="qc-sub">将来仮説サービスを埋めた場合</div>
       </div>
       <div class="quant-card highlight">
-        <div class="qc-label">合計ポテンシャル（全 28マス）</div>
-        <div class="qc-num">¥1,837<span class="qc-unit">万/月</span></div>
-        <div class="qc-sub">年商換算 約 <b>2.2億円</b></div>
+        <div class="qc-label">合計ポテンシャル（全 32マス）</div>
+        <div class="qc-num">¥2,069<span class="qc-unit">万/月</span></div>
+        <div class="qc-sub">年商換算 約 <b>2.5億円</b></div>
       </div>
     </div>
 
@@ -546,7 +558,7 @@
       <div class="bd-card exist"><div class="bd-num">¥417万</div><div class="bd-label">既存（3マス）</div><div class="bd-sub">安定収益の柱</div></div>
       <div class="bd-card boost"><div class="bd-num">¥204万</div><div class="bd-label">強化（2マス）</div><div class="bd-sub">単価アップ余地</div></div>
       <div class="bd-card new"><div class="bd-num">¥419万</div><div class="bd-label">新規・着手済（7マス）</div><div class="bd-sub">育成中の芽</div></div>
-      <div class="bd-card hypo"><div class="bd-num">¥797万</div><div class="bd-label">仮説（16マス）</div><div class="bd-sub">未開拓の伸びしろ</div></div>
+      <div class="bd-card hypo"><div class="bd-num">¥1,029万</div><div class="bd-label">仮説（20マス）</div><div class="bd-sub">未開拓の伸びしろ</div></div>
     </div>
   </div>
 </div>
@@ -556,36 +568,40 @@
   <div class="container">
     <p class="section-label">FILL-IN PRIORITY</p>
     <h2 class="section-title">埋めるべき優先順位</h2>
-    <p class="section-desc">「売上インパクト × 既存資産との相性 × エリア拡大効果」で16マスを3段階に格付け。上から着手すれば最短で効きます。</p>
+    <p class="section-desc">「売上インパクト × 既存資産との相性 × エリア拡大効果」で空白20マスを3段階に格付け。上から着手すれば最短で効きます。</p>
 
     <!-- A -->
     <div class="prio-block">
       <div class="prio-block-head">
-        <span class="prio a">優先度A</span><span class="pb-title">最優先／即着手（3件）</span>
-        <span class="pb-total">合計ポテンシャル ¥263万/月</span>
+        <span class="prio a">優先度A</span><span class="pb-title">最優先／即着手（6件）</span>
+        <span class="pb-total">合計ポテンシャル ¥443万/月</span>
       </div>
       <div class="prio-list">
         <div class="prio-row a"><div class="pr-pos">01</div><div class="pr-main"><div class="pr-svc">介護施設向け 機能訓練プログラム提供</div><div class="pr-meta">シニア：フレイル予備軍 × ビジネス｜¥25万×5施設・B2B受託でエリア拡大</div></div><div class="pr-rev">¥125万</div></div>
-        <div class="prio-row a"><div class="pr-pos">02</div><div class="pr-main"><div class="pr-svc">不調改善パーソナル</div><div class="pr-meta">現役：不調予備軍 × ファンクショナル｜保健室からの単価UP（縦深掘り）</div></div><div class="pr-rev">¥90万</div></div>
-        <div class="prio-row a"><div class="pr-pos">03</div><div class="pr-main"><div class="pr-svc">保育園・幼稚園 運動指導の受託</div><div class="pr-meta">ジュニア：運動苦手層 × ビジネス｜¥8万×6園・出張型でノーリスク拡大</div></div><div class="pr-rev">¥48万</div></div>
+        <div class="prio-row a"><div class="pr-pos">02</div><div class="pr-main"><div class="pr-svc">高単価マンツーマンパーソナル</div><div class="pr-meta">経営者・自営 × ファンクショナル｜自己投資意欲が高くLTV最大</div></div><div class="pr-rev">¥90万</div></div>
+        <div class="prio-row a"><div class="pr-pos">03</div><div class="pr-main"><div class="pr-svc">運動不足解消・健診対策トレ</div><div class="pr-meta">サラリーマン × ファンクショナル｜会社員の大ボリューム層</div></div><div class="pr-rev">¥72万</div></div>
+        <div class="prio-row a"><div class="pr-pos">04</div><div class="pr-main"><div class="pr-svc">腰痛・肩こり改善（デスクワーク疲労）</div><div class="pr-meta">サラリーマン × コンディショニング｜保健室ノウハウを横展開</div></div><div class="pr-rev">¥60万</div></div>
+        <div class="prio-row a"><div class="pr-pos">05</div><div class="pr-main"><div class="pr-svc">産後・骨盤ケアコンディショニング</div><div class="pr-meta">主婦・ママ層 × コンディショニング｜差別化しやすい強ニーズ</div></div><div class="pr-rev">¥48万</div></div>
+        <div class="prio-row a"><div class="pr-pos">06</div><div class="pr-main"><div class="pr-svc">保育園・幼稚園 運動指導の受託</div><div class="pr-meta">ジュニア：運動苦手層 × ビジネス｜出張型でノーリスク拡大</div></div><div class="pr-rev">¥48万</div></div>
       </div>
     </div>
 
     <!-- B -->
     <div class="prio-block">
       <div class="prio-block-head">
-        <span class="prio b">優先度B</span><span class="pb-title">中期で展開（8件）</span>
-        <span class="pb-total">合計ポテンシャル ¥372万/月</span>
+        <span class="prio b">優先度B</span><span class="pb-title">中期で展開（9件）</span>
+        <span class="pb-total">合計ポテンシャル ¥403万/月</span>
       </div>
       <div class="prio-list">
-        <div class="prio-row b"><div class="pr-pos">04</div><div class="pr-main"><div class="pr-svc">法人会員プラン（福利厚生）</div><div class="pr-meta">現役：ボディメイク層 × ビジネス｜B2Bで会員一括獲得</div></div><div class="pr-rev">¥72万</div></div>
-        <div class="prio-row b"><div class="pr-pos">05</div><div class="pr-main"><div class="pr-svc">リカバリー・コンディショニング</div><div class="pr-meta">現役：ボディメイク層 × コンディショニング｜会員への追加提案</div></div><div class="pr-rev">¥60万</div></div>
-        <div class="prio-row b"><div class="pr-pos">06</div><div class="pr-main"><div class="pr-svc">シニア不調改善（膝・腰ケア）</div><div class="pr-meta">シニア：アクティブ層 × コンディショニング｜アクティブ層の入口</div></div><div class="pr-rev">¥56万</div></div>
-        <div class="prio-row b"><div class="pr-pos">07</div><div class="pr-main"><div class="pr-svc">初心者向けグループトレーニング</div><div class="pr-meta">現役：コミュニティ層 × ファンクショナル｜運動デビューの受け皿</div></div><div class="pr-rev">¥54万</div></div>
-        <div class="prio-row b"><div class="pr-pos">08</div><div class="pr-main"><div class="pr-svc">シニア健康講座の受託</div><div class="pr-meta">シニア：アクティブ層 × ビジネス｜地域・企業向けB2B</div></div><div class="pr-rev">¥50万</div></div>
-        <div class="prio-row b"><div class="pr-pos">09</div><div class="pr-main"><div class="pr-svc">親子あそび運動サークル</div><div class="pr-meta">ジュニア：運動苦手層 × コミュニティ｜口コミ起点</div></div><div class="pr-rev">¥30万</div></div>
-        <div class="prio-row b"><div class="pr-pos">10</div><div class="pr-main"><div class="pr-svc">通いの場・健康サロン</div><div class="pr-meta">シニア：フレイル予備軍 × コミュニティ｜自治体連携</div></div><div class="pr-rev">¥30万</div></div>
-        <div class="prio-row b"><div class="pr-pos">11</div><div class="pr-main"><div class="pr-svc">スポーツ少年団 指導者研修</div><div class="pr-meta">ジュニア：スポーツ層 × ビジネス｜関係構築・送客導線</div></div><div class="pr-rev">¥20万</div></div>
+        <div class="prio-row b"><div class="pr-pos">07</div><div class="pr-main"><div class="pr-svc">役員・幹部 健康サポート（法人）</div><div class="pr-meta">経営者・自営 × ビジネス｜B2B高単価・経営リスク対策</div></div><div class="pr-rev">¥75万</div></div>
+        <div class="prio-row b"><div class="pr-pos">08</div><div class="pr-main"><div class="pr-svc">シニア不調改善（膝・腰ケア）</div><div class="pr-meta">シニア：アクティブ層 × コンディショニング｜アクティブ層の入口</div></div><div class="pr-rev">¥56万</div></div>
+        <div class="prio-row b"><div class="pr-pos">09</div><div class="pr-main"><div class="pr-svc">美容・健康 福利厚生プラン</div><div class="pr-meta">OL・働く女性 × ビジネス｜女性活躍企業向けB2B</div></div><div class="pr-rev">¥50万</div></div>
+        <div class="prio-row b"><div class="pr-pos">10</div><div class="pr-main"><div class="pr-svc">スキマ時間ボディメイク（託児付き）</div><div class="pr-meta">主婦・ママ層 × ファンクショナル｜通えない壁を解消</div></div><div class="pr-rev">¥50万</div></div>
+        <div class="prio-row b"><div class="pr-pos">11</div><div class="pr-main"><div class="pr-svc">シニア健康講座の受託</div><div class="pr-meta">シニア：アクティブ層 × ビジネス｜地域・企業向けB2B</div></div><div class="pr-rev">¥50万</div></div>
+        <div class="prio-row b"><div class="pr-pos">12</div><div class="pr-main"><div class="pr-svc">ママ友フィットネスサークル</div><div class="pr-meta">主婦・ママ層 × コミュニティ｜口コミ拡散力が高い</div></div><div class="pr-rev">¥42万</div></div>
+        <div class="prio-row b"><div class="pr-pos">13</div><div class="pr-main"><div class="pr-svc">親子あそび運動サークル</div><div class="pr-meta">ジュニア：運動苦手層 × コミュニティ｜口コミ起点</div></div><div class="pr-rev">¥30万</div></div>
+        <div class="prio-row b"><div class="pr-pos">14</div><div class="pr-main"><div class="pr-svc">通いの場・健康サロン</div><div class="pr-meta">シニア：フレイル予備軍 × コミュニティ｜自治体連携</div></div><div class="pr-rev">¥30万</div></div>
+        <div class="prio-row b"><div class="pr-pos">15</div><div class="pr-main"><div class="pr-svc">スポーツ少年団 指導者研修</div><div class="pr-meta">ジュニア：スポーツ層 × ビジネス｜関係構築・送客導線</div></div><div class="pr-rev">¥20万</div></div>
       </div>
     </div>
 
@@ -593,14 +609,14 @@
     <div class="prio-block">
       <div class="prio-block-head">
         <span class="prio c">優先度C</span><span class="pb-title">長期・余力で（5件）</span>
-        <span class="pb-total">合計ポテンシャル ¥162万/月</span>
+        <span class="pb-total">合計ポテンシャル ¥183万/月</span>
       </div>
       <div class="prio-list">
-        <div class="prio-row c"><div class="pr-pos">12</div><div class="pr-main"><div class="pr-svc">ジュニア交流戦・合宿イベント</div><div class="pr-meta">ジュニア：スポーツ層 × コミュニティ｜スポット収益</div></div><div class="pr-rev">¥45万</div></div>
-        <div class="prio-row c"><div class="pr-pos">13</div><div class="pr-main"><div class="pr-svc">みんなで整えるグループケア</div><div class="pr-meta">現役：コミュニティ層 × コンディショニング</div></div><div class="pr-rev">¥35万</div></div>
-        <div class="prio-row c"><div class="pr-pos">14</div><div class="pr-main"><div class="pr-svc">ウォーキング健康サークル</div><div class="pr-meta">現役：不調予備軍 × コミュニティ｜低単価の接点</div></div><div class="pr-rev">¥30万</div></div>
-        <div class="prio-row c"><div class="pr-pos">15</div><div class="pr-main"><div class="pr-svc">キッズ姿勢・ねこ背改善クラス</div><div class="pr-meta">ジュニア：運動苦手層 × コンディショニング</div></div><div class="pr-rev">¥28万</div></div>
-        <div class="prio-row c"><div class="pr-pos">16</div><div class="pr-main"><div class="pr-svc">自宅でできる筋力維持プログラム</div><div class="pr-meta">シニア：フレイル予備軍 × ファンクショナル｜オンライン型</div></div><div class="pr-rev">¥24万</div></div>
+        <div class="prio-row c"><div class="pr-pos">16</div><div class="pr-main"><div class="pr-svc">経営者コミュニティ・交流型ジム</div><div class="pr-meta">経営者・自営 × コミュニティ｜人脈づくり×健康</div></div><div class="pr-rev">¥50万</div></div>
+        <div class="prio-row c"><div class="pr-pos">17</div><div class="pr-main"><div class="pr-svc">ジュニア交流戦・合宿イベント</div><div class="pr-meta">ジュニア：スポーツ層 × コミュニティ｜スポット収益</div></div><div class="pr-rev">¥45万</div></div>
+        <div class="prio-row c"><div class="pr-pos">18</div><div class="pr-main"><div class="pr-svc">疲労回復・コンディショニング</div><div class="pr-meta">経営者・自営 × コンディショニング｜多忙対応・短時間</div></div><div class="pr-rev">¥36万</div></div>
+        <div class="prio-row c"><div class="pr-pos">19</div><div class="pr-main"><div class="pr-svc">キッズ姿勢・ねこ背改善クラス</div><div class="pr-meta">ジュニア：運動苦手層 × コンディショニング</div></div><div class="pr-rev">¥28万</div></div>
+        <div class="prio-row c"><div class="pr-pos">20</div><div class="pr-main"><div class="pr-svc">自宅でできる筋力維持プログラム</div><div class="pr-meta">シニア：フレイル予備軍 × ファンクショナル｜オンライン型</div></div><div class="pr-rev">¥24万</div></div>
       </div>
     </div>
   </div>
@@ -618,10 +634,10 @@
         <div class="kpi-num">01 / 売上向上</div>
         <div class="kpi-head">縦の深掘り</div>
         <div class="kpi-method">既存顧客の単価アップ（LTV）</div>
-        <div class="kpi-body">「ボディメイク・コミュニティ層」に対し、通常のフィットネス会費（サブスク）に加えて<strong>【強化】グループパーソナル（追加チケット制）</strong>をハメ込む。会員数を維持したまま単価を引き上げる。</div>
+        <div class="kpi-body">高単価を払える<strong>経営者・自営</strong>には【仮説】マンツーマンパーソナルを、<strong>OL・働く女性</strong>には会費に加えて【強化】グループパーソナル（追加チケット制）をハメ込む。会員数を維持したまま単価を引き上げる。</div>
         <div>
-          <span class="kpi-target">現役：ボディメイク層</span>
-          <span class="kpi-target">現役：コミュニティ重視層</span>
+          <span class="kpi-target">経営者・自営</span>
+          <span class="kpi-target">OL・働く女性</span>
         </div>
         <div class="kpi-metric">顧客単価（LTV）を <span>1.5〜2倍</span> へ</div>
       </div>
@@ -630,10 +646,10 @@
         <div class="kpi-num">02 / 会員数向上</div>
         <div class="kpi-head">横の展開</div>
         <div class="kpi-method">新規ターゲットの獲得</div>
-        <div class="kpi-body">「ジュニア：運動苦手層／スポーツ層」を取り込む。子供のスクールは<strong>口コミが起きやすく</strong>、一度定着すると「小学校卒業まで」など長期にわたって安定した会員数をキープできる。</div>
+        <div class="kpi-body"><strong>ジュニア層</strong>と<strong>主婦・ママ層</strong>を取り込む。子供のスクールやママ友サークルは<strong>口コミが起きやすく</strong>、一度定着すると長期にわたって安定した会員数をキープできる。</div>
         <div>
           <span class="kpi-target">ジュニア：運動苦手層</span>
-          <span class="kpi-target">ジュニア：スポーツ層</span>
+          <span class="kpi-target">主婦・ママ層</span>
         </div>
         <div class="kpi-metric">長期定着で <span>安定会員基盤</span> を構築</div>
       </div>
@@ -642,7 +658,7 @@
         <div class="kpi-num">03 / エリア拡大</div>
         <div class="kpi-head">ハコを持たない展開</div>
         <div class="kpi-method">出張型・受託型モデル</div>
-        <div class="kpi-body">「シニア：フレイル予備軍（自治体・施設受託）」や「ジュニア（園・クラブチーム出張）」を狙う。行政施設や相手先を活用でき、<strong>店舗のないエリアでもノーリスク</strong>で認知を広げられる。</div>
+        <div class="kpi-body">「シニア：フレイル予備軍（自治体・施設受託）」や「ジュニア（園・クラブチーム出張）」、サラリーマン向けの企業出張を狙う。<strong>店舗のないエリアでもノーリスク</strong>で認知を広げられる。</div>
         <div>
           <span class="kpi-target">シニア：フレイル予備軍</span>
           <span class="kpi-target">ジュニア：スポーツ層</span>
@@ -656,7 +672,7 @@
 <footer>
   <div class="container">
     <p class="disclaimer">※ 本マップの単価・客数・売上規模、および優先度は<strong>仮説に基づく試算値</strong>です。実際の会員データ・客単価・稼働率に置き換えてご活用ください。月商換算は「単価 × 客数」で算出した目安であり、原価・人件費等は含みません。</p>
-    <p class="footer-text">ターゲット × カテゴリー 定量網羅マップ｜事業拡大戦略の俯瞰図</p>
+    <p class="footer-text">ターゲット（属性ペルソナ）× カテゴリー 定量網羅マップ｜事業拡大戦略の俯瞰図</p>
   </div>
 </footer>
 
