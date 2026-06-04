@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>市場可視化マトリックス｜ターゲット × カテゴリー 網羅戦略</title>
+<title>市場可視化マトリックス｜ターゲット × カテゴリー 定量網羅マップ</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -32,7 +32,7 @@
     background: var(--gray-light);
     -webkit-font-smoothing: antialiased;
   }
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 
   /* HEADER */
   header {
@@ -60,7 +60,7 @@
   .subtitle {
     font-size: 15px;
     color: var(--gray-dark);
-    max-width: 760px;
+    max-width: 820px;
   }
 
   /* SECTION */
@@ -72,23 +72,15 @@
     letter-spacing: 0.15em;
     margin-bottom: 8px;
   }
-  .section-title {
-    font-size: 22px;
-    font-weight: 900;
-    margin-bottom: 8px;
-  }
-  .section-desc {
-    font-size: 14px;
-    color: var(--gray-dark);
-    margin-bottom: 24px;
-  }
+  .section-title { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+  .section-desc { font-size: 14px; color: var(--gray-dark); margin-bottom: 24px; }
 
   /* LEGEND */
   .legend {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
   .legend-item {
     display: flex;
@@ -107,8 +99,30 @@
   .legend-item.boost .dot { background: var(--yellow); }
   .legend-item.new { background: var(--blue-light); border-color: var(--blue); color: var(--blue); }
   .legend-item.new .dot { background: var(--blue); }
-  .legend-item.empty { background: var(--gray-light); border-color: var(--gray); color: var(--gray-dark); }
-  .legend-item.empty .dot { background: var(--gray); }
+  .legend-item.hypo { background: var(--white); border-color: var(--gray); color: var(--gray-dark); border-style: dashed; }
+  .legend-item.hypo .dot { background: var(--gray); }
+
+  .prio-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+    align-items: center;
+  }
+  .prio-legend .pl-label { font-size: 11px; font-weight: 700; color: var(--gray-dark); letter-spacing: 0.05em; }
+  .prio {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  .prio.a { background: var(--primary); }
+  .prio.b { background: var(--blue); }
+  .prio.c { background: var(--gray-dark); }
+  .pl-item { font-size: 11px; color: var(--gray-dark); display: flex; align-items: center; gap: 5px; }
 
   /* MATRIX TABLE */
   .matrix-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
@@ -116,7 +130,7 @@
     border-collapse: separate;
     border-spacing: 6px;
     width: 100%;
-    min-width: 880px;
+    min-width: 1120px;
   }
   table.matrix th, table.matrix td { vertical-align: top; }
   .col-head {
@@ -134,7 +148,7 @@
     border: 1px dashed var(--primary-light);
     border-radius: 6px;
     padding: 10px;
-    width: 16%;
+    width: 15%;
     font-size: 11px;
     font-weight: 700;
     color: var(--primary);
@@ -163,7 +177,7 @@
     border-radius: 6px;
     padding: 11px 10px;
     border-left: 4px solid;
-    min-height: 64px;
+    position: relative;
   }
   .cell .tag {
     font-size: 10px;
@@ -181,103 +195,127 @@
   .cell.boost .tag { color: var(--yellow); }
   .cell.new { background: var(--blue-light); border-color: var(--blue); }
   .cell.new .tag { color: var(--blue); }
-  .cell.empty {
-    background: var(--gray-light);
-    border-color: var(--gray);
+  /* 仮説（薄く表示） */
+  .cell.hypo {
+    background: var(--white);
+    border: 1px dashed var(--gray);
+    border-left: 4px dashed var(--gray);
+    opacity: 0.92;
+  }
+  .cell.hypo .svc { color: var(--gray-dark); }
+  .cell.hypo .tag { color: var(--gray-dark); }
+  .cell .prio { position: absolute; top: 10px; right: 8px; }
+
+  /* metrics row inside cell */
+  .metrics {
+    margin-top: 8px;
+    padding-top: 7px;
+    border-top: 1px dotted rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .metrics .m { font-size: 10px; color: var(--gray-dark); display: flex; justify-content: space-between; gap: 6px; }
+  .metrics .m b { font-weight: 700; color: var(--gray-dark); }
+  .metrics .m.rev { margin-top: 2px; font-size: 11px; }
+  .metrics .m.rev b { color: var(--text); }
+  .metrics .m.rev span { font-weight: 900; color: var(--primary); }
+
+  /* QUANT SUMMARY */
+  .quant-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media(max-width: 720px) { .quant-grid { grid-template-columns: 1fr; } }
+  .quant-card { border-radius: 8px; padding: 22px; border: 1px solid var(--gray); background: var(--gray-light); }
+  .quant-card.highlight { background: var(--primary-bg); border-color: var(--primary-light); }
+  .quant-card .qc-label { font-size: 12px; font-weight: 700; color: var(--gray-dark); }
+  .quant-card .qc-num { font-size: 34px; font-weight: 900; line-height: 1.1; margin: 4px 0; }
+  .quant-card.highlight .qc-num { color: var(--primary); }
+  .quant-card .qc-unit { font-size: 14px; font-weight: 700; }
+  .quant-card .qc-sub { font-size: 11px; color: var(--gray-dark); margin-top: 4px; }
+
+  .bd-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media(max-width: 640px) { .bd-grid { grid-template-columns: 1fr 1fr; } }
+  .bd-card { border-radius: 6px; padding: 14px; text-align: center; border: 1px solid; }
+  .bd-card.exist { background: var(--green-light); border-color: var(--green); }
+  .bd-card.boost { background: var(--yellow-light); border-color: var(--yellow); }
+  .bd-card.new { background: var(--blue-light); border-color: var(--blue); }
+  .bd-card.hypo { background: var(--white); border-color: var(--gray); border-style: dashed; }
+  .bd-num { font-size: 22px; font-weight: 900; }
+  .bd-card.exist .bd-num { color: var(--green); }
+  .bd-card.boost .bd-num { color: var(--yellow); }
+  .bd-card.new .bd-num { color: var(--blue); }
+  .bd-card.hypo .bd-num { color: var(--gray-dark); }
+  .bd-label { font-size: 12px; font-weight: 700; margin-top: 4px; }
+  .bd-sub { font-size: 10px; color: var(--gray-dark); margin-top: 2px; }
+
+  /* PRIORITY ROADMAP */
+  .prio-block { margin-bottom: 22px; }
+  .prio-block-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .prio-block-head .pb-title { font-size: 15px; font-weight: 900; }
+  .prio-block-head .pb-total { font-size: 12px; font-weight: 700; color: var(--gray-dark); margin-left: auto; }
+  .prio-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media(max-width: 720px) { .prio-list { grid-template-columns: 1fr; } }
+  .prio-row {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-  /* SUMMARY STATS */
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
-    margin-top: 24px;
-  }
-  @media(max-width: 640px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
-  .stat-card {
+    padding: 12px 14px;
     border-radius: 6px;
-    padding: 16px;
-    text-align: center;
-    border: 1px solid;
+    background: var(--white);
+    border: 1px solid var(--gray);
   }
-  .stat-card.exist { background: var(--green-light); border-color: var(--green); }
-  .stat-card.boost { background: var(--yellow-light); border-color: var(--yellow); }
-  .stat-card.new { background: var(--blue-light); border-color: var(--blue); }
-  .stat-card.empty { background: var(--gray-light); border-color: var(--gray); }
-  .stat-num { font-size: 30px; font-weight: 900; line-height: 1; }
-  .stat-card.exist .stat-num { color: var(--green); }
-  .stat-card.boost .stat-num { color: var(--yellow); }
-  .stat-card.new .stat-num { color: var(--blue); }
-  .stat-card.empty .stat-num { color: var(--gray-dark); }
-  .stat-label { font-size: 12px; font-weight: 700; margin-top: 6px; }
-  .stat-sub { font-size: 10px; color: var(--gray-dark); margin-top: 2px; }
+  .prio-row.a { border-left: 4px solid var(--primary); }
+  .prio-row.b { border-left: 4px solid var(--blue); }
+  .prio-row.c { border-left: 4px solid var(--gray-dark); }
+  .pr-pos { font-size: 11px; font-weight: 900; color: var(--gray); width: 26px; flex-shrink: 0; }
+  .pr-main { flex: 1; min-width: 0; }
+  .pr-svc { font-size: 13px; font-weight: 700; line-height: 1.4; }
+  .pr-meta { font-size: 11px; color: var(--gray-dark); margin-top: 2px; }
+  .pr-rev { font-size: 14px; font-weight: 900; color: var(--primary); white-space: nowrap; flex-shrink: 0; }
 
   /* KPI INSIGHTS */
   .kpi-wrap { background: var(--text); padding: 48px 0; margin-top: 16px; }
   .kpi-wrap .section-label { color: var(--primary-light); }
   .kpi-wrap .section-title { color: var(--white); }
   .kpi-wrap .section-desc { color: var(--gray); }
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   @media(max-width: 760px) { .kpi-grid { grid-template-columns: 1fr; } }
-  .kpi-card {
-    background: rgba(255,255,255,0.06);
-    border-radius: 8px;
-    padding: 22px;
-    border-top: 4px solid var(--primary);
-  }
-  .kpi-num {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--primary-light);
-    letter-spacing: 0.1em;
-    margin-bottom: 8px;
-  }
+  .kpi-card { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 22px; border-top: 4px solid var(--primary); }
+  .kpi-num { font-size: 12px; font-weight: 700; color: var(--primary-light); letter-spacing: 0.1em; margin-bottom: 8px; }
   .kpi-head { font-size: 18px; font-weight: 900; color: var(--white); margin-bottom: 4px; }
   .kpi-method { font-size: 12px; font-weight: 700; color: var(--primary-light); margin-bottom: 12px; }
   .kpi-body { font-size: 13px; color: #D8D8D6; line-height: 1.8; }
   .kpi-target {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid var(--primary);
-    color: var(--white);
-    padding: 3px 10px;
-    border-radius: 4px;
-    margin: 4px 4px 0 0;
+    display: inline-block; font-size: 11px; font-weight: 700;
+    background: rgba(255,255,255,0.1); border: 1px solid var(--primary); color: var(--white);
+    padding: 3px 10px; border-radius: 4px; margin: 4px 4px 0 0;
   }
   .kpi-metric {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px dashed rgba(255,255,255,0.2);
-    font-size: 13px;
-    font-weight: 900;
-    color: var(--white);
+    margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.2);
+    font-size: 13px; font-weight: 900; color: var(--white);
   }
   .kpi-metric span { color: var(--primary-light); }
 
   /* FOOTER */
-  footer { background: var(--white); padding: 32px 0; text-align: center; }
-  .footer-text { font-size: 12px; color: var(--gray-dark); }
+  footer { background: var(--white); padding: 28px 0; }
+  .disclaimer {
+    background: var(--gray-light); border: 1px solid var(--gray); border-radius: 6px;
+    padding: 14px 16px; font-size: 11px; color: var(--gray-dark); line-height: 1.7; margin-bottom: 16px;
+  }
+  .footer-text { font-size: 12px; color: var(--gray-dark); text-align: center; }
 </style>
 </head>
 <body>
 
 <header>
   <div class="container">
-    <span class="badge">GROWTH STRATEGY</span>
-    <h1>市場可視化マトリックス</h1>
-    <p class="subtitle">細分化した「ターゲット」と「カテゴリー（提供価値）」を掛け合わせ、どこにどのサービスを配置し、どのKPIを狙うのかを一枚で俯瞰する網羅マトリックス。このマスを埋めていくことが、そのまま事業拡大の戦略になります。</p>
+    <span class="badge">GROWTH STRATEGY · QUANT MAP</span>
+    <h1>市場可視化マトリックス（定量版）</h1>
+    <p class="subtitle">「ターゲット × カテゴリー」を掛け合わせた網羅マップ。すでに着手している領域に加え、空白マスを<strong>「将来仮説サービス」</strong>として薄く配置し、各マスに<strong>想定単価・客数・売上規模</strong>を載せました。どこを・どの順番で埋めれば売上が伸びるかが、一枚で俯瞰できます。</p>
   </div>
 </header>
 
@@ -285,14 +323,20 @@
 <div class="section-wrap">
   <div class="container">
     <p class="section-label">CORE FRAMEWORK</p>
-    <h2 class="section-title">ターゲット × カテゴリー 網羅マトリックス</h2>
-    <p class="section-desc">縦軸＝細分化したターゲット層／横軸＝提供価値のカテゴリー。色で「立ち位置」を可視化します。</p>
+    <h2 class="section-title">ターゲット × カテゴリー 定量網羅マップ</h2>
+    <p class="section-desc">色＝立ち位置／点線セル＝まだ埋まっていない「将来仮説」。各マスの下段は <b>単価 → 客数 → 月商換算</b> の試算です。</p>
 
     <div class="legend">
-      <span class="legend-item exist"><span class="dot"></span>既存：すでに基盤がある領域</span>
-      <span class="legend-item boost"><span class="dot"></span>強化：単価・満足度を上げる領域</span>
-      <span class="legend-item new"><span class="dot"></span>新規：未開拓のブルーオーシャン</span>
-      <span class="legend-item empty"><span class="dot"></span>✕：現状ターゲット外</span>
+      <span class="legend-item exist"><span class="dot"></span>既存：基盤がある領域</span>
+      <span class="legend-item boost"><span class="dot"></span>強化：単価・満足度UP</span>
+      <span class="legend-item new"><span class="dot"></span>新規：着手済ブルーオーシャン</span>
+      <span class="legend-item hypo"><span class="dot"></span>仮説：未配置（埋めるべき場所）</span>
+    </div>
+    <div class="prio-legend">
+      <span class="pl-label">埋める優先度：</span>
+      <span class="pl-item"><span class="prio a">優先度A</span>最優先／即着手</span>
+      <span class="pl-item"><span class="prio b">優先度B</span>中期で展開</span>
+      <span class="pl-item"><span class="prio c">優先度C</span>長期・余力で</span>
     </div>
 
     <div class="matrix-scroll">
@@ -310,68 +354,178 @@
           <!-- ジュニア：運動苦手層 -->
           <tr>
             <td class="row-head"><span class="seg">ジュニア</span><div class="rh-name">運動苦手層</div><div class="rh-sub">未就学〜低学年</div></td>
-            <td class="cell empty">✕</td>
-            <td class="cell new"><span class="tag">【新規】</span><div class="svc">キッズ運動能力向上教室</div><div class="note">体育の苦手克服</div></td>
-            <td class="cell empty">✕</td>
-            <td class="cell empty">✕</td>
+            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">キッズ姿勢・ねこ背改善クラス</div><div class="note">子供の姿勢ケア</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥7,000/月</span><span class="m"><b>客数</b>40名</span><span class="m rev"><b>月商</b><span>¥28万</span></span></div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">キッズ運動能力向上教室</div><div class="note">体育の苦手克服</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥8,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥48万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">親子あそび運動サークル</div><div class="note">親子で楽しむ・口コミ起点</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥6,000/月</span><span class="m"><b>客数</b>50組</span><span class="m rev"><b>月商</b><span>¥30万</span></span></div></td>
+            <td class="cell hypo"><span class="prio a">A</span><span class="tag">【仮説】</span><div class="svc">保育園・幼稚園 運動指導の受託</div><div class="note">B2B出張・エリア拡大</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥8万/園·月</span><span class="m"><b>客数</b>6園</span><span class="m rev"><b>月商</b><span>¥48万</span></span></div></td>
           </tr>
           <!-- ジュニア：スポーツ層 -->
           <tr>
             <td class="row-head"><span class="seg">ジュニア</span><div class="rh-name">スポーツ層</div><div class="rh-sub">小学生・習い事</div></td>
-            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ジュニア姿勢・ケガ予防講座</div><div class="note">クラブチーム出張</div></td>
-            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ジュニアアスリート体幹塾</div><div class="note">パフォーマンス向上</div></td>
-            <td class="cell empty">✕</td>
-            <td class="cell empty">✕</td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ジュニア姿勢・ケガ予防講座</div><div class="note">クラブチーム出張</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥3,000/回</span><span class="m"><b>客数</b>80名/月</span><span class="m rev"><b>月商</b><span>¥24万</span></span></div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ジュニアアスリート体幹塾</div><div class="note">パフォーマンス向上</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥10,000/月</span><span class="m"><b>客数</b>40名</span><span class="m rev"><b>月商</b><span>¥40万</span></span></div></td>
+            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">ジュニア交流戦・合宿イベント</div><div class="note">チーム間の繋がり</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥15,000/回</span><span class="m"><b>客数</b>30名/月</span><span class="m rev"><b>月商</b><span>¥45万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">スポーツ少年団 指導者研修</div><div class="note">B2B・関係構築</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥5万/団</span><span class="m"><b>客数</b>4団/月</span><span class="m rev"><b>月商</b><span>¥20万</span></span></div></td>
           </tr>
           <!-- 現役：不調予備軍 -->
           <tr>
             <td class="row-head"><span class="seg">現役</span><div class="rh-name">不調予備軍</div><div class="rh-sub">会社員・市民</div></td>
-            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">からだの保健室</div><div class="note">肩こり・腰痛改善</div></td>
-            <td class="cell empty">✕</td>
-            <td class="cell empty">✕</td>
-            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">健康経営サポート</div><div class="note">生産性向上・離職防止</div></td>
+            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">からだの保健室</div><div class="note">肩こり・腰痛改善</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥6,000/回</span><span class="m"><b>客数</b>120名/月</span><span class="m rev"><b>月商</b><span>¥72万</span></span></div></td>
+            <td class="cell hypo"><span class="prio a">A</span><span class="tag">【仮説】</span><div class="svc">不調改善パーソナル</div><div class="note">保健室からの単価UP（縦深掘り）</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥18,000/月</span><span class="m"><b>客数</b>50名</span><span class="m rev"><b>月商</b><span>¥90万</span></span></div></td>
+            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">ウォーキング健康サークル</div><div class="note">低単価・接点づくり</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥5,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥30万</span></span></div></td>
+            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">健康経営サポート</div><div class="note">生産性向上・離職防止</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥15万/社·月</span><span class="m"><b>客数</b>5社</span><span class="m rev"><b>月商</b><span>¥75万</span></span></div></td>
           </tr>
           <!-- 現役：ボディメイク層 -->
           <tr>
             <td class="row-head"><span class="seg">現役</span><div class="rh-name">ボディメイク層</div><div class="rh-sub">市民・会員</div></td>
-            <td class="cell empty">✕</td>
-            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">フィットネスクラブ</div><div class="note">マシントレーニング等</div></td>
-            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">グループパーソナル</div><div class="note">目的別の短期集中型</div></td>
-            <td class="cell empty">✕</td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">リカバリー・コンディショニング</div><div class="note">疲労回復・ストレッチ（会員追加）</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥10,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥60万</span></span></div></td>
+            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">フィットネスクラブ</div><div class="note">マシントレーニング等</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥9,000/月</span><span class="m"><b>客数</b>300名</span><span class="m rev"><b>月商</b><span>¥270万</span></span></div></td>
+            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">グループパーソナル</div><div class="note">目的別の短期集中型</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥15,000/月</span><span class="m"><b>客数</b>80名</span><span class="m rev"><b>月商</b><span>¥120万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">法人会員プラン（福利厚生）</div><div class="note">B2Bで会員一括獲得</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥12万/社·月</span><span class="m"><b>客数</b>6社</span><span class="m rev"><b>月商</b><span>¥72万</span></span></div></td>
           </tr>
           <!-- 現役：コミュニティ重視層 -->
           <tr>
             <td class="row-head"><span class="seg">現役</span><div class="rh-name">コミュニティ重視層</div><div class="rh-sub">市民・会員</div></td>
-            <td class="cell empty">✕</td>
-            <td class="cell empty">✕</td>
-            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">部活型セミパーソナル</div><div class="note">仲間と楽しむ運動</div></td>
-            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ファミリー健康デイ</div><div class="note">企業向けの親子イベント</div></td>
+            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">みんなで整えるグループケア</div><div class="note">肩こり・腰痛を仲間と</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥7,000/月</span><span class="m"><b>客数</b>50名</span><span class="m rev"><b>月商</b><span>¥35万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">初心者向けグループトレーニング</div><div class="note">運動デビューの受け皿</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥9,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥54万</span></span></div></td>
+            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">部活型セミパーソナル</div><div class="note">仲間と楽しむ運動</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥12,000/月</span><span class="m"><b>客数</b>70名</span><span class="m rev"><b>月商</b><span>¥84万</span></span></div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ファミリー健康デイ</div><div class="note">企業向けの親子イベント</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥20万/回</span><span class="m"><b>客数</b>3社/月</span><span class="m rev"><b>月商</b><span>¥60万</span></span></div></td>
           </tr>
           <!-- シニア：アクティブ層 -->
           <tr>
             <td class="row-head"><span class="seg">シニア</span><div class="rh-name">アクティブ層</div><div class="rh-sub">60代〜70代前半</div></td>
-            <td class="cell empty">✕</td>
-            <td class="cell new"><span class="tag">【新規】</span><div class="svc">大人の趣味特化塾</div><div class="note">ゴルフや旅行のための体幹</div></td>
-            <td class="cell new"><span class="tag">【新規】</span><div class="svc">サークル型フィットネス</div><div class="note">同世代のコミュニティ</div></td>
-            <td class="cell empty">✕</td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">シニア不調改善（膝・腰ケア）</div><div class="note">アクティブ層の土台づくり</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥8,000/月</span><span class="m"><b>客数</b>70名</span><span class="m rev"><b>月商</b><span>¥56万</span></span></div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">大人の趣味特化塾</div><div class="note">ゴルフや旅行のための体幹</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥11,000/月</span><span class="m"><b>客数</b>50名</span><span class="m rev"><b>月商</b><span>¥55万</span></span></div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">サークル型フィットネス</div><div class="note">同世代のコミュニティ</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥8,000/月</span><span class="m"><b>客数</b>90名</span><span class="m rev"><b>月商</b><span>¥72万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">シニア健康講座の受託</div><div class="note">企業・地域向けB2B</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥10万/件·月</span><span class="m"><b>客数</b>5件</span><span class="m rev"><b>月商</b><span>¥50万</span></span></div></td>
           </tr>
           <!-- シニア：フレイル予備軍 -->
           <tr>
             <td class="row-head"><span class="seg">シニア</span><div class="rh-name">フレイル予備軍</div><div class="rh-sub">70代後半〜</div></td>
-            <td class="cell new"><span class="tag">【新規】</span><div class="svc">自治体受託・介護予防</div><div class="note">転倒防止・機能回復</div></td>
-            <td class="cell empty">✕</td>
-            <td class="cell empty">✕</td>
-            <td class="cell empty">✕</td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">自治体受託・介護予防</div><div class="note">転倒防止・機能回復</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥30万/件·月</span><span class="m"><b>客数</b>4件</span><span class="m rev"><b>月商</b><span>¥120万</span></span></div></td>
+            <td class="cell hypo"><span class="prio c">C</span><span class="tag">【仮説】</span><div class="svc">自宅でできる筋力維持プログラム</div><div class="note">オンライン・教材型</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥6,000/月</span><span class="m"><b>客数</b>40名</span><span class="m rev"><b>月商</b><span>¥24万</span></span></div></td>
+            <td class="cell hypo"><span class="prio b">B</span><span class="tag">【仮説】</span><div class="svc">通いの場・健康サロン</div><div class="note">社会的孤立防止・自治体連携</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥5,000/月</span><span class="m"><b>客数</b>60名</span><span class="m rev"><b>月商</b><span>¥30万</span></span></div></td>
+            <td class="cell hypo"><span class="prio a">A</span><span class="tag">【仮説】</span><div class="svc">介護施設向け 機能訓練プログラム提供</div><div class="note">B2B受託・エリア拡大</div>
+              <div class="metrics"><span class="m"><b>単価</b>¥25万/施設·月</span><span class="m"><b>客数</b>5施設</span><span class="m rev"><b>月商</b><span>¥125万</span></span></div></td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
+</div>
 
-    <div class="stat-grid">
-      <div class="stat-card exist"><div class="stat-num">3</div><div class="stat-label">既存</div><div class="stat-sub">基盤がある領域</div></div>
-      <div class="stat-card boost"><div class="stat-num">2</div><div class="stat-label">強化</div><div class="stat-sub">単価・満足度UP</div></div>
-      <div class="stat-card new"><div class="stat-num">7</div><div class="stat-label">新規</div><div class="stat-sub">ブルーオーシャン</div></div>
-      <div class="stat-card empty"><div class="stat-num">16</div><div class="stat-label">未配置</div><div class="stat-sub">今後の検討余地</div></div>
+<!-- QUANT SUMMARY -->
+<div class="section-wrap">
+  <div class="container">
+    <p class="section-label">QUANTITATIVE MAP</p>
+    <h2 class="section-title">定量サマリー｜現状とポテンシャル</h2>
+    <p class="section-desc">マップ全体を月商換算で合計。空白マスを埋めきると、売上規模は約 <b>1.8倍</b> のポテンシャルがあります。</p>
+
+    <div class="quant-grid">
+      <div class="quant-card">
+        <div class="qc-label">現状（着手済 12マス）</div>
+        <div class="qc-num">¥1,040<span class="qc-unit">万/月</span></div>
+        <div class="qc-sub">既存・強化・新規の月商合計</div>
+      </div>
+      <div class="quant-card">
+        <div class="qc-label">仮説ポテンシャル（空白 16マス）</div>
+        <div class="qc-num">¥797<span class="qc-unit">万/月</span></div>
+        <div class="qc-sub">将来仮説サービスを埋めた場合</div>
+      </div>
+      <div class="quant-card highlight">
+        <div class="qc-label">合計ポテンシャル（全 28マス）</div>
+        <div class="qc-num">¥1,837<span class="qc-unit">万/月</span></div>
+        <div class="qc-sub">年商換算 約 <b>2.2億円</b></div>
+      </div>
+    </div>
+
+    <div class="bd-grid">
+      <div class="bd-card exist"><div class="bd-num">¥417万</div><div class="bd-label">既存（3マス）</div><div class="bd-sub">安定収益の柱</div></div>
+      <div class="bd-card boost"><div class="bd-num">¥204万</div><div class="bd-label">強化（2マス）</div><div class="bd-sub">単価アップ余地</div></div>
+      <div class="bd-card new"><div class="bd-num">¥419万</div><div class="bd-label">新規・着手済（7マス）</div><div class="bd-sub">育成中の芽</div></div>
+      <div class="bd-card hypo"><div class="bd-num">¥797万</div><div class="bd-label">仮説（16マス）</div><div class="bd-sub">未開拓の伸びしろ</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIORITY ROADMAP -->
+<div class="section-wrap">
+  <div class="container">
+    <p class="section-label">FILL-IN PRIORITY</p>
+    <h2 class="section-title">埋めるべき優先順位</h2>
+    <p class="section-desc">「売上インパクト × 既存資産との相性 × エリア拡大効果」で16マスを3段階に格付け。上から着手すれば最短で効きます。</p>
+
+    <!-- A -->
+    <div class="prio-block">
+      <div class="prio-block-head">
+        <span class="prio a">優先度A</span><span class="pb-title">最優先／即着手（3件）</span>
+        <span class="pb-total">合計ポテンシャル ¥263万/月</span>
+      </div>
+      <div class="prio-list">
+        <div class="prio-row a"><div class="pr-pos">01</div><div class="pr-main"><div class="pr-svc">介護施設向け 機能訓練プログラム提供</div><div class="pr-meta">シニア：フレイル予備軍 × ビジネス｜¥25万×5施設・B2B受託でエリア拡大</div></div><div class="pr-rev">¥125万</div></div>
+        <div class="prio-row a"><div class="pr-pos">02</div><div class="pr-main"><div class="pr-svc">不調改善パーソナル</div><div class="pr-meta">現役：不調予備軍 × ファンクショナル｜保健室からの単価UP（縦深掘り）</div></div><div class="pr-rev">¥90万</div></div>
+        <div class="prio-row a"><div class="pr-pos">03</div><div class="pr-main"><div class="pr-svc">保育園・幼稚園 運動指導の受託</div><div class="pr-meta">ジュニア：運動苦手層 × ビジネス｜¥8万×6園・出張型でノーリスク拡大</div></div><div class="pr-rev">¥48万</div></div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="prio-block">
+      <div class="prio-block-head">
+        <span class="prio b">優先度B</span><span class="pb-title">中期で展開（8件）</span>
+        <span class="pb-total">合計ポテンシャル ¥372万/月</span>
+      </div>
+      <div class="prio-list">
+        <div class="prio-row b"><div class="pr-pos">04</div><div class="pr-main"><div class="pr-svc">法人会員プラン（福利厚生）</div><div class="pr-meta">現役：ボディメイク層 × ビジネス｜B2Bで会員一括獲得</div></div><div class="pr-rev">¥72万</div></div>
+        <div class="prio-row b"><div class="pr-pos">05</div><div class="pr-main"><div class="pr-svc">リカバリー・コンディショニング</div><div class="pr-meta">現役：ボディメイク層 × コンディショニング｜会員への追加提案</div></div><div class="pr-rev">¥60万</div></div>
+        <div class="prio-row b"><div class="pr-pos">06</div><div class="pr-main"><div class="pr-svc">シニア不調改善（膝・腰ケア）</div><div class="pr-meta">シニア：アクティブ層 × コンディショニング｜アクティブ層の入口</div></div><div class="pr-rev">¥56万</div></div>
+        <div class="prio-row b"><div class="pr-pos">07</div><div class="pr-main"><div class="pr-svc">初心者向けグループトレーニング</div><div class="pr-meta">現役：コミュニティ層 × ファンクショナル｜運動デビューの受け皿</div></div><div class="pr-rev">¥54万</div></div>
+        <div class="prio-row b"><div class="pr-pos">08</div><div class="pr-main"><div class="pr-svc">シニア健康講座の受託</div><div class="pr-meta">シニア：アクティブ層 × ビジネス｜地域・企業向けB2B</div></div><div class="pr-rev">¥50万</div></div>
+        <div class="prio-row b"><div class="pr-pos">09</div><div class="pr-main"><div class="pr-svc">親子あそび運動サークル</div><div class="pr-meta">ジュニア：運動苦手層 × コミュニティ｜口コミ起点</div></div><div class="pr-rev">¥30万</div></div>
+        <div class="prio-row b"><div class="pr-pos">10</div><div class="pr-main"><div class="pr-svc">通いの場・健康サロン</div><div class="pr-meta">シニア：フレイル予備軍 × コミュニティ｜自治体連携</div></div><div class="pr-rev">¥30万</div></div>
+        <div class="prio-row b"><div class="pr-pos">11</div><div class="pr-main"><div class="pr-svc">スポーツ少年団 指導者研修</div><div class="pr-meta">ジュニア：スポーツ層 × ビジネス｜関係構築・送客導線</div></div><div class="pr-rev">¥20万</div></div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="prio-block">
+      <div class="prio-block-head">
+        <span class="prio c">優先度C</span><span class="pb-title">長期・余力で（5件）</span>
+        <span class="pb-total">合計ポテンシャル ¥162万/月</span>
+      </div>
+      <div class="prio-list">
+        <div class="prio-row c"><div class="pr-pos">12</div><div class="pr-main"><div class="pr-svc">ジュニア交流戦・合宿イベント</div><div class="pr-meta">ジュニア：スポーツ層 × コミュニティ｜スポット収益</div></div><div class="pr-rev">¥45万</div></div>
+        <div class="prio-row c"><div class="pr-pos">13</div><div class="pr-main"><div class="pr-svc">みんなで整えるグループケア</div><div class="pr-meta">現役：コミュニティ層 × コンディショニング</div></div><div class="pr-rev">¥35万</div></div>
+        <div class="prio-row c"><div class="pr-pos">14</div><div class="pr-main"><div class="pr-svc">ウォーキング健康サークル</div><div class="pr-meta">現役：不調予備軍 × コミュニティ｜低単価の接点</div></div><div class="pr-rev">¥30万</div></div>
+        <div class="prio-row c"><div class="pr-pos">15</div><div class="pr-main"><div class="pr-svc">キッズ姿勢・ねこ背改善クラス</div><div class="pr-meta">ジュニア：運動苦手層 × コンディショニング</div></div><div class="pr-rev">¥28万</div></div>
+        <div class="prio-row c"><div class="pr-pos">16</div><div class="pr-main"><div class="pr-svc">自宅でできる筋力維持プログラム</div><div class="pr-meta">シニア：フレイル予備軍 × ファンクショナル｜オンライン型</div></div><div class="pr-rev">¥24万</div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -412,7 +566,7 @@
         <div class="kpi-num">03 / エリア拡大</div>
         <div class="kpi-head">ハコを持たない展開</div>
         <div class="kpi-method">出張型・受託型モデル</div>
-        <div class="kpi-body">「シニア：フレイル予備軍（自治体受託）」や「ジュニア：スポーツ層（クラブチーム出張）」を狙う。行政施設や相手先グラウンドを活用でき、<strong>店舗のないエリアでもノーリスク</strong>で認知を広げられる。</div>
+        <div class="kpi-body">「シニア：フレイル予備軍（自治体・施設受託）」や「ジュニア（園・クラブチーム出張）」を狙う。行政施設や相手先を活用でき、<strong>店舗のないエリアでもノーリスク</strong>で認知を広げられる。</div>
         <div>
           <span class="kpi-target">シニア：フレイル予備軍</span>
           <span class="kpi-target">ジュニア：スポーツ層</span>
@@ -425,7 +579,8 @@
 
 <footer>
   <div class="container">
-    <p class="footer-text">ターゲット × カテゴリー 網羅マトリックス｜事業拡大戦略の俯瞰図</p>
+    <p class="disclaimer">※ 本マップの単価・客数・売上規模、および優先度は<strong>仮説に基づく試算値</strong>です。実際の会員データ・客単価・稼働率に置き換えてご活用ください。月商換算は「単価 × 客数」で算出した目安であり、原価・人件費等は含みません。</p>
+    <p class="footer-text">ターゲット × カテゴリー 定量網羅マップ｜事業拡大戦略の俯瞰図</p>
   </div>
 </footer>
 
