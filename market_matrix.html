@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>市場可視化マトリックス｜ターゲット × カテゴリー 網羅戦略</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+    --green: #3DAA6E;
+    --green-light: #E8F7F0;
+    --blue: #3A7FC1;
+    --blue-light: #EBF3FB;
+    --red: #D94F4F;
+    --red-light: #FDEAEA;
+    --yellow: #D4920A;
+    --yellow-light: #FFF8E6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    padding: 40px 0 32px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: var(--gray-dark);
+    max-width: 760px;
+  }
+
+  /* SECTION */
+  .section-wrap { background: var(--white); padding: 40px 0; margin-top: 16px; }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--gray-dark);
+    margin-bottom: 24px;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid;
+  }
+  .legend-item .dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .legend-item.exist { background: var(--green-light); border-color: var(--green); color: var(--green); }
+  .legend-item.exist .dot { background: var(--green); }
+  .legend-item.boost { background: var(--yellow-light); border-color: var(--yellow); color: var(--yellow); }
+  .legend-item.boost .dot { background: var(--yellow); }
+  .legend-item.new { background: var(--blue-light); border-color: var(--blue); color: var(--blue); }
+  .legend-item.new .dot { background: var(--blue); }
+  .legend-item.empty { background: var(--gray-light); border-color: var(--gray); color: var(--gray-dark); }
+  .legend-item.empty .dot { background: var(--gray); }
+
+  /* MATRIX TABLE */
+  .matrix-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
+  table.matrix {
+    border-collapse: separate;
+    border-spacing: 6px;
+    width: 100%;
+    min-width: 880px;
+  }
+  table.matrix th, table.matrix td { vertical-align: top; }
+  .col-head {
+    background: var(--text);
+    color: var(--white);
+    border-radius: 6px;
+    padding: 12px 10px;
+    text-align: left;
+    width: 21%;
+  }
+  .col-head .ch-name { font-size: 13px; font-weight: 900; line-height: 1.4; }
+  .col-head .ch-sub { font-size: 10px; font-weight: 400; color: var(--primary-light); margin-top: 4px; line-height: 1.4; }
+  .corner {
+    background: var(--primary-bg);
+    border: 1px dashed var(--primary-light);
+    border-radius: 6px;
+    padding: 10px;
+    width: 16%;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+  }
+  .row-head {
+    background: var(--primary-bg);
+    border: 1px solid var(--primary-light);
+    border-radius: 6px;
+    padding: 12px 10px;
+  }
+  .row-head .seg {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--primary);
+    padding: 1px 7px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  .row-head .rh-name { font-size: 13px; font-weight: 900; line-height: 1.35; }
+  .row-head .rh-sub { font-size: 10px; color: var(--gray-dark); margin-top: 3px; line-height: 1.4; }
+
+  .cell {
+    border-radius: 6px;
+    padding: 11px 10px;
+    border-left: 4px solid;
+    min-height: 64px;
+  }
+  .cell .tag {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  .cell .svc { font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .cell .note { font-size: 10px; color: var(--gray-dark); margin-top: 3px; line-height: 1.4; }
+
+  .cell.exist { background: var(--green-light); border-color: var(--green); }
+  .cell.exist .tag { color: var(--green); }
+  .cell.boost { background: var(--yellow-light); border-color: var(--yellow); }
+  .cell.boost .tag { color: var(--yellow); }
+  .cell.new { background: var(--blue-light); border-color: var(--blue); }
+  .cell.new .tag { color: var(--blue); }
+  .cell.empty {
+    background: var(--gray-light);
+    border-color: var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* SUMMARY STATS */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+  @media(max-width: 640px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+  .stat-card {
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid;
+  }
+  .stat-card.exist { background: var(--green-light); border-color: var(--green); }
+  .stat-card.boost { background: var(--yellow-light); border-color: var(--yellow); }
+  .stat-card.new { background: var(--blue-light); border-color: var(--blue); }
+  .stat-card.empty { background: var(--gray-light); border-color: var(--gray); }
+  .stat-num { font-size: 30px; font-weight: 900; line-height: 1; }
+  .stat-card.exist .stat-num { color: var(--green); }
+  .stat-card.boost .stat-num { color: var(--yellow); }
+  .stat-card.new .stat-num { color: var(--blue); }
+  .stat-card.empty .stat-num { color: var(--gray-dark); }
+  .stat-label { font-size: 12px; font-weight: 700; margin-top: 6px; }
+  .stat-sub { font-size: 10px; color: var(--gray-dark); margin-top: 2px; }
+
+  /* KPI INSIGHTS */
+  .kpi-wrap { background: var(--text); padding: 48px 0; margin-top: 16px; }
+  .kpi-wrap .section-label { color: var(--primary-light); }
+  .kpi-wrap .section-title { color: var(--white); }
+  .kpi-wrap .section-desc { color: var(--gray); }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media(max-width: 760px) { .kpi-grid { grid-template-columns: 1fr; } }
+  .kpi-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 22px;
+    border-top: 4px solid var(--primary);
+  }
+  .kpi-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .kpi-head { font-size: 18px; font-weight: 900; color: var(--white); margin-bottom: 4px; }
+  .kpi-method { font-size: 12px; font-weight: 700; color: var(--primary-light); margin-bottom: 12px; }
+  .kpi-body { font-size: 13px; color: #D8D8D6; line-height: 1.8; }
+  .kpi-target {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--primary);
+    color: var(--white);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin: 4px 4px 0 0;
+  }
+  .kpi-metric {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(255,255,255,0.2);
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--white);
+  }
+  .kpi-metric span { color: var(--primary-light); }
+
+  /* FOOTER */
+  footer { background: var(--white); padding: 32px 0; text-align: center; }
+  .footer-text { font-size: 12px; color: var(--gray-dark); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <span class="badge">GROWTH STRATEGY</span>
+    <h1>市場可視化マトリックス</h1>
+    <p class="subtitle">細分化した「ターゲット」と「カテゴリー（提供価値）」を掛け合わせ、どこにどのサービスを配置し、どのKPIを狙うのかを一枚で俯瞰する網羅マトリックス。このマスを埋めていくことが、そのまま事業拡大の戦略になります。</p>
+  </div>
+</header>
+
+<!-- MATRIX -->
+<div class="section-wrap">
+  <div class="container">
+    <p class="section-label">CORE FRAMEWORK</p>
+    <h2 class="section-title">ターゲット × カテゴリー 網羅マトリックス</h2>
+    <p class="section-desc">縦軸＝細分化したターゲット層／横軸＝提供価値のカテゴリー。色で「立ち位置」を可視化します。</p>
+
+    <div class="legend">
+      <span class="legend-item exist"><span class="dot"></span>既存：すでに基盤がある領域</span>
+      <span class="legend-item boost"><span class="dot"></span>強化：単価・満足度を上げる領域</span>
+      <span class="legend-item new"><span class="dot"></span>新規：未開拓のブルーオーシャン</span>
+      <span class="legend-item empty"><span class="dot"></span>✕：現状ターゲット外</span>
+    </div>
+
+    <div class="matrix-scroll">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th class="corner">ターゲット ＼ カテゴリー</th>
+            <th class="col-head"><div class="ch-name">コンディショニング</div><div class="ch-sub">不調改善・マイナスをゼロに</div></th>
+            <th class="col-head"><div class="ch-name">ファンクショナル</div><div class="ch-sub">能力向上・ゼロをプラスに</div></th>
+            <th class="col-head"><div class="ch-name">コミュニティ＆エンタメ</div><div class="ch-sub">楽しさ・継続・繋がり</div></th>
+            <th class="col-head"><div class="ch-name">ビジネスソリューション</div><div class="ch-sub">経営課題・福利厚生</div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ジュニア：運動苦手層 -->
+          <tr>
+            <td class="row-head"><span class="seg">ジュニア</span><div class="rh-name">運動苦手層</div><div class="rh-sub">未就学〜低学年</div></td>
+            <td class="cell empty">✕</td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">キッズ運動能力向上教室</div><div class="note">体育の苦手克服</div></td>
+            <td class="cell empty">✕</td>
+            <td class="cell empty">✕</td>
+          </tr>
+          <!-- ジュニア：スポーツ層 -->
+          <tr>
+            <td class="row-head"><span class="seg">ジュニア</span><div class="rh-name">スポーツ層</div><div class="rh-sub">小学生・習い事</div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ジュニア姿勢・ケガ予防講座</div><div class="note">クラブチーム出張</div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ジュニアアスリート体幹塾</div><div class="note">パフォーマンス向上</div></td>
+            <td class="cell empty">✕</td>
+            <td class="cell empty">✕</td>
+          </tr>
+          <!-- 現役：不調予備軍 -->
+          <tr>
+            <td class="row-head"><span class="seg">現役</span><div class="rh-name">不調予備軍</div><div class="rh-sub">会社員・市民</div></td>
+            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">からだの保健室</div><div class="note">肩こり・腰痛改善</div></td>
+            <td class="cell empty">✕</td>
+            <td class="cell empty">✕</td>
+            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">健康経営サポート</div><div class="note">生産性向上・離職防止</div></td>
+          </tr>
+          <!-- 現役：ボディメイク層 -->
+          <tr>
+            <td class="row-head"><span class="seg">現役</span><div class="rh-name">ボディメイク層</div><div class="rh-sub">市民・会員</div></td>
+            <td class="cell empty">✕</td>
+            <td class="cell exist"><span class="tag">【既存】</span><div class="svc">フィットネスクラブ</div><div class="note">マシントレーニング等</div></td>
+            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">グループパーソナル</div><div class="note">目的別の短期集中型</div></td>
+            <td class="cell empty">✕</td>
+          </tr>
+          <!-- 現役：コミュニティ重視層 -->
+          <tr>
+            <td class="row-head"><span class="seg">現役</span><div class="rh-name">コミュニティ重視層</div><div class="rh-sub">市民・会員</div></td>
+            <td class="cell empty">✕</td>
+            <td class="cell empty">✕</td>
+            <td class="cell boost"><span class="tag">【強化】</span><div class="svc">部活型セミパーソナル</div><div class="note">仲間と楽しむ運動</div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">ファミリー健康デイ</div><div class="note">企業向けの親子イベント</div></td>
+          </tr>
+          <!-- シニア：アクティブ層 -->
+          <tr>
+            <td class="row-head"><span class="seg">シニア</span><div class="rh-name">アクティブ層</div><div class="rh-sub">60代〜70代前半</div></td>
+            <td class="cell empty">✕</td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">大人の趣味特化塾</div><div class="note">ゴルフや旅行のための体幹</div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">サークル型フィットネス</div><div class="note">同世代のコミュニティ</div></td>
+            <td class="cell empty">✕</td>
+          </tr>
+          <!-- シニア：フレイル予備軍 -->
+          <tr>
+            <td class="row-head"><span class="seg">シニア</span><div class="rh-name">フレイル予備軍</div><div class="rh-sub">70代後半〜</div></td>
+            <td class="cell new"><span class="tag">【新規】</span><div class="svc">自治体受託・介護予防</div><div class="note">転倒防止・機能回復</div></td>
+            <td class="cell empty">✕</td>
+            <td class="cell empty">✕</td>
+            <td class="cell empty">✕</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card exist"><div class="stat-num">3</div><div class="stat-label">既存</div><div class="stat-sub">基盤がある領域</div></div>
+      <div class="stat-card boost"><div class="stat-num">2</div><div class="stat-label">強化</div><div class="stat-sub">単価・満足度UP</div></div>
+      <div class="stat-card new"><div class="stat-num">7</div><div class="stat-label">新規</div><div class="stat-sub">ブルーオーシャン</div></div>
+      <div class="stat-card empty"><div class="stat-num">16</div><div class="stat-label">未配置</div><div class="stat-sub">今後の検討余地</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI INSIGHTS -->
+<div class="kpi-wrap">
+  <div class="container">
+    <p class="section-label">🎯 STRATEGY READING</p>
+    <h2 class="section-title">このマトリックスから紐解く「KPIへの効果」</h2>
+    <p class="section-desc">埋め方の「方向」によって、効くKPIが変わります。狙うゴールから逆算してマスを攻略します。</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-num">01 / 売上向上</div>
+        <div class="kpi-head">縦の深掘り</div>
+        <div class="kpi-method">既存顧客の単価アップ（LTV）</div>
+        <div class="kpi-body">「ボディメイク・コミュニティ層」に対し、通常のフィットネス会費（サブスク）に加えて<strong>【強化】グループパーソナル（追加チケット制）</strong>をハメ込む。会員数を維持したまま単価を引き上げる。</div>
+        <div>
+          <span class="kpi-target">現役：ボディメイク層</span>
+          <span class="kpi-target">現役：コミュニティ重視層</span>
+        </div>
+        <div class="kpi-metric">顧客単価（LTV）を <span>1.5〜2倍</span> へ</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-num">02 / 会員数向上</div>
+        <div class="kpi-head">横の展開</div>
+        <div class="kpi-method">新規ターゲットの獲得</div>
+        <div class="kpi-body">「ジュニア：運動苦手層／スポーツ層」を取り込む。子供のスクールは<strong>口コミが起きやすく</strong>、一度定着すると「小学校卒業まで」など長期にわたって安定した会員数をキープできる。</div>
+        <div>
+          <span class="kpi-target">ジュニア：運動苦手層</span>
+          <span class="kpi-target">ジュニア：スポーツ層</span>
+        </div>
+        <div class="kpi-metric">長期定着で <span>安定会員基盤</span> を構築</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-num">03 / エリア拡大</div>
+        <div class="kpi-head">ハコを持たない展開</div>
+        <div class="kpi-method">出張型・受託型モデル</div>
+        <div class="kpi-body">「シニア：フレイル予備軍（自治体受託）」や「ジュニア：スポーツ層（クラブチーム出張）」を狙う。行政施設や相手先グラウンドを活用でき、<strong>店舗のないエリアでもノーリスク</strong>で認知を広げられる。</div>
+        <div>
+          <span class="kpi-target">シニア：フレイル予備軍</span>
+          <span class="kpi-target">ジュニア：スポーツ層</span>
+        </div>
+        <div class="kpi-metric">店舗なしで <span>認知度・商圏</span> を拡大</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p class="footer-text">ターゲット × カテゴリー 網羅マトリックス｜事業拡大戦略の俯瞰図</p>
+  </div>
+</footer>
+
+</body>
+</html>
