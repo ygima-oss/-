@@ -1,0 +1,46 @@
+name: Golden Cross Notifier
+
+# 株探(kabutan)からゴールデンクロス系シグナル銘柄を抽出し、
+# テーマ別にまとめた GitHub Issue を作成する。
+on:
+  schedule:
+    - cron: "0 23 * * *"  # 08:00 JST (UTC+9)
+    - cron: "0 7 * * *"   # 16:00 JST (UTC+9)
+  workflow_dispatch:        # 手動実行用
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests pandas lxml
+
+      - name: Scrape golden cross stocks
+        id: scrape
+        run: python scripts/fetch_golden_cross.py
+
+      - name: Ensure label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh label create "golden-cross" --color FFD700 --description "ゴールデンクロス銘柄まとめ" --force || true
+
+      - name: Create issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "${{ steps.scrape.outputs.title }}" \
+            --body-file issue_body.md \
+            --label "golden-cross"
