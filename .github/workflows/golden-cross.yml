@@ -1,0 +1,35 @@
+name: Golden Cross Notify
+
+on:
+  schedule:
+    # UTC 22:00 = 翌日 07:00 JST（米国市場クローズ後）。月〜金に実行。
+    # 時刻を変えたい場合はこの cron を編集してください。
+    - cron: "0 22 * * 1-5"
+  workflow_dispatch:        # 手動実行も可能
+    inputs:
+      always:
+        description: "クロスが無くても市場環境を通知する"
+        type: boolean
+        default: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run golden cross notifier
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_TO: ${{ secrets.LINE_TO }}
+        run: |
+          python -m goldencross.main \
+            ${{ (github.event_name == 'workflow_dispatch' && inputs.always) && '--always' || '' }}
