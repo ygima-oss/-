@@ -31,6 +31,7 @@ stocks:
     - { symbol: "6723.T", name: "ルネサス",         theme: "半導体" }
     # --- 宇宙 ---
     - { symbol: "9348.T", name: "ispace",      theme: "宇宙" }
+    - { symbol: "9412.T", name: "スカパーJSAT", theme: "宇宙" }
     - { symbol: "7011.T", name: "三菱重工業",  theme: "宇宙" }
     - { symbol: "7012.T", name: "川崎重工業",  theme: "宇宙" }
     - { symbol: "7013.T", name: "IHI",         theme: "宇宙" }
@@ -47,6 +48,10 @@ stocks:
     - { symbol: "GOOGL", name: "Alphabet",  theme: "主力" }
     - { symbol: "AMZN",  name: "Amazon",    theme: "主力" }
     - { symbol: "TSLA",  name: "Tesla",     theme: "主力" }
+    - { symbol: "TMUS",  name: "T-Mobile US", theme: "通信" }
+    # --- AI ---
+    - { symbol: "AI",    name: "C3.ai",         theme: "AI" }
+    - { symbol: "PLTR",  name: "Palantir",      theme: "AI" }
     # --- 半導体 ---
     - { symbol: "NVDA",  name: "NVIDIA",          theme: "半導体" }
     - { symbol: "AMD",   name: "AMD",             theme: "半導体" }
