@@ -16,6 +16,7 @@ class Signal:
     name: str
     kind: str  # "golden" | "dead"
     price: Optional[float]
+    theme: str = ""  # 例: "半導体" / "宇宙" / "量子"
 
 
 def _fmt_price(v: Optional[float]) -> str:
@@ -47,16 +48,20 @@ def build_message(
     golden = [s for s in signals if s.kind == "golden"]
     dead = [s for s in signals if s.kind == "dead"]
 
+    def _line(s: Signal) -> str:
+        tag = f"[{s.theme}]" if s.theme else ""
+        return f"  ・{s.name}（{s.symbol}）{tag} {_fmt_price(s.price)}"
+
     if golden:
         lines.append("🟢 ゴールデンクロス（買いシグナル）")
         for s in golden:
-            lines.append(f"  ・{s.name}（{s.symbol}） {_fmt_price(s.price)}")
+            lines.append(_line(s))
         lines.append("")
 
     if dead:
         lines.append("🔴 デッドクロス（売りシグナル）")
         for s in dead:
-            lines.append(f"  ・{s.name}（{s.symbol}） {_fmt_price(s.price)}")
+            lines.append(_line(s))
         lines.append("")
 
     if not golden and not dead:

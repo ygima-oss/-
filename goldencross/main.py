@@ -35,7 +35,11 @@ def run(config_path: str | None, dry_run: bool, always: bool) -> int:
         if kind:
             signals.append(
                 message.Signal(
-                    symbol=symbol, name=name, kind=kind, price=closes[-1]
+                    symbol=symbol,
+                    name=name,
+                    kind=kind,
+                    price=closes[-1],
+                    theme=stock.get("theme", ""),
                 )
             )
             print(f"[signal] {name}({symbol}): {kind}")
