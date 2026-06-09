@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>顧客ヒアリング結果｜THE PERSON 町屋</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E2792E;
+    --primary-light: #F5B883;
+    --primary-bg: #FDF4EC;
+    --gray: #CBCBCA;
+    --gray-light: #F5F5F4;
+    --gray-dark: #5A5A58;
+    --text: #2B2B2A;
+    --white: #FFFFFF;
+    --green: #3DAA6E;
+    --green-light: #E8F7F0;
+    --red: #D94F4F;
+    --red-light: #FDEAEA;
+    --yellow: #D4920A;
+    --yellow-light: #FFF8E6;
+    --blue: #2D7DD2;
+    --blue-light: #EAF3FB;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    background: var(--gray-light);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+  header {
+    background: var(--white);
+    padding: 28px 0 24px;
+    border-bottom: 4px solid var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: clamp(20px, 5vw, 28px); font-weight: 900; line-height: 1.3; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: var(--gray-dark); }
+
+  .sec-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+  .sec-title {
+    font-size: clamp(16px, 4vw, 19px);
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  /* ── NPS セクション ── */
+  .nps-wrap {
+    background: var(--text);
+    padding: 32px 0;
+    margin-top: 16px;
+  }
+  .nps-wrap .sec-label { color: var(--primary-light); }
+  .nps-wrap .sec-title { color: var(--white); }
+
+  .nps-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, #D5651A 100%);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .nps-banner::after {
+    content: '';
+    position: absolute;
+    right: -30px; bottom: -30px;
+    width: 140px; height: 140px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .nps-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .nps-num {
+    font-size: clamp(60px, 16vw, 80px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .nps-num span { font-size: clamp(22px, 5vw, 28px); color: rgba(255,255,255,0.7); }
+  .nps-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  .nps-detail {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+  }
+
+  .nps-scale {
+    display: flex;
+    gap: 5px;
+    margin-top: 20px;
+    align-items: flex-end;
+  }
+  .nps-scale-item {
+    flex: 1;
+    text-align: center;
+  }
+  .nps-bar {
+    height: 28px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+  }
+  .nps-bar.active {
+    background: var(--white);
+    color: var(--text);
+    font-size: 14px;
+    height: 44px;
+    border-radius: 6px;
+  }
+  .nps-bar-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+  .nps-bar-label.active { color: var(--primary-light); font-weight: 700; }
+
+  /* ── スコアセクション ── */
+  .scores-wrap {
+    background: var(--white);
+    padding: 32px 0;
+    margin-top: 16px;
+  }
+
+  .score-group {
+    margin-bottom: 28px;
+  }
+  .score-group-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    letter-spacing: 0.12em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gray-light);
+    margin-bottom: 14px;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .score-row:last-child { border-bottom: none; }
+
+  .score-label-wrap { flex: 1; min-width: 0; }
+  .score-label {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .score-sublabel {
+    font-size: 11px;
+    color: var(--gray-dark);
+    margin-top: 2px;
+  }
+
+  .score-meter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    width: 160px;
+  }
+  .score-dots {
+    display: flex;
+    gap: 5px;
+  }
+  .dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--gray-light);
+    border: 2px solid var(--gray);
+  }
+  .dot.filled-green { background: var(--green); border-color: var(--green); }
+  .dot.filled-orange { background: var(--primary); border-color: var(--primary); }
+  .dot.filled-yellow { background: var(--yellow); border-color: var(--yellow); }
+  .dot.filled-red { background: var(--red); border-color: var(--red); }
+
+  .score-val {
+    font-size: 18px;
+    font-weight: 900;
+    min-width: 28px;
+    text-align: right;
+  }
+  .score-val.high { color: var(--green); }
+  .score-val.mid { color: var(--primary); }
+  .score-val.mid-low { color: var(--yellow); }
+  .score-val.low { color: var(--red); }
+
+  /* ── サマリーカード ── */
+  .summary-wrap {
+    background: var(--primary-bg);
+    padding: 32px 0;
+    margin-top: 16px;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+  .summary-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .summary-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+  .summary-card-label.strength { color: var(--green); }
+  .summary-card-label.weak { color: var(--red); }
+  .summary-card-label.opportunity { color: var(--blue); }
+  .summary-card-label.action { color: var(--primary); }
+
+  .summary-card-title {
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .summary-card ul { padding-left: 0; list-style: none; }
+  .summary-card ul li {
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .summary-card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+    top: 5px;
+  }
+  .summary-card.strength ul li::before { color: var(--green); }
+  .summary-card.weak ul li::before { color: var(--red); }
+  .summary-card.opportunity ul li::before { color: var(--blue); }
+  .summary-card.action ul li::before { color: var(--primary); }
+
+  /* ── フリーコメント ── */
+  .comment-wrap {
+    background: var(--white);
+    padding: 32px 0;
+    margin-top: 16px;
+  }
+  .comment-card {
+    background: var(--gray-light);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .comment-card::before {
+    content: '"';
+    position: absolute;
+    top: 10px; left: 16px;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--gray);
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .comment-text {
+    font-size: 14px;
+    line-height: 1.8;
+    padding-top: 24px;
+    font-weight: 500;
+  }
+  .comment-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-right: 6px;
+  }
+  .comment-tag.issue { background: var(--red-light); color: var(--red); }
+  .comment-tag.request { background: var(--yellow-light); color: var(--yellow); }
+  .comment-tag.nas { background: var(--blue-light); color: var(--blue); }
+
+  /* ── アクション ── */
+  .action-wrap {
+    background: var(--text);
+    padding: 32px 0 40px;
+    margin-top: 16px;
+  }
+  .action-wrap .sec-label { color: var(--primary-light); }
+  .action-wrap .sec-title { color: var(--white); }
+
+  .action-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    align-items: flex-start;
+  }
+  .action-item:last-child { border-bottom: none; }
+  .action-prio {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .action-prio.high { background: var(--red); color: var(--white); }
+  .action-prio.mid { background: var(--yellow); color: var(--white); }
+  .action-prio.low { background: var(--blue); color: var(--white); }
+
+  .action-body {}
+  .action-title { font-size: 14px; font-weight: 900; color: var(--white); margin-bottom: 4px; }
+  .action-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  footer {
+    padding: 24px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray-dark);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="badge">CUSTOMER INTERVIEW</div>
+    <h1>顧客ヒアリング 結果報告</h1>
+    <p class="subtitle">THE PERSON ／ 町屋在住 会員様　2026年6月実施</p>
+  </div>
+</header>
+
+<!-- NPS -->
+<section class="nps-wrap">
+  <div class="container">
+    <div class="sec-label">NPS — NET PROMOTER SCORE</div>
+    <div class="sec-title" style="color:var(--white)">推奨度</div>
+
+    <div class="nps-banner">
+      <div class="nps-label">ご家族・ご友人へのおすすめ度</div>
+      <div class="nps-num">10<span>/10</span></div>
+      <div class="nps-sub">最高評価 — Promoter</div>
+      <div class="nps-detail">「ぜひすすめたい」と迷わず答えられる水準</div>
+    </div>
+
+    <div class="nps-scale">
+      <div class="nps-scale-item">
+        <div class="nps-bar">0</div>
+        <div class="nps-bar-label">低</div>
+      </div>
+      <div class="nps-scale-item"><div class="nps-bar">1</div><div class="nps-bar-label"></div></div>
+      <div class="nps-scale-item"><div class="nps-bar">2</div><div class="nps-bar-label"></div></div>
+      <div class="nps-scale-item"><div class="nps-bar">3</div><div class="nps-bar-label"></div></div>
+      <div class="nps-scale-item"><div class="nps-bar">4</div><div class="nps-bar-label"></div></div>
+      <div class="nps-scale-item"><div class="nps-bar">5</div><div class="nps-bar-label"></div></div>
+      <div class="nps-scale-item"><div class="nps-bar">6</div><div class="nps-bar-label">中立</div></div>
+      <div class="nps-scale-item"><div class="nps-bar">7</div><div class="nps-bar-label"></div></div>
+      <div class="nps-scale-item"><div class="nps-bar">8</div><div class="nps-bar-label"></div></div>
+      <div class="nps-scale-item"><div class="nps-bar">9</div><div class="nps-bar-label">推奨</div></div>
+      <div class="nps-scale-item">
+        <div class="nps-bar active">10</div>
+        <div class="nps-bar-label active">◀ 回答</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- スコア詳細 -->
+<section class="scores-wrap">
+  <div class="container">
+    <div class="sec-label">SCORES</div>
+    <div class="sec-title">各指標スコア（5段階）</div>
+
+    <!-- 理解・目的意識 -->
+    <div class="score-group">
+      <div class="score-group-title">理解・目的意識</div>
+
+      <div class="score-row">
+        <div class="score-label-wrap">
+          <div class="score-label">からだの状態・トレーニングを自分の言葉で説明できる</div>
+          <div class="score-sublabel">自己理解の言語化</div>
+        </div>
+        <div class="score-meter-wrap">
+          <div class="score-dots">
+            <div class="dot filled-yellow"></div>
+            <div class="dot filled-yellow"></div>
+            <div class="dot filled-yellow"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="score-val mid-low">3</div>
+        </div>
+      </div>
+
+      <div class="score-row">
+        <div class="score-label-wrap">
+          <div class="score-label">気になることがあったとき、次の対処の見通しが持てている</div>
+          <div class="score-sublabel">見通し・セルフマネジメント</div>
+        </div>
+        <div class="score-meter-wrap">
+          <div class="score-dots">
+            <div class="dot filled-red"></div>
+            <div class="dot filled-red"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="score-val low">2</div>
+        </div>
+      </div>
+
+      <div class="score-row">
+        <div class="score-label-wrap">
+          <div class="score-label">いまの運動・習慣が自分の人生に意味があると感じる</div>
+          <div class="score-sublabel">意味を感じる感覚</div>
+        </div>
+        <div class="score-meter-wrap">
+          <div class="score-dots">
+            <div class="dot filled-green"></div>
+            <div class="dot filled-green"></div>
+            <div class="dot filled-green"></div>
+            <div class="dot filled-green"></div>
+            <div class="dot filled-green"></div>
+          </div>
+          <div class="score-val high">5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- サポート・安心感 -->
+    <div class="score-group">
+      <div class="score-group-title">サポート・安心感</div>
+
+      <div class="score-row">
+        <div class="score-label-wrap">
+          <div class="score-label">気になることがあったとき「相談していい」と思える相手がいて、実際に相談できている</div>
+          <div class="score-sublabel">相談できる相手の存在</div>
+        </div>
+        <div class="score-meter-wrap">
+          <div class="score-dots">
+            <div class="dot filled-green"></div>
+            <div class="dot filled-green"></div>
+            <div class="dot filled-green"></div>
+            <div class="dot filled-green"></div>
+            <div class="dot filled-green"></div>
+          </div>
+          <div class="score-val high">5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 関係 -->
+    <div class="score-group">
+      <div class="score-group-title">トレーナーとの関係</div>
+
+      <div class="score-row">
+        <div class="score-label-wrap">
+          <div class="score-label">「この方になら不調や悩みも話せる」と思えるトレーナーがいる</div>
+          <div class="score-sublabel">信頼可能感</div>
+        </div>
+        <div class="score-meter-wrap">
+          <div class="score-dots">
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="score-val mid">4</div>
+        </div>
+      </div>
+
+      <div class="score-row">
+        <div class="score-label-wrap">
+          <div class="score-label">引越し・転勤で店舗が変わっても、そのトレーナーとはつながり続けたい</div>
+          <div class="score-sublabel">関係の継続性</div>
+        </div>
+        <div class="score-meter-wrap">
+          <div class="score-dots">
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="score-val mid">4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 継続 -->
+    <div class="score-group">
+      <div class="score-group-title">継続意向</div>
+
+      <div class="score-row">
+        <div class="score-label-wrap">
+          <div class="score-label">今後12ヶ月、THE PERSONを続けているイメージがある</div>
+          <div class="score-sublabel">継続意向</div>
+        </div>
+        <div class="score-meter-wrap">
+          <div class="score-dots">
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot filled-orange"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="score-val mid">4</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- サマリー -->
+<section class="summary-wrap">
+  <div class="container">
+    <div class="sec-label">SUMMARY</div>
+    <div class="sec-title">ヒアリング全体の要約</div>
+
+    <div class="summary-grid">
+      <div class="summary-card strength">
+        <div class="summary-card-label strength">STRENGTH — 強み</div>
+        <div class="summary-card-title">すでに高い水準にある点</div>
+        <ul>
+          <li>NPS 10 — 迷わずすすめられる最高評価</li>
+          <li>相談できる相手（トレーナー）への信頼 5/5</li>
+          <li>習慣・運動への意味・価値の実感 5/5</li>
+          <li>トレーナーとの信頼関係が確立されており、継続意向も堅固</li>
+        </ul>
+      </div>
+
+      <div class="summary-card weak">
+        <div class="summary-card-label weak">WEAKNESS — 課題</div>
+        <div class="summary-card-title">改善が必要な点</div>
+        <ul>
+          <li>「次にどう対処すればよいか」の見通し 2/5 — 最低スコア</li>
+          <li>からだの状態・トレーニング理由の言語化 3/5</li>
+          <li>自主トレスペースの予約が取れず活用できていない</li>
+          <li>NASスタッフへ要望を伝えにくい構造がある</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="summary-grid">
+      <div class="summary-card opportunity">
+        <div class="summary-card-label opportunity">OPPORTUNITY — 機会</div>
+        <div class="summary-card-title">伸びしろのある領域</div>
+        <ul>
+          <li>「見通し」を高めることで自律的なセルフケアが促進</li>
+          <li>予約体験の改善が自主トレ活用率・満足度向上につながる</li>
+          <li>NASとの連携強化で言いにくい要望のハードルを下げられる</li>
+        </ul>
+      </div>
+
+      <div class="summary-card action">
+        <div class="summary-card-label action">NEXT ACTION — 対応</div>
+        <div class="summary-card-title">優先対応事項</div>
+        <ul>
+          <li>予約枠の拡充 または 空き状況のリアルタイム可視化</li>
+          <li>自主トレスペース予約の利便性改善</li>
+          <li>「次の一手」の説明をセッション内で習慣化</li>
+          <li>NASへの要望窓口・フィードバック導線の整備</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- フリーコメント -->
+<section class="comment-wrap">
+  <div class="container">
+    <div class="sec-label">FREE COMMENT</div>
+    <div class="sec-title">ご意見・ご要望（原文ベース）</div>
+
+    <div class="comment-card">
+      <div class="comment-text">予約枠がもっと増えるといい。予約できる枠が見えるとよい。</div>
+      <span class="comment-tag request">要望</span>
+      <span class="comment-tag issue">予約枠不足</span>
+    </div>
+
+    <div class="comment-card">
+      <div class="comment-text">自主トレスペースで予約が必要。予約が取れない。ダンベルが使えない。</div>
+      <span class="comment-tag issue">自主トレ利用困難</span>
+      <span class="comment-tag request">設備アクセス改善</span>
+    </div>
+
+    <div class="comment-card">
+      <div class="comment-text">NASに対して（要望を）言いづらい。</div>
+      <span class="comment-tag nas">NAS連携</span>
+      <span class="comment-tag issue">コミュニケーション障壁</span>
+    </div>
+  </div>
+</section>
+
+<!-- アクションプラン -->
+<section class="action-wrap">
+  <div class="container">
+    <div class="sec-label">ACTION PLAN</div>
+    <div class="sec-title" style="color:var(--white)">推奨アクション</div>
+
+    <div class="action-item">
+      <div class="action-prio high">1</div>
+      <div class="action-body">
+        <div class="action-title">予約システムの改善（空き枠の可視化・枠の拡充）</div>
+        <div class="action-desc">「予約できる枠が見えない」「取れない」という声は行動の機会損失に直結。空き状況のリアルタイム表示と予約枠の増設を最優先で検討する。</div>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-prio high">2</div>
+      <div class="action-body">
+        <div class="action-title">自主トレスペースのアクセス改善（ダンベル利用含む）</div>
+        <div class="action-desc">予約が必要なうえに取れない状況では自主トレの習慣化が阻まれる。スペース管理ルールの見直しと設備利用ガイドの明確化が必要。</div>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-prio mid">3</div>
+      <div class="action-body">
+        <div class="action-title">「次の一手」共有をセッション内で標準化</div>
+        <div class="action-desc">見通しスコアが 2/5 と最低水準。各セッション末に「今週試してほしいこと」「次回までのポイント」を1〜2点提示するルーティンを設ける。</div>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-prio low">4</div>
+      <div class="action-body">
+        <div class="action-title">NASへの要望・フィードバック導線の整備</div>
+        <div class="action-desc">「NASに言いづらい」は潜在的な不満が蓄積するリスク。トレーナーがハブとなって要望を吸い上げる仕組み、または専用フォーム等の導入を検討。</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    THE PERSON ／ 顧客ヒアリング結果報告　2026年6月
+  </div>
+</footer>
+
+</body>
+</html>
