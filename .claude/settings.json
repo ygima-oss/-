@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "mcp__b9691144-6cc4-4285-86a2-2ae9aa0e4e64__slack_send_message"
-    ]
+      "mcp__b9691144-6cc4-4285-86a2-2ae9aa0e4e64__slack_send_message",
+      "mcp__b9691144-6cc4-4285-86a2-2ae9aa0e4e64__*"
+    ],
+    "defaultMode": "auto"
   }
 }
