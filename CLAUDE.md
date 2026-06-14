@@ -38,3 +38,21 @@
 - 回数：12〜15回 / 3セット
 - 動画：https://youtu.be/uRmw1pgXxJ0?si=qrpa03ZMLayzGF_P
 - お腹の力を入れながら、お尻を使って股関節を伸ばしていきます！お尻を使う感覚はあると思うので、腰ばかりが使われないようにしていきましょう！
+
+### もも前ほぐし
+- カテゴリ：ストレッチ
+- 目的：筋肉をほぐす
+- 時間：30〜60秒 / 2〜3セット
+- 動画：https://youtu.be/XRG_yHLyFWs?si=P73WtWSq5ctB6Xgb
+
+### もも横ほぐし
+- カテゴリ：ストレッチ
+- 目的：筋肉をほぐす
+- 時間：30〜60秒 / 2〜3セット
+- 動画：https://youtu.be/DWQyJYHJrFA?si=dqhwd1JfY7u4xJCA
+
+### もも裏ストレッチ
+- カテゴリ：ストレッチ
+- 目的：筋肉を伸ばす
+- 時間：30〜60秒 / 2〜3セット
+- 動画：https://youtube.com/shorts/MTEolu9iU1U?si=wtYWjZbx46i_Tjex
