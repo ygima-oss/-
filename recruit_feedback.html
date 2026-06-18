@@ -3,20 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>採用フロー・求人票 改善提案</title>
+  <title>採用フロー・求人票 改善提案 | stadiums</title>
   <style>
+    :root {
+      --primary:       #E2792E;
+      --primary-light: #F5B883;
+      --primary-bg:    #FDF4EC;
+      --gray:          #CBCBCA;
+      --gray-light:    #F5F5F4;
+      --gray-dark:     #5A5A58;
+      --text:          #2B2B2A;
+      --white:         #FFFFFF;
+      --green:         #3DAA6E;
+      --green-light:   #E8F7F0;
+      --yellow:        #D4920A;
+      --yellow-light:  #FFF8E6;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-      background: #f4f6f9;
-      color: #333;
+      background: var(--gray-light);
+      color: var(--text);
       line-height: 1.8;
     }
 
     header {
-      background: linear-gradient(135deg, #2c5f8a, #3a8fc1);
-      color: #fff;
+      background: linear-gradient(135deg, var(--primary) 0%, #D5651A 100%);
+      color: var(--white);
       padding: 40px 32px 32px;
     }
     header .label {
@@ -43,7 +58,7 @@
     }
 
     .section {
-      background: #fff;
+      background: var(--white);
       border-radius: 12px;
       padding: 28px 28px 24px;
       margin-bottom: 24px;
@@ -66,22 +81,22 @@
       font-size: 18px;
       flex-shrink: 0;
     }
-    .icon-blue  { background: #e8f4fd; }
-    .icon-green { background: #eafaf1; }
-    .icon-amber { background: #fef9e7; }
-    .icon-purple{ background: #f3eafd; }
+    .icon-orange { background: var(--primary-bg); }
+    .icon-green  { background: var(--green-light); }
+    .icon-yellow { background: var(--yellow-light); }
+    .icon-gray   { background: var(--gray-light); }
 
     .section-title {
       font-size: 17px;
       font-weight: 700;
-      color: #2c5f8a;
+      color: var(--primary);
     }
 
     .point {
-      border-left: 3px solid #3a8fc1;
+      border-left: 3px solid var(--primary);
       padding: 10px 14px;
       margin-bottom: 12px;
-      background: #f8fbfe;
+      background: var(--primary-bg);
       border-radius: 0 6px 6px 0;
       font-size: 14px;
     }
@@ -89,11 +104,11 @@
 
     .point .lead {
       font-weight: 600;
-      color: #1a4a70;
+      color: var(--primary);
       margin-bottom: 4px;
     }
     .point .body {
-      color: #555;
+      color: var(--gray-dark);
       font-size: 13.5px;
     }
 
@@ -106,10 +121,9 @@
       margin-bottom: 6px;
       letter-spacing: .5px;
     }
-    .tag-blue   { background: #dbeeff; color: #1a5f90; }
-    .tag-green  { background: #d4f5e5; color: #1a7040; }
-    .tag-amber  { background: #fdeecf; color: #8a5e00; }
-    .tag-purple { background: #ead6fc; color: #5a1a90; }
+    .tag-high   { background: var(--primary-bg); color: var(--primary); }
+    .tag-mid    { background: var(--yellow-light); color: var(--yellow); }
+    .tag-green  { background: var(--green-light); color: var(--green); }
 
     .flow {
       display: flex;
@@ -119,46 +133,40 @@
       margin-bottom: 10px;
     }
     .flow-step {
-      background: #e8f4fd;
-      color: #1a5080;
+      background: var(--primary-bg);
+      color: var(--primary);
       font-size: 12px;
       font-weight: 600;
       padding: 5px 12px;
       border-radius: 20px;
     }
     .flow-arrow {
-      color: #aaa;
+      color: var(--gray);
       font-size: 14px;
     }
     .flow-label {
       font-size: 12px;
-      color: #999;
+      color: var(--gray-dark);
       margin-bottom: 6px;
     }
 
-    .divider {
-      border: none;
-      border-top: 2px dashed #e0e8f0;
-      margin: 16px 0;
-    }
-
     .summary-box {
-      background: linear-gradient(135deg, #eaf4fb, #f0faff);
-      border: 1.5px solid #b8d9f0;
+      background: linear-gradient(135deg, var(--primary-bg), #fff8f2);
+      border: 1.5px solid var(--primary-light);
       border-radius: 10px;
       padding: 20px 22px;
       margin-top: 8px;
     }
     .summary-box h3 {
       font-size: 14px;
-      color: #2c5f8a;
+      color: var(--primary);
       font-weight: 700;
       margin-bottom: 10px;
     }
     .summary-box ul {
       list-style: none;
       font-size: 13.5px;
-      color: #444;
+      color: var(--gray-dark);
     }
     .summary-box ul li {
       padding: 3px 0 3px 20px;
@@ -168,14 +176,14 @@
       content: '→';
       position: absolute;
       left: 0;
-      color: #3a8fc1;
+      color: var(--primary);
       font-weight: 700;
     }
 
     footer {
       text-align: center;
       font-size: 12px;
-      color: #aaa;
+      color: var(--gray);
       padding-bottom: 40px;
     }
   </style>
@@ -193,10 +201,10 @@
   <!-- 1. 応募フロー -->
   <div class="section">
     <div class="section-header">
-      <div class="section-icon icon-blue">📋</div>
+      <div class="section-icon icon-orange">📋</div>
       <div class="section-title">1. 応募フローのシンプル化</div>
     </div>
-    <span class="tag tag-blue">優先度 高</span>
+    <span class="tag tag-high">優先度 高</span>
 
     <p class="flow-label">現状の応募ステップ</p>
     <div class="flow">
@@ -238,14 +246,14 @@
       <div class="section-icon icon-green">📄</div>
       <div class="section-title">2. 求人票のターゲット整理</div>
     </div>
-    <span class="tag tag-green">優先度 高</span>
+    <span class="tag tag-high">優先度 高</span>
 
     <div class="point">
       <div class="lead">雇用形態ごとに分けて掲載する</div>
       <div class="body">
         現在、正社員と業務委託が1枚にまとまっているため、対象者がわかりにくくなっています。
         以下のように切り分けると、候補者が自分ごととして読みやすくなります。
-        <ul style="margin-top:8px; padding-left:16px; font-size:13px; color:#555;">
+        <ul style="margin-top:8px; padding-left:16px; font-size:13px; color:#5A5A58;">
           <li>正社員（プレイヤー職）— パーソナルトレーナーとして現場メイン</li>
           <li>正社員（マネージャー職）— チームマネジメント・店舗運営</li>
           <li>業務委託 — 稼働形態・報酬例を明記</li>
@@ -275,10 +283,10 @@
   <!-- 3. 求人内容の具体化 -->
   <div class="section">
     <div class="section-header">
-      <div class="section-icon icon-amber">✏️</div>
+      <div class="section-icon icon-yellow">✏️</div>
       <div class="section-title">3. 求人内容の具体化</div>
     </div>
-    <span class="tag tag-amber">優先度 中</span>
+    <span class="tag tag-mid">優先度 中</span>
 
     <div class="point">
       <div class="lead">必須スキル・歓迎スキルの精査</div>
@@ -308,10 +316,10 @@
   <!-- 4. 会社の魅力訴求 -->
   <div class="section">
     <div class="section-header">
-      <div class="section-icon icon-purple">✨</div>
-      <div class="section-title">4. スタジアムスならではの魅力を前面に</div>
+      <div class="section-icon icon-orange">✨</div>
+      <div class="section-title">4. stadiums ならではの魅力を前面に</div>
     </div>
-    <span class="tag tag-purple">優先度 中</span>
+    <span class="tag tag-mid">優先度 中</span>
 
     <div class="point">
       <div class="lead">「手を挙げれば何でもできる」環境をもっとアピール</div>
@@ -347,7 +355,7 @@
 </div>
 
 <footer>
-  Recruitment Improvement Proposal — Stadiums
+  Recruitment Improvement Proposal — stadiums
 </footer>
 
 </body>
