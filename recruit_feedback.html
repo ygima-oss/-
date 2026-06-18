@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>採用フロー・求人票 改善提案</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2c5f8a, #3a8fc1);
+      color: #fff;
+      padding: 40px 32px 32px;
+    }
+    header .label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 8px;
+    }
+    header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    header p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .icon-blue  { background: #e8f4fd; }
+    .icon-green { background: #eafaf1; }
+    .icon-amber { background: #fef9e7; }
+    .icon-purple{ background: #f3eafd; }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #2c5f8a;
+    }
+
+    .point {
+      border-left: 3px solid #3a8fc1;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      background: #f8fbfe;
+      border-radius: 0 6px 6px 0;
+      font-size: 14px;
+    }
+    .point:last-child { margin-bottom: 0; }
+
+    .point .lead {
+      font-weight: 600;
+      color: #1a4a70;
+      margin-bottom: 4px;
+    }
+    .point .body {
+      color: #555;
+      font-size: 13.5px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 6px;
+      letter-spacing: .5px;
+    }
+    .tag-blue   { background: #dbeeff; color: #1a5f90; }
+    .tag-green  { background: #d4f5e5; color: #1a7040; }
+    .tag-amber  { background: #fdeecf; color: #8a5e00; }
+    .tag-purple { background: #ead6fc; color: #5a1a90; }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+    .flow-step {
+      background: #e8f4fd;
+      color: #1a5080;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+    .flow-arrow {
+      color: #aaa;
+      font-size: 14px;
+    }
+    .flow-label {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 6px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 2px dashed #e0e8f0;
+      margin: 16px 0;
+    }
+
+    .summary-box {
+      background: linear-gradient(135deg, #eaf4fb, #f0faff);
+      border: 1.5px solid #b8d9f0;
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-top: 8px;
+    }
+    .summary-box h3 {
+      font-size: 14px;
+      color: #2c5f8a;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .summary-box ul {
+      list-style: none;
+      font-size: 13.5px;
+      color: #444;
+    }
+    .summary-box ul li {
+      padding: 3px 0 3px 20px;
+      position: relative;
+    }
+    .summary-box ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #3a8fc1;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      padding-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="label">Recruitment Improvement Proposal</div>
+  <h1>採用フロー・求人票 改善提案</h1>
+  <p>より多くの優秀な候補者へ届くために — いただいたフィードバックのまとめ</p>
+</header>
+
+<div class="container">
+
+  <!-- 1. 応募フロー -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">📋</div>
+      <div class="section-title">1. 応募フローのシンプル化</div>
+    </div>
+    <span class="tag tag-blue">優先度 高</span>
+
+    <p class="flow-label">現状の応募ステップ</p>
+    <div class="flow">
+      <span class="flow-step">HP でボタン押下</span>
+      <span class="flow-arrow">›</span>
+      <span class="flow-step">LINE 登録</span>
+      <span class="flow-arrow">›</span>
+      <span class="flow-step">採用情報を確認</span>
+      <span class="flow-arrow">›</span>
+      <span class="flow-step">フォーム提出</span>
+    </div>
+
+    <div class="point">
+      <div class="lead">応募意欲が高い瞬間を逃さない</div>
+      <div class="body">
+        候補者が「応募したい」と感じた熱量はとても短命です。ステップが多くなるほど離脱リスクが高まります。
+        理想は <strong>HP → 応募フォーム → 即日程確定</strong> の最短ルート。
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="lead">推奨フロー（改善案）</div>
+      <div class="body">
+        <div class="flow" style="margin-top:6px">
+          <span class="flow-step">HP カジュアル面談ボタン</span>
+          <span class="flow-arrow">›</span>
+          <span class="flow-step">応募フォーム（1 画面）</span>
+          <span class="flow-arrow">›</span>
+          <span class="flow-step">日程調整 / 確定</span>
+        </div>
+        ホームページから直接応募フォームへ遷移させることで、離脱ポイントを最小化できます。
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 求人票の整理 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">📄</div>
+      <div class="section-title">2. 求人票のターゲット整理</div>
+    </div>
+    <span class="tag tag-green">優先度 高</span>
+
+    <div class="point">
+      <div class="lead">雇用形態ごとに分けて掲載する</div>
+      <div class="body">
+        現在、正社員と業務委託が1枚にまとまっているため、対象者がわかりにくくなっています。
+        以下のように切り分けると、候補者が自分ごととして読みやすくなります。
+        <ul style="margin-top:8px; padding-left:16px; font-size:13px; color:#555;">
+          <li>正社員（プレイヤー職）— パーソナルトレーナーとして現場メイン</li>
+          <li>正社員（マネージャー職）— チームマネジメント・店舗運営</li>
+          <li>業務委託 — 稼働形態・報酬例を明記</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="lead">給与幅を補足説明で安心感に変える</div>
+      <div class="body">
+        「250,000 〜 500,000 円」という幅は候補者に不安を与えやすいです。
+        業務委託の場合は <strong>稼働時間の例</strong> や <strong>経験年数・評価指標ごとの報酬事例</strong>
+        を添えると、自分の見込み収入がイメージしやすくなります。
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="lead">福利厚生も雇用形態ごとに明示</div>
+      <div class="body">
+        業務委託には原則として福利厚生が適用されません。
+        もし業務委託向けに提供できるサポートがあれば、それを別枠で「業務委託サポート制度」として
+        切り出すと、誤解なく正確に伝えられます。
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 求人内容の具体化 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-amber">✏️</div>
+      <div class="section-title">3. 求人内容の具体化</div>
+    </div>
+    <span class="tag tag-amber">優先度 中</span>
+
+    <div class="point">
+      <div class="lead">必須スキル・歓迎スキルの精査</div>
+      <div class="body">
+        「経験 1 年未満可・年齢不問」という記載が本当に全ポジション共通で良いか、
+        ターゲット像に合わせて再確認することをお勧めします。
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="lead">業務内容はターゲット別に具体化</div>
+      <div class="body">
+        各ポジションで担う業務を一段具体的に書くと、候補者の「自分がここで働くイメージ」が湧きやすくなります。
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="lead">研修・評価制度は独立した項目として掲載</div>
+      <div class="body">
+        現状、研修制度に関する記述が業務内容の中に埋もれています。
+        「研修制度」「評価制度」を独立した見出しとして分けることで、
+        会社の魅力として前面に打ち出せます。
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 会社の魅力訴求 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-purple">✨</div>
+      <div class="section-title">4. スタジアムスならではの魅力を前面に</div>
+    </div>
+    <span class="tag tag-purple">優先度 中</span>
+
+    <div class="point">
+      <div class="lead">「手を挙げれば何でもできる」環境をもっとアピール</div>
+      <div class="body">
+        新規立ち上げやチャレンジングな機会が豊富なことは、求職者にとって大きな魅力です。
+        現状の求人票ではその点が伝わりきっていないため、
+        <strong>成長機会・裁量の大きさ・社内起業的な文化</strong> を積極的に言語化すると、
+        同じ志向を持つ候補者に響きます。
+      </div>
+    </div>
+
+    <div class="point">
+      <div class="lead">ターゲットペルソナを意識したコピーを</div>
+      <div class="body">
+        「新しいことに挑戦したい」「自分でビジネスを育てたい」層に向けたメッセージを
+        冒頭に置くと、マッチ度の高い候補者の応募が増えやすくなります。
+      </div>
+    </div>
+  </div>
+
+  <!-- まとめ -->
+  <div class="summary-box">
+    <h3>アクションサマリー</h3>
+    <ul>
+      <li>HP から応募フォームへ直接遷移できる動線を作る</li>
+      <li>求人票を「正社員（プレイヤー）」「正社員（マネージャー）」「業務委託」に分けて掲載</li>
+      <li>業務委託の報酬は稼働例・評価軸を添えて具体化する</li>
+      <li>研修制度・評価制度を独立した項目として見せる</li>
+      <li>チャレンジ・裁量・成長機会の魅力を求人票の冒頭で訴求する</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  Recruitment Improvement Proposal — Stadiums
+</footer>
+
+</body>
+</html>
