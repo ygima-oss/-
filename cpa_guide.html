@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【THE PERSON】CPA低減 基礎知識 & 現場施策ガイド</title>
+<style>
+  body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #1a1a1a;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: #ffffff;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1a1a1a;
+    border-bottom: 3px solid #1a1a1a;
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  .subtitle {
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 32px;
+  }
+
+  /* セクション見出し */
+  h2 {
+    font-size: 17px;
+    font-weight: bold;
+    background: #1a1a2e;
+    color: #ffffff;
+    padding: 8px 14px;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1a1a2e;
+    border-left: 4px solid #1a1a2e;
+    padding-left: 10px;
+    margin-top: 28px;
+    margin-bottom: 10px;
+  }
+  h4 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 6px;
+  }
+
+  /* 目次 */
+  .toc {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 20px 28px;
+    margin-bottom: 40px;
+  }
+  .toc h2 {
+    font-size: 14px;
+    background: none;
+    color: #333;
+    padding: 0;
+    margin: 0 0 10px 0;
+    border-radius: 0;
+  }
+  .toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .toc li {
+    margin: 4px 0;
+    font-size: 13px;
+  }
+
+  /* ハイライトボックス */
+  .highlight-yellow {
+    background: #fffde7;
+    border-left: 4px solid #f9a825;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .highlight-blue {
+    background: #e3f2fd;
+    border-left: 4px solid #1565c0;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .highlight-green {
+    background: #e8f5e9;
+    border-left: 4px solid #2e7d32;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .highlight-red {
+    background: #ffebee;
+    border-left: 4px solid #c62828;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .highlight-purple {
+    background: #f3e5f5;
+    border-left: 4px solid #6a1b9a;
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* 重要ポイント */
+  .key-point {
+    background: #fff8e1;
+    border: 2px solid #f9a825;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-weight: bold;
+  }
+  .key-point::before {
+    content: "★ ";
+    color: #f9a825;
+  }
+
+  /* 警告 */
+  .warning {
+    background: #fff3e0;
+    border: 1px solid #e65100;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .warning::before {
+    content: "⚠️ ";
+  }
+
+  /* テーブル */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  th {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td {
+    background: #f9f9f9;
+  }
+  .achieved {
+    color: #2e7d32;
+    font-weight: bold;
+  }
+  .gap {
+    color: #c62828;
+    font-weight: bold;
+  }
+
+  /* バッジ */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-right: 4px;
+  }
+  .badge-red    { background: #ffcdd2; color: #b71c1c; }
+  .badge-yellow { background: #fff9c4; color: #f57f17; }
+  .badge-green  { background: #c8e6c9; color: #1b5e20; }
+  .badge-blue   { background: #bbdefb; color: #0d47a1; }
+
+  /* チェックリスト */
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+  }
+  .checklist li {
+    padding: 5px 0 5px 28px;
+    position: relative;
+    border-bottom: 1px dotted #eee;
+  }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    color: #888;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  /* 優先度グループ */
+  .priority-group {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .priority-group .priority-label {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .priority-high   .priority-label { color: #c62828; }
+  .priority-mid    .priority-label { color: #e65100; }
+  .priority-low    .priority-label { color: #1565c0; }
+  .priority-high { border-color: #ef9a9a; background: #fff8f8; }
+  .priority-mid  { border-color: #ffcc80; background: #fffaf5; }
+  .priority-low  { border-color: #90caf9; background: #f5f9ff; }
+
+  /* スクリプト吹き出し */
+  .speech-bubble {
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-style: italic;
+    position: relative;
+  }
+  .speech-bubble::before {
+    content: "💬 ";
+  }
+
+  /* 数式・計算式 */
+  .formula {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-family: monospace;
+    font-size: 14px;
+    margin: 12px 0;
+    display: block;
+  }
+
+  /* まとめ */
+  .summary-box {
+    background: #1a1a2e;
+    color: #fff;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 48px;
+  }
+  .summary-box h2 {
+    background: none;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 8px;
+    margin-top: 0;
+  }
+  .summary-box li {
+    margin: 8px 0;
+  }
+
+  ul, ol {
+    padding-left: 22px;
+    margin: 8px 0;
+  }
+  li { margin: 4px 0; }
+  p  { margin: 8px 0; }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 32px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>【THE PERSON】CPA低減 基礎知識 &amp; 現場施策ガイド</h1>
+<p class="subtitle">マーケチーム新メンバー向け ／ 作成日：2026年6月</p>
+
+<!-- 目次 -->
+<div class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li>まず押さえる基礎指標</li>
+    <li>THE PERSONの現状と課題</li>
+    <li>CPAを下げる3つの構造</li>
+    <li>重点施策 ① 広告運用の最適化</li>
+    <li>重点施策 ② LPO（ランディングページ最適化）</li>
+    <li>重点施策 ③ 中長期チャネル（SEO・アフィリエイト・オフライン）</li>
+    <li>重点施策 ④ リファラル（紹介）施策 ── 紹介を増やす実装プレイブック</li>
+    <li>現場で今すぐできる施策チェックリスト</li>
+    <li>KPIの見方・モニタリング方法</li>
+  </ol>
+</div>
+
+
+<!-- ============================== -->
+<h2>1. まず押さえる基礎指標</h2>
+
+<h3>CPA（Cost Per Acquisition）＝ 獲得単価</h3>
+<p>1件のコンバージョン（体験申込・入会）を得るのにかかった広告費。</p>
+<span class="formula">CPA = 広告費合計 ÷ CV（コンバージョン）数</span>
+<p>例：広告費 ¥100万、体験申込 100件 → <strong>CPA = ¥10,000</strong></p>
+
+<h3>CPO（Cost Per Order）＝ 入会獲得単価</h3>
+<p>1件の入会を得るのにかかったコスト。</p>
+<span class="formula">CPO = CPA ÷ 入会率</span>
+<p>例：CPA ¥10,000、入会率 50% → <strong>CPO = ¥20,000</strong></p>
+
+<h3>CVR（Conversion Rate）＝ コンバージョン率</h3>
+<p>LPを訪れたユーザーのうち、実際に申込んだ割合。</p>
+<span class="formula">CVR = CV数 ÷ LP訪問者数 × 100（%）</span>
+<p>THE PERSONの現状：<strong class="gap">CVR &lt; 1%</strong>（目標：約2%）</p>
+
+<h3>CPC（Cost Per Click）＝ クリック単価</h3>
+<span class="formula">CPC = 広告費 ÷ クリック数</span>
+
+<h3>CTR（Click Through Rate）＝ クリック率</h3>
+<span class="formula">CTR = クリック数 ÷ インプレッション数 × 100（%）</span>
+
+<h3>広告比率</h3>
+<p>全体の入会数のうち広告経由が占める割合。THE PERSONの目標：<strong>広告比率 50%</strong>（現状ほぼ広告依存 → 半分は非広告で獲得）</p>
+
+<div class="key-point">
+  指標のつながり：<code>CPA = CPC ÷ CVR</code><br>
+  CPAを下げるには「CPCを下げる」か「CVRを上げる」。<br>
+  CVRが1% → 2%になれば、広告費そのままでCPAは半減する。
+</div>
+
+<div class="highlight-blue">
+  例：CPC ¥500、CVR 1% → CPA = <strong>¥50,000</strong>（高い）<br>
+  　　CPC ¥500、CVR 2% → CPA = <strong>¥25,000</strong>（CVR2倍でCPA半減）
+</div>
+
+
+<!-- ============================== -->
+<h2>2. THE PERSONの現状と課題</h2>
+
+<h3>前期実績 vs 目標</h3>
+<table>
+  <tr><th>指標</th><th>目標</th><th>全店実績</th><th>必要改善率</th></tr>
+  <tr><td>媒体CPA（体験）</td><td>¥10,000</td><td class="gap">¥15,675</td><td class="gap">▲36.2%</td></tr>
+  <tr><td>全体CPA（体験）</td><td>¥10,000</td><td class="gap">¥17,580</td><td class="gap">▲43.1%</td></tr>
+  <tr><td>全体CPO（入会）</td><td>¥20,000</td><td class="gap">¥35,160</td><td class="gap">▲43.1%</td></tr>
+  <tr><td>入会率</td><td>50%</td><td class="achieved">50%</td><td class="achieved">達成 ✓</td></tr>
+  <tr><td>広告比率</td><td>50%</td><td class="gap">ほぼ広告依存</td><td class="gap">要改善</td></tr>
+</table>
+
+<h3>ボトルネックの所在</h3>
+<div class="highlight-red">
+  <strong>入会率は達成済み（50%）。ボトルネックは「体験申込を集める効率（CPA）」にある。</strong>
+</div>
+<ul>
+  <li><strong>ボトルネック①：CVR &lt; 1%</strong> ── 100人がLPに来ても1人しか申し込まない。CVR 2%になればCPAはほぼ半減</li>
+  <li><strong>ボトルネック②：店舗間CPAばらつきが最大3倍</strong> ── 商圏差により全店一律の広告運用では非効率が混在</li>
+</ul>
+
+<h3>なぜ広告比率50%を目標にするのか</h3>
+<span class="formula">全体CPA = 広告CPA × 広告比率 ＋ 非広告CPA × 非広告比率</span>
+<div class="highlight-green">
+  例：広告CPA ¥20,000（広告比率100%）→ 全体CPA = <strong>¥20,000</strong><br>
+  　　広告CPA ¥20,000（50%）＋ 紹介CPA ¥2,000（50%）→ 全体CPA = <strong>¥11,000</strong><br>
+  　　→ 広告CPAが同じでも、非広告チャネルを育てるだけで全体CPAが大幅改善
+</div>
+
+
+<!-- ============================== -->
+<h2>3. CPAを下げる3つの構造</h2>
+
+<div class="priority-group priority-high">
+  <div class="priority-label">【構造A】CVRを上げる（最大レバー）</div>
+  <ul>
+    <li>LPのデザイン・文言・構成を改善</li>
+    <li>ターゲット別LP（女性向け・ミドルシニア向け）を作成</li>
+    <li>フォームの入力項目を減らす</li>
+    <li>ページの表示速度を上げる</li>
+  </ul>
+  <p>→ CVR 1% → 2% でCPAは約半減（費用そのままで成果2倍）</p>
+</div>
+
+<div class="priority-group priority-mid">
+  <div class="priority-label">【構造B】CPCを下げる（広告効率改善）</div>
+  <ul>
+    <li>不要なキーワード・エリアを除外して無駄クリックを減らす</li>
+    <li>入札戦略を見直す</li>
+    <li>広告文・クリエイティブを改善してCTRを上げる</li>
+    <li>Meta/Googleの予算配分を最適化する</li>
+  </ul>
+  <p>→ 同じ予算でより多くのクリックを獲得</p>
+</div>
+
+<div class="priority-group priority-low">
+  <div class="priority-label">【構造C】非広告チャネルを育てる（中長期）</div>
+  <ul>
+    <li>SEO：記事コンテンツで検索流入を増やす（広告費ゼロ）</li>
+    <li>アフィリエイト：成果報酬型なので固定コストゼロ</li>
+    <li>リファラル（紹介）：インセンティブ原価のみで獲得</li>
+    <li>オフライン：ポスティング・駅前看板で商圏内認知を上げる</li>
+  </ul>
+  <p>→ 広告比率を下げることで全体（ブレンド）CPAを構造的に低減</p>
+</div>
+
+
+<!-- ============================== -->
+<h2>4. 重点施策 ① 広告運用の最適化</h2>
+
+<h3>(a) 運用の最適化</h3>
+
+<h4>エリアターゲティング</h4>
+<ul>
+  <li>店舗から徒歩圏（約1〜2km）に絞って配信</li>
+  <li>商圏外への配信は除外設定する</li>
+  <li>協業先から居住エリアデータをもらえれば精度アップ</li>
+</ul>
+
+<h4>キーワード管理（Google広告）</h4>
+<ul>
+  <li>効果の低いキーワードを定期的に棚卸し</li>
+  <li>除外キーワードを追加（競合名・無関係ワード）</li>
+  <li>広告文を定期刷新（月1回以上）</li>
+</ul>
+
+<h4>配信面の精査（Meta広告）</h4>
+<ul>
+  <li>Instagram Stories、Facebook フィードなど、CPAが高い配信面を除外</li>
+  <li>年齢・性別・興味関心のターゲティングを見直す</li>
+</ul>
+
+<h4>店舗別の配信ON/OFFルール</h4>
+<ul>
+  <li>許容CPAを超えた店舗は出稿を抑制 or 停止</li>
+  <li>好調店には予算を増やして最大化</li>
+</ul>
+
+<h3>(b) 予算の最適化</h3>
+<ul>
+  <li>Meta / Google の配分を実績CPAで判断（効率の良い方に寄せる）</li>
+  <li>店舗ごとに予算上限を設定（不調店の垂れ流しを防ぐ）</li>
+  <li>週次でCPA確認 → 月内に予算配分を調整するサイクルを作る</li>
+</ul>
+
+<h3>(c) クリエイティブの改善</h3>
+
+<table>
+  <tr><th>訴求軸</th><th>ターゲット</th><th>フォーマット</th></tr>
+  <tr><td>リカバリー（疲れ・体型戻し）</td><td>30〜40代</td><td>静止画・動画</td></tr>
+  <tr><td>女性向け（美体型・産後）</td><td>20〜30代女性</td><td>リール・Stories</td></tr>
+  <tr><td>ミドルシニア（健康維持・体力）</td><td>40〜50代</td><td>静止画・動画</td></tr>
+</table>
+
+<ul>
+  <li>月次で新しいバリエーションを一定数投入（マンネリ防止）</li>
+  <li>勝ちクリエイティブを横展開（他店舗でも使う）</li>
+  <li>デザイナーとのフロー（Slack連携）を高速化</li>
+</ul>
+
+<div class="highlight-green">
+  <strong>期待効果：</strong>媒体CPA ¥15,675 → ¥10,000（▲36%）・店舗間CPAのばらつきを縮小
+</div>
+
+
+<!-- ============================== -->
+<h2>5. 重点施策 ② LPO（ランディングページ最適化）</h2>
+
+<div class="key-point">
+  CVR &lt; 1% ＝ LPに来た99%以上が申込まずに離脱している。<br>
+  CVR 1% → 2% になれば広告費ゼロで体験申込数2倍 ＝ CPA半分。
+</div>
+
+<h3>LP改善の優先順位</h3>
+
+<div class="priority-group priority-high">
+  <div class="priority-label">【優先度 高】ファーストビュー</div>
+  <ul>
+    <li>ターゲットが「自分向けだ」と思えるビジュアル・コピー</li>
+    <li>ベネフィットが瞬時に伝わるか（何が得られるか）</li>
+    <li>CTAボタンが目立つか</li>
+  </ul>
+</div>
+
+<div class="priority-group priority-high">
+  <div class="priority-label">【優先度 高】フォーム最適化</div>
+  <ul>
+    <li>入力項目は最小限（名前・電話番号・希望日時のみが理想）</li>
+    <li>ボタンラベル例：「申し込む」→「今すぐ無料体験を予約する」</li>
+    <li>スマホで入力しやすいか（入力欄の大きさ・キーボードの種類）</li>
+  </ul>
+</div>
+
+<div class="priority-group priority-mid">
+  <div class="priority-label">【優先度 中】ターゲット別LPの出し分け</div>
+  <ul>
+    <li>共通LP・女性向けLP・40〜50代向けLP を広告ターゲティングに合わせて表示</li>
+    <li>ターゲットに刺さるLPを見せることでCVRが上がる</li>
+  </ul>
+</div>
+
+<div class="priority-group priority-mid">
+  <div class="priority-label">【優先度 中】ページ表示速度</div>
+  <ul>
+    <li>3秒以上かかると離脱率急上昇（1秒遅くなるごとにCVR約7%低下）</li>
+    <li>画像最適化（WebP形式・圧縮）、不要タグ整理、遅延読み込み設定</li>
+  </ul>
+</div>
+
+<h3>SquadBeyond（LP量産ツール）の活用</h3>
+<ul>
+  <li>1つのLPから複数バリエーションを素早く生成、A/Bテストを高速化</li>
+  <li>まず1店舗・2〜3ヶ月のトライアルで効果検証</li>
+  <li>評価基準：CVR改善率、CPA改善率</li>
+</ul>
+
+<h3>CVR積み上げのロジック</h3>
+<table>
+  <tr><th>施策</th><th>CVR改善寄与</th></tr>
+  <tr><td>ファーストビュー改善</td><td>+10%</td></tr>
+  <tr><td>フォーム最適化</td><td>+15%</td></tr>
+  <tr><td>ターゲット別LP</td><td>+10%</td></tr>
+  <tr><td>ページ速度改善</td><td>+5〜10%</td></tr>
+  <tr><td><strong>合計</strong></td><td><strong>CVR 約1% → 2% を目指す</strong></td></tr>
+</table>
+
+
+<!-- ============================== -->
+<h2>6. 重点施策 ③ 中長期チャネル（SEO・アフィリエイト・オフライン）</h2>
+
+<h3>SEO（検索エンジン最適化）</h3>
+<div class="highlight-blue">
+  <strong>THE PERSONの強み：</strong>ドメインレーティング（DR）が高い ＝ Googleからの信頼度が高い。良質な記事を書けばランクアップしやすい。
+</div>
+<ul>
+  <li>地域ロングテールキーワード記事：「パーソナルトレーニング 〇〇駅」など</li>
+  <li>悩み系記事：「産後ダイエット おすすめ」「50代 筋トレ 効果」など</li>
+  <li>サイト構造の整理（内部リンク、タイトル・メタ情報の最適化）</li>
+  <li>AI検索（ChatGPT・Perplexity）対策も兼ねたコンテンツ設計</li>
+</ul>
+<p class="warning">SEOは成果が出るまで3〜6ヶ月かかる。今すぐ始めないと次期に間に合わない。</p>
+
+<h3>アフィリエイト</h3>
+<p>比較メディアへの掲載で、体験申込・入会があった場合にのみ報酬を払う<strong>成果報酬型</strong>。固定費ゼロ。</p>
+<ul>
+  <li>ASP業者と契約・連携</li>
+  <li>比較記事への掲載営業を強化</li>
+  <li>既存アフィリエイトの是正対応（誤情報確認）</li>
+</ul>
+
+<h3>Googleマップ（MEO）</h3>
+<ul>
+  <li>「パーソナルジム 〇〇」検索で上位表示 → 来店意欲の高い近隣ユーザーにリーチ</li>
+  <li>Googleビジネスプロフィールを最新化（写真・営業時間・電話番号）</li>
+  <li>口コミへの丁寧な返信（評価数・評価がランクに影響）</li>
+</ul>
+
+<h3>オフライン施策（認知・商圏獲得）</h3>
+<div class="highlight-yellow">
+  <strong>来店動機1位「自宅から近い」</strong> → 商圏（徒歩圏）への直接リーチが最も有効
+</div>
+<table>
+  <tr><th>施策</th><th>狙い</th><th>計測方法</th></tr>
+  <tr><td>ポスティング</td><td>徒歩圏世帯への認知・獲得</td><td>専用QR・専用LP</td></tr>
+  <tr><td>駅前広告</td><td>日常導線上での認知獲得</td><td>指名検索の増加</td></tr>
+  <tr><td>看板広告</td><td>地域内ブランド想起の醸成</td><td>指名検索の増加</td></tr>
+  <tr><td>協業先との予算折半</td><td>OOHコスト半減・クロス送客</td><td>流入元分析</td></tr>
+</table>
+
+
+<!-- ============================== -->
+<h2>7. 重点施策 ④ リファラル（紹介）施策<br>── 紹介を増やす実装プレイブック</h2>
+
+<div class="highlight-green">
+  <strong>獲得コスト ≒ インセンティブ原価のみ（¥2,000〜¥5,000程度）</strong><br>
+  広告CPA ¥17,580 と比べて圧倒的に低コスト。<br>
+  会員満足度 ★4.9 を紹介行動に転換できていない ＝ 伸びしろが大きい。
+</div>
+
+<hr>
+
+<h3>大前提：「満足 ≠ 紹介行動」</h3>
+<div class="highlight-red">
+  ★4.9でも紹介が少ない理由は、3つの欠如にある。
+  <ol>
+    <li><strong>きっかけがない</strong> → 依頼されていない</li>
+    <li><strong>手間がかかる</strong> → 紹介のハードルが高い</li>
+    <li><strong>動機が弱い</strong> → メリット設計ができていない</li>
+  </ol>
+  この3つを同時に解消することが、紹介を増やす構造的な打ち手になる。
+</div>
+
+<hr>
+
+<h3>欠如① きっかけを作る（依頼と仕組み）</h3>
+<p>人は「紹介して」と言われない限り動かない。依頼する仕組みを作ることが最優先。</p>
+
+<h4>トレーナーからの声かけをルール化</h4>
+<ul>
+  <li><span class="badge badge-blue">タイミング</span> 入会3ヶ月後（満足度がピークになりやすい時期）</li>
+  <li><span class="badge badge-red">逃さない</span> 「目標体重達成」「体脂肪率低下」「腰痛改善」など成果が出た瞬間 ＝ 紹介が最も生まれやすい瞬間</li>
+  <li>この場で紹介カードを渡す / アプリの紹介機能を案内する</li>
+</ul>
+
+<h4>声かけスクリプト（例）</h4>
+<div class="speech-bubble">
+  「最近すごくいい感じですね！<br>
+  もし周りでジム始めたい方いたら、ぜひ紹介してください。<br>
+  ご紹介いただいた方にも特典をご用意しています。<br>
+  このカード（orリンク）を渡してもらえれば大丈夫ですよ」
+</div>
+<p>→ 全店で統一したスクリプトを使い、声かけの属人化を防ぐ</p>
+
+<h4>紹介キャンペーン期間の設定</h4>
+<ul>
+  <li>「今月紹介すると特典2倍」など期間限定で行動を促す</li>
+  <li>新店オープン・記念月・閑散期などのタイミングに合わせると効果的</li>
+</ul>
+
+<hr>
+
+<h3>欠如② 手間をゼロにする（紹介導線の整備）</h3>
+<p>「友達に説明して…連絡して…」が面倒で行動しない。紹介のステップを最大限シンプルにすることが鍵。</p>
+
+<h4>会員アプリ / LINE公式アカウント</h4>
+<ul>
+  <li>紹介リンク・QRコードを1タップで友人に送信できる</li>
+  <li>LINE公式の「友だち紹介」機能を活用するのが実装コスト最小</li>
+  <li>申込が完了すると紹介者に自動で通知・特典が付与される仕組み</li>
+</ul>
+
+<h4>被紹介者が説明不要な状態にする</h4>
+<ul>
+  <li>リンクを送るだけで「初回無料体験ができる」ことが分かるLPに着地させる</li>
+  <li>「〇〇さんからご紹介いただいた方へ」という動的な訴求を入れるとCVRが上がる</li>
+</ul>
+
+<h4>店頭の紹介カード（アナログ施策）</h4>
+<ul>
+  <li>デジタルが苦手なシニア・ミドル層にはカードが有効</li>
+  <li>体験後・入会後に<strong>毎回渡すルール</strong>にする（渡し漏れをなくす）</li>
+  <li>QRコードを載せて、紙でもデジタルでも申し込めるようにする</li>
+</ul>
+
+<h4>家族・パートナー割の設計</h4>
+<ul>
+  <li>「一緒に通う」は最も成約しやすい紹介パターン</li>
+  <li>既存会員の満足度が高い業態ほど「ファミリープラン」は効きやすい</li>
+</ul>
+
+<hr>
+
+<h3>欠如③ 動機を設計する（インセンティブ）</h3>
+
+<div class="highlight-yellow">
+  <strong>基本構造：紹介者・被紹介者の双方に特典</strong><br>
+  紹介者だけへの特典では「友達を売る」感覚が生まれる。双方に特典があることで「友達にもいいことがある」と行動しやすくなる。
+</div>
+
+<table>
+  <tr><th>対象</th><th>特典例</th><th>金銭的価値</th></tr>
+  <tr><td><strong>紹介者</strong></td><td>月会費 ¥3,000 割引（1ヶ月）<br>体験チケット1枚<br>セッション1回サービス</td><td>¥3,000〜¥5,000相当</td></tr>
+  <tr><td><strong>被紹介者</strong></td><td>初回体験無料<br>入会金無料<br>入会月の月会費割引</td><td>¥3,000〜¥20,000相当</td></tr>
+</table>
+
+<div class="warning">
+  景品表示法により提供できる景品・割引額には上限がある。一般懸賞：取引額の20倍以内かつ上限10万円が目安。<strong>実施前に必ず法務確認を行う。</strong>
+</div>
+
+<h4>成果報告・ビジュアルを活かした自然な紹介</h4>
+<ul>
+  <li>ビフォーアフター写真（本人同意のもと）をSNSで投稿 → 見た友人から「どこのジム？」という流れ</li>
+  <li>Instagramストーリーズでのシェアを促す（投稿テンプレートを会員に提供すると行動しやすい）</li>
+</ul>
+
+<hr>
+
+<h3>かかりつけトレーナー起点の紹介促進（THE PERSONの最大の武器）</h3>
+
+<div class="key-point">
+  THE PERSONの最大の資産は「★4.9 × かかりつけトレーナーの信頼関係」。<br>
+  広告では絶対に作れない「人からの推奨」が眠っている状態。
+</div>
+
+<h4>声かけのタイミング設計</h4>
+<table>
+  <tr><th>タイミング</th><th>声かけ内容</th></tr>
+  <tr><td>入会直後</td><td>「もし知人・家族で興味ある方いたら紹介カードお渡しします」</td></tr>
+  <tr><td>入会3ヶ月後</td><td>「最近すごく変化が出てきましたね。ぜひ周りにも紹介を」</td></tr>
+  <tr><td>成果達成時</td><td>「達成おめでとうございます！ぜひ友人にも教えてあげてください」</td></tr>
+  <tr><td>更新時</td><td>「継続ありがとうございます。ご紹介キャンペーン中です」</td></tr>
+</table>
+
+<h4>トレーナーへのインセンティブ設計</h4>
+<ul>
+  <li>紹介を生んだトレーナーを社内で評価・表彰する仕組みを作る</li>
+  <li>紹介件数を評価指標の1つに組み込む（モチベーション向上）</li>
+  <li>現場が自発的に動く仕組みにすることが、紹介数の安定増加につながる</li>
+</ul>
+
+<hr>
+
+<h3>仕組み化で継続的に効かせる追加アイデア</h3>
+<table>
+  <tr><th>施策</th><th>狙い</th></tr>
+  <tr><td>紹介キャンペーン期間の設定</td><td>「今月特典2倍」で行動を一気に促す</td></tr>
+  <tr><td>成果報告のSNS投稿促進</td><td>ビフォーアフター投稿 → 自然な紹介導線</td></tr>
+  <tr><td>家族・パートナー割</td><td>「一緒に通う」は最も成約しやすい紹介</td></tr>
+  <tr><td>トレーナーへのインセンティブ</td><td>現場が自発的に動く仕組み化</td></tr>
+  <tr><td>紹介率のKPI化</td><td>会員1人あたり紹介率を月次で可視化・店舗別比較</td></tr>
+</table>
+
+<h3>計測指標</h3>
+<ul>
+  <li>紹介経由の入会数（月次）</li>
+  <li>会員1人あたりの紹介率（紹介数 ÷ 総会員数）</li>
+  <li>紹介経由CPA（≒ インセンティブ原価 ÷ 紹介入会数）</li>
+  <li>紹介導線別の申込数（アプリ / LINE / 店頭カード）</li>
+</ul>
+
+
+<!-- ============================== -->
+<h2>8. 現場で今すぐできる施策チェックリスト</h2>
+
+<h3>今週中にできること <span class="badge badge-red">即効性あり</span></h3>
+<ul class="checklist">
+  <li>Googleビジネスプロフィールを最新化する（写真追加・営業時間・電話番号確認）</li>
+  <li>既存LPのCTAボタンの文言・色を見直す（「申し込む」→「今すぐ無料体験を予約する」）</li>
+  <li>広告の除外キーワードを確認・追加する（競合他社名、「無料」「バイト」など）</li>
+  <li>現行LPのスマホ表示を実機確認する（ボタンが押しにくい・文字が小さすぎないか）</li>
+  <li>体験後・入会後に紹介カードを渡す導線を作る（まずは紙のカードでOK）</li>
+  <li>トレーナーへの声かけスクリプトを作成・共有する</li>
+</ul>
+
+<h3>今月中にできること <span class="badge badge-yellow">1〜2週間</span></h3>
+<ul class="checklist">
+  <li>店舗別の週次CPAを確認する習慣を作る（GA4・媒体管理画面）</li>
+  <li>A/Bテスト候補のLP改善仮説を3つリストアップする</li>
+  <li>既存クリエイティブのパフォーマンスを整理する（CTR・CVRが高いものを特定）</li>
+  <li>Googleマップの口コミに未返信のものがあれば返信する</li>
+  <li>紹介インセンティブの設計案（内容・法務確認）を作成する</li>
+  <li>入会3ヶ月後の会員リストを確認 → 声かけ対象者を特定する</li>
+</ul>
+
+<h3>来月以降 <span class="badge badge-blue">1ヶ月以内に着手</span></h3>
+<ul class="checklist">
+  <li>SquadBeyondのトライアルを1店舗で開始する</li>
+  <li>SEOキーワード調査を行い、記事コンテンツ計画を作成する</li>
+  <li>アフィリエイトASP業者との商談を開始する</li>
+  <li>好調店のCPAが低い要因を分析 → ベストプラクティスリストを作る</li>
+  <li>ポスティング（1店舗テスト）の実施計画を立てる</li>
+  <li>LINEまたはアプリの紹介機能を実装する（開発リソースと相談）</li>
+</ul>
+
+
+<!-- ============================== -->
+<h2>9. KPIの見方・モニタリング方法</h2>
+
+<h3>週次で見る指標（広告担当）</h3>
+<ul>
+  <li>媒体CPA（Meta・Google 各管理画面）</li>
+  <li>CVR（GA4）：LP訪問 → 体験申込</li>
+  <li>CTR：広告のクリック率</li>
+  <li>予算消化状況：各店舗の予算残と想定CPAのズレ確認</li>
+</ul>
+
+<h3>月次で見る指標（チーム全体）</h3>
+<ul>
+  <li>全体CPA / CPO（媒体 + 非広告チャネル含む実態値）</li>
+  <li>チャネル別CV数（広告 / SEO / アフィリエイト / 紹介 / その他）</li>
+  <li>広告比率（= 広告CV ÷ 全体CV）</li>
+  <li>店舗別CPA の比較（ばらつきの確認）</li>
+  <li>紹介経由入会数・会員1人あたり紹介率</li>
+</ul>
+
+<h3>CPAが急に悪化したときのチェックリスト</h3>
+<ol>
+  <li>クリエイティブの疲弊（同じ広告を出し続けてCTRが下落）</li>
+  <li>競合の参入（入札単価が上昇しCPCが上がった）</li>
+  <li>LPの問題（ページ速度低下・フォームエラー）</li>
+  <li>季節性（年末年始・夏季は検討層が減る時期がある）</li>
+  <li>トラッキングのズレ（タグの計測漏れ）</li>
+</ol>
+
+<h3>CVRが低い店舗のチェックリスト</h3>
+<ol>
+  <li>LPがその店舗の商圏ターゲットに合っているか</li>
+  <li>ファーストビューのビジュアルがターゲット層に合っているか</li>
+  <li>フォームの完了率（開いたが送信しない離脱がないか）</li>
+  <li>ページ表示速度（GTmetrix / PageSpeed Insights で計測）</li>
+</ol>
+
+<h3>使うツール</h3>
+<table>
+  <tr><th>ツール</th><th>確認できる指標</th></tr>
+  <tr><td>Meta Business Manager / Google広告管理画面</td><td>媒体CPA・CTR・CPC</td></tr>
+  <tr><td>Googleアナリティクス（GA4）</td><td>LP訪問数・CVR・流入チャネル別CV</td></tr>
+  <tr><td>Googleサーチコンソール</td><td>SEO流入KW・表示回数・CTR</td></tr>
+  <tr><td>Googleビジネスプロフィール</td><td>マップ経由の電話・経路案内数</td></tr>
+</table>
+
+
+<!-- ============================== -->
+<div class="summary-box">
+  <h2>まとめ：CPA低減の優先順位</h2>
+  <ul>
+    <li><strong>優先度1（最大インパクト）</strong>：LPO → CVRを1%→2%に上げる ＝ CPA約半減</li>
+    <li><strong>優先度2（即効性あり）</strong>　：広告運用の精度向上 ＝ 無駄なコストを削る</li>
+    <li><strong>優先度3（中長期・構造）</strong>：非広告チャネル育成 ＝ 広告依存を下げる</li>
+    <li><strong>補完施策（低コスト）</strong>　：リファラル強化 ＝ ブレンドCPAを押し下げる</li>
+  </ul>
+  <p>「CVRを上げながら、広告の無駄を省き、非広告チャネルを育てる」<br>
+  この3つが同時に進むと、CPA目標（¥10,000）が視野に入る。</p>
+</div>
+
+<p style="color:#888; font-size:12px; margin-top:32px; text-align:center;">以上 ／ 疑問点はマーケチームへ</p>
+
+</body>
+</html>
