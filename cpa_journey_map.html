@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【THE PERSON】予約前〜体験後 動線マップ</title>
+<style>
+  body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #1a1a1a;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: #ffffff;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 3px solid #1a1a1a;
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+  .subtitle { color: #555; font-size: 13px; margin-bottom: 28px; }
+
+  /* フェーズ帯 */
+  .phase-band {
+    display: flex;
+    gap: 6px;
+    margin: 24px 0 8px;
+  }
+  .phase-band div {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    padding: 6px 4px;
+    border-radius: 4px;
+  }
+  .ph-before { background: #5c6bc0; }
+  .ph-apply  { background: #1a1a2e; }
+  .ph-visit  { background: #00897b; }
+  .ph-after  { background: #f9a825; color:#1a1a1a; }
+
+  /* 動線フロー */
+  .flow { margin: 8px 0 40px; }
+  .stage {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 0;
+    background: #fff;
+    position: relative;
+  }
+  .stage .head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .stage .num {
+    width: 26px; height: 26px;
+    flex: 0 0 26px;
+    border-radius: 50%;
+    background: #1a1a2e;
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stage .title { font-size: 15px; font-weight: bold; }
+  .stage .kpi {
+    margin-left: auto;
+    font-size: 12px;
+    background: #eef0f7;
+    color: #1a1a2e;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  .stage .body { font-size: 13px; padding-left: 36px; }
+  .stage .body .channels { color:#5c6bc0; font-weight:bold; }
+
+  /* 矢印＋離脱 */
+  .arrow {
+    text-align: center;
+    position: relative;
+    height: 34px;
+  }
+  .arrow .line {
+    font-size: 20px;
+    color: #999;
+    line-height: 34px;
+  }
+  .arrow .drop {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    font-size: 12px;
+    color: #c62828;
+    background: #ffebee;
+    border: 1px solid #ef9a9a;
+    border-radius: 4px;
+    padding: 2px 10px;
+    font-weight: bold;
+  }
+
+  /* 現場の打ち手 */
+  .lever {
+    margin-top: 10px;
+    margin-left: 36px;
+    background: #e8f5e9;
+    border-left: 4px solid #2e7d32;
+    border-radius: 0 4px 4px 0;
+    padding: 8px 12px;
+    font-size: 12.5px;
+  }
+  .lever::before { content: "🟢 現場の打ち手："; font-weight: bold; color:#2e7d32; }
+
+  /* ボトルネック強調 */
+  .bottleneck { border: 2px solid #c62828; box-shadow: 0 0 0 3px #ffebee; }
+  .bottleneck .num { background: #c62828; }
+
+  .badge {
+    display:inline-block; font-size:11px; font-weight:bold;
+    padding:1px 7px; border-radius:10px; margin-left:6px;
+  }
+  .b-bottle { background:#ffcdd2; color:#b71c1c; }
+  .b-free   { background:#c8e6c9; color:#1b5e20; }
+
+  /* ループ */
+  .loop-box {
+    border: 2px dashed #f9a825;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 6px 0 36px;
+    background: #fffdf5;
+    font-size: 13px;
+  }
+  .loop-box .title { font-weight:bold; color:#e65100; font-size:14px; }
+
+  /* 凡例 */
+  .legend {
+    display:flex; gap:18px; flex-wrap:wrap;
+    font-size:12px; background:#f5f5f5; border:1px solid #ddd;
+    border-radius:6px; padding:10px 16px; margin: 16px 0 8px;
+  }
+  .legend span { display:flex; align-items:center; gap:6px; }
+  .dot { width:12px; height:12px; border-radius:3px; display:inline-block; }
+
+  .note { color:#888; font-size:12px; margin-top:28px; text-align:center; }
+  table { width:100%; border-collapse:collapse; margin:10px 0 30px; font-size:12.5px; }
+  th { background:#1a1a2e; color:#fff; padding:7px 10px; text-align:left; }
+  td { padding:7px 10px; border:1px solid #ddd; }
+  tr:nth-child(even) td { background:#f9f9f9; }
+</style>
+</head>
+<body>
+
+<h1>予約前 〜 体験後 動線マップ（カスタマージャーニー）</h1>
+<p class="subtitle">THE PERSON マーケチーム ／ 各ステージの「KPI・離脱ポイント・現場でできる打ち手」を1本の動線に可視化</p>
+
+<div class="legend">
+  <span><span class="dot" style="background:#eef0f7;border:1px solid #1a1a2e;"></span> KPI（測る指標）</span>
+  <span><span class="dot" style="background:#ffebee;border:1px solid #ef9a9a;"></span> 離脱ポイント</span>
+  <span><span class="dot" style="background:#e8f5e9;border:1px solid #2e7d32;"></span> 現場でできる打ち手</span>
+  <span><span class="dot" style="background:#ffcdd2;border:1px solid #c62828;"></span> ボトルネック</span>
+</div>
+
+<!-- フェーズ帯 -->
+<div class="phase-band">
+  <div class="ph-before">予約前（認知〜検討）</div>
+  <div class="ph-apply">申込</div>
+  <div class="ph-visit">体験</div>
+  <div class="ph-after">体験後（入会〜紹介）</div>
+</div>
+
+<div class="flow">
+
+  <!-- 1 認知 -->
+  <div class="stage">
+    <div class="head">
+      <span class="num">1</span>
+      <span class="title">認知・きっかけ</span>
+      <span class="kpi">KPI：インプレッション / 指名検索数</span>
+    </div>
+    <div class="body">
+      <span class="channels">広告（Meta/Google）・SEO・MEO（Googleマップ）・紹介・オフライン（ポスティング/看板）</span><br>
+      「近くにジムがある」「良さそう」と知る段階。来店動機1位は<strong>「自宅から近い」</strong>＝商圏内リーチが鍵。
+    </div>
+    <div class="lever">口コミ依頼でMEO強化（地域名＋成果の口コミを増やす）／近隣店舗へのカード置き／現場で撮った素材を広告に供給</div>
+  </div>
+
+  <div class="arrow"><span class="line">▼</span><span class="drop">大半がクリックせず離脱</span></div>
+
+  <!-- 2 LP訪問 -->
+  <div class="stage">
+    <div class="head">
+      <span class="num">2</span>
+      <span class="title">LP訪問（クリック）</span>
+      <span class="kpi">KPI：CTR / CPC / 表示速度</span>
+    </div>
+    <div class="body">
+      広告やマップ、検索からLPに着地。ここで<strong>「自分向けだ」と3秒で思えるか</strong>が勝負。
+    </div>
+    <div class="lever">体験者・非申込者に「迷った理由」をヒアリング → ファーストビューで潰す不安をLPチームに連携</div>
+  </div>
+
+  <div class="arrow"><span class="line">▼</span><span class="drop">99%以上が申込まず離脱（CVR&lt;1%）</span></div>
+
+  <!-- 3 体験申込 ボトルネック -->
+  <div class="stage bottleneck">
+    <div class="head">
+      <span class="num">3</span>
+      <span class="title">体験申込（フォーム送信）<span class="badge b-bottle">最大ボトルネック</span></span>
+      <span class="kpi">KPI：CVR（目標 1%→2%）</span>
+    </div>
+    <div class="body">
+      LP訪問者のうち実際に申し込む割合。<strong>CVRが2%になれば広告費そのままでCPA半減</strong>。
+      フォーム項目数・CTA文言・スマホ操作性が直結。
+    </div>
+    <div class="lever">CTA文言の見直し（「申し込む」→「今すぐ無料体験を予約する」）／スマホ実機でフォーム入力テスト</div>
+  </div>
+
+  <div class="arrow"><span class="line">▼</span><span class="drop">申込後、来店せず（無断キャンセル）</span></div>
+
+  <!-- 4 来店リマインド -->
+  <div class="stage">
+    <div class="head">
+      <span class="num">4</span>
+      <span class="title">申込 → 体験来店<span class="badge b-free">広告費ゼロで効く</span></span>
+      <span class="kpi">KPI：ショー率（来店率）</span>
+    </div>
+    <div class="body">
+      <strong>資料に抜けがちな"隠れCPA"</strong>。申込しても来なければ広告費がムダに。
+      ここは現場が100%コントロールできる領域で、改善すれば<strong>実質CPAが下がる</strong>。
+    </div>
+    <div class="lever">体験前日のLINE/電話リマインド（「明日◯時お待ちしてます／担当は◯◯です」と担当者名を出す）</div>
+  </div>
+
+  <div class="arrow"><span class="line">▼</span></div>
+
+  <!-- 5 体験実施 -->
+  <div class="stage">
+    <div class="head">
+      <span class="num">5</span>
+      <span class="title">体験実施</span>
+      <span class="kpi">KPI：体験満足度</span>
+    </div>
+    <div class="body">
+      かかりつけトレーナーとの信頼関係が生まれる場（満足度 ★4.9 の源泉）。
+      ここでの体験価値が入会・紹介の両方を左右する。
+    </div>
+    <div class="lever">体験中に「成果イメージ」を具体提示／その場で入会後の流れを案内し不安を解消</div>
+  </div>
+
+  <div class="arrow"><span class="line">▼</span><span class="drop">入会せず離脱（残り50%）</span></div>
+
+  <!-- 6 入会 -->
+  <div class="stage">
+    <div class="head">
+      <span class="num">6</span>
+      <span class="title">入会</span>
+      <span class="kpi">KPI：入会率 50%（達成済 ✓）</span>
+    </div>
+    <div class="body">
+      入会率はすでに目標達成。<strong>ここはボトルネックではない</strong>＝伸ばすべきは手前の集客効率（CPA）。
+    </div>
+    <div class="lever">入会時に紹介カードを必ず渡すルール化（渡し漏れゼロ）</div>
+  </div>
+
+  <div class="arrow"><span class="line">▼</span></div>
+
+  <!-- 7 体験後・紹介 -->
+  <div class="stage" style="border-color:#f9a825; background:#fffdf5;">
+    <div class="head">
+      <span class="num" style="background:#f9a825;color:#1a1a1a;">7</span>
+      <span class="title">入会後 → 口コミ・紹介<span class="badge b-free">CPA最安チャネル</span></span>
+      <span class="kpi">KPI：会員1人あたり紹介率 / 口コミ数</span>
+    </div>
+    <div class="body">
+      ★4.9 の満足を「紹介行動」に転換する最重要ポイント。獲得コスト≒インセンティブ原価のみ。
+      <strong>成果が出た瞬間</strong>が紹介の生まれる瞬間。
+    </div>
+    <div class="lever">成果達成時に「口コミ依頼＋紹介依頼」をワンセットで声かけ／具体名で聞く（「ご家族や職場で運動したい方は？」）</div>
+  </div>
+
+</div>
+
+<!-- ループ -->
+<div class="loop-box">
+  <div class="title">🔁 ループ構造：体験後が次の"認知・申込"を生む</div>
+  ステージ7（口コミ・紹介）は、ステージ1（認知）とステージ3（申込）に戻る矢印を持つ。
+  つまり<strong>体験後の動線を仕組み化すると、広告費ゼロで認知と申込が自走し始める</strong>。
+  これが「広告比率を50%まで下げる」＝ブレンドCPA低減の本丸。
+</div>
+
+<!-- ステージ別サマリー -->
+<h1 style="font-size:18px;border-bottom-width:2px;">ステージ別サマリー</h1>
+<table>
+  <tr><th>#</th><th>ステージ</th><th>KPI</th><th>主な離脱</th><th>現場の打ち手</th></tr>
+  <tr><td>1</td><td>認知</td><td>指名検索数</td><td>そもそも知られない</td><td>口コミ強化・カード置き・素材供給</td></tr>
+  <tr><td>2</td><td>LP訪問</td><td>CTR/CPC</td><td>クリックされない</td><td>離脱理由ヒアリング→LP連携</td></tr>
+  <tr><td style="color:#c62828;font-weight:bold;">3</td><td><strong>体験申込</strong></td><td><strong>CVR 1→2%</strong></td><td><strong>99%超が離脱</strong></td><td>CTA改善・スマホ実機テスト</td></tr>
+  <tr><td>4</td><td>申込→来店</td><td>ショー率</td><td>無断キャンセル</td><td>前日リマインド（担当者名つき）</td></tr>
+  <tr><td>5</td><td>体験実施</td><td>体験満足度</td><td>体験価値不足</td><td>成果イメージ提示・不安解消</td></tr>
+  <tr><td>6</td><td>入会</td><td>入会率50%（達成）</td><td>—</td><td>紹介カード必須化</td></tr>
+  <tr><td>7</td><td>口コミ・紹介</td><td>紹介率/口コミ数</td><td>満足が紹介に転換せず</td><td>成果達成時に口コミ＋紹介をワンセット声かけ</td></tr>
+</table>
+
+<p class="note">以上 ／ ブラウザで開くと動線が縦に流れる図として表示されます</p>
+
+</body>
+</html>
