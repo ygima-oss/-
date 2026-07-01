@@ -1,0 +1,341 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #E2792E;
+    --orange-light: #fdf0e6;
+    --orange-mid: #f5b17a;
+    --gray: #CBCBCA;
+    --gray-dark: #555;
+    --gray-light: #f7f7f6;
+    --text: #222;
+    --text-muted: #666;
+    --border: rgba(0,0,0,0.1);
+    --radius: 10px;
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+    --red: #c62828;
+    --red-light: #fce4ec;
+    --font: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  }
+  body { font-family: var(--font); color: var(--text); background: #fff; font-weight: 700; line-height: 1.6; }
+  .page { max-width: 880px; margin: 0 auto; padding: 0 0 80px; }
+
+  /* Header */
+  .site-header { background: var(--orange); padding: 30px 32px 26px; }
+  .site-header .brand { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.75); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+  .site-header h1 { font-size: 23px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .site-header .version { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+
+  /* Sections */
+  .section { padding: 32px; border-bottom: 1px solid var(--border); }
+  .section:last-child { border-bottom: none; }
+  .section-title { font-size: 18px; font-weight: 700; color: var(--orange); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+  .section-title .icon { width: 30px; height: 30px; background: var(--orange-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .lead { font-size: 13.5px; color: var(--text); line-height: 1.85; margin-bottom: 20px; font-weight: 500; }
+  .lead strong { color: var(--orange); font-weight: 700; }
+
+  /* Info grid */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 8px; }
+  .info-card { background: var(--gray-light); border-radius: var(--radius); padding: 14px 16px; }
+  .info-card .label { font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .info-card .value { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+  /* SOC bars */
+  .soc { display: flex; flex-direction: column; gap: 14px; margin: 6px 0 4px; }
+  .soc-row { }
+  .soc-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .soc-name { font-size: 14px; font-weight: 700; }
+  .soc-name span { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-left: 6px; }
+  .soc-val { font-size: 16px; font-weight: 700; color: var(--orange); }
+  .bar { height: 12px; background: var(--gray-light); border-radius: 99px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--orange); border-radius: 99px; }
+  .soc-note { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 5px; line-height: 1.6; }
+
+  /* Table */
+  table.data { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
+  table.data th { text-align: left; padding: 8px 10px; background: var(--orange-light); color: var(--orange); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+  table.data td { padding: 8px 10px; border-bottom: 0.5px solid var(--border); color: var(--text); }
+  table.data td.num, table.data th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.data tr:last-child td { border-bottom: none; }
+
+  /* Tag */
+  .tag { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 10.5px; font-weight: 700; }
+  .tag-ok { background: var(--green-light); color: var(--green); }
+  .tag-ng { background: var(--red-light); color: var(--red); }
+
+  /* Alert */
+  .alert { background: #fff3e0; border-left: 4px solid var(--orange); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 16px; font-size: 13px; color: #7a4000; margin-top: 16px; line-height: 1.75; font-weight: 500; }
+  .alert strong { color: var(--orange); font-weight: 700; }
+
+  /* Action list */
+  .actions { display: flex; flex-direction: column; gap: 14px; }
+  .action { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; background: var(--gray-light); border-radius: var(--radius); border-left: 4px solid var(--orange); }
+  .action-num { width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+  .action-body { flex: 1; }
+  .action-title { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+  .action-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.75; font-weight: 500; }
+  .action-desc b { color: var(--text); font-weight: 700; }
+  .action-meta { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 700; color: var(--orange); background: var(--orange-light); padding: 2px 10px; border-radius: 99px; }
+
+  /* Format card */
+  .fmt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .fmt-grid { grid-template-columns: 1fr; } }
+  .fmt-card { border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .fmt-card.after { border-color: var(--orange); }
+  .fmt-head { padding: 10px 14px; font-size: 12px; font-weight: 700; }
+  .fmt-card .fmt-head { background: var(--gray-light); color: var(--gray-dark); }
+  .fmt-card.after .fmt-head { background: var(--orange-light); color: var(--orange); }
+  .fmt-body { padding: 4px 6px 10px; }
+  .fmt-line { padding: 8px 12px; font-size: 12.5px; line-height: 1.55; border-bottom: 0.5px solid var(--border); }
+  .fmt-line:last-child { border-bottom: none; }
+  .fmt-line.new { background: #fffaf3; }
+  .fmt-line small { display: block; font-size: 10.5px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+  .soc-chip { display: inline-block; font-size: 9.5px; font-weight: 700; padding: 1px 7px; border-radius: 99px; margin-left: 6px; vertical-align: middle; }
+  .chip-m { background: #e3f2fd; color: #1565c0; }  /* 処理可能感 */
+  .chip-me { background: #f3e5f5; color: #7b1fa2; } /* 有意味感 */
+  .chip-c { background: #e8f5e9; color: #2e7d32; }  /* 把握可能感 */
+  .chip-h { background: #eceff1; color: #546e7a; }  /* 引き継ぎ */
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 16px; font-size: 11px; font-weight: 500; color: var(--text-muted); }
+
+  /* copy block */
+  .copyblock { background: #1e1e1e; color: #e8e8e8; border-radius: var(--radius); padding: 18px 20px; font-size: 12.5px; line-height: 2.0; font-family: 'SFMono-Regular', Consolas, 'Courier New', monospace; white-space: pre-wrap; margin-top: 6px; font-weight: 500; }
+
+  .footer { padding: 24px 32px; font-size: 11px; color: var(--text-muted); font-weight: 500; line-height: 1.8; }
+</style>
+
+<div class="page">
+  <div class="site-header">
+    <div class="brand">THE PERSON ｜ Karte Analysis × Tuning Session</div>
+    <h1>チューニング時カルテ分析 ― 今後の打ち手まとめ</h1>
+    <div class="version">
+      対象期間 2026-04-01〜06-30 ／ 記載済みカルテ 2,765件 ／ データ源 BigQuery <code>the_person_prd</code><br>
+      手法：カルテ本文の語彙ベース言及率（SOC＝首尾一貫感覚のプロキシ指標）
+    </div>
+  </div>
+
+  <!-- 0. 要約 -->
+  <div class="section">
+    <div class="section-title"><div class="icon">📌</div>この分析でわかったこと（3行）</div>
+    <div class="actions">
+      <div class="action">
+        <div class="action-num">①</div>
+        <div class="action-body">
+          <div class="action-title">カルテは「できた（処理可能感 78%）」に厚く、「なぜ・どうなりたい」が薄い</div>
+          <div class="action-desc">有意味感 63%／把握可能感 58%。<b>個人差ではなく全社的なカルテ文化</b>として、目の前の達成は残るが「なぜやるか・先の見通し」が残りにくい。</div>
+        </div>
+      </div>
+      <div class="action">
+        <div class="action-num">②</div>
+        <div class="action-body">
+          <div class="action-title">記録の質は店舗・トレーナーで最大10倍以上の開きがある</div>
+          <div class="action-desc">同じ1対1でも、直営（THE PERSON）・一部アトリオ・特定TRでは有意味感がほぼ残らない（数値・メニュー中心になりがち）。<b>上位TRのカルテをテンプレ化して横展開</b>する価値が大きい。</div>
+        </div>
+      </div>
+      <div class="action">
+        <div class="action-num">③</div>
+        <div class="action-body">
+          <div class="action-title">特典P・下旬セッションは次回チューニングが組まれにくい</div>
+          <div class="action-desc">原因は「翌月の予約枠がその時点で見えない」構造。<b>声がけ不足ではなく仕組みで解ける課題</b>。ただし翌月枠の開放タイミング（15日ルール）を踏まえると解釈に補正が必要（後述）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. SOC -->
+  <div class="section">
+    <div class="section-title"><div class="icon">🧭</div>① カルテに残っている観点（SOC 3観点・全社平均）</div>
+    <div class="soc">
+      <div class="soc-row">
+        <div class="soc-head"><div class="soc-name">処理可能感 <span>Manageability</span></div><div class="soc-val">78%</div></div>
+        <div class="bar"><div class="bar-fill" style="width:78%"></div></div>
+        <div class="soc-note">できた／自分で／自主トレ／コツ／フォーム／継続 ― 目の前の達成の記録は厚い。</div>
+      </div>
+      <div class="soc-row">
+        <div class="soc-head"><div class="soc-name">有意味感 <span>Meaningfulness</span></div><div class="soc-val">63%</div></div>
+        <div class="bar"><div class="bar-fill" style="width:63%"></div></div>
+        <div class="soc-note">目標／なりたい／楽しい／自信／イベント・旅行 ―「なぜやるか」が残りにくい。</div>
+      </div>
+      <div class="soc-row">
+        <div class="soc-head"><div class="soc-name">把握可能感 <span>Comprehensibility</span></div><div class="soc-val">58%</div></div>
+        <div class="bar"><div class="bar-fill" style="width:58%"></div></div>
+        <div class="soc-note">理解／原因／なぜ／見通し／狙い ― 先の見通しが最も薄い。</div>
+      </div>
+    </div>
+    <div class="alert">特典P／2枚P／1名P いずれも <strong>「処理可能感 ＞ 有意味感 ＞ 把握可能感」</strong> の同一傾向。種別による差は小さく、フォーマットと記録習慣の問題であることを示す。</div>
+  </div>
+
+  <!-- 2. 店舗・TR -->
+  <div class="section">
+    <div class="section-title"><div class="icon">🏢</div>② 店舗・トレーナー別の傾向</div>
+    <div class="lead">SOC総合＝3観点の平均言及率。<strong>上位TRのカルテをサンプル化してテンプレ横展開する価値が大きい</strong>（原文の指摘）。碑文谷（アトリオドゥーエNext 碑文谷・n=268）はサンプル最多クラスながら、有意味感が「良好」群の中でも低め＝<strong>記録がアクション／コンディション中心</strong>になっている可能性が高い。</div>
+    <div class="fmt-grid">
+      <div>
+        <table class="data">
+          <tr><th>上位TR（n≥15）</th><th class="num">SOC</th></tr>
+          <tr><td>小林</td><td class="num">91.0</td></tr>
+          <tr><td>藤原</td><td class="num">88.9</td></tr>
+          <tr><td>小林</td><td class="num">88.1</td></tr>
+          <tr><td>田代</td><td class="num">87.5</td></tr>
+          <tr><td>太田</td><td class="num">84.3</td></tr>
+        </table>
+      </div>
+      <div>
+        <table class="data">
+          <tr><th>下位TR（n≥15）</th><th class="num">SOC</th></tr>
+          <tr><td>儀間</td><td class="num">52.5</td></tr>
+          <tr><td>朝野</td><td class="num">43.3</td></tr>
+          <tr><td>松永</td><td class="num">42.2</td></tr>
+          <tr><td>永井</td><td class="num">37.7</td></tr>
+          <tr><td>五味 / 牧野 / 岡部</td><td class="num">23.0↓</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="alert">直営 <strong>THE PERSON（渋谷・北参道・千駄ヶ谷・原宿）</strong> と一部アトリオ（武蔵小山）は <span class="tag tag-ng">要改善</span>。有意味感がほぼ残っておらず、記録が数値・メニュー中心。ここに上位TRテンプレの横展開が最も効く。</div>
+  </div>
+
+  <!-- 3. 次回予約 -->
+  <div class="section">
+    <div class="section-title"><div class="icon">📅</div>③ 次回チューニングの設定状況 ＆ 15日ルールの補正</div>
+    <div class="lead">セッションを起点に、同一顧客の「次回1対1予約」が入っているかを判定。<strong>特典P・下旬セッションで次回が組まれにくい</strong>。</div>
+
+    <table class="data" style="margin-bottom:18px">
+      <tr><th>種別</th><th class="num">次回予約あり</th><th class="num">同月内</th><th class="num">翌月以降</th><th class="num">次回まで平均</th></tr>
+      <tr><td>2枚パーソナル</td><td class="num">76.6%</td><td class="num">45.1%</td><td class="num">31.5%</td><td class="num">17日</td></tr>
+      <tr><td>1名パーソナル</td><td class="num">50.8%</td><td class="num">29.1%</td><td class="num">21.7%</td><td class="num">19日</td></tr>
+      <tr><td>特典パーソナル</td><td class="num">59.6%</td><td class="num">11.5%</td><td class="num">48.1%</td><td class="num">26日</td></tr>
+    </table>
+
+    <table class="data" style="margin-bottom:18px">
+      <tr><th>セッション時期</th><th class="num">件数</th><th class="num">次回予約あり</th><th class="num">同月内</th><th class="num">翌月以降</th></tr>
+      <tr><td>① 上旬（1–10日）</td><td class="num">523</td><td class="num">68.5%</td><td class="num">51.4%</td><td class="num">17.0%</td></tr>
+      <tr><td>② 中旬（11–20日）</td><td class="num">443</td><td class="num">71.6%</td><td class="num">42.4%</td><td class="num">29.1%</td></tr>
+      <tr><td>③ 下旬（21–31日）</td><td class="num">400</td><td class="num">62.0%</td><td class="num">11.5%</td><td class="num">50.5%</td></tr>
+    </table>
+
+    <div class="alert" style="background:#eef7ff;border-left-color:#1565c0;color:#0d3c66">
+      <strong style="color:#1565c0">【15日ルールを踏まえた補正】</strong><br>
+      予約は <b>「各月15日以降に翌月分が取得可能」</b> になる構造。これを重ねると原文の「翌月枠が見えないから組めない」は <b>時期で意味が分かれる</b>：<br>
+      ・<b>15日より前（上旬〜中旬前半）</b>：翌月枠がまだ開いていない → 同月内しか押さえられず、月内の残枠が尽きると15日まで再予約できない＝<b>ここが真の構造的ボトルネック</b>（上旬の翌月以降が17.0%と極端に低い）。<br>
+      ・<b>15日以降（中旬後半〜下旬）</b>：翌月枠は既に開いている → 下旬の「翌月以降 50.5%」はむしろ最も高く、<b>翌月予約は取得しやすい状態</b>。下旬で残る約38%の「次回なし」は枠の問題ではなく、<b>その場での声がけ・仮押さえ運用の余地</b>と考えられる。
+    </div>
+    <div class="alert">
+      <strong>結論の再整理：</strong>「仕組みで解ける」部分（＝15日前セッションの翌月枠早期開放）と、「運用で解ける」部分（＝15日以降セッションでのその場・翌月予約の徹底）を <b>分けて打ち手を当てる</b>のが正しい。この仮説はBigQueryで「セッション日が15日前後で翌月予約率がどう変わるか」を追検証したい。
+    </div>
+  </div>
+
+  <!-- 4. 今後の打ち手 -->
+  <div class="section">
+    <div class="section-title"><div class="icon">✅</div>今後やっていくべきこと</div>
+    <div class="actions">
+      <div class="action">
+        <div class="action-num">1</div>
+        <div class="action-body">
+          <div class="action-title">カルテフォーマットにSOC 3観点を組み込む（→ 次章の碑文谷改訂案）</div>
+          <div class="action-desc">薄い <b>有意味感（なぜ・どうなりたい）</b> と <b>把握可能感（今日の狙い・見通し）</b> を、記入欄として明示的に用意する。「書く欄があるから残る」に構造を変える。まず碑文谷で試し、効果を見て他店へ展開。</div>
+          <div class="action-meta">最優先 ／ 碑文谷で先行</div>
+        </div>
+      </div>
+      <div class="action">
+        <div class="action-num">2</div>
+        <div class="action-body">
+          <div class="action-title">上位TR（小林・藤原・田代 等）のカルテ実例をテンプレ化して横展開</div>
+          <div class="action-desc">SOC総合が高いTRの実際のカルテを3観点でサンプル化し、要改善店（直営THE PERSON・武蔵小山）へ「良い書き方の見本」として配布・研修。個人の力量差を仕組みで埋める。</div>
+          <div class="action-meta">要改善店へ優先配布</div>
+        </div>
+      </div>
+      <div class="action">
+        <div class="action-num">3</div>
+        <div class="action-body">
+          <div class="action-title">次回予約を「時期で出し分け」して確実に押さえる</div>
+          <div class="action-desc"><b>15日前のセッション</b>：翌月枠が開く15日にリマインド／可能なら翌月枠の早期開放。<b>15日以降のセッション（特に下旬・特典P）</b>：枠は開いているので、その場で翌月分を仮押さえする運用を標準化。特典Pは次回が最も組まれにくい（同月内11.5%）ため重点対象。</div>
+          <div class="action-meta">仕組み＋運用の二段構え</div>
+        </div>
+      </div>
+      <div class="action">
+        <div class="action-num">4</div>
+        <div class="action-body">
+          <div class="action-title">本指標を月次の定点観測Botに載せる</div>
+          <div class="action-desc">SOC 3観点の言及率・次回予約率を店舗／TR別に毎月自動集計し、改善トレンドを追う。フォーマット改訂やテンプレ展開の効果測定に使う。</div>
+          <div class="action-meta">効果測定の土台</div>
+        </div>
+      </div>
+      <div class="action">
+        <div class="action-num">5</div>
+        <div class="action-body">
+          <div class="action-title">顧客ヒアリングと突き合わせてプロキシ指標を検証</div>
+          <div class="action-desc">本分析は「カルテ本文の語彙出現」に基づくプロキシで、顧客の主観的SOCそのものではない。顧客アンケート（処理可能感・有意味感の設問）と突き合わせ、<b>「カルテに残っている観点」と「顧客が実際に感じている観点」のギャップ</b>を検証する。</div>
+          <div class="action-meta">指標の妥当性担保</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 碑文谷フォーマット改訂案 -->
+  <div class="section">
+    <div class="section-title"><div class="icon">📝</div>碑文谷カルテフォーマット 改訂案</div>
+    <div class="lead">現行の碑文谷フォーマットは <strong>アクション・コンディション・引き継ぎ</strong> に手厚く、<strong>処理可能感と連続性</strong>を確実に残せる良い設計。一方で <strong>有意味感（なぜ・どうなりたい）と把握可能感（今日の狙い・見通し）を書く欄がない</strong> ため、データ上も碑文谷は有意味感が低めに出ている。<strong>今ある引き継ぎの強みは残したまま、2つの観点の欄を足す</strong>のが改訂の骨子。</div>
+
+    <div class="legend">
+      <span><span class="soc-chip chip-m">処理可能感</span></span>
+      <span><span class="soc-chip chip-me">有意味感</span></span>
+      <span><span class="soc-chip chip-c">把握可能感</span></span>
+      <span><span class="soc-chip chip-h">引き継ぎ</span></span>
+      <span style="margin-left:auto;color:var(--orange)">■ = 今回の追加欄</span>
+    </div>
+
+    <div class="fmt-grid">
+      <div class="fmt-card">
+        <div class="fmt-head">現行フォーマット</div>
+        <div class="fmt-body">
+          <div class="fmt-line">🏃‍♂️ 前回からの引き継ぎ <span class="soc-chip chip-h">引き継ぎ</span></div>
+          <div class="fmt-line">📍 本日のアクション <span class="soc-chip chip-m">処理</span></div>
+          <div class="fmt-line">🏋️‍♀️ コンディション <span class="soc-chip chip-m">処理</span></div>
+          <div class="fmt-line">⚠️ 定性情報（必ずコピペ引継ぎ） <span class="soc-chip chip-h">引き継ぎ</span></div>
+          <div class="fmt-line">⚠️ トレーニング注意事項（必ずコピペ引継ぎ） <span class="soc-chip chip-h">引き継ぎ</span></div>
+          <div class="fmt-line">📣 次回へ引き継ぎ <span class="soc-chip chip-h">引き継ぎ</span></div>
+        </div>
+      </div>
+      <div class="fmt-card after">
+        <div class="fmt-head">改訂案（■2欄追加＋次回予約の明示）</div>
+        <div class="fmt-body">
+          <div class="fmt-line">🏃‍♂️ 前回からの引き継ぎ <span class="soc-chip chip-h">引き継ぎ</span></div>
+          <div class="fmt-line new">🎯 今日の狙い（なぜ今日これをやるか）<span class="soc-chip chip-c">把握</span><small>■ 例：「先週の張りを取りつつ、旅行で歩ける脚づくり」</small></div>
+          <div class="fmt-line">📍 本日のアクション <span class="soc-chip chip-m">処理</span></div>
+          <div class="fmt-line">🏋️‍♀️ コンディション <span class="soc-chip chip-m">処理</span></div>
+          <div class="fmt-line new">🌱 目標・どうなりたい（お客様の言葉で）<span class="soc-chip chip-me">有意味</span><small>■ 例：「9月の旅行で疲れず観光したい」「自信を持ちたい」</small></div>
+          <div class="fmt-line">⚠️ 定性情報（必ずコピペ引継ぎ） <span class="soc-chip chip-h">引き継ぎ</span></div>
+          <div class="fmt-line">⚠️ トレーニング注意事項（必ずコピペ引継ぎ） <span class="soc-chip chip-h">引き継ぎ</span></div>
+          <div class="fmt-line">📣 次回へ引き継ぎ＋<b>次回予約</b>（狙い・予約日／未定なら15日以降にリマインド） <span class="soc-chip chip-h">引き継ぎ</span><span class="soc-chip chip-c">把握</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <div class="soc-note" style="margin-bottom:6px;font-size:12px;color:var(--gray-dark)">▼ コピペ用テンプレート</div>
+      <div class="copyblock">🏃‍♂️前回からの引き継ぎ
+
+🎯今日の狙い（なぜ今日これをやるか）
+
+📍本日のアクション
+
+🏋️‍♀️コンディション
+
+🌱目標・どうなりたい（お客様の言葉で）
+
+⚠️定性情報（必ずコピペ引継ぎ）
+
+⚠️トレーニング注意事項（必ずコピペ引継ぎ）
+
+📣次回へ引き継ぎ／次回予約（狙い・予約日）</div>
+    </div>
+
+    <div class="alert">
+      <strong>ねらい：</strong>「🎯今日の狙い」で <b>把握可能感（見通し・原因）</b> を、「🌱目標・どうなりたい」で <b>有意味感（なぜ・楽しさ）</b> を毎回1行でも残す。既存の「コピペ引継ぎ」の強い引き継ぎ文化はそのまま活かす。まず碑文谷で数週間運用し、SOC言及率が上がるかをBotで確認 → 効果があれば全店フォーマットに反映。
+    </div>
+  </div>
+
+  <div class="footer">
+    生成 2026-06-30 ／ THE PERSON 管理システム分析　｜　本分析はカルテ本文の語彙出現に基づくプロキシ指標であり、顧客の主観的なSOCスコアそのものではありません。<br>
+    ※トレーナー名は同姓が複数在籍するため姓のみ表示。数値は原レポート（対象2,765件）に準拠。15日ルールに関する時期別の再解釈は追検証が必要な仮説です。
+  </div>
+</div>
