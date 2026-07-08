@@ -39,6 +39,10 @@
 - 動画：https://youtu.be/uRmw1pgXxJ0?si=qrpa03ZMLayzGF_P
 - お腹の力を入れながら、お尻を使って股関節を伸ばしていきます！お尻を使う感覚はあると思うので、腰ばかりが使われないようにしていきましょう！
 
+### クランチ
+- カテゴリ：体幹
+- 動画：https://youtube.com/shorts/DQ3fLoyTem8?si=JqoA5_y8qIaZzMKk
+
 ### レッグプレスマシン
 - カテゴリ：下半身
 - 動画：https://youtube.com/shorts/mcdJRrMCAhw?si=kH0a4I_Py7U0PUXh
