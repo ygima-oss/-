@@ -1,0 +1,297 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #E2792E;
+    --orange-light: #fdf0e6;
+    --orange-mid: #f5b17a;
+    --gray: #CBCBCA;
+    --gray-dark: #555;
+    --gray-light: #f7f7f6;
+    --text: #222;
+    --text-muted: #666;
+    --border: rgba(0,0,0,0.1);
+    --radius: 10px;
+    --font: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  }
+  body { font-family: var(--font); color: var(--text); background: #fff; font-weight: 700; }
+  .page { max-width: 860px; margin: 0 auto; padding: 0 0 60px; }
+
+  .site-header { background: var(--orange); padding: 28px 32px 24px; }
+  .site-header .brand { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.75); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .site-header h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .site-header .version { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+  .nav { background: #fff; border-bottom: 1.5px solid var(--orange); position: sticky; top: 0; z-index: 100; padding: 0 32px; display: flex; gap: 0; overflow-x: auto; }
+  .nav a { display: block; padding: 12px 14px; font-size: 13px; color: var(--text-muted); text-decoration: none; white-space: nowrap; border-bottom: 2.5px solid transparent; transition: color 0.15s; cursor: pointer; }
+  .nav a:hover { color: var(--orange); }
+  .nav a.active { color: var(--orange); border-bottom-color: var(--orange); font-weight: 500; }
+
+  .section { padding: 32px; border-bottom: 1px solid var(--border); display: none; }
+  .section.visible { display: block; }
+  .section:last-child { border-bottom: none; }
+  .section-title { font-size: 18px; font-weight: 700; color: var(--orange); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .section-title .icon { width: 28px; height: 28px; background: var(--orange-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+
+  .sub-section { margin-bottom: 28px; }
+  .sub-section:last-child { margin-bottom: 0; }
+  .sub-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-left: 10px; border-left: 3px solid var(--orange); }
+
+  .lead { font-size: 13px; line-height: 1.9; color: var(--text-muted); font-weight: 700; margin-bottom: 18px; }
+
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .info-card { background: var(--gray-light); border-radius: var(--radius); padding: 16px 18px; }
+  .info-card .label { font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .info-card .value { font-size: 13px; color: var(--text); line-height: 1.7; }
+
+  .quote { background: var(--gray-light); border-left: 4px solid var(--gray); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; font-size: 13px; color: var(--gray-dark); line-height: 1.9; margin-bottom: 16px; }
+
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: var(--gray-light); border-radius: var(--radius); }
+  .step-num { width: 28px; height: 28px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .step-content { flex: 1; }
+  .step-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .step-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+  .alert { background: #fff3e0; border-left: 4px solid var(--orange); border-radius: 0 var(--radius) var(--radius) 0; padding: 12px 16px; font-size: 13px; color: #7a4000; margin-top: 14px; line-height: 1.7; }
+  .alert strong { color: var(--orange); }
+
+  .cards { display: flex; flex-direction: column; gap: 14px; }
+  .mcard { border: 1.5px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+  .mcard .mtag { display: inline-block; font-size: 10px; font-weight: 700; color: #fff; background: var(--orange); border-radius: 20px; padding: 3px 10px; margin-bottom: 10px; letter-spacing: 0.04em; }
+  .mcard .mtag.soft { background: var(--orange-mid); color: #5a2e00; }
+  .mcard .mtag.gray { background: var(--gray); color: var(--gray-dark); }
+  .mcard .mtitle { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .mcard .mdesc { font-size: 13px; color: var(--text-muted); line-height: 1.85; }
+  .mcard ul { margin: 10px 0 0 0; padding-left: 18px; }
+  .mcard li { font-size: 13px; color: var(--text); line-height: 1.9; margin-bottom: 4px; }
+
+  .cycle { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .cycle .node { background: var(--orange-light); color: var(--orange); font-size: 12px; font-weight: 700; padding: 10px 14px; border-radius: 8px; }
+  .cycle .arrow { color: var(--orange-mid); font-weight: 700; }
+
+  table.karte { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.karte th { text-align: left; padding: 9px 12px; background: var(--orange-light); color: var(--orange); font-size: 11px; font-weight: 700; width: 34%; vertical-align: top; }
+  table.karte td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); color: var(--text); line-height: 1.7; }
+</style>
+
+<div class="page">
+  <div class="site-header">
+    <div class="brand">THE PERSON × NAS ｜ 五反田</div>
+    <h1>退会申請への対応 ／ 顧客が安心して通える仕組みづくり</h1>
+    <div class="version">対象：久村 侑由 様（ライトプラン）｜ 作成 2026.07.09</div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a class="active" onclick="show('summary')" href="#">概要</a>
+    <a onclick="show('customer')" href="#">顧客状況</a>
+    <a onclick="show('root')" href="#">課題の本質</a>
+    <a onclick="show('t2t')" href="#">トレーナー間引き継ぎ</a>
+    <a onclick="show('t2c')" href="#">トレーナー紹介</a>
+    <a onclick="show('session')" href="#">予約・レッスン品質</a>
+    <a onclick="show('action')" href="#">久村様への対応</a>
+  </nav>
+
+  <!-- 概要 -->
+  <div class="section visible" id="sec-summary">
+    <div class="section-title"><div class="icon">🎯</div>このまとめの狙い</div>
+    <p class="lead">
+      久村様の退会理由は「特定のトレーナーを指名したい」という要望ではなく、<br>
+      <strong style="color:var(--orange)">誰が担当になっても、自分を理解した安心できるレッスンを受けたい</strong>という、通う体験そのものへの不安です。
+    </p>
+    <p class="lead">
+      グループパーソナルはトレーナーの指名ができないという制約があります。だからこそ「指名の代わりに安心感をつくる」ことが対応の軸になります。そのための具体策を、①トレーナー同士の引き継ぎ、②トレーナーから顧客へのトレーナー紹介、③予約時の事前告知とレッスン品質、の3つに整理しました。
+    </p>
+    <div class="alert">
+      <strong>対応の軸：</strong>「合うトレーナーを選べる」ではなく「どのトレーナーでも自分を分かってくれる」状態をつくる。指名不可という制約を、チーム全体で顧客を担当する強みに変える。
+    </div>
+  </div>
+
+  <!-- 顧客状況 -->
+  <div class="section" id="sec-customer">
+    <div class="section-title"><div class="icon">📋</div>顧客状況の整理</div>
+
+    <div class="sub-section">
+      <div class="info-grid">
+        <div class="info-card"><div class="label">お名前</div><div class="value">久村 侑由 様</div></div>
+        <div class="info-card"><div class="label">利用店舗</div><div class="value">五反田</div></div>
+        <div class="info-card"><div class="label">現在のプラン</div><div class="value">ライト</div></div>
+        <div class="info-card"><div class="label">申請種別</div><div class="value" style="color:var(--orange);font-weight:700;">退会</div></div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">申請時のお声（原文）</div>
+      <div class="quote">
+        通い始めた頃と比べて予約できるトレーナーの方が限られるようになり、自分に合うトレーナーの方との予約も取りづらくなりました。そのため、通うモチベーションを維持することが難しくなりました。
+      </div>
+      <div class="quote">
+        【要望】レッスン予約時に担当トレーナーが事前に分かるようになると、安心して予約しやすいと感じます。
+      </div>
+      <div class="quote">
+        【要望】トレーニング中は、動き方の説明後に一度フォームや動きが正しくできているか確認していただいてから、次の方の対応に移っていただけると、より安心してトレーニングに取り組めると思います。
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">お声から読み取れる3つのサイン</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">担当の一貫性が失われた</div><div class="step-desc">予約できるトレーナーが限られ、以前のように自分を理解した人に見てもらえない不安。</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">予約の見通しが立たない</div><div class="step-desc">誰が担当か分からないまま予約するため、心の準備ができず一歩が重い。</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">レッスン中の確認不足</div><div class="step-desc">フォームが合っているか確認されないまま進み、「これで合っているのか」という不安が残る。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 課題の本質 -->
+  <div class="section" id="sec-root">
+    <div class="section-title"><div class="icon">🔍</div>課題の本質</div>
+    <p class="lead">
+      表面的な要望は「担当トレーナーを事前に知りたい／指名したい」ですが、その奥にあるのは <strong style="color:var(--orange)">「自分のことを分かってくれている人に、正しく見てもらえる安心感」</strong> です。
+    </p>
+
+    <div class="cards">
+      <div class="mcard">
+        <div class="mtitle">❌ 表面の要望をそのまま叶えようとすると</div>
+        <div class="mdesc">「指名制にする」＝グループパーソナルの仕組み上できない。ここで止まると退会を止められません。</div>
+      </div>
+      <div class="mcard">
+        <div class="mtitle">✅ 本質（＝満たすべきもの）</div>
+        <ul>
+          <li><strong>一貫性</strong>：担当が変わっても、自分の目標・体の状態・苦手な動きが引き継がれている</li>
+          <li><strong>予測可能性</strong>：予約時に誰が担当かが分かり、心の準備ができる</li>
+          <li><strong>信頼</strong>：初めての担当でも「この人なら大丈夫」と思える紹介・つながりがある</li>
+          <li><strong>手応え</strong>：レッスン中に正しくできているか確認され、成長を実感できる</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert">
+      <strong>制約の再定義：</strong>グループパーソナルは「指名できない」＝弱みではなく、<strong>チーム全員が同じ質で顧客を担当できる</strong>ようにすれば、むしろ「誰に当たっても安心」という強みになります。以降の施策はすべてこの発想に立っています。
+    </div>
+  </div>
+
+  <!-- トレーナー間引き継ぎ -->
+  <div class="section" id="sec-t2t">
+    <div class="section-title"><div class="icon">🔁</div>施策①　トレーナー → トレーナー（引き継ぎ・情報共有）</div>
+    <p class="lead">担当が固定できないなら、<strong>顧客の情報を固定する</strong>。どのトレーナーが担当しても、久村様を「初めまして」にしない仕組みです。</p>
+
+    <div class="sub-section">
+      <div class="sub-title">1. 顧客カルテ（引き継ぎシート）の整備</div>
+      <div class="mdesc" style="font-size:13px;color:var(--text-muted);line-height:1.85;margin-bottom:12px;">全トレーナーが担当前に2〜3分で目を通し、レッスン後に3行だけ更新する共有カルテ。項目例：</div>
+      <table class="karte">
+        <tr><th>目標・なりたい姿</th><td>例）姿勢改善・肩こり軽減、続けられることが第一</td></tr>
+        <tr><th>身体の状態・不安</th><td>例）右肩の可動域が狭い、腰に負担をかけたくない</td></tr>
+        <tr><th>苦手な動き・注意点</th><td>例）片脚バランス系が苦手。声かけ多めが安心</td></tr>
+        <tr><th>コミュニケーションの好み</th><td>例）1種目ごとにフォーム確認してもらえると安心する</td></tr>
+        <tr><th>前回やったこと</th><td>担当が毎回1〜2行で記録</td></tr>
+        <tr><th>次回意識すること</th><td>次の担当への申し送り（ここが最重要）</td></tr>
+      </table>
+      <div class="alert"><strong>ポイント：</strong>久村様の「フォーム確認してほしい」という要望を<strong>カルテに明記</strong>しておけば、どの担当でも自動的に対応できます。要望を個人の記憶ではなく仕組みに載せる。</div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">2. レッスン後の申し送りを習慣化</div>
+      <div class="cycle">
+        <span class="node">レッスン実施</span><span class="arrow">→</span>
+        <span class="node">3行更新（今日／次回／様子）</span><span class="arrow">→</span>
+        <span class="node">次の担当が事前に確認</span><span class="arrow">→</span>
+        <span class="node">継続</span>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">3. 週次のトレーナーミーティング（5分）</div>
+      <div class="mdesc" style="font-size:13px;color:var(--text-muted);line-height:1.85;">「気になる顧客」「継続に不安がある顧客」を全員で共有。久村様のような退会サインのある方を早期に検知し、チームで担当を回す。</div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">4. トレーナーの得意分野をタグ化</div>
+      <div class="mdesc" style="font-size:13px;color:var(--text-muted);line-height:1.85;">「可動域改善が得意」「初心者の不安に寄り添うのが得意」などをチームで把握。顧客の課題に合う担当を<strong>店舗側が意図的にアサイン</strong>できる（指名の代替）。</div>
+    </div>
+  </div>
+
+  <!-- トレーナー紹介 -->
+  <div class="section" id="sec-t2c">
+    <div class="section-title"><div class="icon">🤝</div>施策②　トレーナー → 顧客（トレーナー紹介・ハンドオフ）</div>
+    <p class="lead">顧客が「知らない人に当たる不安」を、<strong>信頼している人からの紹介</strong>で解消します。指名できなくても「紹介してもらえる」ことで安心感は代替できます。</p>
+
+    <div class="cards">
+      <div class="mcard">
+        <div class="mtag">その場でのハンドオフ</div>
+        <div class="mtitle">今の担当から次の担当へ、言葉でつなぐ</div>
+        <div class="mdesc">担当が次回不在になると分かった時、レッスンの最後に一言。<br>「次回は◯◯が担当しますが、久村様のことはしっかり引き継いでいます。◯◯は△△が得意なので安心してください」</div>
+      </div>
+      <div class="mcard">
+        <div class="mtag soft">相互紹介</div>
+        <div class="mtitle">トレーナー同士が互いを推薦する</div>
+        <div class="mdesc">「今の課題なら◯◯が可動域改善が得意なのでおすすめです」と、他トレーナーの強みを顧客に橋渡し。指名の代わりに“おすすめ”で信頼を移す。</div>
+      </div>
+      <div class="mcard">
+        <div class="mtag gray">チーム紹介</div>
+        <div class="mtitle">トレーナー紹介カード（掲示 / アプリ）</div>
+        <div class="mdesc">全トレーナーの顔写真・得意分野・一言メッセージを掲示。「限られたトレーナーしか知らない」状態を解消し、チーム全員を“知っている人”に変える。</div>
+      </div>
+    </div>
+
+    <div class="alert"><strong>狙い：</strong>久村様の「合うトレーナーと予約が取りづらい」は、裏を返せば<strong>“合うと思える人が少ない”</strong>ということ。紹介を通じて「安心できるトレーナー」の母数を増やせば、予約のハードルそのものが下がります。</div>
+  </div>
+
+  <!-- 予約・レッスン品質 -->
+  <div class="section" id="sec-session">
+    <div class="section-title"><div class="icon">📅</div>施策③　予約時の事前告知 ＆ レッスン品質</div>
+
+    <div class="sub-section">
+      <div class="sub-title">A. 予約時に担当トレーナーが分かるように（要望①への直接対応）</div>
+      <div class="cards">
+        <div class="mcard">
+          <div class="mtag">仕組みで対応</div>
+          <div class="mtitle">予約画面・確認メッセージに担当名を表示</div>
+          <div class="mdesc">選べなくても「誰が担当か分かる」だけで心の準備ができ、予約のハードルが下がります。</div>
+        </div>
+        <div class="mcard">
+          <div class="mtag soft">今すぐ運用で対応</div>
+          <div class="mtitle">レッスン前日にひとことメッセージ</div>
+          <div class="mdesc">システム表示が難しければ、前日にLINE等で「明日は◯◯が担当します。△△が得意です」と一言。手動でも安心感は大きい。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">B. レッスン中のフォーム確認を標準化（要望②への直接対応）</div>
+      <div class="mdesc" style="font-size:13px;color:var(--text-muted);line-height:1.85;margin-bottom:12px;">「説明したら次の人へ」ではなく、<strong>一人ずつフォームを確認してから進む</strong>巡回の型をグループパーソナルの標準サイクルにする。</div>
+      <div class="cycle">
+        <span class="node">① 動き方を説明</span><span class="arrow">→</span>
+        <span class="node">② 本人が実施</span><span class="arrow">→</span>
+        <span class="node">③ 1人ずつフォーム確認＋一言FB</span><span class="arrow">→</span>
+        <span class="node">④ 次の種目 / 次の方へ</span>
+      </div>
+      <div class="alert"><strong>実装：</strong>この4ステップをトレーナー研修とカルテの標準項目に組み込み、「確認してから次へ」を個人の裁量ではなく店舗の型にする。久村様に限らず全顧客の満足度・安全性が上がる。</div>
+    </div>
+  </div>
+
+  <!-- 久村様への対応 -->
+  <div class="section" id="sec-action">
+    <div class="section-title"><div class="icon">💬</div>久村様への具体アクション（退会引き止め）</div>
+    <p class="lead">仕組みづくりと並行して、<strong>今回の退会申請そのもの</strong>に対しては、お声に正面から応える個別対応を。</p>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">まず感謝と共感を伝える</div><div class="step-desc">丁寧なフィードバックへの御礼と、「合うトレーナーと通いたい」という思いへの共感を最初に。否定・引き止め先行はNG。</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">改善を“具体的に”約束する</div><div class="step-desc">「予約時に担当が分かるようにする」「フォーム確認を必ず入れる」「担当が変わっても引き継ぐ」と、上記施策を約束として提示。</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">合いそうなトレーナーを紹介・体験提案</div><div class="step-desc">課題（姿勢・寄り添い等）に合うトレーナーを店舗側からアサインし、「一度この担当で試してみませんか」と紹介付きで提案。</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">退会の前に“休会・プラン変更”の選択肢を提示</div><div class="step-desc">モチベーション低下が理由なら、完全退会ではなく休会や頻度調整で一度離れずに済む道を用意する。</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">結果をカルテに残し、チームで共有</div><div class="step-desc">対応内容と反応を記録。同じサインの他顧客にも横展開し、再発を防ぐ。</div></div></div>
+    </div>
+
+    <div class="alert"><strong>伝え方のコア：</strong>「指名はできませんが、<strong>誰が担当でも久村様を分かった状態でお迎えできるように変えます</strong>」——制約を正直に伝えつつ、それを上回る安心を約束するのが引き止めの決め手です。</div>
+  </div>
+
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('visible');
+  event.target.classList.add('active');
+}
+</script>
