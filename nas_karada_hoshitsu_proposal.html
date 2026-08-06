@@ -1,0 +1,427 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #E2792E;
+    --orange-light: #fdf0e6;
+    --orange-mid: #f5b17a;
+    --orange-deep: #c25f1a;
+    --gray: #CBCBCA;
+    --gray-dark: #555;
+    --gray-light: #f7f7f6;
+    --text: #222;
+    --text-muted: #666;
+    --border: rgba(0,0,0,0.1);
+    --radius: 12px;
+    --font: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font); color: var(--text);
+    background: #e9e7e4; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px;
+  }
+
+  /* Deck stage */
+  .deck { width: 100%; max-width: 960px; }
+  .stage {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    background: #fff; border-radius: var(--radius);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+    overflow: hidden;
+  }
+
+  /* Slides */
+  .slide {
+    position: absolute; inset: 0; padding: 46px 54px;
+    display: none; flex-direction: column;
+    animation: fade .35s ease;
+  }
+  .slide.active { display: flex; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .kicker { font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .kicker::before { content: ''; width: 22px; height: 2.5px; background: var(--orange); border-radius: 2px; }
+  .slide h2 { font-size: 27px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 20px; }
+  .slide h2 .accent { color: var(--orange); }
+  .lead { font-size: 15px; color: var(--text-muted); line-height: 1.85; font-weight: 500; }
+
+  /* ---- Title slide ---- */
+  .title-slide { justify-content: center; background: linear-gradient(150deg, var(--orange) 0%, var(--orange-deep) 100%); }
+  .title-slide .brand { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 26px; }
+  .title-slide .big { font-size: 42px; font-weight: 700; color: #fff; line-height: 1.28; margin-bottom: 16px; }
+  .title-slide .sub { font-size: 16px; color: rgba(255,255,255,0.92); font-weight: 500; line-height: 1.7; }
+  .title-slide .meta { margin-top: 34px; font-size: 13px; color: rgba(255,255,255,0.82); font-weight: 500; }
+  .title-badge { display: inline-block; background: rgba(255,255,255,0.18); color:#fff; border: 1.5px solid rgba(255,255,255,0.45); padding: 6px 16px; border-radius: 99px; font-size: 13px; margin-bottom: 24px; }
+
+  /* ---- Info cards ---- */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 6px; }
+  .info-card { background: var(--gray-light); border-radius: var(--radius); padding: 16px 18px; }
+  .info-card .label { font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .info-card .value { font-size: 15px; color: var(--text); line-height: 1.6; }
+  .info-card .value small { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+  /* ---- Point / highlight ---- */
+  .point-wrap { display: flex; flex-direction: column; gap: 16px; margin-top: 6px; }
+  .point { display: flex; gap: 18px; align-items: flex-start; background: var(--orange-light); border-radius: var(--radius); padding: 20px 22px; border-left: 5px solid var(--orange); }
+  .point .pnum { width: 40px; height: 40px; flex-shrink: 0; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .point .ptitle { font-size: 17px; color: var(--orange-deep); margin-bottom: 6px; }
+  .point .pdesc { font-size: 13.5px; color: var(--gray-dark); font-weight: 500; line-height: 1.7; }
+
+  /* ---- Benefit cards ---- */
+  .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 6px; }
+  .benefit { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 20px 18px; }
+  .benefit .bicon { font-size: 26px; margin-bottom: 12px; }
+  .benefit .btitle { font-size: 15px; margin-bottom: 8px; color: var(--text); }
+  .benefit .bdesc { font-size: 12.5px; color: var(--text-muted); font-weight: 500; line-height: 1.7; }
+  .benefit.hot { border-color: var(--orange); background: var(--orange-light); }
+
+  /* ---- Flow steps (horizontal) ---- */
+  .flow { display: flex; align-items: stretch; gap: 8px; margin-top: 10px; }
+  .flow-step { flex: 1; background: var(--gray-light); border-radius: var(--radius); padding: 16px 12px; text-align: center; position: relative; }
+  .flow-step .fnum { width: 26px; height: 26px; margin: 0 auto 8px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .flow-step .ftitle { font-size: 13.5px; margin-bottom: 5px; }
+  .flow-step .fdesc { font-size: 11px; color: var(--text-muted); font-weight: 500; line-height: 1.6; }
+  .flow-arrow { display: flex; align-items: center; color: var(--orange-mid); font-size: 18px; }
+
+  /* ---- Staff ---- */
+  .staff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 6px; }
+  .staff-card { background: var(--gray-light); border-radius: var(--radius); padding: 20px; }
+  .staff-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .staff-avatar { width: 42px; height: 42px; background: var(--orange); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+  .staff-role { font-size: 15px; }
+  .staff-tag { font-size: 11px; color: var(--orange); font-weight: 700; }
+  .staff-body { font-size: 13px; color: var(--gray-dark); font-weight: 500; line-height: 1.75; }
+
+  /* ---- Bullet list ---- */
+  .blist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+  .blist li { display: flex; gap: 12px; font-size: 14px; padding: 13px 16px; background: var(--gray-light); border-radius: 10px; align-items: flex-start; line-height: 1.65; font-weight: 500; }
+  .blist li::before { content: '▸'; color: var(--orange); font-size: 13px; flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+  .blist li strong { font-weight: 700; color: var(--text); }
+
+  /* ---- KPI ---- */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 6px; }
+  .kpi { text-align: center; background: var(--gray-light); border-radius: var(--radius); padding: 22px 12px; position: relative; }
+  .kpi.featured { background: var(--orange); }
+  .kpi .knum { font-size: 38px; color: var(--orange); line-height: 1; }
+  .kpi.featured .knum { color: #fff; }
+  .kpi .kunit { font-size: 15px; }
+  .kpi .klabel { font-size: 12px; color: var(--text-muted); font-weight: 700; margin-top: 8px; }
+  .kpi.featured .klabel { color: rgba(255,255,255,0.9); }
+  .kpi .kbase { font-size: 10.5px; color: var(--text-muted); font-weight: 500; margin-top: 4px; }
+  .kpi.featured .kbase { color: rgba(255,255,255,0.8); }
+  .kpi-arrow { display:flex; align-items:center; justify-content:center; color: var(--orange-mid); font-size: 20px; }
+
+  /* ---- Timeline ---- */
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 6px; position: relative; }
+  .tl-item { display: flex; gap: 18px; padding: 10px 0; position: relative; }
+  .tl-dot { width: 100px; flex-shrink: 0; text-align: right; }
+  .tl-date { font-size: 14px; color: var(--orange); }
+  .tl-line { position: relative; width: 2px; background: var(--orange-mid); flex-shrink: 0; }
+  .tl-line::before { content:''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--orange); border: 2.5px solid #fff; box-shadow: 0 0 0 1.5px var(--orange); }
+  .tl-body { padding-bottom: 6px; }
+  .tl-title { font-size: 14.5px; }
+  .tl-desc { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 2px; line-height: 1.6; }
+  .tl-item.hot .tl-title { color: var(--orange-deep); }
+
+  /* ---- Confirm table ---- */
+  .ctable { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 4px; }
+  .ctable th { text-align: left; padding: 8px 12px; background: var(--orange); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+  .ctable th:first-child { border-radius: 8px 0 0 0; }
+  .ctable th:last-child { border-radius: 0 8px 0 0; }
+  .ctable td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); color: var(--text); font-weight: 500; line-height: 1.55; vertical-align: top; }
+  .ctable td:first-child { font-weight: 700; color: var(--orange-deep); white-space: nowrap; }
+  .ctable tr:nth-child(even) td { background: var(--gray-light); }
+
+  /* ---- Closing ---- */
+  .closing-slide { justify-content: center; align-items: center; text-align: center; background: linear-gradient(150deg, var(--orange) 0%, var(--orange-deep) 100%); }
+  .closing-slide .ctitle { font-size: 32px; color: #fff; line-height: 1.4; margin-bottom: 18px; }
+  .closing-slide .cdesc { font-size: 15px; color: rgba(255,255,255,0.92); font-weight: 500; line-height: 1.9; }
+
+  .alert { background: #fff3e0; border-left: 4px solid var(--orange); border-radius: 0 10px 10px 0; padding: 11px 15px; font-size: 12.5px; color: #7a4000; margin-top: 14px; line-height: 1.6; font-weight: 500; }
+  .alert strong { color: var(--orange); }
+
+  /* Footer inside slide */
+  .slide-foot { position: absolute; bottom: 16px; left: 54px; right: 54px; display: flex; justify-content: space-between; align-items: center; font-size: 10.5px; color: var(--gray); font-weight: 500; letter-spacing: 0.04em; }
+
+  /* Controls */
+  .controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
+  .ctrl-btn { width: 42px; height: 42px; border-radius: 50%; border: none; background: #fff; color: var(--orange); font-size: 18px; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.12); transition: transform .12s, background .12s; display:flex; align-items:center; justify-content:center; }
+  .ctrl-btn:hover { background: var(--orange); color: #fff; transform: translateY(-2px); }
+  .counter { font-size: 13px; color: var(--gray-dark); min-width: 54px; text-align: center; }
+  .dots { display: flex; gap: 7px; margin-top: 14px; justify-content: center; flex-wrap: wrap; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray); cursor: pointer; transition: background .12s, transform .12s; }
+  .dot.active { background: var(--orange); transform: scale(1.3); }
+  .hint { text-align: center; font-size: 11px; color: var(--gray-dark); margin-top: 12px; font-weight: 500; }
+
+  @media (max-width: 720px) {
+    .slide { padding: 26px 24px; }
+    .slide h2 { font-size: 20px; }
+    .title-slide .big { font-size: 28px; }
+    .benefit-grid, .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .flow { flex-wrap: wrap; }
+    .flow-arrow { display: none; }
+    .flow-step { flex: 1 1 40%; }
+  }
+</style>
+
+<div class="deck">
+  <div class="stage" id="stage">
+
+    <!-- 1. Title -->
+    <section class="slide title-slide active">
+      <div class="brand">THE PERSON &times; NAS 溝の口</div>
+      <div class="title-badge">新規顧客獲得イベント ご提案</div>
+      <div class="big">「からだの保健室」<br>開催のご提案</div>
+      <div class="sub">体組成・姿勢チェックで“からだの課題”を可視化し<br>非会員の入会促進 ＋ 退会者の再入会を狙う体験イベント</div>
+      <div class="meta">2026年8月　｜　ご提案：THE PERSON　｜　開催候補：2026年9月27日(日)</div>
+    </section>
+
+    <!-- 2. Big point -->
+    <section class="slide">
+      <div class="kicker">本企画の狙い</div>
+      <h2>今回の<span class="accent">大きなポイント</span></h2>
+      <div class="point-wrap">
+        <div class="point">
+          <div class="pnum">1</div>
+          <div>
+            <div class="ptitle">非会員を「無料の体験」で呼び込み、新規入会へ</div>
+            <div class="pdesc">「NAS会員でない方も無料で測定できます」を前面に打ち出し、これまで接点のなかった非会員層を来館・入会につなげます。</div>
+          </div>
+        </div>
+        <div class="point">
+          <div class="pnum">2</div>
+          <div>
+            <div class="ptitle">NAS公式LINEで“退会者の再開”を促す</div>
+            <div class="pdesc">NAS公式LINEに登録されている退会者へ発信し、「からだの保健室」をきっかけに再入会を後押しします。既存の資産（LINE）を活かした再獲得施策です。</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 3. Overview -->
+    <section class="slide">
+      <div class="kicker">企画概要</div>
+      <h2>イベントの<span class="accent">基本情報</span></h2>
+      <div class="info-grid">
+        <div class="info-card"><div class="label">目的</div><div class="value">新規顧客獲得<br><small>非会員の入会促進</small></div></div>
+        <div class="info-card"><div class="label">開催日（候補）</div><div class="value">9月27日(日)<br><small>※要日程調整</small></div></div>
+        <div class="info-card"><div class="label">開催時間（仮）</div><div class="value">10:30〜17:00</div></div>
+        <div class="info-card"><div class="label">対象者</div><div class="value">① NAS非会員<br>② NAS会員</div></div>
+      </div>
+      <div class="info-grid" style="margin-top:12px;">
+        <div class="info-card" style="grid-column: 1 / -1;"><div class="label">体験内容</div><div class="value">体組成チェック（体成分分析／InBody）・姿勢チェック　<small>― 短時間で明確な結果が出るコンテンツ</small></div></div>
+      </div>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 4. Benefits for NAS -->
+    <section class="slide">
+      <div class="kicker">NAS様のメリット</div>
+      <h2>この企画で得られる<span class="accent">3つの成果</span></h2>
+      <div class="benefit-grid">
+        <div class="benefit hot">
+          <div class="bicon">🆕</div>
+          <div class="btitle">新規入会の獲得</div>
+          <div class="bdesc">無料体験を入口に非会員を来館させ、その場でのクロージングで入会へ。目標は新規入会10名。</div>
+        </div>
+        <div class="benefit hot">
+          <div class="bicon">🔄</div>
+          <div class="btitle">退会者の再入会</div>
+          <div class="bdesc">公式LINEに残る退会者へ再アプローチ。休眠顧客の掘り起こしができます。</div>
+        </div>
+        <div class="benefit">
+          <div class="bicon">🤝</div>
+          <div class="btitle">会員満足・紹介の活性化</div>
+          <div class="bdesc">既存会員も無料で測定でき、家族・友人紹介の仕掛けでコミュニティが広がります。</div>
+        </div>
+      </div>
+      <div class="alert"><strong>運営はTHE PERSON側が主体。</strong>スタッフ2名体制で実施し、NAS様の当日負荷を最小限に抑えます。</div>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 5. Experience content -->
+    <section class="slide">
+      <div class="kicker">体験コンテンツ</div>
+      <h2>“からだの課題”を<span class="accent">見える化</span>する</h2>
+      <div class="flow">
+        <div class="flow-step"><div class="fnum">1</div><div class="ftitle">測定</div><div class="fdesc">体組成（InBody）・姿勢チェックを実施</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="fnum">2</div><div class="ftitle">可視化</div><div class="fdesc">現状の数値・姿勢を専用シートに記入</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="fnum">3</div><div class="ftitle">フィードバック</div><div class="fdesc">トレーナーが課題と改善方針を解説</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="fnum">4</div><div class="ftitle">運動の必要性を実感</div><div class="fdesc">「通う理由」を持ち帰ってもらう</div></div>
+      </div>
+      <ul class="blist" style="margin-top:16px;">
+        <li>会員・非会員を問わず<strong>「課題の可視化」</strong>を行い、運動の必要性を感じてもらう構成。</li>
+        <li>体組成データが印刷できないため、<strong>数値記入＋手書きFB用のシート</strong>を用意して結果を持ち帰れるようにします。</li>
+        <li>1人あたり<strong>約15分</strong>（測定＋フィードバック＋クロージング）で回転。</li>
+      </ul>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 6. Day flow / dousen -->
+    <section class="slide">
+      <div class="kicker">当日の運営フロー・動線</div>
+      <h2>受付から<span class="accent">クロージング</span>まで</h2>
+      <div class="flow">
+        <div class="flow-step"><div class="fnum">1</div><div class="ftitle">1F入口／フロント前</div><div class="fdesc">声かけ・1次受付。会場へ誘導し整理券を発行</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="fnum">2</div><div class="ftitle">4F／5F 会場</div><div class="fdesc">会場前で同意書記入（2次受付）</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="fnum">3</div><div class="ftitle">体験</div><div class="fdesc">測定・フィードバック</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="fnum">4</div><div class="ftitle">クロージング</div><div class="fdesc">施設利用／体験／入会のご案内</div></div>
+      </div>
+      <div class="info-grid" style="margin-top:16px;">
+        <div class="info-card"><div class="label">実施場所（候補）</div><div class="value">4F（トイレ前エリア・ベッド1台）／ 5F スタジオB<br><small>※理想は4階での実施</small></div></div>
+        <div class="info-card"><div class="label">受付方式</div><div class="value">基本はWebで完結<br><small>当日の飛び込み希望も受付</small></div></div>
+      </div>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 7. Staff -->
+    <section class="slide">
+      <div class="kicker">スタッフ体制</div>
+      <h2><span class="accent">2名体制</span>で運営</h2>
+      <div class="staff-grid">
+        <div class="staff-card">
+          <div class="staff-head"><div class="staff-avatar">①</div><div><div class="staff-role">施術担当</div><div class="staff-tag">測定・アドバイス</div></div></div>
+          <div class="staff-body">InBody・姿勢チェックの測定と、その結果に基づく身体のアドバイス。会員・非会員を問わず課題を可視化し、運動の必要性を伝える。</div>
+        </div>
+        <div class="staff-card">
+          <div class="staff-head"><div class="staff-avatar">②</div><div><div class="staff-role">クロージング担当</div><div class="staff-tag">受付・案内・オファー</div></div></div>
+          <div class="staff-body">受付管理・同意書回収・案内誘導。測定後の非会員に、悩みを解決する「NASの施設利用／体験／入会」をご案内。</div>
+        </div>
+      </div>
+      <div class="alert"><strong>NAS様へのお願いは最小限。</strong>当日の主運営はTHE PERSON側で担当し、案内スペースや機材面でのご協力をお願いします。</div>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 8. Promotion -->
+    <section class="slide">
+      <div class="kicker">集客・告知施策</div>
+      <h2>会員紹介 ＋ <span class="accent">公式LINE</span>で集客</h2>
+      <ul class="blist">
+        <li><strong>優先体験チケットの手渡し配布：</strong>スタッフから既存会員へ、家族・友人に渡せる「優先体験チケット」を直接お渡し。</li>
+        <li><strong>紹介インセンティブ：</strong>参加者が後日入会した場合、紹介者（既存会員）へ「1回無料券」をプレゼント。</li>
+        <li><strong>サイネージ・館内掲示：</strong>「NAS会員でない方も無料で測定できます！」を大きく打ち出し。</li>
+        <li><strong>NAS公式LINE：</strong>「非会員のご家族・ご友人も参加OK」を配信。<strong>退会者の再入会</strong>も対象に発信。</li>
+        <li><strong>店舗外への認知拡大：</strong>ビル共用部・エレベーター内ポスター、近隣店舗へのチラシ、可能ならポスティング。</li>
+      </ul>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 9. KPI -->
+    <section class="slide">
+      <div class="kicker">数値目標（KPI）</div>
+      <h2>参加から入会までの<span class="accent">目標フロー</span></h2>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="knum">25<span class="kunit">名</span></div><div class="klabel">総参加人数</div><div class="kbase">全体目標（仮）</div></div>
+        <div class="kpi"><div class="knum">20<span class="kunit">名</span></div><div class="klabel">うち非会員</div><div class="kbase">全体の80%</div></div>
+        <div class="kpi"><div class="knum">15<span class="kunit">名</span></div><div class="klabel">体験・見学予約</div><div class="kbase">非会員の75%</div></div>
+        <div class="kpi featured"><div class="knum">10<span class="kunit">名</span></div><div class="klabel">最終新規入会</div><div class="kbase">非会員の50%</div></div>
+      </div>
+      <div class="alert"><strong>ゴールは新規入会10名。</strong>非会員20名の来場を起点に、体験予約→入会へと段階的に転換させる設計です。</div>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 10. Timeline -->
+    <section class="slide">
+      <div class="kicker">スケジュール</div>
+      <h2>ご説明から<span class="accent">開催</span>まで</h2>
+      <div class="timeline">
+        <div class="tl-item hot">
+          <div class="tl-dot"><div class="tl-date">〜 8/10</div></div>
+          <div class="tl-line"></div>
+          <div class="tl-body"><div class="tl-title">NAS様への企画説明</div><div class="tl-desc">本ご提案・確認事項のすり合わせ（＝本日）</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"><div class="tl-date">8/10〜20</div></div>
+          <div class="tl-line"></div>
+          <div class="tl-body"><div class="tl-title">企画詳細を詰める</div><div class="tl-desc">日程・会場・受付フロー・特典の確定</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"><div class="tl-date">8/20〜31</div></div>
+          <div class="tl-line"></div>
+          <div class="tl-body"><div class="tl-title">準備進行</div><div class="tl-desc">クリエイティブ依頼・予約システム・掲示物の制作</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"><div class="tl-date">9/1</div></div>
+          <div class="tl-line"></div>
+          <div class="tl-body"><div class="tl-title">発信開始</div><div class="tl-desc">NAS掲示物 ／ 公式LINE配信 ／ サイネージ 等</div></div>
+        </div>
+        <div class="tl-item hot">
+          <div class="tl-dot"><div class="tl-date">9/27(日)</div></div>
+          <div class="tl-line"></div>
+          <div class="tl-body"><div class="tl-title">「からだの保健室」開催</div><div class="tl-desc">10:30〜17:00（候補）</div></div>
+        </div>
+      </div>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 11. Confirmation items -->
+    <section class="slide">
+      <div class="kicker">NAS様へのご確認・ご協議事項</div>
+      <h2>実施に向けて<span class="accent">ご相談したいこと</span></h2>
+      <table class="ctable">
+        <tr><th>カテゴリー</th><th>ご確認・ご協議事項</th></tr>
+        <tr><td>実施日時・会場</td><td>9月の開催日時（10:30〜17:00）の確定と、4-5階の使用可能エリア。他イベント・レッスンとのバッティング確認。</td></tr>
+        <tr><td>受付・入館</td><td>入館にあたり同意書が必要か。当日フロー確定のための受付ルール確認。</td></tr>
+        <tr><td>1F案内・誘導</td><td>1F入口・フロント周辺での案内スタッフ配置、サイネージ設置・呼び込みの可否。</td></tr>
+        <tr><td>機材・備品</td><td>InBody等の測定機材の空き状況、長机・椅子・パーテーション・看板等の貸出可否。</td></tr>
+        <tr><td>紹介・入会特典</td><td>「紹介者への1回無料券」「当日・期間限定入会特典」の発券可否。既存の紹介制度との整合性。</td></tr>
+        <tr><td>告知・販促</td><td>館内ポスター・サイネージ枠、公式LINE配信スケジュールと文面承認、ビル内外での販促許可範囲。</td></tr>
+      </table>
+      <div class="slide-foot"><span>THE PERSON × NAS 溝の口</span><span>からだの保健室</span></div>
+    </section>
+
+    <!-- 12. Closing / next action -->
+    <section class="slide closing-slide">
+      <div class="ctitle">まずは開催日と会場の<br>すり合わせからお願いします</div>
+      <div class="cdesc">「からだの保健室」で、非会員の新規入会と退会者の再入会を。<br>詳細フロー・特典・告知は、本日のご確認事項をもとに一緒に固めていければと思います。<br><br>ご確認・ご協議のほど、よろしくお願いいたします。</div>
+    </section>
+
+  </div>
+
+  <div class="controls">
+    <button class="ctrl-btn" id="prev" aria-label="前へ">‹</button>
+    <div class="counter"><span id="cur">1</span> / <span id="total">12</span></div>
+    <button class="ctrl-btn" id="next" aria-label="次へ">›</button>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="hint">← → キーまたはボタンでスライドを移動できます</div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  const cur = document.getElementById('cur');
+  document.getElementById('total').textContent = slides.length;
+  let i = 0;
+
+  slides.forEach((_, idx) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (idx === 0 ? ' active' : '');
+    d.addEventListener('click', () => go(idx));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    cur.textContent = i + 1;
+  }
+  document.getElementById('next').addEventListener('click', () => go(i + 1));
+  document.getElementById('prev').addEventListener('click', () => go(i - 1));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') go(i + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
+    if (e.key === 'Home') go(0);
+    if (e.key === 'End') go(slides.length - 1);
+  });
+</script>
