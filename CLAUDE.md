@@ -41,7 +41,19 @@
 
 ### クランチ
 - カテゴリ：体幹
-- 動画：https://youtube.com/shorts/DQ3fLoyTem8?si=JqoA5_y8qIaZzMKk
+- 動画：https://youtube.com/shorts/PKp_OR0uv6g?si=bYSfd5IbYEo9RGe-
+
+### クランチツイスト
+- カテゴリ：体幹
+- 動画：https://youtu.be/oqq2Vnv26cA?si=5KDu8MPIq539aOZv
+
+### サイドレイズ
+- カテゴリ：肩
+- 動画：https://youtube.com/shorts/6Mgr3Vp3T3Y?si=dKLz47ClqU32ITEB
+
+### ブルガリアンスクワット
+- カテゴリ：下半身
+- 動画：https://youtube.com/shorts/UK-PIYeaARM?si=mJ54r93Z6mBcv4_2
 
 ### レッグプレスマシン
 - カテゴリ：下半身
