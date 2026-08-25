@@ -49,7 +49,15 @@
 
 ### サイドレイズ
 - カテゴリ：肩
-- 動画：https://youtube.com/shorts/6Mgr3Vp3T3Y?si=dKLz47ClqU32ITEB
+- 動画：https://youtube.com/shorts/-bvP-lzw6X0?si=Ta9uEhBtCZqLye7j
+
+### ダンベルプレス
+- カテゴリ：胸
+- 動画：https://youtube.com/shorts/N4dCNxgtJ-s?si=5dE_ddAIS3D3l2MC
+
+### ダンベルオーバーヘッドプレス
+- カテゴリ：肩
+- 動画：https://youtube.com/shorts/URajm3Vu9TY?si=iVcxdJrV4vC0ywhJ
 
 ### ブルガリアンスクワット
 - カテゴリ：下半身
