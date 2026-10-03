@@ -47,6 +47,12 @@
 - カテゴリ：体幹
 - 動画：https://youtu.be/oqq2Vnv26cA?si=5KDu8MPIq539aOZv
 
+### シーテッドロウ
+- カテゴリ：背中
+- 動画：https://youtu.be/2Z2IysT0MlE?si=F4aq6nYYwX7JMlGl
+- 胸を張りながら引いていきますが、お腹に力を入れ肩甲骨を寄せていきます！腕で引っ張る形にならないように注意してください！
+- ※ `https://youtu.be/4Rb8L6ZYr-w`（旧「ケーブルロウイング」リンク）はラットプルダウンの動画なので使用しない
+
 ### サイドレイズ
 - カテゴリ：肩
 - 動画：https://youtube.com/shorts/-bvP-lzw6X0?si=Ta9uEhBtCZqLye7j
